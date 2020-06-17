@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>wonhee</title>
+<title>wonhee의 index</title>
 </head>
 <body>
 <h2>^_^</h2>
