@@ -1,5 +1,5 @@
 package practice;
 
-public class user1 {
+public class juyong {
 
 }
