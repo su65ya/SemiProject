@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>yeonjae</title>
+<title>연재연재</title>
 </head>
 <body>
 	<div align="center">
