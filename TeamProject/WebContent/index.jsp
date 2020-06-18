@@ -5,10 +5,11 @@
 <head>
 <meta charset="UTF-8">
 
-<title>yeonjae, juyong,연재연재,dongguen</title>
+<title>yeonjae, juyong,연재연재,dongguen,sua,wonyi의 index</title>
 </head>
 <body>
-	<div align="center">
+<div align="center">
+ <h2>어서오세요!-wonyi-</h2>
 		<table border="1">
 			<thead>
 				<tr>
@@ -17,6 +18,6 @@
 				</tr>
 			</thead>
 		</table>
-	</div>
-</body>
+</div>
 </html>
+
