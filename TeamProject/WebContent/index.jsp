@@ -4,10 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>yeonjae, juyong,연재연재</title>
+
+<title>yeonjae, juyong,연재연재, sua</title>
 </head>
 <body>
-	<div align="center">
+
+<div align="center">
 		<table border="1">
 			<thead>
 				<tr>
@@ -18,5 +20,6 @@
 			</thead>
 		</table>
 	</div>
+
 </body>
 </html>
