@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>yeonjae</title>
+<title>yeonjae, juyong</title>
 </head>
 <body>
 	<div align="center">
@@ -12,7 +12,8 @@
 			<thead>
 				<tr>
 					<th>세미프로젝트</th>
-					<td>세미세미</td>		
+					<td>세미세미</td>
+					<td>Test</td>
 				</tr>
 			</thead>
 		</table>
