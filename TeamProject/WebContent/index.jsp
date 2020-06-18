@@ -4,9 +4,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>juyong</title>
+<title>yeonjae, juyong</title>
 </head>
 <body>
-
+	<div align="center">
+		<table border="1">
+			<thead>
+				<tr>
+					<th>세미프로젝트</th>
+					<td>세미세미</td>
+					<td>Test</td>
+				</tr>
+			</thead>
+		</table>
+	</div>
 </body>
 </html>
