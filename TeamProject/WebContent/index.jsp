@@ -13,7 +13,7 @@
 			<thead>
 				<tr>
 					<th>세미프로젝트</th>
-					<td>세미세미</td>
+					<td>세미세미semi</td>
 				</tr>
 			</thead>
 		</table>
