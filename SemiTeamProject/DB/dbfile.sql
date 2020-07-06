@@ -229,4 +229,3 @@ refund_price NUMBER NOT NULL,
 refund_type varchar2(30)
 );
 CREATE SEQUENCE refund_seq nocache;
->>>>>>> refs/remotes/origin/master
