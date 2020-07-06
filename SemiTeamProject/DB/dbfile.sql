@@ -1,5 +1,20 @@
+------------------------------------------------
+-- 관리자 테이블 --
+------------------------------------------------
+
+CREATE TABLE admin(
+admin_no number	PRIMARY KEY,
+admin_id varchar2(20) NOT NULL UNIQUE,
+admin_pw varchar2(20) NOT NULL,
+admin_phone	char(11) NOT NULL,
+admin_mail varchar2(50)	NOT NULL,
+admin_birth	DATE NOT NULL
+);
+
+CREATE SEQUENCE admin_seq nocache;
+
 --------------------------------------------------------------------------
---판매자 테이블--
+-- 판매자 테이블 --
 --------------------------------------------------------------------------
 CREATE TABLE seller(
 seller_no NUMBER PRIMARY KEY,
@@ -18,22 +33,9 @@ company_no char(10) NOT NULL
 
 CREATE SEQUENCE seller_seq nocache;
 
----------------------------------
---관리자 테이블--
---------------------------------
-CREATE TABLE admin(
-admin_no number   PRIMARY KEY,
-admin_id varchar2(20) NOT NULL UNIQUE,
-admin_pw varchar2(20) NOT NULL,
-admin_phone char(11) NOT NULL,
-admin_mail varchar2(50)   NOT NULL,
-admin_birth DATE NOT NULL
-);
-
-CREATE SEQUENCE admin_seq nocache;
--------------------------------------------------------------------------------------
+-----------------------------------------------------
 -- 사용자 --
--------------------------------------------------------------------------------------
+-----------------------------------------------------
 CREATE TABLE member (
    member_no NUMBER PRIMARY KEY,
    member_id varchar2(20) NOT NULL UNIQUE,
@@ -107,6 +109,7 @@ hairdryer NUMBER  NOT NULL,
 cookoo  NUMBER NOT NULL,
 dog NUMBER  NOT NULL
 );
+
 CREATE SEQUENCE room_seq nocache;
 
 ----------------------------------------------------------
@@ -117,37 +120,10 @@ room_image_no NUMBER PRIMARY KEY,
 room_image_room_no  NOT NULL REFERENCES room(room_no) ON DELETE CASCADE,
 room_image_name VARCHAR2(256) NOT NULL,
 room_image_size NUMBER NOT NULL CHECK(room_image_size > 0),
-room_image_type CHAR(10),
+room_image_type CHAR(10)
 );
+
 CREATE SEQUENCE room_image_seq nocache;
-
--------------------------------------------------------
---환불--
--------------------------------------------------------
-CREATE TABLE refund(
-refund_no NUMBER PRIMARY KEY,
-refund_res_no REFERENCES reservation(res_no)ON DELETE CASCADE,
-refund_member_no NOT NULL REFERENCES member(member_no)ON DELETE CASCADE,
-refund_price NUMBER NOT NULL,
-refund_type varchar2(30)
-);
-CREATE SEQUENCE refund_seq nocache;
-
-----------------------------------------------------------
---리뷰--
-----------------------------------------------------------
-CREATE TABLE review(
-	review_no NUMBER NOT NULL,
-	review_writer REFERENCES member(member_no) ON DELETE SET NULL,
-	review_pension_no NOT NULL REFERENCES pension(pension_no) ON DELETE CASCADE,
-	review_res_no REFERENCES reservation(res_no) ON DELETE SET NULL,
-review_title varchar2(300) NOT NULL
-	review_content varchar2(4000) NOT NULL,
-	review_date DATE DEFAULT sysdate NOT NULL,
-	review_count NUMBER DEFAULT 0 NOT NULL
-);
-
-CREATE SEQUENCE review_seq nocache;
 
 ----------------------------------------------------------
 --예약--
@@ -156,15 +132,32 @@ CREATE TABLE reservation(
 res_no NUMBER PRIMARY KEY,
 res_write REFERENCES member(member_no)ON DELETE SET NULL,
 res_room_no REFERENCES room(room_no)ON DELETE CASCADE,
-res_name varchar2(21),
-res_date DATE DEFAULT 0 NOT NULL,
-res_in DATE DEFAULT 0 NOT NULL,
-res_out DATE DEFAULT 0 NOT NULL,
-res_paytype vachar2(30) NOT NULL check(res_paytype IN('카카오페이','네이버페이','계좌이체')),
-res_price NUMBER NOT NULL,
+res_name VARCHAR2(21),
+res_date DATE NOT NULL,
+res_in DATE NOT NULL,
+res_out DATE NOT NULL,
+res_paytype VARCHAR2(30) NOT NULL check(res_paytype IN('카카오페이','네이버페이','계좌이체')),
+res_price NUMBER NOT NULL
 );
 
 CREATE SEQUENCE res_seq nocache;
+
+----------------------------------------------------------
+--리뷰--
+----------------------------------------------------------
+ CREATE TABLE review( 
+ review_no NUMBER PRIMARY KEY, 
+ review_writer REFERENCES MEMBER(member_no) ON DELETE SET NULL, 
+ review_pension_no NOT NULL REFERENCES pension(pension_no) ON DELETE CASCADE, 
+ review_res_no REFERENCES reservation(res_no) ON DELETE SET NULL, 
+ review_title varchar2(300) NOT NULL,
+ review_content varchar2(4000) NOT NULL, 
+ review_date DATE DEFAULT sysdate NOT NULL, 
+ review_count NUMBER DEFAULT 0 NOT NULL 
+);
+
+CREATE SEQUENCE review_seq nocache;
+
 
 ----------------------------------------------------------
 --팬션옵션--
@@ -176,17 +169,9 @@ option_name varchar2(100) NOT NULL,
 option_price NUMBER NOT NULL,
 option_select NUMBER(1) NOT NULL
 );
-CREATE SEQUENCE member_seq nocache;
 
+CREATE SEQUENCE pension_option_seq nocache;
 
-
-
-
-
-
---------------------------------------------------------------------------------------------------------------------
-07-04일 추가함 - 연재
--------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------
 --댓글 테이블--
 ----------------------------------------------------------
@@ -201,7 +186,7 @@ CREATE TABLE review_reply(
 CREATE SEQUENCE review_reply_seq nocache;
 
 -------------------------------------------------------------------------------------
--- 문의 --2020.07.06 주용 첨부
+-- 문의 --
 -------------------------------------------------------------------------------------
 
 CREATE TABLE question (
@@ -221,17 +206,26 @@ CREATE TABLE question (
 CREATE SEQUENCE que_seq nocache;
 
 -------------------------------------------------------------------------------------
--- 첨부파일 --2020.07.06 영완 첨부
+-- 첨부파일 
 -------------------------------------------------------------------------------------
---첨부파일
 CREATE TABLE review_file (
-review_no NUMBER PRIMARY KEY,
-review_file_no REFERENCES review (review_no) ON DELETE CASCADE,
+review_file_no NUMBER PRIMARY KEY,
+review_origin REFERENCES review (review_no) ON DELETE CASCADE,
 review_file_name VARCHAR2(256) NOT NULL,
-review_file_size NUMBER NOT NULL CHECK(board_file_size > 0),
-review_file_type CHAR(10) NOT NULL,
+review_file_size NUMBER NOT NULL CHECK(review_file_size > 0),
+review_file_type CHAR(10) NOT NULL
 );
+
 CREATE SEQUENCE review_file_seq nocache;
 
-아직 환불테이블이랑 예약옵션 생성 전
-
+-------------------------------------------------------
+--환불--
+-------------------------------------------------------
+CREATE TABLE refund(
+refund_no NUMBER PRIMARY KEY,
+refund_res_no REFERENCES reservation(res_no)ON DELETE CASCADE,
+refund_member_no NUMBER REFERENCES member(member_no)ON DELETE CASCADE,
+refund_price NUMBER NOT NULL,
+refund_type varchar2(30)
+);
+CREATE SEQUENCE refund_seq nocache;
