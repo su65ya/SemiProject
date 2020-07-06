@@ -29,6 +29,25 @@ public class SellerDao {
 		return src.getConnection();
 	}
 	
+	// 단일 조회 메소드
+	public SellerDto get(String seller_id) throws Exception {
+		Connection con = getConnection();
+		
+		String sql = "select * from seller where seller_id = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, seller_id);
+		ResultSet rs = ps.executeQuery();
+		
+		SellerDto seller = null;
+		if (rs.next()) {
+			seller = new SellerDto(rs);
+		}
+		
+		con.close();
+		return seller;
+	}
+	
+	
 	// 판매자 가입
 	public void join(SellerDto sdto) throws Exception {
 		Connection con = getConnection();
