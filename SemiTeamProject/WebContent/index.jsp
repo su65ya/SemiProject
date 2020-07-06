@@ -4,11 +4,6 @@
 <jsp:include page="/template/nav.jsp"></jsp:include>
 			
 			<artcle>
-				<div>
-					<h6>sellerinfo : <%= session.getAttribute("sellerinfo") %></h6>
-				
-				</div>
-			
 				<div class="row center">
 					<img src="https://placehold.it/1280x1000">
 				</div>
