@@ -22,7 +22,7 @@ public class MemberJoinServlet extends HttpServlet {
 			mdto.setMember_name(req.getParameter("member_name"));
 			mdto.setMember_birth(req.getParameter("member_birth"));
 			mdto.setMember_mail(req.getParameter("member_mail"));
-			mdto.setMember_post(req.getParameter("member_mail"));
+			mdto.setMember_post(req.getParameter("member_post"));
 			mdto.setMember_basic_addr(req.getParameter("member_basic_addr"));
 			mdto.setMember_detail_addr(req.getParameter("member_detail_addr"));
 			mdto.setMember_phone(req.getParameter("member_phone"));
@@ -32,8 +32,8 @@ public class MemberJoinServlet extends HttpServlet {
 			mdao.join(mdto);
 			
 			//결과
-			resp.sendRedirect("join_result.jsp");
-			System.out.println("가입완료");
+			resp.sendRedirect("join.jsp");
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();

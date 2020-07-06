@@ -7,9 +7,9 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import semi.beans.dto.MemberDto;
+import semi.beans.dto.PensionDto;
 
-public class MemberDao {
+public class PensionDao {
 	private static DataSource src;
 
 	static {
@@ -28,29 +28,22 @@ public class MemberDao {
 //		return DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","c##kh","c##kh");
 		return src.getConnection();
 	}
+
 	
-	
-	//사용자 회원가입 메소드
-	public void join(MemberDto mdto) throws Exception{
+	//펜션 등록 메소드
+	public void regist(PensionDto pdto) throws Exception{
 		Connection con = getConnection();
-		
-		String sql = "INSERT INTO member VALUES(member_seq.nextval,?,?,?,?,?,?,?,?,?,'일반',sysdate)";
-		
+		String sql = "INSERT INTO pension VALUES(pension_seq.nextval,?,?,?,?,?,sysdate,?)";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, mdto.getMember_id());
-		ps.setString(2, mdto.getMember_pw());
-		ps.setString(3, mdto.getMember_name());
-		ps.setString(4, mdto.getMember_birth());
-		ps.setString(5, mdto.getMember_mail());
-		ps.setString(6, mdto.getMember_post());
-		ps.setString(7, mdto.getMember_basic_addr());
-		ps.setString(8, mdto.getMember_detail_addr());
-		ps.setString(9, mdto.getMember_phone());
+		
+		ps.setInt(1, pdto.getPension_seller_no());
+		ps.setString(2, pdto.getPension_name());
+		ps.setString(3, pdto.getPension_post());
+		ps.setString(4, pdto.getPension_basic_addr());
+		ps.setString(5, pdto.getPension_detail_addr());
+		ps.setString(6, pdto.getPension_phone());
 		
 		ps.execute();
-		
 		con.close();
-		
 	}
-
 }
