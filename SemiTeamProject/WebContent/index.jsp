@@ -7,45 +7,7 @@
 <title>index</title>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/base.css">
 	<style>
-        main {
-            width:1280px;
-            margin:auto;
-        }
-        .menuu{
-        	width : 100%;
-        	height: 54px;
-        	background-color: #ea1f62;
-        	padding: 0;
-        	margin: 0;
-        }
-        .menuu > li{
-        	list-style: none;
-        	display: inline-block;
-        	padding: 0.5rem;
-        }
-        .menuu a{
-			text-decoration: none;
-			color:white;
-        }
         
-        
-        .footer{
-        	width : 100%;
-        	background-color: #F6F6F6;
-        	padding: 0;
-        	margin: 0;
-        	font-size: 14px;
-        	font-family: 고딕;
-        }
-        .footer > li{
-        	list-style: none;
-        	display: inline-block;
-        	padding: 0.5rem;
-        }
-        .footer a{
-			text-decoration: none;
-			color:black;
-        }
     </style>
 </head>
 <body>
