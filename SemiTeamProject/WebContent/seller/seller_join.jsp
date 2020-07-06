@@ -66,63 +66,66 @@
     }
 </script>
 	<div class="row">
-		<article class="w-40">
 		<form action="seller_join.do" method="post">
-			<div class="row">
-				<h2>판매자 회원가입</h2>
-			</div>
-			<div class="row">
-				<label><span>*</span>아이디</label>
-				<input class="form-input" type="text" name="seller_id" placeholder="아이디는 8~20자 이내로 입력하세요" required autocomplete="none">
-			</div>
-			<div class="row">
-				<label><span>*</span>비밀번호</label>
-				<input class="form-input" type="password" name="seller_pw" placeholder="비밀번호는 8~20자 이내로 입력하세요" required autocomplete="none">
-			</div>
-			<div class="row">
-				<label><span>*</span>이름</label>
-				<input class="form-input" type = "text" name = "seller_name" placeholder="이름" required autocomplete="none">
-			</div>
-			<div class="row">
-				<label><span>*</span>생년월일</label>
-				<input class="form-input" type = "date" name="seller_birth" required autocomplete="none">
-			</div>
-			<div class="row">
-				<label><span>*</span>핸드폰번호</label>
-				<input class="form-input" type="text" name="seller_phone" placeholder="'-' 제외 번호입력">
-			</div>
-			<div class="row">
-				<label><span>*</span>이메일</label>
-				<input class="form-input" type = "text" name="seller_email" placeholder="이메일" required>
-			</div>
-			<div class="row">
-				<label>주소</label><br>
-				<input class="form-input form-inline" type="text" name="seller_post" placeholder="우편번호 입력" size="6" maxlength="6" autocomplete="none">
-				<input onclick = "findAddress();" type = "button" value="우편번호 찾기">
-			</div>
-			<!-- 기본주소 -->
-			<div class="row">
-				<input class="form-input" type="text" name="seller_basic_addr" placeholder="기본주소 입력" size="50" autocomplete="none">
-			</div>
-			<!-- 상세주소 -->
-			<div class="row">
-				<input class="form-input" type="text" name="seller_detail_addr" placeholder="상세주소 입력" size="50" autocomplete="none">
-			</div>
-			<div class="row">
-				<label><span>*</span>사업자 등록 번호</label>
-				<input class="form-input" type="text" name="company_no" placeholder="'-'제외 입력" required autocomplete="none">
-			</div>
-			
-			
-			<div class = "row-empty"></div>
-			<div class="row">
-				<input class= "form-btn" type="submit" value="가입하기">
-			</div>
+			<article class="w-40">
+				<div class="row">
+					<h2>판매자 회원가입</h2>
+				</div>
+				<div class="row">
+					<label><span>*</span>아이디</label>
+					<input class="form-input" type="text" name="seller_id" placeholder="아이디는 8~20자 이내로 입력하세요" required autocomplete="none">
+				</div>
+				<div class="row">
+					<label><span>*</span>비밀번호</label>
+					<input class="form-input" type="password" name="seller_pw" placeholder="비밀번호는 8~20자 이내로 입력하세요" required autocomplete="none">
+				</div>
+				<div class="row">
+					<label><span>*</span>이름</label>
+					<input class="form-input" type = "text" name = "seller_name" placeholder="이름" required autocomplete="none">
+				</div>
+				<div class="row">
+					<label><span>*</span>생년월일</label>
+					<input class="form-input" type = "date" name="seller_birth" required autocomplete="none">
+				</div>
+				<div class="row">
+					<label><span>*</span>핸드폰번호</label>
+					<input class="form-input" type="text" name="seller_phone" placeholder="'-' 제외 번호입력">
+				</div>
+				<div class="row">
+					<label><span>*</span>이메일</label>
+					<input class="form-input" type = "text" name="seller_email" placeholder="이메일" required>
+				</div>
+				<div class="row">
+					<label>주소</label><br>
+					<input class="form-input form-inline" type="text" name="seller_post" placeholder="우편번호 입력" size="6" maxlength="6" autocomplete="none">
+					<input onclick = "findAddress();" type = "button" value="우편번호 찾기">
+				</div>
+				<!-- 기본주소 -->
+				<div class="row">
+					<input class="form-input" type="text" name="seller_basic_addr" placeholder="기본주소 입력" size="50" autocomplete="none">
+				</div>
+				<!-- 상세주소 -->
+				<div class="row">
+					<input class="form-input" type="text" name="seller_detail_addr" placeholder="상세주소 입력" size="50" autocomplete="none">
+				</div>
+				<div class="row">
+					<label><span>*</span>사업자 등록 번호</label>
+					<input class="form-input" type="text" name="company_no" placeholder="'-'제외 입력" required autocomplete="none">
+				</div>
+				
+				
+				<div class = "row-empty"></div>
+				<div class="row">
+					<input class= "form-btn" type="submit" value="가입하기">
+				</div>
+			</article>
 		</form>
-		</article>
 	</div>
     
-    <jsp:include page="/template/footer.jsp"></jsp:include>   
+  
+  
+  
+<jsp:include page="/template/footer.jsp"></jsp:include>   
     
     
     
