@@ -404,11 +404,7 @@
 	.left {text-align: left !important;}
 	.center {text-align: center !important;}
 	.right {text-align: right !important;}
-	
-	/*내 홈페이지의 모든 h2는 파스텔 색감 유지*/
-	.row> h2{
-		color: cadetblue;
-	}
+
 
 
 	/*textarea는 수직으로만 크기 조정이 가능하도록 구현*/
