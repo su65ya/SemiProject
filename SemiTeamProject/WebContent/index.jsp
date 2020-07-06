@@ -70,7 +70,7 @@
 			<div class="row-empty"></div>
 			<div class="row-empty"></div>
 			<div class="row center">
-				<img src="https://placehold.it/1000x1000">
+				<img src="https://placehold.it/1280x1000">
 			</div>
 			<div class="row-empty"></div>
 			<div class="row-empty"></div>
