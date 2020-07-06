@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import semi.beans.dao.PensionDao;
 import semi.beans.dto.PensionDto;
+import semi.beans.dto.SellerDto;
 
 @WebServlet(urlPatterns = "/seller/pension_regist.do")
 public class PensionRegistServlet extends HttpServlet {
@@ -23,7 +24,7 @@ public class PensionRegistServlet extends HttpServlet {
 			pdto.setPension_detail_addr(req.getParameter("pension_detail_addr"));
 			pdto.setPension_phone(req.getParameter("pension_phone"));
 			
-			SelletDto seller = (SellerDto) req.getSession().getAttribute("sellerinfo");
+			SellerDto seller = (SellerDto) req.getSession().getAttribute("sellerinfo");
 			pdto.setPension_seller_no(seller.getSeller_no());
 			
 			//처리
