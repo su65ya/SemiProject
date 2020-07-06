@@ -23,6 +23,7 @@ public class PensionRegistServlet extends HttpServlet {
 			pdto.setPension_basic_addr(req.getParameter("pension_basic_addr"));
 			pdto.setPension_detail_addr(req.getParameter("pension_detail_addr"));
 			pdto.setPension_phone(req.getParameter("pension_phone"));
+			pdto.setPension_intro(req.getParameter("pension_intro"));
 			
 			SellerDto seller = (SellerDto) req.getSession().getAttribute("sellerinfo");
 			pdto.setPension_seller_no(seller.getSeller_no());

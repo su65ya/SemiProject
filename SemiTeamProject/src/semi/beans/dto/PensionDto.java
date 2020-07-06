@@ -9,6 +9,13 @@ public class PensionDto{
 	private String pension_detail_addr;
 	private String pension_regist_date;
 	private String pension_phone;
+	private String pension_intro;
+	public String getPension_intro() {
+		return pension_intro;
+	}
+	public void setPension_intro(String pension_intro) {
+		this.pension_intro = pension_intro;
+	}
 	public PensionDto() {
 		super();
 	}

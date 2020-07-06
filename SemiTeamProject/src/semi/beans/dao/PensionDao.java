@@ -33,7 +33,7 @@ public class PensionDao {
 	//펜션 등록 메소드
 	public void regist(PensionDto pdto) throws Exception{
 		Connection con = getConnection();
-		String sql = "INSERT INTO pension VALUES(pension_seq.nextval,?,?,?,?,?,sysdate,?)";
+		String sql = "INSERT INTO pension VALUES(pension_seq.nextval,?,?,?,?,?,sysdate,?,?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		
 		ps.setInt(1, pdto.getPension_seller_no());
@@ -42,6 +42,7 @@ public class PensionDao {
 		ps.setString(4, pdto.getPension_basic_addr());
 		ps.setString(5, pdto.getPension_detail_addr());
 		ps.setString(6, pdto.getPension_phone());
+		ps.setString(7, pdto.getPension_intro());
 		
 		ps.execute();
 		con.close();
