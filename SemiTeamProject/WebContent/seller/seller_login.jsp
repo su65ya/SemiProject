@@ -7,7 +7,7 @@
 	<form action="seller_login.do" method="post">
 			
 		
-		<article class="w-30">
+		<article class="w-25">
 			
 		
 			<div class="row">
