@@ -37,8 +37,8 @@ public class SellerJoinServlet extends HttpServlet {
 			
 			
 			// 출럭
-			System.out.println("완료");
-//			resp.sendRedirect(location);
+//			System.out.println("완료");
+			resp.sendRedirect("seller_join_res.jsp");
 			
 			
 		} catch (Exception e) {

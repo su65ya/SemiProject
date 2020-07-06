@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-    
-<jsp:include page="/template/nav.jsp"></jsp:include>
-
     <style>
     	span{
     		color:red;
@@ -13,6 +10,9 @@
     		font-size:13;
     	}
     </style>
+    
+<jsp:include page="/template/nav.jsp"></jsp:include>
+
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
