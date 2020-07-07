@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee                       
-	http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+<web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee                       http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
 	
 	<!-- 최초 대문 페이지 설정 -->
   	<welcome-file-list>
@@ -24,13 +23,13 @@
   	</filter-mapping>
   	
   	<!-- 테스트필터는 로그인 필터 전에 배치해야 한다 -->
-<!--   	<filter> -->
-<!--   		<filter-name>testLoginFilter</filter-name> -->
-<!--   		<filter-class>semi.filter.TestLoginFilter</filter-class> -->
-<!--   	</filter> -->
-<!--   	<filter-mapping> -->
-<!--   		<filter-name>testLoginFilter</filter-name> -->
-<!--   		<url-pattern>/*</url-pattern> -->
-<!--   	</filter-mapping> -->
+   	<filter>
+  		<filter-name>sellertestLoginFilter</filter-name>
+  		<filter-class>semi.filter.SellerTestLoginFilter</filter-class>
+  	</filter>
+  	<filter-mapping>
+  		<filter-name>sellertestLoginFilter</filter-name>
+  		<url-pattern>/*</url-pattern>
+  	</filter-mapping>
 
 </web-app>

@@ -3,10 +3,10 @@
 
 <jsp:include page="/template/nav.jsp"></jsp:include>
 			
-			<artcle>
+			<article>
 				<div class="row center">
 					<img src="https://placehold.it/1280x1000">
 				</div>
-			</artcle>
+			</article>
 			
 <jsp:include page="/template/footer.jsp"></jsp:include>
