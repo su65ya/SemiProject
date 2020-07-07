@@ -27,8 +27,37 @@
                 selectItem[i].checked = selectAll;    
             }
         }
-          
         
+        function preview(){
+            var fileTag = document.querySelector("input[name=room_image]");
+            
+            var divTag = document.querySelector(".preview-wrap");
+            
+            if(fileTag.files.length > 0){
+                //선택된 파일들을 다 읽어와서 이미지 생성 후 추가
+                //미리보기 전부 삭제
+                divTag.innerHTML = "";
+                
+                for(var i=0; i < fileTag.files.length; i++){
+                    var reader = new FileReader();
+                    reader.onload = function(data){
+                        //img 생성 후 data.target.result 설정하여 추가
+                        var imgTag = document.createElement("img");
+                        imgTag.setAttribute("src", data.target.result);
+                        imgTag.setAttribute("width", "120");
+                        imgTag.setAttribute("height", "120");
+                        divTag.appendChild(imgTag);
+                    };
+                    reader.readAsDataURL(fileTag.files[i]);
+                }
+                
+            }
+            else{
+                //미리보기 전부 삭제
+                divTag.innerHTML = "";
+            }
+        }
+   
     </script>
 <jsp:include page="/template/nav.jsp"></jsp:include>
 
@@ -94,42 +123,42 @@
 			
 			<div class="row">
                 <input class="select-item" type="checkbox" name="amenity" id="ck">
-        		<label>어메니티</label>
+        		<label for="ck">어메니티</label>
 			</div>
 			
 			<div class="row">
                 <input class="select-item" type="checkbox" name="microwave" id="ck">
-                <label>전자레인지</label>
+                <label for="ck">전자레인지</label>
 			</div>
 			
 			<div class="row">
         		<input class="select-item" type="checkbox" name="bed" id="ck">
-        		<label>침대</label>
+        		<label for="ck">침대</label>
 			</div>
            
             <div class="row">
                 <input class="select-item" type="checkbox" name="tv" id="ck">
-        		<label>티비</label>
+        		<label for="ck">티비</label>
 			</div>
 			
 			<div class="row">
                 <input class="select-item" type="checkbox" name="room_sofa" id="ck">
-        		<label>소파</label>
+        		<label for="ck">소파</label>
 			</div>
 			
 			<div class="row">
                <input class="select-item" type="checkbox" name="room_aircon" id="ck">
-        		<label>에어컨</label>
+        		<label for="ck">에어컨</label>
 			</div>
 			
 			<div class="row">
                <input class="select-item" type="checkbox" name="fridge" id="ck">
-        		<label>냉장고</label>
+        		<label for="ck">냉장고</label>
 			</div>
 			
 			<div class="row">
                 <input class="select-item" type="checkbox" name="tub" id="ck">
-        		<label>욕조</label>
+        		<label for="ck">욕조</label>
 			</div>
             
             <div class="row">
@@ -139,23 +168,23 @@
             
             <div class="row">
                 <input class="select-item" type="checkbox" name="cookoo" id="ck">
-        		<label>밥솥</label>
+        		<label for="ck">밥솥</label>
 			</div>
             
             <div class="row">
                 <input class="select-item" type="checkbox" name="dog" id="ck">
-        		<label>반려견</label>
+        		<label for="ck">반려견</label>
 			</div>
 			<div class="row right">
-				<input type="checkbox" class="select-all" onchange="changeCheckbox();">
-				<label>전체선택/해제</label>
+				<input type="checkbox" class="select-all" onchange="changeCheckbox();" id="ck">
+				<label for="ck">전체선택/해제</label>
 			</div>
 			<hr>
-			<div class="row-empty"></div>
 			<div class="row">
-				<label>객실 사진 등록</label><br>
+				<h4>객실 사진 등록</h4>
 				<div class="row-empty"></div>
-				<input type="file" name="room_image" multiple accept=".jpg,.png,.gif">
+				<input type="file" name="room_image" multiple accept=".jpg,.png,.gif" onchange="preview();">
+				<div class="preview-wrap"></div>
 			</div>
             <div class="row-empty"></div>
             <div class="row-empty"></div>
