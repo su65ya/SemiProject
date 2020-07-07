@@ -6,7 +6,7 @@ import java.sql.SQLException;
 public class SellerDto {
 
 	private int seller_no;
-	private String seller_id, seller_pw, seller_name, seller_birth, seller_phone, seller_mail,
+	private String seller_id, seller_pw, seller_name, seller_birth, seller_phone, seller_email,
 						seller_post, seller_basic_addr, seller_detail_addr, seller_join, company_no;
 	
 	public SellerDto() {
@@ -20,7 +20,7 @@ public class SellerDto {
 		this.setSeller_name(rs.getString("seller_name"));
 		this.setSeller_birth(rs.getString("seller_birth"));
 		this.setSeller_phone(rs.getString("seller_phone"));
-		this.setSeller_mail(rs.getString("seller_mail"));
+		this.setSeller_email(rs.getString("seller_email"));
 		this.setSeller_post(rs.getString("seller_post"));
 		this.setSeller_basic_addr(rs.getString("seller_basic_addr"));
 		this.setSeller_detail_addr(rs.getString("seller_detail_addr"));
@@ -77,12 +77,12 @@ public class SellerDto {
 		this.seller_phone = seller_phone;
 	}
 
-	public String getSeller_mail() {
-		return seller_mail;
+	public String getSeller_email() {
+		return seller_email;
 	}
 
-	public void setSeller_mail(String seller_mail) {
-		this.seller_mail = seller_mail;
+	public void setSeller_email(String seller_email) {
+		this.seller_email = seller_email;
 	}
 
 	public String getSeller_post() {

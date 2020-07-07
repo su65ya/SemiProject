@@ -59,7 +59,7 @@ public class SellerDao {
 		ps.setString(3, sdto.getSeller_name());
 		ps.setString(4, sdto.getSeller_birth());
 		ps.setString(5, sdto.getSeller_phone());
-		ps.setString(6, sdto.getSeller_mail());
+		ps.setString(6, sdto.getSeller_email());
 		ps.setString(7, sdto.getSeller_post());
 		ps.setString(8, sdto.getSeller_basic_addr());
 		ps.setString(9, sdto.getSeller_detail_addr());
