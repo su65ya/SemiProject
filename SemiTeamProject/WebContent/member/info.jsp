@@ -19,7 +19,7 @@
 			</tr>
 			<tr>
 				<th>비밀번호</th>
-				<th><%=mdto.getMember_pw() %>h>
+				<th><%=mdto.getMember_pw() %></th>
 			</tr>
 			<tr>
 				<th>이름</th>
