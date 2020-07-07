@@ -24,7 +24,7 @@ label {
 <jsp:include page="/template/nav.jsp"></jsp:include>
 
 
-<form action="login.do" method="post">
+<form action="member_login.do" method="post">
 
 	<article class="w-25">
 
