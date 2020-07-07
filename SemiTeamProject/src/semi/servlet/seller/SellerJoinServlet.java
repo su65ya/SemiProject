@@ -23,7 +23,7 @@ public class SellerJoinServlet extends HttpServlet {
 			sdto.setSeller_name(req.getParameter("seller_name"));
 			sdto.setSeller_birth(req.getParameter("seller_birth"));
 			sdto.setSeller_phone(req.getParameter("seller_phone"));
-			sdto.setSeller_mail(req.getParameter("seller_mail"));
+			sdto.setSeller_email(req.getParameter("seller_email"));
 			sdto.setSeller_post(req.getParameter("seller_post"));
 			sdto.setSeller_basic_addr(req.getParameter("seller_basic_addr"));
 			sdto.setSeller_detail_addr(req.getParameter("seller_detail_addr"));
