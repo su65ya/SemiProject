@@ -28,7 +28,43 @@ public class AdminDao {
 	public Connection getConnection() throws Exception {
 		return src.getConnection();
 	}
+	//단일조회
+	public AdminDto get(String admin_id) throws Exception{
+		Connection con = getConnection();
+		
+		String sql = "SELECT * FROM admin WHERE admin_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, admin_id);
+		ResultSet rs = ps.executeQuery();
+		AdminDto adto;
+		if(rs.next()) {
+			adto = new AdminDto(rs);
+		}else {
+			adto = null;
+		}
+		
+		con.close();
+		
+		return adto;
+	}
+	//관리자 가입
+	public void join(AdminDto adto) throws Exception{
+		Connection con = getConnection();
+		
+		String sql = "INSERT into admin values(admin_seq.nextval,?,?,?,?,?)";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, adto.getAdmin_id());
+		ps.setString(2, adto.getAdmin_pw());
+		ps.setString(3, adto.getAdmin_phone());
+		ps.setString(4, adto.getAdmin_mail());
+		ps.setString(5, adto.getAdmin_birth());
+		ps.execute();
+		
+		con.close();	
+		
+	}
 	
+	//관리자 로그인
 	public AdminDto login(AdminDto adto) throws Exception {
 		Connection con = getConnection();
 		
@@ -50,6 +86,5 @@ public class AdminDao {
 		con.close();
 		return admin;
 	}
-
 }
 
