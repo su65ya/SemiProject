@@ -11,9 +11,9 @@
 <jsp:include page="/template/nav.jsp"></jsp:include>
 
 
-<article class "w-35"'>
-	<div class="row-empty"></div>
-	<div class="row-empty"></div>
+<article class =  "w-35"'>
+	<div class = "row-empty"></div>
+	<div class = "row-empty"></div>
 
 	<div class = "row">
 		<h2>회원 가입이 완료되었습니다</h2>
