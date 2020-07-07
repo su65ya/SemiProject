@@ -350,6 +350,12 @@
 		    height:20px;
 		}
 		
+		div.row-emptyy {
+		    height:10px;
+		}
+		
+		
+		
 		
 		/* article 내에 사용하는 헤더는 가운데 정렬 */
 		article h1,
@@ -404,11 +410,6 @@
 	.left {text-align: left !important;}
 	.center {text-align: center !important;}
 	.right {text-align: right !important;}
-<<<<<<< HEAD
-
-=======
-	
->>>>>>> refs/remotes/origin/master
 
 
 	/*textarea는 수직으로만 크기 조정이 가능하도록 구현*/
@@ -470,7 +471,6 @@
 			color : cadetblue;
 			font-weight: 400;
 		}
-<!----------------------------------------------------------------------------------------------------------------------------------------------->
 
 		/*  
 			2020.07.06 footer style코드 작성

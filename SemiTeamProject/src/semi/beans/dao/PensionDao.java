@@ -28,8 +28,6 @@ public class PensionDao {
 
 	// 연결메소드
 	public Connection getConnection() throws Exception {
-//		Class.forName("oracle.jdbc.OracleDriver");
-//		return DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","c##kh","c##kh");
 		return src.getConnection();
 	}
 

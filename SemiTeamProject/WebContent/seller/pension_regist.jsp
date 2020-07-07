@@ -7,6 +7,15 @@
     	}
     	label{
     		font-size:13;
+    		font-weight: bold;
+    	}
+    	
+    	.select{
+    		height: 36px;
+            width: 70px;
+    	}
+    	.price {
+    		width: 60px;
     	}
     </style>
 <jsp:include page="/template/nav.jsp"></jsp:include>
@@ -76,13 +85,15 @@
 			<div class="row">
 				<label><span>*</span>주소 입력</label><br>
 				<input class="form-input form-inline" type="text" name="pension_post" placeholder="우편번호" required>
-				<input onclick="findAddress();" type="button" value="우편번호 찾기">
+				<input onclick="findAddress();" type="button" value="우편번호 찾기"><br>
 			</div>
+			<div class="row-emptyy"></div>
 			<div class="row">
-				<input class="form-input" type="text" name="pension_basic_addr" placeholder="기본주소" required>
+				<input class="form-input" type="text" name="pension_basic_addr" placeholder="기본주소" required><br>
 			</div>
+			<div class="row-emptyy"></div>
 			<div class="row">
-				<input class="form-input" type="text" name="pension_detail_addr" placeholder="상세주소" required>
+				<input class="form-input" type="text" name="pension_detail_addr" placeholder="상세주소" required><br>
 			</div>
 			<div class="row">
 				<label><span>*</span>펜션 전화번호</label>
@@ -91,6 +102,28 @@
 			<div class="row">
 				<label><span>*</span>펜션 소개글</label>
 				<textarea rows="15" cols="77" name="pension_intro" required></textarea>
+			</div>
+			<div class="row-empty"></div>
+			<div class="row-empty"></div>
+			<div class="row"><hr></div>
+			<div class="row-empty"></div>
+			<div class="row-empty"></div>
+			<div class="row center">
+				<label><h3>옵션</h3></label>
+			</div>
+			<div class="row-empty"></div>
+			<div class="row">
+				<select class="select">
+					<option>숯불</option>
+					<option>성인</option>
+					<option>아동</option>
+				</select>
+				<input class="form-input form-inline price" type="number" name="option_price" placeholder="가격 ex)10000">
+			</div>
+			<div class="row">
+			</div>
+			<div class="row">
+				<input class="form-input" type="checkbox" name="option_select" value="필수">
 			</div>
 			<div class="row-empty"></div>
 			<div class="row">
