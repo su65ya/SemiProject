@@ -40,7 +40,7 @@
 			<input class="form-btn" type="submit" value="로그인">			
 		</div>
 			
-		<div class="row left">
+		<div class="row">
            	<% if (request.getParameter("error") != null) {	%>
 			<!-- 오류 메시지는 페이지에 error라는 파라미터가 있을 경우에만 -->
 				<font color="#ff0000" size="2px">입력하신 로그인 정보가 맞지 않습니다</font>

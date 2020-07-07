@@ -1,5 +1,8 @@
 package semi.beans.dto;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class MemberDto {
 	private int member_no;
 	private String member_id;
@@ -17,6 +20,22 @@ public class MemberDto {
 	public MemberDto() {
 		super();
 	}
+	
+	public MemberDto(ResultSet rs) throws SQLException {
+		this.setMember_no(rs.getInt("member_no"));
+		this.setMember_id(rs.getString("member_id"));
+		this.setMember_pw(rs.getString("member_pw"));
+		this.setMember_name(rs.getString("member_name"));
+		this.setMember_birth(rs.getString("member_birth"));
+		this.setMember_mail(rs.getString("member_mail"));
+		this.setMember_post(rs.getString("member_post"));
+		this.setMember_basic_addr(rs.getString("member_basic_addr"));
+		this.setMember_detail_addr(rs.getString("member_detail_addr"));
+		this.setMember_phone(rs.getString("member_phone"));
+		this.setMember_rate(rs.getString("member_rate"));
+		this.setMember_join(rs.getString("member_join"));
+	}	
+	
 
 	public int getMember_no() {
 		return member_no;
