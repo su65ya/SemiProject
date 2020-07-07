@@ -14,7 +14,7 @@ import semi.beans.dao.SellerDao;
 import semi.beans.dto.SellerDto;
 
 //등록은 web.xml에 수행
-public class TestLoginFilter implements Filter {
+public class SellerTestLoginFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
