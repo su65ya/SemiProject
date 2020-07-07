@@ -23,7 +23,7 @@
   	</filter-mapping>
   	
   	<!-- 판매자 테스트 필터 -->
-<!--    	<filter>
+<!--  	<filter>
   		<filter-name>sellertestLoginFilter</filter-name>
   		<filter-class>semi.filter.SellerTestLoginFilter</filter-class>
   	</filter>
@@ -32,16 +32,17 @@
   		<url-pattern>/*</url-pattern>
   	</filter-mapping> -->
   	
-  	  <!-- 예약자 테스트 필터 -->
-<!--    	<filter>
+	<!-- 예약자 테스트 필터 -->
+	 <!-- 
+	<filter>
   		<filter-name>membertestLoginFilter</filter-name>
   		<filter-class>semi.filter.MemberTestLoginFilter</filter-class>
   	</filter>
   	<filter-mapping>
-  		<filter-name>membersellertestLoginFilter</filter-name>
+  		<filter-name>membertestLoginFilter</filter-name>
   		<url-pattern>/*</url-pattern>
-  	</filter-mapping> -->
-  	
+  	</filter-mapping>
+  	  -->
 
 </web-app>
 

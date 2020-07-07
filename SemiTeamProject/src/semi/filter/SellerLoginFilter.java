@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import semi.beans.dto.SellerDto;
 
-@WebFilter(urlPatterns = "/seller/*")
+//@WebFilter(urlPatterns = "/seller/*")
 public class SellerLoginFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {

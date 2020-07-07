@@ -3,6 +3,7 @@
 
 <jsp:include page="/template/nav.jsp"></jsp:include>
 			
+			
 			<article>
 				<div class="row center">
 					<img src="https://placehold.it/1280x1000">
