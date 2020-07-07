@@ -93,7 +93,7 @@
 				</div>
 				<div class="row">
 					<label><span>*</span>이메일</label>
-					<input class="form-input" type = "text" name="seller_mail" placeholder="이메일" required>
+					<input class="form-input" type = "text" name="seller_email" placeholder="이메일" required>
 				</div>
 				<div class="row">
 					<label>주소</label><br>
