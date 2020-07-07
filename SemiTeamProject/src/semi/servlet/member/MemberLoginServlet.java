@@ -34,9 +34,6 @@ public class MemberLoginServlet extends HttpServlet{
 			else {
 				resp.sendRedirect("login.jsp?error");
 			}
-			
-			
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 			resp.sendError(500);
