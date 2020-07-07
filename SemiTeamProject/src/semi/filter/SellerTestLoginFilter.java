@@ -37,7 +37,7 @@ public class SellerTestLoginFilter implements Filter {
 					newSeller.setSeller_name("판매자");
 					newSeller.setSeller_birth("2020-01-01");
 					newSeller.setSeller_phone("01011112222");
-					newSeller.setSeller_email("seller@naver.com");
+					newSeller.setSeller_mail("seller@naver.com");
 					newSeller.setCompany_no("1112233333");
 					sdao.join(newSeller);//등록시키기
 					
