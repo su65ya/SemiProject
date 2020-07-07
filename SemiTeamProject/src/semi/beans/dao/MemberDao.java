@@ -114,13 +114,9 @@ public class MemberDao {
 		
 		con.close();
 		return member_id;
-		
-		
 
 	}
 	
-	
-
 }
 
 

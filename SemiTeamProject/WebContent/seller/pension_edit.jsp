@@ -1,14 +1,14 @@
+<%@page import="semi.beans.dao.PensionDao"%>
+<%@page import="semi.beans.dto.PensionDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-        <style>
-    	span{
-    		color:red;
-    		font-size:16;
-    	}
-    	label{
-    		font-size:13;
-    	}
-    </style>
+    
+    <%
+    int pension_no = Integer.parseInt(request.getParameter("pension_no"));
+	PensionDao pdao = new PensionDao();
+	PensionDto pdto = pdao.get(pension_no);
+    
+    %>
 <jsp:include page="/template/nav.jsp"></jsp:include>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -62,35 +62,37 @@
     }
 </script>
 	<article class="w-40">
-		<form action="pension_regist.do" method="post">
+		<form action="pension_edit.do" method="post">
+		<!-- 수정이 가능하도록 PK를 숨김 첨부한다 -->
+		<input type="hidden" name="pension_no" value="<%=pension_no%>">
 			<div class="row-empty"></div>
 			<div class="row">
-				<h2>펜션 등록</h2>
+				<h2>펜션 정보 수정</h2>
 			</div>
 			<div class="row-empty"></div>
 			<div class="row">
 				<label><span>*</span>펜션 이름</label>
-				<input class="form-input" type="text" name="pension_name" placeholder="16자 이내" required>
+				<input class="form-input" type="text" name="pension_name" value="<%=pdto.getPension_name() %>" required>
 			</div>
 			
 			<div class="row">
 				<label><span>*</span>주소 입력</label><br>
-				<input class="form-input form-inline" type="text" name="pension_post" placeholder="우편번호" required>
+				<input class="form-input form-inline" type="text" name="pension_post" value="<%=pdto.getPension_post() %>" required>
 				<input onclick="findAddress();" type="button" value="우편번호 찾기">
 			</div>
 			<div class="row">
-				<input class="form-input" type="text" name="pension_basic_addr" placeholder="기본주소" required>
+				<input class="form-input" type="text" name="pension_basic_addr" <%=pdto.getPension_basic_addr() %> required>
 			</div>
 			<div class="row">
-				<input class="form-input" type="text" name="pension_detail_addr" placeholder="상세주소" required>
+				<input class="form-input" type="text" name="pension_detail_addr" value="<%=pdto.getPension_detail_addr() %>" required>
 			</div>
 			<div class="row">
 				<label><span>*</span>펜션 전화번호</label>
-				<input class="form-input" type="text" name="pension_phone" placeholder="펜션 전화번호" required>
+				<input class="form-input" type="text" name="pension_phone" value=<%=pdto.getPension_phone() %> required>
 			</div>
 			<div class="row">
 				<label><span>*</span>펜션 소개글</label>
-				<textarea rows="15" cols="77" name="pension_intro" required></textarea>
+				<textarea rows="15" cols="77" name="pension_intro" required><%=pdto.getPension_intro() %></textarea>
 			</div>
 			<div class="row-empty"></div>
 			<div class="row">
@@ -100,11 +102,11 @@
 			</div>
 			<div class="row-empty"></div>
 			<div class="row">
-				<input class= "form-btn" type="submit" value="등록하기">
+				<input class= "form-btn" type="submit" value="수정하기">
 			</div>
 			<div class="row"></div>
+		
 		</form>
 	</article>
-
 
 <jsp:include page="/template/footer.jsp"></jsp:include>

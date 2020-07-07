@@ -9,7 +9,6 @@
 	PensionDao pdao = new PensionDao();
 	List<PensionDto> list = pdao.getList();
 
-
 %>
 <!-- 펜션 목록 리스트 -->
 <article class="w-60">
@@ -26,7 +25,7 @@
 					<th>펜션 번호</th>
 					<th>펜션 이름</th>
 					<th>펜션 등록일</th>
-					<th colspan="3">등록</th>
+					<th colspan="2">관리</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -36,8 +35,7 @@
 					<td><%=pdto.getPension_no() %></td>
 					<td><%=pdto.getPension_name() %></td>
 					<td><%=pdto.getPension_regist_date_day() %></td>
-					<td><a href="#">수정</a></td>
-					<td><a href="#">삭제</a></td>
+					<td><a href="pension_detail.jsp?pension_no=<%=pdto.getPension_no()%>">상세보기</a></td>
 					<td><a href="#">객실등록</a></td>
 				</tr>
 				<%} %>
@@ -54,7 +52,4 @@
 	<!-- 네비게이터 -->
 	<div class="row"></div>
 </article>
-
-
-
 <jsp:include page = "/template/footer.jsp"></jsp:include>
