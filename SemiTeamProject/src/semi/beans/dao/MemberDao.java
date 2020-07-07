@@ -2,6 +2,7 @@ package semi.beans.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -29,6 +30,7 @@ public class MemberDao {
 		return src.getConnection();
 	}
 	
+	// 회원 가입 메소드
 	public void join(MemberDto mdto) throws Exception{
 		Connection con = getConnection();
 		
@@ -48,11 +50,63 @@ public class MemberDao {
 		ps.execute();
 		
 		con.close();
+	}
+	
+	// 회원 로그인 메소드
+	public MemberDto login(MemberDto mdto) throws Exception {
+		Connection con = getConnection();
+		
+		String sql = "select * from member where member_id = ? and member_pw = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, mdto.getMember_id());
+		ps.setString(2, mdto.getMember_pw());
+		ResultSet rs = ps.executeQuery();
+		
+		MemberDto user = null;
+		if (rs.next()) {
+			user = new MemberDto(rs);
+		}
+		
+		
+		con.close();
+		return user;
+	}
+	
+	//아이디 찾기 메소드
+	
+	public String findId(MemberDto mdto) throws Exception{
+		Connection con = getConnection();
+		
+		String sql = "SELECT member_id FROM member WHERE member_name=? and member_phone=? and member_birth=?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, mdto.getMember_name());
+		ps.setString(2, mdto.getMember_phone());
+		ps.setString(3, mdto.getMember_birth());
+		ResultSet rs = ps.executeQuery();
+		
+//		String member_id = 추출한 아이디 or null;
+		String member_id;
+		if(rs.next()) {
+			member_id = rs.getString("member_id");
+		}
+		else {
+			member_id = null;
+		}
+		
+		con.close();
+		
+		return member_id;
 		
 	}
+	
+	
 
-	
-	
-	
-	
 }
+
+
+
+
+
+
+
