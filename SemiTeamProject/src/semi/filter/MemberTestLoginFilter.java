@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import semi.beans.dao.MemberDao;
 import semi.beans.dto.MemberDto;
 
-public class MemeberTestFilterServlet implements Filter {
+public class MemberTestLoginFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
