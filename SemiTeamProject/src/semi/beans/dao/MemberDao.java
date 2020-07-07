@@ -71,9 +71,25 @@ public class MemberDao {
 		
 		con.close();
 		return user;
+	}
+	
+	// 회원 단일 조회
+	public MemberDto get(String member_id) throws Exception {
+		Connection con = getConnection();
 		
+		String sql = "select * from member where member_id = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, member_id);
+		ResultSet rs = ps.executeQuery();
 		
-		
+		MemberDto user = null;
+		if (rs.next()) {
+			user= new MemberDto(rs);
+			
+		}
+				
+		con.close();
+		return user;
 	}
 	
 	
