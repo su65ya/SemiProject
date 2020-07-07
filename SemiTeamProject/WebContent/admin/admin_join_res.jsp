@@ -11,9 +11,9 @@
 <jsp:include page="/template/nav.jsp"></jsp:include>
 
 
-<article class =  "w-35"'>
-	<div class = "row-empty"></div>
-	<div class = "row-empty"></div>
+<article class="w-35">
+	<div class="row-empty"></div>
+	<div class="row-empty"></div>
 
 	<div class = "row">
 		<h2>회원 가입이 완료되었습니다</h2>
@@ -21,7 +21,7 @@
 		
 	<div class = "row">
 		<h4>
-			<a href="seller_login.jsp"> 로그인 화면</a>
+			<a href="admin_login.jsp">로그인 화면</a>
 		</h4>
 	</div>	
 	
@@ -35,6 +35,3 @@
 
 
 <jsp:include page="/template/footer.jsp"></jsp:include>
-
-
- 
