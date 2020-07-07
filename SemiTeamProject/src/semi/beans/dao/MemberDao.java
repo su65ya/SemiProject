@@ -30,6 +30,7 @@ public class MemberDao {
 		return src.getConnection();
 	}
 	
+	// 회원 가입 메소드
 	public void join(MemberDto mdto) throws Exception{
 		Connection con = getConnection();
 		
@@ -49,7 +50,26 @@ public class MemberDao {
 		ps.execute();
 		
 		con.close();
+	}
+	
+	// 회원 로그인 메소드
+	public MemberDto login(MemberDto mdto) throws Exception {
+		Connection con = getConnection();
 		
+		String sql = "select * from member where member_id = ? and member_pw = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, mdto.getMember_id());
+		ps.setString(2, mdto.getMember_pw());
+		ResultSet rs = ps.executeQuery();
+		
+		MemberDto user = null;
+		if (rs.next()) {
+			user = new MemberDto(rs);
+		}
+		
+		
+		con.close();
+		return user;
 	}
 	
 	
@@ -57,3 +77,10 @@ public class MemberDao {
 	
 
 }
+
+
+
+
+
+
+
