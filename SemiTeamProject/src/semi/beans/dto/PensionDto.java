@@ -1,5 +1,9 @@
 package semi.beans.dto;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class PensionDto{
 	private int pension_no;
 	private int pension_seller_no;
@@ -58,6 +62,17 @@ public class PensionDto{
 	public String getPension_regist_date() {
 		return pension_regist_date;
 	}
+	
+	
+	//yyyy-MM-dd방식
+	public String getPension_regist_date_day(){
+		return pension_regist_date.substring(0, 10);
+	}
+	//00:00:00방식
+	public String getPension_regist_date_time() {
+		return pension_regist_date.substring(11, 16);
+	}
+
 	public void setPension_regist_date(String pension_regist_date) {
 		this.pension_regist_date = pension_regist_date;
 	}

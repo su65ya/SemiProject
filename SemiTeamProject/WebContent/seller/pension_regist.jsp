@@ -72,6 +72,7 @@
 				<label><span>*</span>펜션 이름</label>
 				<input class="form-input" type="text" name="pension_name" placeholder="16자 이내" required>
 			</div>
+			
 			<div class="row">
 				<label><span>*</span>주소 입력</label><br>
 				<input class="form-input form-inline" type="text" name="pension_post" placeholder="우편번호" required>
@@ -94,7 +95,7 @@
 			<div class="row-empty"></div>
 			<div class="row">
 				<label>펜션 사진 등록</label><br>
-				<div class="row-empty">
+				<div class="row-empty"></div>
 				<input type="file" name="pension_image" multiple accept=".jpg,.png,.gif">
 			</div>
 			<div class="row-empty"></div>
