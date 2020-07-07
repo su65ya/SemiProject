@@ -30,6 +30,8 @@ public class MemberDao {
 		return src.getConnection();
 	}
 	
+	
+	//사용자 회원가입 메소드
 	public void join(MemberDto mdto) throws Exception{
 		Connection con = getConnection();
 		

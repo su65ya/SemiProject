@@ -32,8 +32,8 @@ public class MemberJoinServlet extends HttpServlet {
 			mdao.join(mdto);
 			
 			//결과
-			resp.sendRedirect("join_result.jsp");
-			System.out.println("가입완료");
+			resp.sendRedirect("join.jsp");
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
