@@ -71,7 +71,7 @@ public class PensionDao {
 	public List<PensionDto> getList() throws Exception{
 		Connection con = getConnection();
 		
-		String sql = "SELECT * FROM pension";
+		String sql = "SELECT * FROM pension ORDER BY pension_no ASC";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
@@ -129,5 +129,21 @@ public class PensionDao {
 	}
 	
 	
-	//펜션 수정
+	//펜션 정보 수정
+	public void edit(PensionDto pdto)throws Exception{
+		Connection con = getConnection();
+		String sql = "UPDATE pension SET pension_name=? , pension_post=?, pension_basic_addr=?,pension_detail_addr=?,pension_phone=?,pension_intro=? WHERE pension_no=?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, pdto.getPension_name());
+		ps.setString(2, pdto.getPension_post());
+		ps.setString(3, pdto.getPension_basic_addr());
+		ps.setString(4, pdto.getPension_detail_addr());
+		ps.setString(5, pdto.getPension_phone());
+		ps.setString(6, pdto.getPension_intro());
+		ps.setInt(7, pdto.getPension_no());
+		
+		ps.execute();
+		con.close();
+	}
 }

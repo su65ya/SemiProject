@@ -53,7 +53,7 @@
  		</div>
  		<div class="row-empty"></div>
  		<div class="row center a">
- 			<a href = "#">수정하기</a>&nbsp;&nbsp;
+ 			<a href = "pension_edit.jsp?pension_no=<%=pdto.getPension_no()%>">수정하기</a>&nbsp;&nbsp;
  			<a href = "#">객실 등록</a>&nbsp;&nbsp;
  			<a href = "pension_delete.do?pension_no=<%=pension_no%>">펜션 삭제</a>&nbsp;&nbsp;
  			<a href = "pension_list.jsp">목록보기</a>

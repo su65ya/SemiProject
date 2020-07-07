@@ -72,11 +72,6 @@ public class MemberDao {
 		con.close();
 		return user;
 		
-		
-		
 	}
-	
-	
-	
 	
 }
