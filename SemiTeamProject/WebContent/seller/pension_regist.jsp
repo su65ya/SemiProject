@@ -103,7 +103,6 @@
 				<input class= "form-btn" type="submit" value="등록하기">
 			</div>
 			<div class="row"></div>
-		
 		</form>
 	</article>
 

@@ -56,7 +56,7 @@ public class PensionRegistServlet extends HttpServlet {
 			
 			//출력
 //			resp.sendRedirect("/pen");
-			System.out.println("등록완료");
+			resp.sendRedirect("pension_list.jsp");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
