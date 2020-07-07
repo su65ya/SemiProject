@@ -18,7 +18,7 @@ label {
 <jsp:include page="/template/nav.jsp"></jsp:include>
 
 
-<form action="admin_login.do" method="post">
+<form action="login.do" method="post">
 	<article class="w-25">
 
 		<div class="row">
@@ -39,11 +39,8 @@ label {
 			<input class="login-checkbox" type="checkbox" name="id_check">
 			<label for="idsave">ID 저장</label>
 		</div>
-
-		<div class="row">
-			<input class="form-btn" type="submit" value="로그인">
-		</div>
-
+		
+		
 		<div class="row left">
 			<%
 				if (request.getParameter("error") != null) {
@@ -53,6 +50,9 @@ label {
 			<%
 				}
 			%>
+		<div class="row">
+			<input class="form-btn" type="submit" value="로그인">
+		</div>
 		</div>
 		<div class="row">
 		<input class="form-btn" type="submit"value="아이디 / 비밀번호 찾기"><br> 
