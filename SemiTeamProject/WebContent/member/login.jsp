@@ -24,7 +24,8 @@ label {
 <jsp:include page="/template/nav.jsp"></jsp:include>
 
 
-<form action="member_login.do" method="post">
+<form action="login.do" method="post">
+
 	<article class="w-25">
 
 		<div class="row">
@@ -43,7 +44,7 @@ label {
 			<input class="login-checkbox" type="checkbox" name="id_check">
 			<label for="idsave">ID 저장</label>
 		</div>
-
+		
 		<div class="row">
 			<input class="form-btn" type="submit" value="로그인">
 		</div>
@@ -51,7 +52,7 @@ label {
 		<div class="row">
            	<% if (request.getParameter("error") != null) {	%>
 			<!-- 오류 메시지는 페이지에 error라는 파라미터가 있을 경우에만 -->
-				<font color="#ff0000" size="2px">입력하신 로그인 정보가 맞지 않습니다</font>
+			<font color="#ff0000" size="2px">입력하신 로그인 정보가 맞지 않습니다</font>
 			<%} %>
         </div>
 		<div class = "row find">
