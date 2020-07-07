@@ -13,8 +13,9 @@ public class MemberLogoutServlet extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		req.getSession().removeAttribute("userinfo");
-		resp.sendRedirect(req.getContextPath());
+		req.getSession().removeAttribute("userinfo"); //삭제
+		
+		resp.sendRedirect(req.getContextPath()); // 루트
 		
 	}
 }
