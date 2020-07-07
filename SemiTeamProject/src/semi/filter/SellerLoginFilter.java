@@ -7,29 +7,28 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import semi.beans.dto.MemberDto;
+import semi.beans.dto.SellerDto;
 
-public class LoginFilter implements Filter{
-	@Override
+@WebFilter(urlPatterns = "/seller/*")
+public class SellerLoginFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-			
+
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
+
+		SellerDto sdto = (SellerDto) req.getSession().getAttribute("sellerinfo");
 		
+		boolean isSellerLogin = sdto != null;
 		
-		MemberDto mdto = (MemberDto) req.getSession().getAttribute("userinfo");
-		
-		boolean isLogin = mdto != null;
-		
-		if (isLogin) {	// 로그인
+		if(isSellerLogin) {
 			chain.doFilter(request, response);
-		}
-		else {	// 로그아웃
-			resp.sendRedirect(req.getContextPath()+"/member/login.jsp");
+		}else {
+			resp.sendRedirect(req.getContextPath()+"/seller/seller_login.jsp");
 		}
 	}
 }
