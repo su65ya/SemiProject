@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import semi.beans.dto.SellerDto;
 
-@WebFilter(urlPatterns = "/seller/*")
+//@WebFilter(urlPatterns = "/seller/*")
 public class SellerLoginFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
@@ -28,7 +28,7 @@ public class SellerLoginFilter implements Filter {
 		if(isSellerLogin) {
 			chain.doFilter(request, response);
 		}else {
-			resp.sendRedirect(req.getContextPath()+"/seller/seller_login.jsp");
+			resp.sendRedirect(req.getContextPath()+"/seller/");
 		}
 	}
 }

@@ -77,6 +77,8 @@ public class MemberDao {
 	public String findId(MemberDto mdto) throws Exception{
 		Connection con = getConnection();
 		
+<<<<<<< HEAD
+=======
 		String sql = "SELECT member_id FROM member WHERE member_name=? and member_phone=? and member_birth=?";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -98,10 +100,14 @@ public class MemberDao {
 		
 		return member_id;
 		
+>>>>>>> refs/remotes/origin/master
 	}
 	
+<<<<<<< HEAD
+=======
 	
 
+>>>>>>> refs/remotes/origin/master
 }
 
 
