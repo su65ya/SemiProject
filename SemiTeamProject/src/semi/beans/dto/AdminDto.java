@@ -8,9 +8,9 @@ public class AdminDto {
 	private int admin_no;
 	private String admin_id; 
 	private String admin_pw;
-	private String admin_name;
-	private String admin_birth;
 	private String admin_phone;
+	private String admin_mail;
+	private String admin_birth;
 	
 	public AdminDto() {
 		super();
@@ -20,9 +20,10 @@ public class AdminDto {
 		this.setAdmin_no(rs.getInt("admin_no"));
 		this.setAdmin_id(rs.getString("admin_id"));
 		this.setAdmin_pw(rs.getString("admin_pw"));
-		this.setAdmin_name(rs.getString("admin_name"));
-		this.setAdmin_birth(rs.getString("admin_birth"));
 		this.setAdmin_phone(rs.getString("admin_phone"));
+		this.setAdmin_mail(rs.getString("admin_mail"));
+		this.setAdmin_birth(rs.getString("admin_birth"));
+		
 	}
 
 	public int getAdmin_no() {
@@ -49,12 +50,20 @@ public class AdminDto {
 		this.admin_pw = admin_pw;
 	}
 
-	public String getAdmin_name() {
-		return admin_name;
+	public String getAdmin_phone() {
+		return admin_phone;
 	}
 
-	public void setAdmin_name(String admin_name) {
-		this.admin_name = admin_name;
+	public void setAdmin_phone(String admin_phone) {
+		this.admin_phone = admin_phone;
+	}
+	
+	public String getAdmin_mail() {
+		return admin_mail;
+	}
+
+	public void setAdmin_mail(String admin_mail) {
+		this.admin_mail = admin_mail;
 	}
 
 	public String getAdmin_birth() {
@@ -64,14 +73,5 @@ public class AdminDto {
 	public void setAdmin_birth(String admin_birth) {
 		this.admin_birth = admin_birth;
 	}
-
-	public String getAdmin_phone() {
-		return admin_phone;
-	}
-
-	public void setAdmin_phone(String admin_phone) {
-		this.admin_phone = admin_phone;
-	}
-	
 
 }
