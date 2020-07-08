@@ -70,6 +70,37 @@ public class MemberDao {
 		con.close();
 		return user;
 	}
+	
+	//아이디 찾기 메소드
+	
+	public String findId(MemberDto mdto) throws Exception{
+		Connection con = getConnection();
+		
+		String sql = "SELECT member_id FROM member WHERE member_name=? and member_phone=? and member_birth=?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, mdto.getMember_name());
+		ps.setString(2, mdto.getMember_phone());
+		ps.setString(3, mdto.getMember_birth());
+		ResultSet rs = ps.executeQuery();
+		
+//		String member_id = 추출한 아이디 or null;
+		String member_id;
+		if(rs.next()) {
+			member_id = rs.getString("member_id");
+		}
+		else {
+			member_id = null;
+		}
+		
+		con.close();
+		
+		return member_id;
+		
+	}
+	
+
+
 
 	// 맴버 탈퇴 메소드
 	public void delete(String member_id) throws Exception {
