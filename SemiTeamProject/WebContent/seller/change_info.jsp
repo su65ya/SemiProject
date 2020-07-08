@@ -43,7 +43,7 @@
     				</tr>
     				<tr>
     					<th>휴대전화</th>
-    					<td><select name="phone1" id="phone1">
+    					<td><select name="phone1" id="phone1" value="<%=mdto.getSeller_phone() %>">
                             <option value="010">010</option>
                             <option value="016">016</option>
                             <option value="011" >011</option>
@@ -51,9 +51,9 @@
                             <option value="017">017</option>                        
                         </select>
                         -
-                        <input type = "text"size = "5" name="seller_phone" maxlength="4" vallue="">
+                        <input type = "text"size = "5" name="seller_phone" maxlength="4" vallue="<%=mdto.getSeller_phone() %>">
                         -
-                        <input type = "text"size = "5" name="seller_phone" maxlength="4" vallue="">
+                        <input type = "text"size = "5" name="seller_phone" maxlength="4" vallue="<%=mdto.getSeller_phone() %>">
                         </td>
     					
     					
@@ -61,20 +61,20 @@
     				<tr>
     					<th>주소</th>
     					<td>
-    					<input type = "text" size="30" name="seller_address">
+    					<input type = "text" size="30" name="seller_address" vallue"<%=mdto.getSeller_basic_addr() %>">
     					</td>
     				
     				</tr>
     				<tr>
     					<th></th>
     					<td>
-    					<input type = "text" size="50" placeholder="상세주소 입력" name="seller_address2">
+    					<input type = "text" size="50" placeholder="상세주소 입력" name="seller_address2" vallue"<%=mdto.getSeller_detail_addr() %>">
     					</td>
     				</tr>
     				<tr>
     					<th>사업자번호</th>
     					<td>
-    					<input type = "text" size = "30" name="company_no" maxlength="10" requirde vallue="">
+    					<input type = "text" size = "30" name="company_no" maxlength="10" requirde vallue="<%=mdto.getCompany_no() %>">
     			
     			</tbody>
     			<tfoot>

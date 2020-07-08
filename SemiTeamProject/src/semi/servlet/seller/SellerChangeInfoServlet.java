@@ -24,13 +24,13 @@ public class SellerChangeInfoServlet extends HttpServlet{
 			String Seller_id = mdto.getSeller_id();
 			
 			SellerDto user = new SellerDto();
-			user.setSeller_id(seller_id);
-			user.setSeller_name(req.getParameter(seller_name));
-			user.setSeller_birth(req.getParameter(seller_birth));
-			user.setSeller_email(req.getParameter(seller_email));
-			user.setSeller_basic_addr(req.getParameter(seller_basic_addr));
-			user.setSeller_detail_addr(req.getParameter(seller_detail_addr);
-			user.setCompany_no(req.getParameter(company_no));
+			user.setSeller_id("seller_id"); 
+			user.setSeller_name("seller_name");
+			
+			user.setSeller_email(req.getParameter("seller_email"));
+			user.setSeller_basic_addr(req.getParameter("seller_basic_addr"));
+			user.setSeller_detail_addr(req.getParameter("seller_detail_addr"));
+			user.setCompany_no(req.getParameter("company_no"));
 			
 			
 			SellerDao mdao = new SellerDao();
