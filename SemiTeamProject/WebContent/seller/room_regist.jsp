@@ -28,7 +28,16 @@
             }
         }
           
-        
+        function changeNumber(){
+        	
+        	var checkTag = document.querySelector("input[type=checkbox]");
+        	
+        	if(checkTag.checked){
+        		checkTag.value = "1";
+        	}else{
+        		checkTag.value="0";
+        	}
+        }
     </script>
 <jsp:include page="/template/nav.jsp"></jsp:include>
 
@@ -93,7 +102,7 @@
 			</div>
 			
 			<div class="row">
-                <input class="select-item" type="checkbox" name="amenity" id="ck">
+                <input class="select-item" type="checkbox" name="amenity" id="ck" onchange="changeNumber();">
         		<label>어메니티</label>
 			</div>
 			
