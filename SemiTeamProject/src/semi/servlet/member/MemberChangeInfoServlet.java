@@ -17,6 +17,7 @@ public class MemberChangeInfoServlet extends HttpServlet{
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		try{
+			//아이디는 세션에서
 			MemberDto mdto = (MemberDto) req.getSession().getAttribute("userinfo");
 			String member_id = mdto.getMember_id();
 			
@@ -28,6 +29,7 @@ public class MemberChangeInfoServlet extends HttpServlet{
 			user.setMember_post(req.getParameter("member_post"));
 			user.setMember_basic_addr(req.getParameter("member_basic_addr"));
 			user.setMember_detail_addr(req.getParameter("member_detail_addr"));
+			user.setMember_phone(req.getParameter("member_phone"));
 			
 			MemberDao mdao = new MemberDao();
 			mdao.changeINfo(user);

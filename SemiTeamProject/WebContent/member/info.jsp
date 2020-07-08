@@ -5,7 +5,10 @@
     
  <%
     MemberDto mdto = (MemberDto) session.getAttribute("userinfo");
-
+ 
+ 	String member_id = mdto.getMember_id();
+	MemberDao mdao = new MemberDao();
+	MemberDto user = mdao.get(member_id);
  %>
  
 <jsp:include page="/template/nav.jsp"></jsp:include>
@@ -17,7 +20,7 @@
 		<tbody>
 			<tr>
 				<th>아이디</th>
-				<td><%=mdto.getMember_id()%></td>
+				<td><%=user.getMember_id()%></td>
 			</tr>
 			<tr>
 				<th>비밀번호</th>
@@ -27,36 +30,36 @@
 			</tr>
 			<tr>
 				<th>이름</th>
-				<td><%=mdto.getMember_name() %></td>
+				<td><%=user.getMember_name() %></td>
 			</tr>
 			<tr>
 				<th>생년월일</th>
-				<td><%=mdto.getMember_birthdayFormat()%></td>
+				<td><%=user.getMember_birthdayFormat()%></td>
 			</tr>
 			<tr>
 				<th>이메일</th>
-				<td><%=mdto.getMember_mail() %></td>
+				<td><%=user.getMember_mail() %></td>
 			</tr>
 			<tr>
 				<th>주소</th>
 				<td>
-					[<%=mdto.getMember_post() %>]
-					<%=mdto.getMember_basic_addr() %>
-					<%=mdto.getMember_detail_addr() %>
+					[<%=user.getMember_post() %>]
+					<%=user.getMember_basic_addr() %>
+					<%=user.getMember_detail_addr() %>
 					상세주소
 				</td>
 			</tr>
 			<tr>
 				<th>전화번호</th>
-				<td><%=mdto.getMember_phone() %></td>
+				<td><%=user.getMember_phone() %></td>
 			</tr>
 			<tr>
 				<th>등급</th>
-				<td><%=mdto.getMember_rate() %></td>
+				<td><%=user.getMember_rate() %></td>
 			</tr>
 			<tr>
 				<th>가입일</th>
-				<td><%=mdto.getMember_join() %></td>
+				<td><%=user.getMember_join() %></td>
 			</tr>
 		</tbody>
 		<tfoot>
