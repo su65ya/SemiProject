@@ -17,8 +17,9 @@ public class SellerRoomRegistServlet extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
+			
+			int pension_no = (Integer.parseInt(req.getParameter("pension_no")));
 			RoomDto rdto = new RoomDto();
-			PensionDto pdto = (PensionDto)req.getSession().getAttribute("pensioninfo");
 			rdto.setRoom_name(req.getParameter("room_name"));
 			rdto.setRoom_type(req.getParameter("room_type"));
 			rdto.setStandard_people(Integer.parseInt(req.getParameter("standard_people")));
@@ -40,7 +41,7 @@ public class SellerRoomRegistServlet extends HttpServlet{
 			rdto.setHairdryer(Integer.parseInt(req.getParameter("hairdryer")));
 			rdto.setCookoo(Integer.parseInt(req.getParameter("cookoo")));
 			rdto.setDog(Integer.parseInt(req.getParameter("dog")));
-			
+			rdto.setRoom_pension_no(pension_no);
 			RoomDao rdao = new RoomDao();
 			rdao.regist(rdto);
 			

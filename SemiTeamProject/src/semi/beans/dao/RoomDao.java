@@ -31,7 +31,7 @@ private static DataSource src;
 	public void regist(RoomDto rdto) throws Exception {
 		Connection con = getConnection();
 		
-		String sql = "INSERT INTO room values(room_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO room values(room_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		
 		ps.setInt(1,rdto.getRoom_pension_no());
