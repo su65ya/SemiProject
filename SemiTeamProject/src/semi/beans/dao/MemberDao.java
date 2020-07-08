@@ -122,7 +122,6 @@ public class MemberDao {
 	
 	public String findId(MemberDto mdto) throws Exception{
 		Connection con = getConnection();
-
 		String sql = "SELECT member_id FROM member WHERE member_name=? and member_phone=? and member_birth=?";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -143,7 +142,6 @@ public class MemberDao {
 		con.close();
 		
 		return member_id;
-
 	}
 	
 
@@ -194,6 +192,5 @@ public class MemberDao {
 		con.close();
 		return mdto;
 	}
-
-
 }
+

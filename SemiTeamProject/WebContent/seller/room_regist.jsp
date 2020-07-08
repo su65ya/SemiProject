@@ -8,11 +8,12 @@
     	}
     	label{
     		font-size:13;
+    		font-weight: bold;
     	}
-    	#ck + label {
+    	.ck + label {
             color:black;
         }
-        #ck:checked + label {
+        .ck:checked + label {
             color:silver;
         }
     </style>
@@ -88,108 +89,110 @@
             	<label><span>*</span>객실명</label>
             	<input class="form-input" type="text" name="room_name" placeholder="20글자이내로 적어주세요." required autocomplete="none">
         	</div>
-        	
+        	<div class="row-emptyy"></div>
         	<div class="row">
         		<label>객실타입</label>
         		<input class="form-input" type="text" name="room_type" placeholder="10글자이내로 적어주세요.">		
 			</div>
+			<div class="row-emptyy"></div>
 			<div class="row">
         		<label><span>*</span>최소인원</label>
         		<input class="form-input" type="text" name="standard_people"required>
 			</div>
-			
+			<div class="row-emptyy"></div>
 			<div class="row">
         		<label><span>*</span>최대인원</label>
         		<input class="form-input" type="text" name="max_people"required>
 			</div>
-           
+           	<div class="row-emptyy"></div>
             <div class="row">
         		<label><span>*</span>방넓이</label>
         		<input class="form-input" type="text" name="room_width"placeholder="평수"required>
 			</div>
-			
+			<div class="row-emptyy"></div>
 			<div class="row">
         		<label><span>*</span>화장실개수</label>
         		<input class="form-input" type="text" name="toilet_count"placeholder="ex)1" required>
 			</div>
-			
+			<div class="row-emptyy"></div>
 			<div class="row">
         		<label><span>*</span>비수기 평일 가격</label>
         		<input class="form-input" type="text" name="off_weekday" placeholder=""required>
 			</div>
-           
+           <div class="row-emptyy"></div>
             <div class="row">
         		<label><span>*</span>비수기 주말 가격</label>
         		<input class="form-input" type="text" name="off_weekend"placeholder=""required>
 			</div>
-           
+           <div class="row-emptyy"></div>
             <div class="row">
         		<label><span>*</span>성수기 평일 가격</label>
         		<input class="form-input" type="text" name="on_weekday"placeholder=""required>
 			</div>
-        
+        <div class="row-emptyy"></div>
             <div class="row">
         		<label><span>*</span>성수기 주말 가격</label>
         		<input class="form-input" type="text" name="on_weekend"placeholder=""required>
 			</div>
+			<div class="row-emptyy"></div>
 			<div class="row-empty"></div>
 			<hr>
 			<div class="row">
 				<h4>옵션</h4>
 			</div>
 			<div class="row">
-                <input class="select-item" type="checkbox" name="amenity" id="ck" onchange="changeNumber(0);">
-        		<label for="ck">어메니티</label>
+                <input class="select-item ck" type="checkbox" name="amenity" id="amenity" onchange="changeNumber(0);">
+        		<label for="amenity">어메니티</label>
 			</div>
 			
 			<div class="row">
-                <input class="select-item" type="checkbox" name="microwave" id="ck" onchange="changeNumber(1);">
-                <label for="ck">전자레인지</label>
+                <input class="select-item ck" type="checkbox" name="microwave" id="micro" onchange="changeNumber(1);">
+                <label for="micro">전자레인지</label>
 			</div>
 			
 			<div class="row">
-        		<input class="select-item" type="checkbox" name="bed" id="ck" onchange="changeNumber(2);">
-        		<label for="ck">침대</label>
+        		<input class="select-item ck" type="checkbox" name="bed" id="bed" onchange="changeNumber(2);">
+        		<label for="bed">침대</label>
 			</div>
            
             <div class="row">
-                <input class="select-item" type="checkbox" name="tv" id="ck"onchange="changeNumber(3);">
-        		<label for="ck">티비</label>
+                <input class="select-item ck" type="checkbox" name="tv" id="tv"onchange="changeNumber(3);">
+        		<label for="tv">티비</label>
 			</div>
 			
 			<div class="row">
-                <input class="select-item" type="checkbox" name="room_sofa" id="ck" onchange="changeNumber(4);">
-        		<label for="ck">소파</label>
+                <input class="select-item ck" type="checkbox" name="room_sofa" id="sofa" onchange="changeNumber(4);">
+        		<label for="sofa">소파</label>
 			</div>
 			
 			<div class="row">
-               <input class="select-item" type="checkbox" name="room_aircon" id="ck" onchange="changeNumber(5);">
-        		<label for="ck">에어컨</label>
+               <input class="select-item ck" type="checkbox" name="room_aircon" id="room_aircon" onchange="changeNumber(5);">
+        		<label for="room_aircon">에어컨</label>
 			</div>
 			
 			<div class="row">
-               <input class="select-item" type="checkbox" name="fridge" id="ck" onchange="changeNumber(6);">
-        		<label for="ck">냉장고</label>
+               <input class="select-item ck" type="checkbox" name="fridge" id="fridge" onchange="changeNumber(6);">
+        		<label for="fridge">냉장고</label>
 			</div>
 			
 			<div class="row">
-                <input class="select-item" type="checkbox" name="tub" id="ck" onchange="changeNumber(7);">
-        		<label for="ck">욕조</label>
+                <input class="select-item ck" type="checkbox" name="tub" id="tub" onchange="changeNumber(7);">
+        		<label for="tub">욕조</label>
 			</div>
             
             <div class="row">
-                <input class="select-item" type="checkbox" name="hairdryer" id="ck" onchange="changeNumber(8);">
-        		<label for="ck">드라이기</label>
+                <input class="select-item ck" type="checkbox" name="hairdryer" id="hair" onchange="changeNumber(8);">
+        		<label for="hair">드라이기</label>
 			</div>
             
             <div class="row">
-                <input class="select-item" type="checkbox" name="cookoo" id="ck" onchange="changeNumber(9);">
-        		<label for="ck">밥솥</label>
+                <input class="select-item ck" type="checkbox" name="cookoo" id="cookoo" onchange="changeNumber(9);">
+        		<label for="cookoo">밥솥</label>
 			</div>
             
             <div class="row">
-                <input class="select-item" type="checkbox" name="dog" id="ck" onchange="changeNumber(10);">
-        		<label for="ck">반려견</label>
+                <input class="select-item ck" type="checkbox" name="dog" id="dog" onchange="changeNumber(10);">
+        		<label for="dog">반려견</label>
 			</div>
 			
 			<div class="row right">
