@@ -33,11 +33,20 @@ public class QuestionDao {
 	}
 	
 	// 문의 리스트
-	public List<QuestionDto> getlist() throws Exception {
+	public List<QuestionDto> getlist(int start, int finish) throws Exception {
 		Connection con = getConnection();
 		
-		String sql ="select * from question";
+		String sql ="select * from ("
+							+ "select rownum rn, T.* from ("
+								+ "SELECT * FROM question "
+									+ "CONNECT BY PRIOR que_no = super_no "
+									+ "START WITH super_no IS NULL "
+									+ "ORDER siblings BY group_no DESC, que_no ASC"
+								+ ")T "
+							+ ") where rn between ? and ?";
 		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, start);
+		ps.setInt(2, finish);
 		ResultSet rs = ps.executeQuery();
 		
 		List<QuestionDto> list = new ArrayList<>();
@@ -52,13 +61,22 @@ public class QuestionDao {
 	}
 	
 	// 문의 검색 리스트
-	public List<QuestionDto> search(String type, String keyword) throws Exception {
+	public List<QuestionDto> search(String type, String keyword, int start, int finish) throws Exception {
 		Connection con = getConnection();
 		
-		String sql ="select * from question where instr(#1, ?) > 0";
+		String sql ="select * from ("
+				+ "select rownum rn, T.* from ("
+					+ "SELECT * FROM question where instr(#1, ?) > 0"
+						+ "CONNECT BY PRIOR que_no = super_no "
+						+ "START WITH super_no IS NULL "
+						+ "ORDER siblings BY group_no DESC, que_no ASC"
+					+ ")T "
+				+ ") where rn between ? and ?";
 		sql = sql.replace("#1", type);
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, keyword);
+		ps.setInt(2, start);
+		ps.setInt(3, finish);
 		ResultSet rs = ps.executeQuery();
 		
 		List<QuestionDto> list = new ArrayList<>();
@@ -155,6 +173,55 @@ public class QuestionDao {
 		ps.execute();
 		
 		con.close();		
+	}
+	
+	
+	// 수정 메소드
+	public void edit(QuestionDto qdto) throws Exception {
+		Connection con = getConnection();
+		
+		String sql = "update question set que_head = ?, que_title = ?, que_content = ? where que_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, qdto.getQue_head());
+		ps.setString(2, qdto.getQue_title());
+		ps.setString(3, qdto.getQue_content());
+		ps.setInt(4, qdto.getQue_no());
+		ps.execute();
+		
+		con.close();
+	}
+	
+	
+	// 게시글 개수
+	public int getCount() throws Exception {
+		Connection con = getConnection();
+		
+		String sql ="select count(*) from question";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		
+		int count = rs.getInt(1);
+		
+		con.close();
+		return count;
+	}
+	
+	// 검색 게시글 개수
+	public int getSearch(String type, String keyword) throws Exception {
+		Connection con = getConnection();
+		
+		String sql ="select count(*) from question where instr(#1, ?) > 0";
+		sql = sql.replace("#1", type);
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, keyword);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		
+		int count = rs.getInt(1);
+		
+		con.close();
+		return count;
 	}
 	
 

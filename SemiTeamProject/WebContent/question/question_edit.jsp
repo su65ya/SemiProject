@@ -87,7 +87,7 @@
 
 
 
-<form action="question_write.do" method="post" onsubmit="return formCheck();">
+<form action="question_edit.do" method="post" onsubmit="return formCheck();">
 	
 	<% if (request.getParameter("que_no") != null) { %>
 		<input type="hidden" name="que_no"
@@ -118,11 +118,11 @@
 		
 		<div class="row">
 			<label>&nbsp;&nbsp;&nbsp;제목&nbsp;&nbsp;&nbsp;</label>
-			<input class="form-input" type="text" name="que_title" placeholder="문의 제목을 입력해 주세요" required  style="width: 85%">
+			<input class="form-input" type="text" name="que_title" value="<%= qdto.getQue_title() %>" required  style="width: 85%">
 		</div>
 		
 		<div class="row">
-			<textarea name="que_content" cols="100px" rows="20px"><%=  %></textarea>
+			<textarea name="que_content" cols="100px" rows="20px"><%= qdto.getQue_content() %></textarea>
 		</div>
 		
 		<div class="row">

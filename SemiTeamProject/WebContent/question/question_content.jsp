@@ -45,7 +45,7 @@
 	</div>
 	
 	<div class="row">
-		<%= qdto.getQue_date() %> / 
+		<%= qdto.getQue_auto() %> / 
 		<%= qdto.getQue_view() %>
 	</div>
 	
@@ -64,7 +64,7 @@
 		</a>
 		<a href="question_delete.do?que_no=<%= que_no %>">
 			<input class="form-btn form-inline" type="button" value="삭제">
-		</a>r
+		</a>
 		<a href="question_write.jsp">
 			<input class="form-btn form-inline" type="button" value="글쓰기">
 		</a>

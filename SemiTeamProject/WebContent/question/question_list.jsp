@@ -1,3 +1,4 @@
+<%@page import="oracle.net.aso.e"%>
 <%@page import="semi.beans.dao.QuestionDao"%>
 <%@page import="semi.beans.dto.QuestionDto"%>
 <%@page import="java.util.ArrayList"%>
@@ -11,15 +12,55 @@
 	String keyword = request.getParameter("keyword");
 	
 	boolean isSearch = type != null  && keyword != null;
+	
+	///////////////////////////////////////////////////
+	
+	int pageSize = 2;
+	
+	String pageStr = request.getParameter("page");
+	int pageNo;
+	try {
+		pageNo = Integer.parseInt(pageStr);
+		if (pageNo <= 0 ) {
+			throw new Exception();
+		}
+	}
+	catch (Exception e) {
+		pageNo = 1;
+	}
+	
+	int finish = pageNo * pageSize;
+	int start = finish - (pageSize -1);
+	
+	////////////////////////////////////////
+	
+	int blockSize = 10;
+	int blockStart = (pageNo - 1) / blockSize * blockSize + 1;
+	int blockFinish = blockStart +blockSize - 1;
+	
 
-	List<QuestionDto> list = new ArrayList<>();
 	QuestionDao qdao = new QuestionDao();
 	
+	int count;
 	if (isSearch) {
-		list = qdao.search(type, keyword);		
+		count = qdao.getSearch(type, keyword);
+	}
+	else{
+		count = qdao.getCount();
+	}
+	
+	int pageCount = (count + pageSize - 1) / pageSize;
+	if (blockFinish > pageCount) {
+		blockFinish = pageCount;
+	}
+	
+	
+	List<QuestionDto> list;
+	if (isSearch) {
+		list = qdao.search(type, keyword, start, finish);		
 	}
 	else {
-		list = qdao.getlist();
+		list = qdao.getlist(start, finish);
 	}
 
 %>
@@ -87,12 +128,17 @@
 						<%= qdto.getQue_title() %>
 					</a>
 				</td>
-				<td><%= qdto.getQue_write() %></td>
-				<td><%= qdto.getQue_date() %></td>
+				<td>
+					<% if (qdto.getQue_write() != 0) {%>
+						<%= qdto.getQue_write() %>
+					<%} else {%>
+						<font color="gray">XXX</font>
+					<%} %>
+				</td>
+				<td><%= qdto.getQue_auto() %></td>
 				<td><%= qdto.getQue_view() %></td>
 			</tr>
 			<%} %>
-			
 		</tbody>
 	</table>
 
@@ -101,6 +147,40 @@
 			<input class="form-btn form-inline" type="button" value="글쓰기">
 		</a>
 	</div>
+	
+	
+	<div class="row center pagination">
+	
+		<!-- 이전 -->
+		<% if (blockStart > 1) { %>
+			<%if (!isSearch) { %>
+				<a href="question_list.jsp?page=<%= blockStart - 1 %>">&lt;</a>
+			<%} else { %>
+				<a href="question_list.jsp?page=<%= blockStart - 1 %>&type=<%= type %>&keyword=<%= keyword %>">&lt;</a>
+			<%} %>
+		<%} %>
+		
+		<% for (int i = blockStart; i <= blockFinish; i++) {%>
+			<% if (!isSearch) { %>	
+				<a href="question_list.jsp?page=<%= i %>"><%= i %></a>
+			<%} else { %>
+				<a href="question_list.jsp?page=<%= i %>&type=<%= type %>&keyword=<%= keyword %>"><%= i %></a>
+			<%} %>
+		<%} %>
+		
+		<!-- 다음 -->
+		<% if (blockFinish < pageCount) { %>
+			<%if (!isSearch) { %>
+				<a href="question_list.jsp?page=<%= blockFinish + 1 %>">&gt;</a>
+			<%} else { %>
+				<a href="question_list.jsp?page=<%= blockFinish + 1 %>&type=<%= type %>&keyword=<%= keyword %>">&gt;</a>
+			<%} %>
+		<%} %>
+		
+	</div>
+	
+	
+	
 	
 	<!-- 검색창 -->
 	<div class="row center">

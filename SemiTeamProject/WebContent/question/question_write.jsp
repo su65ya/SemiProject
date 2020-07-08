@@ -112,7 +112,7 @@
 		</div>
 		
 		<div class="row">
-			<textarea name="que_content" cols="100px" rows="20px">문의 내용을 입력해 주세요</textarea>
+			<textarea name="que_content" cols="100px" rows="20px"></textarea>
 		</div>
 		
 		<div class="row">
