@@ -63,11 +63,6 @@
 
 
 
-<!--  에러처리  -->
-<%if(request.getParameter("error")!=null){%>
-<h6><font color= "red" >해당하는 정보를 찾을수 없습니다</font></h6>
-<% }%>
-
 </div>
 
 
