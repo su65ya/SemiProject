@@ -16,7 +16,7 @@
             color:silver;
         }
     </style>
-    <script>
+    <script>    
         function changeCheckbox(){
             
             var selectAll = document.querySelector(".select-all").checked;
@@ -24,9 +24,25 @@
             var selectItem = document.querySelectorAll(".select-item");
             
             for(var i in selectItem){
-                selectItem[i].checked = selectAll;    
+            	selectItem[i].checked = selectAll; 
             }
         }
+        
+        function changeNumber(no){
+       		var checkTag = document.querySelectorAll("input[type=checkbox]");
+      
+        		if(checkTag[no].checked){
+           			checkTag[no].value = "1";
+        		}else{
+           			checkTag[no].value="0";
+        		}
+        }
+//         function AllchangeNum(){
+//         	var allcheck = document.querySeletorAll(".select-all").checked;
+        	
+//         	if()
+//         }
+       
         
         function preview(){
             var fileTag = document.querySelector("input[name=room_image]");
@@ -63,8 +79,9 @@
 
    <article class="w-40">
 		<form action="room_regist.do" method="post">
+		<input type = "hidden" name = "pension_no" value="<%=request.getParameter("pension_no")%>">
 			<div class="row">
-				<h2>객실 관리</h2>
+				<h2>객실 등록관리</h2>
 			</div>
 			
 			<div class="row">
@@ -120,63 +137,63 @@
 			<div class="row">
 				<h4>옵션</h4>
 			</div>
-			
 			<div class="row">
-                <input class="select-item" type="checkbox" name="amenity" id="ck">
+                <input class="select-item" type="checkbox" name="amenity" id="ck" onchange="changeNumber(0);">
         		<label for="ck">어메니티</label>
 			</div>
 			
 			<div class="row">
-                <input class="select-item" type="checkbox" name="microwave" id="ck">
+                <input class="select-item" type="checkbox" name="microwave" id="ck" onchange="changeNumber(1);">
                 <label for="ck">전자레인지</label>
 			</div>
 			
 			<div class="row">
-        		<input class="select-item" type="checkbox" name="bed" id="ck">
+        		<input class="select-item" type="checkbox" name="bed" id="ck" onchange="changeNumber(2);">
         		<label for="ck">침대</label>
 			</div>
            
             <div class="row">
-                <input class="select-item" type="checkbox" name="tv" id="ck">
+                <input class="select-item" type="checkbox" name="tv" id="ck"onchange="changeNumber(3);">
         		<label for="ck">티비</label>
 			</div>
 			
 			<div class="row">
-                <input class="select-item" type="checkbox" name="room_sofa" id="ck">
+                <input class="select-item" type="checkbox" name="room_sofa" id="ck" onchange="changeNumber(4);">
         		<label for="ck">소파</label>
 			</div>
 			
 			<div class="row">
-               <input class="select-item" type="checkbox" name="room_aircon" id="ck">
+               <input class="select-item" type="checkbox" name="room_aircon" id="ck" onchange="changeNumber(5);">
         		<label for="ck">에어컨</label>
 			</div>
 			
 			<div class="row">
-               <input class="select-item" type="checkbox" name="fridge" id="ck">
+               <input class="select-item" type="checkbox" name="fridge" id="ck" onchange="changeNumber(6);">
         		<label for="ck">냉장고</label>
 			</div>
 			
 			<div class="row">
-                <input class="select-item" type="checkbox" name="tub" id="ck">
+                <input class="select-item" type="checkbox" name="tub" id="ck" onchange="changeNumber(7);">
         		<label for="ck">욕조</label>
 			</div>
             
             <div class="row">
-                <input class="select-item" type="checkbox" name="hairdryer" id="ck">
+                <input class="select-item" type="checkbox" name="hairdryer" id="ck" onchange="changeNumber(8);">
         		<label for="ck">드라이기</label>
 			</div>
             
             <div class="row">
-                <input class="select-item" type="checkbox" name="cookoo" id="ck">
+                <input class="select-item" type="checkbox" name="cookoo" id="ck" onchange="changeNumber(9);">
         		<label for="ck">밥솥</label>
 			</div>
             
             <div class="row">
-                <input class="select-item" type="checkbox" name="dog" id="ck">
+                <input class="select-item" type="checkbox" name="dog" id="ck" onchange="changeNumber(10);">
         		<label for="ck">반려견</label>
 			</div>
+			
 			<div class="row right">
-				<input type="checkbox" class="select-all" onchange="changeCheckbox();" id="ck">
+				<input type="checkbox" class="select-all" onchange="changeCheckbox(); changeAll(11);" id="ck">
 				<label for="ck">전체선택/해제</label>
 			</div>
 			<hr>
