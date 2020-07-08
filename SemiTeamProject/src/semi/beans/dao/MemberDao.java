@@ -29,13 +29,13 @@ public class MemberDao {
 //		return DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","c##kh","c##kh");
 		return src.getConnection();
 	}
-	
+
 	// 회원 가입 메소드
-	public void join(MemberDto mdto) throws Exception{
+	public void join(MemberDto mdto) throws Exception {
 		Connection con = getConnection();
-		
+
 		String sql = "INSERT INTO member VALUES(member_seq.nextval,?,?,?,?,?,?,?,?,?,'일반',sysdate)";
-		
+
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, mdto.getMember_id());
 		ps.setString(2, mdto.getMember_pw());
@@ -46,28 +46,27 @@ public class MemberDao {
 		ps.setString(7, mdto.getMember_basic_addr());
 		ps.setString(8, mdto.getMember_detail_addr());
 		ps.setString(9, mdto.getMember_phone());
-		
+
 		ps.execute();
-		
+
 		con.close();
 	}
-	
+
 	// 회원 로그인 메소드
 	public MemberDto login(MemberDto mdto) throws Exception {
 		Connection con = getConnection();
-		
+
 		String sql = "select * from member where member_id = ? and member_pw = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, mdto.getMember_id());
 		ps.setString(2, mdto.getMember_pw());
 		ResultSet rs = ps.executeQuery();
-		
+
 		MemberDto user = null;
 		if (rs.next()) {
 			user = new MemberDto(rs);
 		}
-		
-		
+
 		con.close();
 		return user;
 	}
@@ -77,8 +76,6 @@ public class MemberDao {
 	public String findId(MemberDto mdto) throws Exception{
 		Connection con = getConnection();
 		
-<<<<<<< HEAD
-=======
 		String sql = "SELECT member_id FROM member WHERE member_name=? and member_phone=? and member_birth=?";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -100,19 +97,22 @@ public class MemberDao {
 		
 		return member_id;
 		
->>>>>>> refs/remotes/origin/master
 	}
 	
-<<<<<<< HEAD
-=======
-	
 
->>>>>>> refs/remotes/origin/master
+
+
+	// 맴버 탈퇴 메소드
+	public void delete(String member_id) throws Exception {
+		Connection con = getConnection();
+
+		String sql = "DELETE member WHERE member_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, member_id);
+		ps.execute();
+
+		con.close();
+
+	}
+
 }
-
-
-
-
-
-
-
