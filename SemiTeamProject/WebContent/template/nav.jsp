@@ -25,7 +25,7 @@
 				<li><a href="<%= root %>/member/join.jsp">회원가입</a></li>
 				<li><a href="<%= root %>/member/info.jsp">내정보</a></li>
 				<li><a href="<%= root %>/member/logout.do">로그아웃</a></li>
-				<li><a href="<%= root %>/seller/seller_login.jsp">펜션관리</a></li>
+				<li><a href="<%= root %>/seller/seller_list.jsp">펜션관리</a></li>
 				<li><a href="#">업소관리</a></li>
 				<li><a href="#">입점신청</a></li>
 				<li><a href="#">펜션 찾기</a></li>

@@ -5,10 +5,7 @@
     
  <%
     MemberDto mdto = (MemberDto) session.getAttribute("userinfo");
- 
- 	String member_id = mdto.getMember_id();
- 	MemberDao mdao = new MemberDao();
- 	MemberDto user = mdao.get(member_id);
+
  %>
  
 <jsp:include page="/template/nav.jsp"></jsp:include>
@@ -20,7 +17,7 @@
 		<tbody>
 			<tr>
 				<th>아이디</th>
-				<td><%=user.getMember_id()%></td>
+				<td><%=mdto.getMember_id()%></td>
 			</tr>
 			<tr>
 				<th>비밀번호</th>

@@ -60,4 +60,9 @@ public class PensionImageDao {
 		ps.execute();
 		con.close();
 	}
+	
+	//펜션 삭제 메소드
+	public void delete(int pension_no)throws Exception{
+		
+	}
 }
