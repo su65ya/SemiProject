@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%
+	int pension_no = Integer.parseInt(request.getParameter("pension_no"));
+%>
 <style>
     	span{
     		color:red;
@@ -8,7 +10,6 @@
     	}
     	label{
     		font-size:13;
-    		font-weight: bold;
     	}
     	.ck + label {
             color:black;
@@ -26,24 +27,35 @@
             
             for(var i in selectItem){
             	selectItem[i].checked = selectAll; 
+        	   var check_count = document.getElementsByClassName("ck").length;
+        	   var checked=0;
+               for (var i=0; i<check_count; i++) {
+                   if (document.getElementsByClassName("ck")[i].checked == true) {
+                     	checked+=1;
+                     	document.getElementsByClassName("ck")[i].value=checked;
+                   }
+                   else if(document.getElementsByClassName("ck")[i].checked == false){
+                   	
+                   	document.getElementsByClassName("ck")[i].value=checked;
+                   }
+             	}
+            	
             }
         }
-        
-        function changeNumber(no){
-       		var checkTag = document.querySelectorAll("input[type=checkbox]");
-      
-        		if(checkTag[no].checked){
-           			checkTag[no].value = "1";
-        		}else{
-           			checkTag[no].value="0";
-        		}
+        function value_check() {
+            var check_count = document.getElementsByClassName("ck").length;
+     		var checked=0;
+            for (var i=0; i<check_count; i++) {
+                if (document.getElementsByClassName("ck")[i].checked == true) {
+                  	checked+=1;
+                  	document.getElementsByClassName("ck")[i].value=checked;
+                }
+                else if(document.getElementsByClassName("ck")[i].checked == false){
+                	
+                	document.getElementsByClassName("ck")[i].value=checked;
+                }
+          	}
         }
-//         function AllchangeNum(){
-//         	var allcheck = document.querySeletorAll(".select-all").checked;
-        	
-//         	if()
-//         }
-       
         
         function preview(){
             var fileTag = document.querySelector("input[name=room_image]");
@@ -64,7 +76,6 @@
                         imgTag.setAttribute("width", "120");
                         imgTag.setAttribute("height", "120");
                         divTag.appendChild(imgTag);
-                        
                     };
                     reader.readAsDataURL(fileTag.files[i]);
                 }
@@ -81,7 +92,6 @@
 
    <article class="w-40">
 		<form action="room_regist.do" method="post">
-		<input type = "hidden" name = "pension_no" value="<%=request.getParameter("pension_no")%>">
 			<div class="row">
 				<h2>객실 등록관리</h2>
 			</div>
@@ -90,127 +100,127 @@
             	<label><span>*</span>객실명</label>
             	<input class="form-input" type="text" name="room_name" placeholder="20글자이내로 적어주세요." required autocomplete="none">
         	</div>
-        	<div class="row-emptyy"></div>
+        	
         	<div class="row">
         		<label>객실타입</label>
         		<input class="form-input" type="text" name="room_type" placeholder="10글자이내로 적어주세요.">		
 			</div>
-			<div class="row-emptyy"></div>
 			<div class="row">
         		<label><span>*</span>최소인원</label>
         		<input class="form-input" type="text" name="standard_people"required>
 			</div>
-			<div class="row-emptyy"></div>
+			
 			<div class="row">
         		<label><span>*</span>최대인원</label>
         		<input class="form-input" type="text" name="max_people"required>
 			</div>
-           	<div class="row-emptyy"></div>
+           
             <div class="row">
         		<label><span>*</span>방넓이</label>
         		<input class="form-input" type="text" name="room_width"placeholder="평수"required>
 			</div>
-			<div class="row-emptyy"></div>
+			
 			<div class="row">
         		<label><span>*</span>화장실개수</label>
         		<input class="form-input" type="text" name="toilet_count"placeholder="ex)1" required>
 			</div>
-			<div class="row-emptyy"></div>
+			
 			<div class="row">
         		<label><span>*</span>비수기 평일 가격</label>
         		<input class="form-input" type="text" name="off_weekday" placeholder=""required>
 			</div>
-           <div class="row-emptyy"></div>
+           
             <div class="row">
         		<label><span>*</span>비수기 주말 가격</label>
         		<input class="form-input" type="text" name="off_weekend"placeholder=""required>
 			</div>
-           <div class="row-emptyy"></div>
+           
             <div class="row">
         		<label><span>*</span>성수기 평일 가격</label>
         		<input class="form-input" type="text" name="on_weekday"placeholder=""required>
 			</div>
-        <div class="row-emptyy"></div>
+        
             <div class="row">
         		<label><span>*</span>성수기 주말 가격</label>
         		<input class="form-input" type="text" name="on_weekend"placeholder=""required>
 			</div>
-			<div class="row-emptyy"></div>
 			<div class="row-empty"></div>
 			<hr>
 			<div class="row">
 				<h4>옵션</h4>
 			</div>
-			<div class="row">
-                <input class="select-item ck" type="checkbox" name="amenity" id="amenity" onchange="changeNumber(0);">
-        		<label for="amenity">어메니티</label>
+			<div>
+			<input class="select-item ck" type="checkbox" name="amenity" id="amenity_id" onchange="value_check();" value = "0">
+        		<label for="amenity_id">어메니티</label>
 			</div>
 			
 			<div class="row">
-                <input class="select-item ck" type="checkbox" name="microwave" id="micro" onchange="changeNumber(1);">
-                <label for="micro">전자레인지</label>
+                <input class="select-item ck" type="checkbox" name="microwave" id="micro_id" onchange="value_check();" value = "0">
+                <label for="mi">전자레인지</label>
 			</div>
 			
 			<div class="row">
-        		<input class="select-item ck" type="checkbox" name="bed" id="bed" onchange="changeNumber(2);">
-        		<label for="bed">침대</label>
+        		<input class="select-item ck" type="checkbox" name="bed" id="bed_id" onchange="value_check();" value = "0">
+        		<label for="bed_id">침대</label>
 			</div>
            
             <div class="row">
-                <input class="select-item ck" type="checkbox" name="tv" id="tv"onchange="changeNumber(3);">
-        		<label for="tv">티비</label>
+                <input class="select-item ck" type="checkbox" name="tv" id="tv_id"onchange="value_check();" value = "0">
+        		<label for="tv_id">티비</label>
 			</div>
 			
 			<div class="row">
-                <input class="select-item ck" type="checkbox" name="room_sofa" id="sofa" onchange="changeNumber(4);">
-        		<label for="sofa">소파</label>
+                <input class="select-item ck" type="checkbox" name="room_sofa" id="sofa_id" onchange="value_check();" value = "0">
+        		<label for="sofa_id">소파</label>
 			</div>
 			
 			<div class="row">
-               <input class="select-item ck" type="checkbox" name="room_aircon" id="room_aircon" onchange="changeNumber(5);">
-        		<label for="room_aircon">에어컨</label>
+               <input class="select-item ck" type="checkbox" name="room_aircon" id="aircon_id" onchange="value_check();" value = "0">
+        		<label for="room_aircon_id">에어컨</label>
 			</div>
 			
 			<div class="row">
-               <input class="select-item ck" type="checkbox" name="fridge" id="fridge" onchange="changeNumber(6);">
-        		<label for="fridge">냉장고</label>
+               <input class="select-item ck" type="checkbox" name="fridge" id="fridge_id" onchange="value_check();" value = "0">
+        		<label for="fridge_id">냉장고</label>
 			</div>
 			
 			<div class="row">
-                <input class="select-item ck" type="checkbox" name="tub" id="tub" onchange="changeNumber(7);">
-        		<label for="tub">욕조</label>
+                <input class="select-item ck" type="checkbox" name="tub" id="tub_id" onchange="value_check();" value = "0">
+        		<label for="tub_id">욕조</label>
 			</div>
             
             <div class="row">
-                <input class="select-item ck" type="checkbox" name="hairdryer" id="hair" onchange="changeNumber(8);">
-        		<label for="hair">드라이기</label>
+                <input class="select-item ck" type="checkbox" name="hairdryer" id="hair_id" onchange="value_check();" value = "0">
+        		<label for="hair_id">드라이기</label>
 			</div>
             
             <div class="row">
-                <input class="select-item ck" type="checkbox" name="cookoo" id="cookoo" onchange="changeNumber(9);">
-        		<label for="cookoo">밥솥</label>
+                <input class="select-item ck" type="checkbox" name="cookoo" id="cookoo_id" onchange="value_check();" value = "0">
+        		<label for="cookoo_id">밥솥</label>
 			</div>
             
             <div class="row">
-                <input class="select-item ck" type="checkbox" name="dog" id="dog" onchange="changeNumber(10);">
-        		<label for="dog">반려견</label>
+                <input class="select-item ck" type="checkbox" name="dog" id="dog_id" onchange="value_check();" value = "0">
+        		<label for="dog_id">반려견</label>
 			</div>
 			
 			<div class="row right">
-				<input type="checkbox" class="select-all" onchange="changeCheckbox(); changeAll(11);" id="ck">
+ 				<input type="checkbox" class="select-all ck" onchange="changeCheckbox(); value_check();" id="ck" value = "0">
 				<label for="ck">전체선택/해제</label>
 			</div>
+	
+			 
 			<hr>
 			<div class="row">
 				<h4>객실 사진 등록</h4>
 				<div class="row-empty"></div>
 				<input type="file" name="room_image" multiple accept=".jpg,.png,.gif" onchange="preview();">
-				<div class="row-empty"></div>
 				<div class="preview-wrap"></div>
 			</div>
             <div class="row-empty"></div>
             <div class="row-empty"></div>
             <div class="row">
+        		<input type = "hidden" name = "pension_no" value = "<%=pension_no%>">
         		<input class="form-btn" type="submit" value="객실등록하기">
 			</div>
             
