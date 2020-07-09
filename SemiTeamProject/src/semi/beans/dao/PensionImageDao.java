@@ -34,7 +34,7 @@ public class PensionImageDao {
 	public int getSequence() throws Exception{
 		Connection con = getConnection();
 		
-		String sql = "SELECT pension_image_seq.nextval FROM dual";
+		String sql = "SELECT pen_img_seq.nextval FROM dual";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 		rs.next();
