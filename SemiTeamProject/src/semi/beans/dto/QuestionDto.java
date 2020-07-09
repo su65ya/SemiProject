@@ -8,8 +8,8 @@ import java.util.Date;
 
 public class QuestionDto {
 	
-	private int que_no, que_reply, que_view, group_no, super_no, depth, que_write;
-	private String que_head, que_title, que_content, que_date;
+	private int que_no, que_pension_no, reply_writer, que_writer, que_view;
+	private String que_head, que_title, que_content, que_date, que_reply;
 	
 	
 	public QuestionDto() {
@@ -22,15 +22,14 @@ public class QuestionDto {
 		this.setQue_title(rs.getString("que_title"));
 		this.setQue_content(rs.getString("que_content"));
 		this.setQue_date(rs.getString("que_date"));
-		this.setQue_reply(rs.getInt("que_reply"));
 		this.setQue_view(rs.getInt("que_view"));
-		this.setGroup_no(rs.getInt("group_no"));
-		this.setSuper_no(rs.getInt("super_no"));
-		this.setDepth(rs.getInt("depth"));
-		this.setQue_write(rs.getInt("que_write"));
-		
+		this.setQue_writer(rs.getInt("que_writer"));
+		this.setReply_writer(rs.getInt("reply_writer"));
+		this.setQue_pension_no(rs.getInt("que_pension_no"));
+		this.setQue_reply(rs.getString("que_reply"));
 	}
-
+	
+	
 	public int getQue_no() {
 		return que_no;
 	}
@@ -39,12 +38,28 @@ public class QuestionDto {
 		this.que_no = que_no;
 	}
 
-	public int getQue_reply() {
-		return que_reply;
+	public int getQue_pension_no() {
+		return que_pension_no;
 	}
 
-	public void setQue_reply(int que_reply) {
-		this.que_reply = que_reply;
+	public void setQue_pension_no(int que_pension_no) {
+		this.que_pension_no = que_pension_no;
+	}
+
+	public int getReply_writer() {
+		return reply_writer;
+	}
+
+	public void setReply_writer(int reply_writer) {
+		this.reply_writer = reply_writer;
+	}
+
+	public int getQue_writer() {
+		return que_writer;
+	}
+
+	public void setQue_writer(int que_writer) {
+		this.que_writer = que_writer;
 	}
 
 	public int getQue_view() {
@@ -53,38 +68,6 @@ public class QuestionDto {
 
 	public void setQue_view(int que_view) {
 		this.que_view = que_view;
-	}
-
-	public int getGroup_no() {
-		return group_no;
-	}
-
-	public void setGroup_no(int group_no) {
-		this.group_no = group_no;
-	}
-
-	public int getSuper_no() {
-		return super_no;
-	}
-
-	public void setSuper_no(int super_no) {
-		this.super_no = super_no;
-	}
-
-	public int getDepth() {
-		return depth;
-	}
-
-	public void setDepth(int depth) {
-		this.depth = depth;
-	}
-
-	public int getQue_write() {
-		return que_write;
-	}
-
-	public void setQue_write(int que_write) {
-		this.que_write = que_write;
 	}
 
 	public String getQue_head() {
@@ -118,7 +101,15 @@ public class QuestionDto {
 	public void setQue_date(String que_date) {
 		this.que_date = que_date;
 	}
-	
+
+	public String getQue_reply() {
+		return que_reply;
+	}
+
+	public void setQue_reply(String que_reply) {
+		this.que_reply = que_reply;
+	}
+
 	// 시간
 	public  String getQue_time() {
 		return que_date.substring(11, 16);

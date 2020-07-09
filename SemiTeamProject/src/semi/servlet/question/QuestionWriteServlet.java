@@ -23,20 +23,14 @@ public class QuestionWriteServlet extends HttpServlet{
 			MemberDto mdto = (MemberDto) req.getSession().getAttribute("userinfo");
 			SellerDto sdto = (SellerDto) req.getSession().getAttribute("sellerinfo");
 			
-			if (mdto != null) {
-				qdto.setQue_write(mdto.getMember_no());
-			}
-			else {
-				qdto.setQue_write(sdto.getSeller_no());
-			}
+			
+			qdto.setQue_writer(mdto.getMember_no());
+			qdto.setQue_pension_no(Integer.parseInt(req.getParameter("que_pension_no")));
 			
 			qdto.setQue_head(req.getParameter("que_head"));
 			qdto.setQue_title(req.getParameter("que_title"));
 			qdto.setQue_content(req.getParameter("que_content"));
 			
-			if (req.getParameter("que_no") != null) {
-				qdto.setSuper_no(Integer.parseInt(req.getParameter("que_no")));
-			}
 			
 			// 처리
 			QuestionDao qdao = new QuestionDao();

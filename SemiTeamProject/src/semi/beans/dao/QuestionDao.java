@@ -33,20 +33,21 @@ public class QuestionDao {
 	}
 	
 	// 문의 리스트
-	public List<QuestionDto> getlist(int start, int finish) throws Exception {
+	public List<QuestionDto> getlist() throws Exception {
 		Connection con = getConnection();
 		
-		String sql ="select * from ("
-							+ "select rownum rn, T.* from ("
-								+ "SELECT * FROM question "
-									+ "CONNECT BY PRIOR que_no = super_no "
-									+ "START WITH super_no IS NULL "
-									+ "ORDER siblings BY group_no DESC, que_no ASC"
-								+ ")T "
-							+ ") where rn between ? and ?";
+		String sql = "select * from question order by que_no desc";
+//		String sql ="select * from ("
+//							+ "select rownum rn, T.* from ("
+//								+ "SELECT * FROM question "
+//									+ "CONNECT BY PRIOR que_no = super_no "
+//									+ "START WITH super_no IS NULL "
+//									+ "ORDER siblings BY group_no DESC, que_no ASC"
+//								+ ")T "
+//							+ ") where rn between ? and ?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, start);
-		ps.setInt(2, finish);
+//		ps.setInt(1, start);
+//		ps.setInt(2, finish);
 		ResultSet rs = ps.executeQuery();
 		
 		List<QuestionDto> list = new ArrayList<>();
@@ -61,22 +62,23 @@ public class QuestionDao {
 	}
 	
 	// 문의 검색 리스트
-	public List<QuestionDto> search(String type, String keyword, int start, int finish) throws Exception {
+	public List<QuestionDto> search(String type, String keyword) throws Exception {
 		Connection con = getConnection();
-		
-		String sql ="select * from ("
-				+ "select rownum rn, T.* from ("
-					+ "SELECT * FROM question where instr(#1, ?) > 0"
-						+ "CONNECT BY PRIOR que_no = super_no "
-						+ "START WITH super_no IS NULL "
-						+ "ORDER siblings BY group_no DESC, que_no ASC"
-					+ ")T "
-				+ ") where rn between ? and ?";
+
+		String sql = "select * from question where inste(#1, ?) > 0 order by que_no desc"; 
+//		String sql ="select * from ("
+//				+ "select rownum rn, T.* from ("
+//					+ "SELECT * FROM question where instr(#1, ?) > 0"
+//						+ "CONNECT BY PRIOR que_no = super_no "
+//						+ "START WITH super_no IS NULL "
+//						+ "ORDER siblings BY group_no DESC, que_no ASC"
+//					+ ")T "
+//				+ ") where rn between ? and ?";
 		sql = sql.replace("#1", type);
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, keyword);
-		ps.setInt(2, start);
-		ps.setInt(3, finish);
+//		ps.setInt(2, start);
+//		ps.setInt(3, finish);
 		ResultSet rs = ps.executeQuery();
 		
 		List<QuestionDto> list = new ArrayList<>();
@@ -126,42 +128,20 @@ public class QuestionDao {
 	
 	// 문의 등록 메소드
 	public void write(QuestionDto qdto) throws Exception {
-		
-		// 새 문의 글이라면 그룹에 문의 번호를 설정
-		if (qdto.getSuper_no() == 0) {
-			qdto.setGroup_no(qdto.getQue_no());
-		}
-		else {
-			QuestionDto que_super = this.get(qdto.getSuper_no());
-			
-			qdto.setGroup_no(que_super.getGroup_no());
-			qdto.setDepth(que_super.getDepth() + 1);;
-		}
-		
 		Connection con = getConnection();
 		
-		String sql = "insert into question(que_no, que_head, que_title, que_content, que_write, super_no, group_no, depth) values (?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "insert into question (que_no, que_head, que_title, que_content, que_writer, que_pension_no) values (?, ?, ?, ?, ?, ?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, qdto.getQue_no());
 		ps.setString(2, qdto.getQue_head());
 		ps.setString(3, qdto.getQue_title());
 		ps.setString(4, qdto.getQue_content());
-		ps.setInt(5, qdto.getQue_write());
-		
-		if(qdto.getSuper_no() == 0) {
-			ps.setNull(6, Types.INTEGER);
-		}
-		else {
-			ps.setInt(6, qdto.getSuper_no());
-		}
-		
-		ps.setInt(7, qdto.getGroup_no());
-		ps.setInt(8, qdto.getDepth());
+		ps.setInt(5, qdto.getQue_writer());
+		ps.setInt(6, qdto.getQue_pension_no());
 		ps.execute();
-
+		
 		con.close();
 	}
-	
 	
 	// 문의 삭제
 	public void delete(int que_no) throws Exception {
@@ -224,6 +204,19 @@ public class QuestionDao {
 		return count;
 	}
 	
+	// 조회수 메소드
+	public void viewCount(int que_no, int que_write) throws Exception {
+		Connection con = getConnection();
+		
+		String sql = "update question set que_view = que_view + 1 where que_no = ? and que_write != ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, que_no);
+		ps.setInt(2, que_write);
+		ps.execute();
+		
+		
+		con.close();
+	}
 
 }
 	

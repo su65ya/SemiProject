@@ -1,3 +1,6 @@
+<%@page import="semi.beans.dto.MemberDto"%>
+<%@page import="java.util.HashSet"%>
+<%@page import="java.util.Set"%>
 <%@page import="semi.beans.dao.QuestionDao"%>
 <%@page import="semi.beans.dto.QuestionDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -6,7 +9,27 @@
     <%
     	int que_no = Integer.parseInt(request.getParameter("que_no"));
     
-    	QuestionDao qdao = new QuestionDao();
+    //////////////////////////////////////////////////////////////////////////////////
+    
+	    Set<Integer> memory  = (Set<Integer>) session.getAttribute("memory");
+	
+	    if (memory ==null) {
+			memory = new HashSet<>();    	
+	    }
+	    
+	    boolean isCount = memory.add(que_no);
+	    
+	    session.setAttribute("memory", memory);
+	    
+	    QuestionDao qdao = new QuestionDao();
+    	
+	    MemberDto user = (MemberDto) session.getAttribute("userinfo");
+	    if (isCount) {
+	    	qdao.viewCount(que_no, user.getMember_no());
+	    }
+	    
+	    
+    	
 		QuestionDto qdto = qdao.get(que_no);
     	
     %>
@@ -37,8 +60,8 @@
 	</div>
 	
 	<div class="row">
-		<% if (qdto.getQue_write() != 0) {%>
-			<%= qdto.getQue_write() %>
+		<% if (qdto.getQue_writer() != 0) {%>
+			<%= qdto.getQue_writer() %>
 		<%} else {%>
 			<font color="gray">XXX</font>
 		<%} %>
@@ -57,7 +80,7 @@
 		<%= qdto.getQue_content() %>
 	</div>
 	
-	
+
 	<div class="row right">
 		<a href="question_edit.jsp?que_no=<%= que_no %>">
 			<input class="form-btn form-inline" type="button" value="수정">

@@ -15,7 +15,7 @@
 	
 	///////////////////////////////////////////////////
 	
-	int pageSize = 2;
+	int pageSize = 10;
 	
 	String pageStr = request.getParameter("page");
 	int pageNo;
@@ -33,14 +33,14 @@
 	int start = finish - (pageSize -1);
 	
 	////////////////////////////////////////
-	
+/* 	
 	int blockSize = 10;
 	int blockStart = (pageNo - 1) / blockSize * blockSize + 1;
 	int blockFinish = blockStart +blockSize - 1;
-	
+ */	
 
 	QuestionDao qdao = new QuestionDao();
-	
+/*	
 	int count;
 	if (isSearch) {
 		count = qdao.getSearch(type, keyword);
@@ -53,14 +53,16 @@
 	if (blockFinish > pageCount) {
 		blockFinish = pageCount;
 	}
-	
+	 */
 	
 	List<QuestionDto> list;
 	if (isSearch) {
-		list = qdao.search(type, keyword, start, finish);		
+		/* list = qdao.search(type, keyword, start, finish); */
+		list = qdao.search(type, keyword);
 	}
 	else {
-		list = qdao.getlist(start, finish);
+		/* list = qdao.getlist(start, finish); */
+		list = qdao.getlist();
 	}
 
 %>
@@ -82,12 +84,12 @@
 </style>
 
 
-<article class = "w-65">
+<article class = "w-50">
 	
 	<div class="row-empty"></div>
 	
 	<div class="row">
-		<h2>문의 게시판</h2>
+		<h1>문의</h2>
 	</div>
 	
 	<div class="row-empty"></div>
@@ -110,6 +112,7 @@
 
 				<td class="left">
 					
+					<%-- 
 					<!-- 답글 띄어쓰기 -->
 					<% if (qdto.getDepth() > 0) { %>
 						<% for(int i = 0; i < qdto.getDepth(); i++) { %>
@@ -117,6 +120,7 @@
 						<%} %>
 						<!-- <img src="http://placehold.it/20x15"> -->
 					<%} %>
+					 --%>
 					
 					<font color="gray" size="3">
 						<% if(qdto.getQue_head() != null) { %>
@@ -129,8 +133,8 @@
 					</a>
 				</td>
 				<td>
-					<% if (qdto.getQue_write() != 0) {%>
-						<%= qdto.getQue_write() %>
+					<% if (qdto.getQue_writer() != 0) {%>
+						<%= qdto.getQue_writer() %>
 					<%} else {%>
 						<font color="gray">XXX</font>
 					<%} %>
@@ -148,7 +152,7 @@
 		</a>
 	</div>
 	
-	
+	<%-- 
 	<div class="row center pagination">
 	
 		<!-- 이전 -->
@@ -161,10 +165,19 @@
 		<%} %>
 		
 		<% for (int i = blockStart; i <= blockFinish; i++) {%>
+			<%
+				String prop;
+				if (i == pageNo) {	// 현재 페이지 번호면
+					prop = "class='on'";
+				}
+				else {	// 현재 페이지가 아니면
+					prop = "";
+			}%>
+		
 			<% if (!isSearch) { %>	
-				<a href="question_list.jsp?page=<%= i %>"><%= i %></a>
+				<a href="question_list.jsp?page=<%= i %>" <%= prop %>><%= i %></a>
 			<%} else { %>
-				<a href="question_list.jsp?page=<%= i %>&type=<%= type %>&keyword=<%= keyword %>"><%= i %></a>
+				<a href="question_list.jsp?page=<%= i %>&type=<%= type %>&keyword=<%= keyword %>" <%= prop %>><%= i %></a>
 			<%} %>
 		<%} %>
 		
@@ -178,7 +191,7 @@
 		<%} %>
 		
 	</div>
-	
+	 --%>
 	
 	
 	

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import semi.beans.dao.QuestionDao;
 import semi.beans.dto.QuestionDto;
 
-@WebServlet(urlPatterns ="/question/qeustion_edit.do")
+@WebServlet(urlPatterns ="/question/question_edit.do")
 public class QuestionEditServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
