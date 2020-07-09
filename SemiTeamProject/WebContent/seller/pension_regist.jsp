@@ -223,7 +223,7 @@
     }
 </script>
 	<article class="w-40">
-		<form action="pension_regist.do" method="post">
+		<form action="pension_regist.do" method="post"  enctype="multipart/form-data">
 			<div class="row-empty"></div>
 			<div class="row">
 				<h2>펜션 등록</h2>

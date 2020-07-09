@@ -1,3 +1,4 @@
+<%@page import="semi.beans.dto.PensionInfoDto"%>
 <%@page import="semi.beans.dto.PensionOptionDto"%>
 <%@page import="semi.beans.dao.PensionOptionDao"%>
 <%@page import="semi.beans.dao.PensionDao"%>
@@ -8,7 +9,7 @@
     <%
     int pension_no = Integer.parseInt(request.getParameter("pension_no"));
 	PensionDao pdao = new PensionDao();
-	PensionDto pdto = pdao.get(pension_no);
+	PensionInfoDto pdto = pdao.get(pension_no);
     
 	PensionOptionDao podao = new PensionOptionDao();
 	PensionOptionDto podto = podao.get(pension_no);

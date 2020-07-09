@@ -50,7 +50,6 @@
  					<th>펜션 등록일</th>
  					<td class="left"><%=pidto.getPension_regist_date_day() %></td>
  				</tr>
- 				
  			</tbody>
  			</table>
  		</div>

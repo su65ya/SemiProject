@@ -14,7 +14,7 @@
 	<div class = "row">
 		<h3>비밀번호 확인</h3>
 	</div>
-	<form action="" method="post">
+	<form action="password_check.do" method="post">
 	<div class = "row center">
 		<input type="hidden" name="go" value="<%=go %>">
 		<input class= "form-input form-inline" type="password" name = "seller_pw" placeholder="비밀번호 입력하세요" required>
