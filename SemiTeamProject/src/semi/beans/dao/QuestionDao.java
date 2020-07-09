@@ -33,10 +33,10 @@ public class QuestionDao {
 	}
 	
 	// 문의 리스트
-	public List<QuestionDto> getlist() throws Exception {
+	public List<QuestionDto> getlist(int que_pension_no) throws Exception {
 		Connection con = getConnection();
 		
-		String sql = "select * from question order by que_no desc";
+		String sql = "select * from question where que_pension_no = ? order by que_no desc";
 //		String sql ="select * from ("
 //							+ "select rownum rn, T.* from ("
 //								+ "SELECT * FROM question "
@@ -46,6 +46,7 @@ public class QuestionDao {
 //								+ ")T "
 //							+ ") where rn between ? and ?";
 		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, que_pension_no);
 //		ps.setInt(1, start);
 //		ps.setInt(2, finish);
 		ResultSet rs = ps.executeQuery();
@@ -62,10 +63,10 @@ public class QuestionDao {
 	}
 	
 	// 문의 검색 리스트
-	public List<QuestionDto> search(String type, String keyword) throws Exception {
+	public List<QuestionDto> search(int que_pension_no, String type, String keyword) throws Exception {
 		Connection con = getConnection();
 
-		String sql = "select * from question where inste(#1, ?) > 0 order by que_no desc"; 
+		String sql = "select * from question where que_pension_no = ? and inste(#1, ?) > 0 order by que_no desc"; 
 //		String sql ="select * from ("
 //				+ "select rownum rn, T.* from ("
 //					+ "SELECT * FROM question where instr(#1, ?) > 0"
@@ -76,9 +77,10 @@ public class QuestionDao {
 //				+ ") where rn between ? and ?";
 		sql = sql.replace("#1", type);
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, keyword);
-//		ps.setInt(2, start);
-//		ps.setInt(3, finish);
+		ps.setInt(1, que_pension_no);
+		ps.setString(2, keyword);
+//		ps.setInt(3, start);
+//		ps.setInt(4, finish);
 		ResultSet rs = ps.executeQuery();
 		
 		List<QuestionDto> list = new ArrayList<>();
@@ -142,6 +144,22 @@ public class QuestionDao {
 		
 		con.close();
 	}
+	
+	// 답글 작성 메소드
+	public void replywrite(QuestionDto qdto) throws Exception {
+		Connection con = getConnection();
+		
+		String sql = "UPDATE question SET reply_writer = ?, que_reply = ? WHERE que_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, qdto.getReply_writer());
+		ps.setString(2, qdto.getQue_reply());
+		ps.setInt(3, qdto.getQue_no());
+		ps.execute();
+		
+		
+		con.close();
+	}
+	
 	
 	// 문의 삭제
 	public void delete(int que_no) throws Exception {

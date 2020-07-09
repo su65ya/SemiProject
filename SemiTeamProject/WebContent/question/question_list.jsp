@@ -8,6 +8,8 @@
 
 
 <%
+	int que_pension_no = Integer.parseInt(request.getParameter("que_pension_no"));
+
 	String type = request.getParameter("type");
 	String keyword = request.getParameter("keyword");
 	
@@ -58,11 +60,11 @@
 	List<QuestionDto> list;
 	if (isSearch) {
 		/* list = qdao.search(type, keyword, start, finish); */
-		list = qdao.search(type, keyword);
+		list = qdao.search(que_pension_no, type, keyword);
 	}
 	else {
 		/* list = qdao.getlist(start, finish); */
-		list = qdao.getlist();
+		list = qdao.getlist(que_pension_no);
 	}
 
 %>
@@ -89,7 +91,7 @@
 	<div class="row-empty"></div>
 	
 	<div class="row">
-		<h1>문의</h2>
+		<h1>문의</h1>
 	</div>
 	
 	<div class="row-empty"></div>
@@ -121,14 +123,18 @@
 						<!-- <img src="http://placehold.it/20x15"> -->
 					<%} %>
 					 --%>
-					
+					 	
 					<font color="gray" size="3">
+					 	<% if(qdto.getQue_reply() != null) { %>
+					 		<span>답변 완료</span>					 		
+					 	<%} %>
+					
 						<% if(qdto.getQue_head() != null) { %>
 							[<%= qdto.getQue_head() %>]
 						<%} %>
 					</font>
 					
-					<a href="question_content.jsp?que_no=<%= qdto.getQue_no() %>">
+					<a href="question_content.jsp?que_pension_no=<%= qdto.getQue_pension_no() %>&que_no=<%= qdto.getQue_no() %>">
 						<%= qdto.getQue_title() %>
 					</a>
 				</td>
@@ -147,7 +153,7 @@
 	</table>
 
 	<div class="row right">
-		<a href="question_write.jsp">
+		<a href="question_write.jsp?que_pension_no=<%= que_pension_no %>">
 			<input class="form-btn form-inline" type="button" value="글쓰기">
 		</a>
 	</div>

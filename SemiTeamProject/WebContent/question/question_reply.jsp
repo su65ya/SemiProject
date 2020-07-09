@@ -5,6 +5,7 @@
 
 <%
 	int que_no = Integer.parseInt(request.getParameter("que_no"));
+	int que_pension_no = Integer.parseInt(request.getParameter("que_pension_no"));
 	
 	QuestionDao qdao = new QuestionDao();
 	QuestionDto qdto = qdao.get(que_no);
@@ -15,6 +16,9 @@
 <jsp:include page="/template/nav.jsp"></jsp:include>
 
 <style>
+	a {
+		text-decoration: none;
+	}
 
     div > label{
     	font-size:13;
@@ -25,6 +29,11 @@
     	font-size: 15px;
     }
     
+     textarea {
+		resize: none;
+	}
+	
+
 </style>
 
  <!-- suneditor CDN -->    
@@ -87,7 +96,7 @@
 
 
 
-<form action="question_edit.do" method="post" onsubmit="return formCheck();">
+<form action="question_reply.do" method="post" onsubmit="return formCheck();">
 	
 	<% if (request.getParameter("que_no") != null) { %>
 		<input type="hidden" name="que_no"
@@ -102,36 +111,57 @@
 
 	<article class="w-50">
 		
-		<div class="row-empty"></div>
 
 		<div class="row">
-			<h2>문의 작성</h2>
+			<h2>답글 작성</h2>
 		</div>
 		
-		<div class="row-empty"></div>		
+		<div class="row-empty"></div>
+	
 		
 		<div class="row">
-			<label>문의유형</label>
-			<select name="que_head">
-				<option value="">선택</option>
-				<option>예약</option>
-				<option>예약취소</option>
-				<option>예약변경</option>
-				<option>기타</option>
-			</select>
+		<font size="5">
+			<font color="gray" size="4">
+			<% if (qdto.getQue_head() != null) { %>
+				[<%= qdto.getQue_head() %>]
+			<%} %>
+			</font>
+			<%= qdto.getQue_title() %>
+		</font>
+	</div>
+	
+	<div class="row">
+		<% if (qdto.getQue_writer() != 0) {%>
+			<%= qdto.getQue_writer() %>
+		<%} else {%>
+			<font color="gray">XXX</font>
+		<%} %>
+	</div>
+
+	
+	<div class="row-empty">
+		<hr>
+	</div>
+	
+	<div class="row" style="min-height: 300px">
+		<%= qdto.getQue_content() %>
+	</div>
+	
+	
+	<form action="question_reply.do" method="post">
+		<div class="row center">
+			<input type="hidden" name="que_no" value="<%= que_no %>">
+			<input type="hidden" name="que_pension_no" value="<%= que_pension_no %>">
+			<textarea class="form-input" name="que_reply" rows="5px" cols="100px"><%if ( qdto.getQue_reply() != null ) {%><%= qdto.getQue_reply() %><%} %></textarea>
 		</div>
+	</form>
+	
 		
-		<div class="row">
-			<label>&nbsp;&nbsp;&nbsp;제목&nbsp;&nbsp;&nbsp;</label>
-			<input class="form-input" type="text" name="que_title" value="<%= qdto.getQue_title() %>" required  style="width: 85%">
-		</div>
-		
-		<div class="row">
-			<textarea name="que_content" cols="100px" rows="20px"><%= qdto.getQue_content() %></textarea>
-		</div>
-		
-		<div class="row">
-			<input class="form-btn" type="submit" value="등록">
+		<div class="row right">
+			<a href = "question_content.jsp?que_pension_no=<%= que_pension_no %>&que_no=<%= que_no %>">
+				<input class="form-btn form-inline" type="button" value="문의내용">
+			</a>
+			<input class="form-btn form-inline" type="submit" value="등록">
 		</div>
 	
 	<div class="row-empty"></div>

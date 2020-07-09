@@ -21,8 +21,7 @@ public class QuestionWriteServlet extends HttpServlet{
 			// 입력
 			QuestionDto qdto = new QuestionDto();
 			MemberDto mdto = (MemberDto) req.getSession().getAttribute("userinfo");
-			SellerDto sdto = (SellerDto) req.getSession().getAttribute("sellerinfo");
-			
+		
 			
 			qdto.setQue_writer(mdto.getMember_no());
 			qdto.setQue_pension_no(Integer.parseInt(req.getParameter("que_pension_no")));

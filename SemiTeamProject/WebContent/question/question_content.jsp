@@ -8,6 +8,7 @@
     
     <%
     	int que_no = Integer.parseInt(request.getParameter("que_no"));
+    	int que_pension_no = Integer.parseInt(request.getParameter("que_pension_no"));
     
     //////////////////////////////////////////////////////////////////////////////////
     
@@ -35,18 +36,23 @@
     %>
 <jsp:include page="/template/nav.jsp"></jsp:include>
 
+
 <style>
 	a {
 		text-decoration: none;
 	}
 	
+ 	textarea {
+		resize: none;
+	}
+	   
 </style>
     
 
 <article class="w-50">
 	<div class="row">
 		<h2>문의 내용</h2>
-	</div>
+	</div>	
 	
 	<div class="row">
 		<font size="5">
@@ -76,9 +82,26 @@
 		<hr>
 	</div>
 	
-	<div class="row" style="min-height: 350px">
+	<div class="row" style="min-heighx`: 300px">
 		<%= qdto.getQue_content() %>
 	</div>
+	
+	<div class="row">
+		<% if ( qdto.getQue_reply() != null ) { %>
+			<%= qdto.getQue_reply() %>
+		<%} %>
+	</div>
+	
+	
+	<%-- 	
+		<form action="question_reply.do" method="post">
+			<div class="row center">
+				<input type="hidden" name="que_no" value="<%= que_no %>">
+				<input type="hidden" name="que_pension_no" value="<%= que_pension_no %>">
+			</div>
+		</form>
+	 --%>
+	
 	
 
 	<div class="row right">
@@ -91,10 +114,10 @@
 		<a href="question_write.jsp">
 			<input class="form-btn form-inline" type="button" value="글쓰기">
 		</a>
-		<a href="question_write.jsp?que_no=<%= que_no %>">
-			<input class="form-btn form-inline" type="button" value="답글">
+		<a href="question_reply.jsp?que_pension_no=<%= que_pension_no %>&que_no=<%= que_no %>">
+			<input class="form-btn form-inline" type="button" value="답변">
 		</a>
-		<a href="question_list.jsp">
+		<a href="question_list.jsp?que_pension_no=<%= que_pension_no %>">
 			<input class="form-btn form-inline" type="button" value="목록">
 		</a>
 	</div>

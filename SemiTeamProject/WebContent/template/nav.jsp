@@ -22,7 +22,7 @@
 
     </style>
 </head>
-<body>
+<body test>
 	<main>
 		<nav>
 		<%if(!isLogin){//비로그인 상태 %>
