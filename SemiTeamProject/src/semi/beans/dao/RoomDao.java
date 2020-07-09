@@ -2,6 +2,9 @@ package semi.beans.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -62,4 +65,20 @@ private static DataSource src;
 		con.close();
 	}
 	
+	public List<RoomDto> getList() throws Exception{
+		Connection con = getConnection();
+		
+		String sql = "SELECT * FROM room ORDER BY room_no ASC";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		
+		List<RoomDto> list = new ArrayList<>();
+		while(rs.next()) {
+			RoomDto rdto = new RoomDto(rs);
+			list.add(rdto);
+		}
+		con.close();
+		return list;
+	}
 }

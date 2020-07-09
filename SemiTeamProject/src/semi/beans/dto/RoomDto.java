@@ -52,17 +52,12 @@ public class RoomDto {
 		this.room_no = room_no;
 	}
 
-
 	public int getRoom_pension_no() {
 		return room_pension_no;
 	}
-
-
 	public void setRoom_pension_no(int room_pension_no) {
 		this.room_pension_no = room_pension_no;
 	}
-
-
 	public String getRoom_name() {
 		return room_name;
 	}

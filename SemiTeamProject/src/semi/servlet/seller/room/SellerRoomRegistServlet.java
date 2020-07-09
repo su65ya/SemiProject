@@ -17,9 +17,10 @@ public class SellerRoomRegistServlet extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
+			//입력
 			
-			int pension_no = (Integer.parseInt(req.getParameter("pension_no")));
 			RoomDto rdto = new RoomDto();
+			rdto.setRoom_pension_no(Integer.parseInt(req.getParameter("pension_no")));
 			rdto.setRoom_name(req.getParameter("room_name"));
 			rdto.setRoom_type(req.getParameter("room_type"));
 			rdto.setStandard_people(Integer.parseInt(req.getParameter("standard_people")));
@@ -30,6 +31,8 @@ public class SellerRoomRegistServlet extends HttpServlet{
 			rdto.setOff_weekend(Integer.parseInt(req.getParameter("off_weekend")));
 			rdto.setOn_weekday(Integer.parseInt(req.getParameter("on_weekday")));
 			rdto.setOn_weekend(Integer.parseInt(req.getParameter("on_weekend")));
+			
+			
 			rdto.setAmenity(Integer.parseInt(req.getParameter("amenity")));
 			rdto.setMicrowave(Integer.parseInt(req.getParameter("microwave")));
 			rdto.setBed(Integer.parseInt(req.getParameter("bed")));
@@ -41,7 +44,8 @@ public class SellerRoomRegistServlet extends HttpServlet{
 			rdto.setHairdryer(Integer.parseInt(req.getParameter("hairdryer")));
 			rdto.setCookoo(Integer.parseInt(req.getParameter("cookoo")));
 			rdto.setDog(Integer.parseInt(req.getParameter("dog")));
-			rdto.setRoom_pension_no(pension_no);
+			
+			
 			RoomDao rdao = new RoomDao();
 			rdao.regist(rdto);
 			
