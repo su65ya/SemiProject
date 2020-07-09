@@ -94,6 +94,29 @@ public class SellerDao {
 		return seller;
 	}
 	
+	//판매자 정보변경
+	
+	public void changeInfo(SellerDto mdto) throws Exception{
+		Connection con = getConnection();
+		
+		String sql = "UPDATE seller SET"
+				+"seller_id=?, seller_name=?, seller_birth=?,seller_email=?, seller_basic_addr=?, seller_detail_addr=?, cmpany_no=? "
+				+"WHERE member_id";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, mdto.getSeller_name());
+		ps.setString(2, mdto.getSeller_email());
+		ps.setString(3, mdto.getSeller_phone());
+		ps.setString(4, mdto.getSeller_basic_addr());
+		ps.setString(5, mdto.getSeller_detail_addr());
+		ps.setString(6, mdto.getCompany_no());
+		
+		ps.execute();
+		
+	
+		con.close();
+	}
+	
 	
 
 }

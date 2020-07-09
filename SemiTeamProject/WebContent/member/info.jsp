@@ -1,9 +1,14 @@
+<%@page import="semi.beans.dao.MemberDao"%>
 <%@page import="semi.beans.dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
  <%
     MemberDto mdto = (MemberDto) session.getAttribute("userinfo");
+ 
+ 	String member_id = mdto.getMember_id();
+	MemberDao mdao = new MemberDao();
+	MemberDto user = mdao.get(member_id);
  %>
  
 <jsp:include page="/template/nav.jsp"></jsp:include>
@@ -15,51 +20,57 @@
 		<tbody>
 			<tr>
 				<th>아이디</th>
-				<th><%=mdto.getMember_id() %></th>
+				<td><%=user.getMember_id()%></td>
 			</tr>
 			<tr>
 				<th>비밀번호</th>
 				<th><%=mdto.getMember_pw() %></th>
+				<td>
+					<a href="change_password.jsp">비밀번호 변경</a>			
 			</tr>
 			<tr>
 				<th>이름</th>
-				<th><%=mdto.getMember_name() %></th>
+				<td><%=user.getMember_name() %></td>
 			</tr>
 			<tr>
 				<th>생년월일</th>
-				<th><%=mdto.getMember_birthdayFormat()%></th>
+				<td><%=user.getMember_birthdayFormat()%></td>
 			</tr>
 			<tr>
 				<th>이메일</th>
-				<th><%=mdto.getMember_mail() %></th>
+				<td><%=user.getMember_mail() %></td>
 			</tr>
 			<tr>
 				<th>주소</th>
-				<th>
-					[<%=mdto.getMember_post() %>]
-					<%=mdto.getMember_basic_addr() %>
-					<%=mdto.getMember_detail_addr() %>
+				<td>
+					[<%=user.getMember_post() %>]
+					<%=user.getMember_basic_addr() %>
+					<%=user.getMember_detail_addr() %>
 					상세주소
-				</th>
+				</td>
 			</tr>
 			<tr>
 				<th>전화번호</th>
-				<th><%=mdto.getMember_phone() %></th>
+				<td><%=user.getMember_phone() %></td>
 			</tr>
 			<tr>
 				<th>등급</th>
-				<th><%=mdto.getMember_rate() %></th>
+				<td><%=user.getMember_rate() %></td>
 			</tr>
 			<tr>
 				<th>가입일</th>
-				<th><%=mdto.getMember_join() %></th>
+				<td><%=user.getMember_join() %></td>
 			</tr>
 		</tbody>
-	
+		<tfoot>
+			<tr>
+				<td colspan="2" align="center">
+					<a href="change_info.jsp">정보 변경</a>
+				</td>
+			</tr>
+		</tfoot>
 	</table>
 	
-	<h5><a href="#">비밀번호 변경</a></h5>
-	<h5><a href="#">개인정보 변경</a></h5>
 	<h5><a href="#">로그아웃</a></h5>
 	<h5><a href="#">회원탈퇴</a></h5>
 

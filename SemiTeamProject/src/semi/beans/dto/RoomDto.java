@@ -1,5 +1,8 @@
 package semi.beans.dto;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class RoomDto {
 	private int room_no;
 	private int room_pension_no;
@@ -11,6 +14,32 @@ public class RoomDto {
 	
 	public RoomDto() {
 		super();
+	}
+	public RoomDto(ResultSet rs)throws SQLException{
+		this.setRoom_no(rs.getInt("room_no"));
+		this.setRoom_pension_no(rs.getInt("room_pension_no"));
+		this.setRoom_name(rs.getString("room_name"));
+		this.setRoom_type(rs.getString("room_type"));
+		this.setStandard_people(rs.getInt("standard_people"));
+		this.setMax_people(rs.getInt("max_people"));
+		this.setRoom_width(rs.getInt("room_width"));
+		this.setToilet_count(rs.getInt("toilet_count"));
+		this.setOff_weekday(rs.getInt("off_weekday"));
+		this.setOff_weekend(rs.getInt("off_weekend"));
+		this.setOn_weekday(rs.getInt("on_weekday"));
+		this.setOn_weekend(rs.getInt("on_weekend"));
+		this.setAmenity(rs.getInt("amenity"));
+		this.setMicrowave(rs.getInt("microwave"));
+		this.setBed(rs.getInt("bed"));
+		this.setTv(rs.getInt("tv"));
+		this.setRoom_sofa(rs.getInt("room_sofa"));
+		this.setRoom_aircon(rs.getInt("room_aircon"));
+		this.setFridge(rs.getInt("fridge"));
+		this.setTub(rs.getInt("tub"));
+		this.setHairdryer(rs.getInt("hairdryer"));
+		this.setCookoo(rs.getInt("cookoo"));
+		this.setDog(rs.getInt("dog"));
+		
 	}
 
 	
