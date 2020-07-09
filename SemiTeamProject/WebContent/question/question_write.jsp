@@ -78,12 +78,13 @@
 
 
 <form action="question_write.do" method="post" onsubmit="return formCheck();">
-	
-	<% if (request.getParameter("que_no") != null) { %>
-		<input type="hidden" name="que_no"
-			value="<%=request.getParameter("que_no")%>">
-	<%}	%>
 
+	
+	<% if (request.getParameter("que_pension_no") != null) { %>
+		<input type="hidden" name="que_pension_no"
+			value="<%=request.getParameter("que_pension_no")%>">
+	<%}	%>
+	
 
 	<article class="w-50">
 		

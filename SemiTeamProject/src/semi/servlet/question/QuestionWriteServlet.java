@@ -40,7 +40,7 @@ public class QuestionWriteServlet extends HttpServlet{
 			
 			
 			// 출력
-			 resp.sendRedirect("question_content.jsp?que_no=" + que_no);
+			 resp.sendRedirect("question_content.jsp?que_pension_no="+ qdto.getQue_pension_no() +"&que_no=" + que_no);
 			
 			
 			

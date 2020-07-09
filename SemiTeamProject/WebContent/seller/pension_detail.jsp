@@ -57,6 +57,7 @@
  			<a href = "room_regist.jsp">객실 등록</a>&nbsp;&nbsp;
  			<a href = "pension_delete.do?pension_no=<%=pension_no%>">펜션 삭제</a>&nbsp;&nbsp;
  			<a href = "pension_list.jsp">목록보기</a>
+ 			<a href = "<%= request.getContextPath() %>/question/question_list.jsp">문의 보기</a>
  		</div>
  	</article>
 

@@ -208,7 +208,7 @@ public class QuestionDao {
 	public void viewCount(int que_no, int que_write) throws Exception {
 		Connection con = getConnection();
 		
-		String sql = "update question set que_view = que_view + 1 where que_no = ? and que_write != ?";
+		String sql = "update question set que_view = que_view + 1 where que_no = ? and que_writer != ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, que_no);
 		ps.setInt(2, que_write);
