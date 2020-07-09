@@ -22,6 +22,7 @@
 			<ul class="menuu">
 				<li><a href="<%= root %>/index.jsp">사이트명(홈으로 가게 하는 사이트명)</a></li>
 				<li><a href="<%= root %>/member/login.jsp">로그인</a></li>
+				<li><a href="<%= root %>/admin/admin_login.jsp">관리자로그인</a></li>
 				<li><a href="<%= root %>/member/join.jsp">회원가입</a></li>
 				<li><a href="<%= root %>/member/info.jsp">내정보</a></li>
 				<li><a href="<%= root %>/member/logout.do">로그아웃</a></li>
