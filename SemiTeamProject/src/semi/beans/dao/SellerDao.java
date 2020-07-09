@@ -3,11 +3,15 @@ package semi.beans.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+
+
 
 import semi.beans.dto.SellerDto;
 
@@ -101,7 +105,7 @@ public class SellerDao {
 		
 		String sql = "UPDATE seller SET"
 				+"seller_id=?, seller_name=?, seller_birth=?,seller_email=?, seller_basic_addr=?, seller_detail_addr=?, cmpany_no=? "
-				+"WHERE member_id";
+				+"WHERE seller_id";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, mdto.getSeller_name());
@@ -117,14 +121,23 @@ public class SellerDao {
 		con.close();
 	}
 	
-	
+	//판매자 탈퇴
+		public void exit(String seller_id,String seller_pw ) throws Exception{
+		Connection con = getConnection();
+		
+		String sql = "DELETE seller WHERE seller_id = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, seller_id);
+		ps.execute();
+		
+		con.close();
+		
+	}
+
+
+
 
 }
-
-
-
-
-
 
 
 
