@@ -32,9 +32,6 @@ label {
 }
 </style>
 
-<jsp:include page="/template/nav.jsp"></jsp:include>
-
-
 
 	<article class="w-25">
 
