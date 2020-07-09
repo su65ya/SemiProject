@@ -87,26 +87,6 @@ public class PensionRegistServlet extends HttpServlet {
 					podao.regist(podto);
 				}
 			}
-//			System.out.println(option[0]);
-//			for (int i = 0; i < option.length; i++) {
-//				String option_split[] = option[i].split("-");
-//				String option_name = option_split[0];
-//				int option_price = Integer.parseInt(option_split[1]);
-//				int option_select = Integer.parseInt(option_split[2]);
-//
-//				System.out.println(pension_no);
-//				System.out.println(option_price);
-//				System.out.println(option_name);
-//				System.out.println(option_select);
-//				
-//				PensionOptionDto podto = new PensionOptionDto();
-//				podto.setPension_key(pension_no);
-//				podto.setOption_name(option_name);
-//				podto.setOption_price(option_price);
-//				podto.setOption_select(option_select);// 선택
-//
-//				podao.regist(podto);
-//			}
 			List<FileItem> fileList = map.get("pension_image");
 			for(FileItem item : fileList) {
 				if(item.getSize()>0) {//파일이 있는 경우
