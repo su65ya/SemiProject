@@ -9,6 +9,16 @@
     	label{
     		font-size:13;
     	}
+    	.form-input2,.form-btn2{
+            padding: 0.3rem;
+            outline: none;/*선택시 자동 부여되는 테두리 제거*/
+            border: 1px solid black;
+        }
+        .form-btn2{
+        	background-color:lightgray;
+            color: black;
+            cursor: pointer;
+        }  
     </style>
     
 <jsp:include page="/template/nav.jsp"></jsp:include>
