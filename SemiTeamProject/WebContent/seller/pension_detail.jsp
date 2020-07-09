@@ -1,3 +1,4 @@
+<%@page import="semi.beans.dao.PensionImageDao"%>
 <%@page import="semi.beans.dto.PensionInfoDto"%>
 <%@page import="semi.beans.dao.PensionDao"%>
 <%@page import="semi.beans.dto.PensionDto"%>
@@ -9,8 +10,6 @@
     int pension_no = Integer.parseInt(request.getParameter("pension_no"));
 //     PensionDto pdto = pdao.get(pension_no);//아이디 말고 번호로 뽑아냄
 	PensionInfoDto pidto = pdao.get(pension_no);//아이디로 뽑아내기
-	
-    	
     %>
 <jsp:include page="/template/nav.jsp"></jsp:include>
 <article class="w-50">

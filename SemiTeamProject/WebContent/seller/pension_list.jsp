@@ -34,9 +34,12 @@
 				</tr>
 			</thead>
 			<tbody>
-				<%for(PensionDto pdto : list){ %>
+				<%for(PensionDto pdto : list){ 
+					// 어떤 메소드(pdto.getPension_no()) -> 첫번째(최신) 번호와 이미지 파일이름 반환 받음
+					// 위의 값을 이용해서 컴퓨터에 있는 이미지 본체 파일을 조회해서 가지고 와
+				%>
 				<tr>
-					<td>사진사진</td>
+					<td><img></td>
 					<td><%=pdto.getPension_no() %></td>
 					<td><%=pdto.getPension_name() %></td>
 					<td><%=pdto.getPension_regist_date_day() %></td>
