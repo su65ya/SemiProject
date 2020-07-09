@@ -1,3 +1,4 @@
+<%@page import="semi.beans.dto.SellerDto"%>
 <%@page import="semi.beans.dao.PensionDao"%>
 <%@page import="semi.beans.dto.PensionDto"%>
 <%@page import="java.util.List"%>
@@ -6,9 +7,14 @@
 <jsp:include page = "/template/nav.jsp"></jsp:include>
 
 <%
-	PensionDao pdao = new PensionDao();
-	List<PensionDto> list = pdao.getList();
 
+	//내가 보유하고 있는 펜션 목록을 출력
+	SellerDto sdto = (SellerDto) request.getSession().getAttribute("sellerinfo");//로그인 된 판매자 정보
+	int pension_seller_no = sdto.getSeller_no();//로그인 된 판매자의 번호
+	PensionDao pdao = new PensionDao();
+	List<PensionDto> list = pdao.getList(pension_seller_no);//로그인 된 판매자 가진 펜션 목록 출력
+	
+	
 %>
 <!-- 펜션 목록 리스트 -->
 <article class="w-60">
@@ -25,7 +31,7 @@
 					<th>펜션 번호</th>
 					<th>펜션 이름</th>
 					<th>펜션 등록일</th>
-					<th colspan="2">관리</th>
+					<th colspan="3">관리</th>
 				</tr>
 			</thead>
 			<tbody>

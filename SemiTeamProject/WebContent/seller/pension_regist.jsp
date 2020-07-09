@@ -15,10 +15,6 @@
     		font-weight: bold;
     	}
     	
-    	.select{
-    		height: 36px;
-            width: 70px;
-    	}
     	.price {
     		width: 60px;
     	}
@@ -42,6 +38,37 @@
             
             for(var i in selectItem){
                 selectItem[i].checked = selectAll;    
+            }
+        }
+        
+        //등록 사진 미리보기
+        function preview(){
+            var fileTag = document.querySelector("input[name=pension_image]");
+            
+            var divTag = document.querySelector(".preview-wrap");
+            
+            if(fileTag.files.length > 0){
+                //선택된 파일들을 다 읽어와서 이미지 생성 후 추가
+                //미리보기 전부 삭제
+                divTag.innerHTML = "";
+                
+                for(var i=0; i < fileTag.files.length; i++){
+                    var reader = new FileReader();
+                    reader.onload = function(data){
+                        //img 생성 후 data.target.result 설정하여 추가
+                        var imgTag = document.createElement("img");
+                        imgTag.setAttribute("src", data.target.result);
+                        imgTag.setAttribute("width", "120");
+                        imgTag.setAttribute("height", "120");
+                        divTag.appendChild(imgTag);
+                    };
+                    reader.readAsDataURL(fileTag.files[i]);
+                }
+                
+            }
+            else{
+                //미리보기 전부 삭제
+                divTag.innerHTML = "";
             }
         }
     </script>
@@ -294,8 +321,11 @@
 			<div class="row">
 				<label>펜션 사진 등록</label><br>
 				<div class="row-empty"></div>
-				<input type="file" name="pension_image" multiple accept=".jpg,.png,.gif">
+				<input type="file" name="pension_image" multiple accept=".jpg,.png,.gif" onchange="preview();">
+				<div class="row-empty"></div>
+				<div class="preview-wrap"></div>
 			</div>
+			<div class="row-empty"></div>
 			<div class="row-empty"></div>
 			<div class="row">
 				<input class= "form-btn" type="submit" value="등록하기">
@@ -303,6 +333,4 @@
 			<div class="row"></div>
 		</form>
 	</article>
-
-
 <jsp:include page="/template/footer.jsp"></jsp:include>
