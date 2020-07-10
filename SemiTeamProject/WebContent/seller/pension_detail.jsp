@@ -59,9 +59,9 @@
  				</tr>
  				<tr>
  					<th>펜션 사진</th>
- 					<td>
+ 					<td class="left">
  						<%for(PensionImageDto pmdto : fileList){ %>
- 						<img src="/pension/download.do?pen_image_no=<%=pmdto.getPen_image_no()%>" width="50" height="50">
+ 						<img src="download.do?pen_image_no=<%=pmdto.getPen_image_no()%>" width="200" height="200">
  						<%} %>
  					</td>
  				</tr>

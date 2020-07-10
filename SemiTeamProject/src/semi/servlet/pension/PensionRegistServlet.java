@@ -26,9 +26,9 @@ import semi.beans.dto.SellerDto;
 
 @WebServlet(urlPatterns = "/seller/pension_regist.do")
 public class PensionRegistServlet extends HttpServlet {
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	@Override
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-//			
 			String charset= "UTF-8";//해석할 인코딩 방식
 			int limit = 10*1024*1024;
 			File baseDir = new File("D:/upload/pension");
@@ -86,11 +86,11 @@ public class PensionRegistServlet extends HttpServlet {
 					podao.regist(podto);
 			}
 			List<FileItem> fileList = map.get("pension_image");
+			PensionImageDao pidao = new PensionImageDao();
 			for(FileItem item : fileList) {
 				if(item.getSize()>0) {//파일이 있는 경우
 					
 					//데이터베이스에 저장
-					PensionImageDao pidao = new PensionImageDao();
 					int pension_image_no = pidao.getSequence();//image번호를 미리 추출
 					
 					PensionImageDto pidto = new PensionImageDto();//dto생성
@@ -106,13 +106,12 @@ public class PensionRegistServlet extends HttpServlet {
 					item.write(target);
 				}
 			}
-//			// 출력
-			resp.sendRedirect("pension_list.jsp");
+			//출력
+			resp.sendRedirect("pension_detail.jsp?pension_no="+pension_no);
 
 		} catch (Exception e) {
-			e.printStackTrace();
 			resp.sendError(500);
+			e.printStackTrace();
 		}
 	}
 }
-

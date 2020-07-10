@@ -63,23 +63,19 @@ public class PensionImageDao {
 		con.close();
 	}
 	
-	//펜션 삭제 메소드
-	public void delete(int pension_no)throws Exception{
-		
-	}
 	
 	// 펜션별 사진 뽑기
-		public PensionImageDto get(int pen_img_pen_no) throws Exception {
+		public PensionImageDto get(int pen_image_no) throws Exception {
 			Connection con = getConnection();
-			String sql = "SELECT * FROM pension_image WHERE pen_img_pen_no=?";
+			String sql = "SELECT * FROM pension_image WHERE pen_image_no=?";
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, pen_img_pen_no);
+			ps.setInt(1, pen_image_no);
 			ResultSet rs = ps.executeQuery();
 			PensionImageDto pidto;
 			if (rs.next()) {
 				pidto = new PensionImageDto();
-				pidto.setPen_image_no(rs.getInt("pen_image_no"));
-				pidto.setPen_image_pen_no(pen_img_pen_no);
+				pidto.setPen_image_no(pen_image_no);
+				pidto.setPen_image_pen_no(rs.getInt("pen_image_pen_no"));
 				pidto.setPen_image_name(rs.getString("pen_image_name"));
 				pidto.setPen_image_size(rs.getLong("pen_image_size"));
 				pidto.setPen_image_type(rs.getString("pen_image_type"));
@@ -98,7 +94,7 @@ public class PensionImageDao {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, pen_img_pen_no);
 			ResultSet rs = ps.executeQuery();
-			List<PensionImageDto> list = new ArrayList<PensionImageDto>();
+			List<PensionImageDto> list = new ArrayList<>();
 			while(rs.next()) {
 				PensionImageDto pidto = new PensionImageDto();
 				pidto.setPen_image_no(rs.getInt("pen_image_no"));
@@ -111,5 +107,4 @@ public class PensionImageDao {
 			con.close();
 			return list;
 		}
-
 }

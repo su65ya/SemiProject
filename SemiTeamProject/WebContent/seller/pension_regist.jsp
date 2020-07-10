@@ -321,7 +321,7 @@
 			<div class="row">
 				<label>펜션 사진 등록</label><br>
 				<div class="row-empty"></div>
-				<input type="file" name="pension_image" multiple accept=".jpg,.png,.gif" onchange="preview();">
+				<input type="file"  name="pension_image" multiple accept=".jpg,.png,.gif" onchange="preview();">
 				<div class="row-empty"></div>
 				<div class="preview-wrap"></div>
 			</div>

@@ -15,16 +15,16 @@ import org.apache.commons.io.FileUtils;
 import semi.beans.dao.PensionImageDao;
 import semi.beans.dto.PensionImageDto;
 
-@WebServlet(urlPatterns = "/pension/download.do")
+@WebServlet(urlPatterns = "/seller/download.do")
 public class PensionImageDownloadServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			//사용자가 원하는 파일은다운로드 할 수 있도록 전송
-			int pension_no = Integer.parseInt(req.getParameter("pension_no"));
+			int pen_image_no = Integer.parseInt(req.getParameter("pen_image_no"));
 			
 			PensionImageDao pidao = new PensionImageDao();
-			PensionImageDto pidto = pidao.get(pension_no);
+			PensionImageDto pidto = pidao.get(pen_image_no);
 			
 //			4. 다운로드를 위해 사용자에게 필요한 정보들을 알려주도록 설정(헤더 설정)
 //			- Content-Type : 사용자(브라우저)에게 알려주는 이 데이터의 형식
@@ -39,11 +39,9 @@ public class PensionImageDownloadServlet extends HttpServlet {
 			
 			resp.setHeader("Content-Type", "application/octet-stream; charset=UTF-8");
 			resp.setHeader("Content-Disposition", "attachment; filename=\""+URLEncoder.encode(pidto.getPen_image_name(), "UTF-8")+"\"");
-////			resp.setHeader("Content-Disposition", "attachment; filename="+bfdto.getBoard_file_name());
-//			resp.setHeader("Content-Disposition", "attachment; filename=\""+URLEncoder.encode(bfdto.getBoard_file_name(), "UTF-8")+"\"");
 			resp.setHeader("Content-Length", String.valueOf(pidto.getPen_image_size()));
 			
-			File target = new File("D:/upload/pension", String.valueOf(pidao.get(pension_no)));
+			File target = new File("D://upload/pension", String.valueOf(pidto.getPen_image_no()));
 			byte[] data = FileUtils.readFileToByteArray(target);//파일 데이터 로드
 			resp.getOutputStream().write(data);//사용자
 		} catch (Exception e) {
