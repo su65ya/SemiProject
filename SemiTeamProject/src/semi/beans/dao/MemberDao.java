@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -191,6 +193,24 @@ public class MemberDao {
 		
 		con.close();
 		return mdto;
+	}
+	
+	//(관리자) 회원 검색 기능
+	public List<MemberDto> search(String member_id) throws Exception{
+		Connection con = getConnection();
+		
+		String sql = "SELECT * FROM member WHERE instr(member_id, ?) > 0 ORDER BY member_id ASC";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, member_id);
+		ResultSet rs = ps.executeQuery();
+		
+		List<MemberDto> list = new ArrayList<>();
+		while(rs.next()) {
+			MemberDto mdto = new MemberDto(rs);	
+			list.add(mdto);
+		}		
+		con.close();
+		return list;
 	}
 }
 
