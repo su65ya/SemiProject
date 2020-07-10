@@ -108,10 +108,10 @@
 		/* 확장 스타일 2번 : .table-stripe 로 줄무늬 부여 */
 		.table.table-stripe > tbody > tr:nth-child(2n) {
 		    /* RGB Hex String */
-		    background-color: #ffeaa7;
+		    background-color: #fb97c1;
 		}
 		.table.table-stripe > thead > tr {
-		    background-color: #fdcb6e;
+		    background-color: #ea1f62;;
 		}
 		
 		/* 확장 스타일 3번 : .table-sideopen 으로 옆트임 테이블 구현 */
@@ -125,6 +125,7 @@
 		    border-bottom: 3px solid black;
 		}
 		.table.table-sideopen > tbody > tr {
+			
 		    border-bottom: 1px solid black;
 		}
 		
