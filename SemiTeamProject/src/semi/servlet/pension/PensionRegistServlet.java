@@ -72,6 +72,7 @@ public class PensionRegistServlet extends HttpServlet {
 			List<FileItem> option = map.get("option");
 			for(int i =0;i<option.size();i++) {//리스트 안에 있는 값을 차례대로 뽑아내기 위한 반복문
 				String option_req = option.get(i).getString();//ㅇㅇ-ㅇㅇ-ㅇ
+				if(option_req.length()>0) {
 					String option_split[] = option_req.split("-");
 					String option_name = option_split[0];
 					int option_price = Integer.parseInt(option_split[1]);
@@ -82,8 +83,9 @@ public class PensionRegistServlet extends HttpServlet {
 					podto.setOption_name(option_name);
 					podto.setOption_price(option_price);
 					podto.setOption_select(option_select);// 선택
-	
-					podao.regist(podto);
+					
+					podao.regist(podto);					
+				}
 			}
 			List<FileItem> fileList = map.get("pension_image");
 			PensionImageDao pidao = new PensionImageDao();
