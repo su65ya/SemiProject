@@ -3,6 +3,8 @@ package semi.beans.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -46,27 +48,27 @@ public class PensionOptionDao {
 	}
 	
 	//펜션 옵션 단일 조회 메소드
-	public PensionOptionDto get(int pension_no) throws Exception{
+	public List<PensionOptionDto> getList(int pension_no) throws Exception{
 		Connection con = getConnection();
 		String sql = "SELECT * FROM pension_option WHERE pension_key=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, pension_no);
 		
 		ResultSet rs = ps.executeQuery();
-		PensionOptionDto podto;
-		if(rs.next()) {
-			podto = new PensionOptionDto();
+		List<PensionOptionDto> list = new ArrayList<PensionOptionDto>();
+		while(rs.next()) {
+			PensionOptionDto podto = new PensionOptionDto();
 			podto.setOption_no(rs.getInt("option_no"));
 			podto.setPension_key(pension_no);
 			podto.setOption_name(rs.getString("option_name"));
 			podto.setOption_price(rs.getInt("option_price"));
 			podto.setOption_select(rs.getInt("option_select"));
 			
-		}else {
-			podto = null;
+			list.add(podto);
 		}
 		
 		con.close();
-		return podto;
+		return list;
 	}
+
 }

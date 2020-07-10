@@ -1,3 +1,5 @@
+<%@page import="semi.beans.dto.PensionOptionDto"%>
+<%@page import="semi.beans.dao.PensionOptionDao"%>
 <%@page import="semi.beans.dto.PenImgViewDto"%>
 <%@page import="semi.beans.dto.SellerDto"%>
 <%@page import="semi.beans.dao.PensionDao"%>
@@ -15,7 +17,9 @@
 	PensionDao pdao = new PensionDao();
 	List<PensionDto> list = pdao.getList(pension_seller_no);//로그인 된 판매자 가진 펜션 목록 출력
 	PenImgViewDto viewDto = new PenImgViewDto();
+	PensionOptionDao podao = new PensionOptionDao();
 %>
+
 <!-- 펜션 목록 리스트 -->
 <style>
 	a{
@@ -55,10 +59,25 @@
 					<td><a href="room_regist.jsp?pension_no=<%= pdto.getPension_no()%>">객실등록</a></td>
 				</tr>
 				
-				<tr><td colspan="6" height="50px">
-					<
+				<tr><td colspan="6" height="50px"  class="left">
+					<%
+					List<PensionOptionDto> optionList = podao.getList(pdto.getPension_no());
+					for(PensionOptionDto podto : optionList){
+						if(podto.getOption_name().equals("수영장")){%>
+						<img alt="수영장" src="<%=request.getContextPath()%>/image/swim.png" style="height: 30px; width: 40px; display: inline;">&nbsp;&nbsp;
+						<%}else if(podto.getOption_name().equals("공용 바베큐장")){ %>
+						<img alt ="공용 바베큐장" src="<%=request.getContextPath()%>/image/bbq.png" style="height: 30px; width: 40px; display: inline">&nbsp;&nbsp;
+						<%}else if(podto.getOption_name().equals("노래방")){ %>
+						<img alt ="노래방" src="<%=request.getContextPath()%>/image/sing.png" style="height: 30px; width: 40px; display: inline">&nbsp;&nbsp;
+						<%}else if(podto.getOption_name().equals("족구장")){ %>
+						<img alt ="족구장" src="<%=request.getContextPath()%>/image/foot.png" style="height: 30px; width: 40px;display: inline">&nbsp;&nbsp;
+						<%}else if(podto.getOption_name().equals("탁구장")){ %>
+						<img alt ="탁구장" src="<%=request.getContextPath()%>/image/tak.png" style="height: 30px; width: 40px; display: inline">&nbsp;&nbsp;
+						<%}else if(podto.getOption_name().equals("반려견")){ %>
+						<img alt ="반려견" src="<%=request.getContextPath()%>/image/dog.png" style="height: 30px; width: 40px; display: inline">&nbsp;&nbsp;
+						<%} %>
+					<%} %>
 				</td></tr>
-				
 				<%} %>
 			</tbody>
 		</table>
