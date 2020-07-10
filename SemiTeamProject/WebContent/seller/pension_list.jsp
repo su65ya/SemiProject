@@ -17,6 +17,11 @@
 	PenImgViewDto viewDto = new PenImgViewDto();
 %>
 <!-- 펜션 목록 리스트 -->
+<style>
+	a{
+		text-decoration: none;
+	}
+</style>
 <article class="w-60">
 	<div class="row">
 		<!-- 제목 -->
@@ -32,15 +37,16 @@
 					<th>펜션 등록일</th>
 					<th colspan="3">관리</th>
 				</tr>
+				
 			</thead>
 			<tbody>
 				<%for(PensionDto pdto : list){ %>
 				<tr>
 					<%viewDto = pdao.getListWithImg(pdto.getPension_no());
 					if(viewDto != null){ %>
-					<td><img src="download.do?pen_image_no=<%=viewDto.getPen_img_no() %>" width="200" height="200"></td>
+					<td rowspan="2"><img src="download.do?pen_image_no=<%=viewDto.getPen_img_no() %>" width="200" height="200"></td>
 					<%}else{ %>
-					<td><img src="https://placehold.it/200x200"></td>
+					<td rowspan="2"><img src="https://placehold.it/200x200"></td>
 					<%} %>
 					<td><%=pdto.getPension_name() %></td>
 					<td><%=pdto.getPension_regist_date() %></td>
@@ -48,6 +54,11 @@
 					<td><a href="room_list.jsp?pension_no=<%=pdto.getPension_no()%>">객실목록</a></td>
 					<td><a href="room_regist.jsp?pension_no=<%= pdto.getPension_no()%>">객실등록</a></td>
 				</tr>
+				
+				<tr><td colspan="6" height="50px">
+					<
+				</td></tr>
+				
 				<%} %>
 			</tbody>
 		</table>
