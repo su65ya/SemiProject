@@ -2,7 +2,6 @@ package semi.beans.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -53,30 +52,4 @@ public class MemberDao {
 		con.close();
 		
 	}
-
-	// 로그인 메소드
-	public MemberDto login(MemberDto mdto) throws Exception {
-		Connection con = getConnection();
-		
-		String sql = "select * from member where member_id = ? and member_pw = ?";
-		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, mdto.getMember_id());
-		ps.setString(2, mdto.getMember_pw());
-		ResultSet rs = ps.executeQuery();
-		
-		MemberDto user = null;
-		if (rs.next())	{
-			user = new MemberDto(rs);
-		}
-		
-		con.close();
-		return user;
-		
-		
-		
-	}
-	
-	
-	
-	
 }

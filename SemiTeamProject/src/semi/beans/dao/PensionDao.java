@@ -11,6 +11,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import semi.beans.dto.PensionDto;
+import semi.beans.dto.SellerDto;
 
 public class PensionDao {
 	private static DataSource src;
@@ -95,4 +96,38 @@ public class PensionDao {
 		return list;
 		
 	}
+	
+	//펜션 삭제
+	public void delete(int pension_no)throws Exception{
+		Connection con = getConnection();
+		String sql = "DELETE pension WHERE pension_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, pension_no);
+		ps.execute();
+		
+		con.close();
+	}
+	
+	//펜션 단일조회 메소드
+	public PensionDto get(int pension_no) throws Exception {
+		Connection con = getConnection();
+		
+		String sql = "select * from pension where pension_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, pension_no);
+		ResultSet rs = ps.executeQuery();
+		
+		PensionDto pdto;
+		if (rs.next()) {
+			pdto = new PensionDto(rs);
+		}else {
+			pdto=null;
+		}
+		
+		con.close();
+		return pdto;
+	}
+	
+	
+	//펜션 수정
 }
