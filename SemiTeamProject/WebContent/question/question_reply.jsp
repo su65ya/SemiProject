@@ -137,6 +137,11 @@
 			<font color="gray">XXX</font>
 		<%} %>
 	</div>
+	
+	<div class="row">
+		<%= qdto.getQue_date() %> / 
+		<%= qdto.getQue_view() %>
+	</div>
 
 	
 	<div class="row-empty">
@@ -149,20 +154,23 @@
 	
 	
 	<form action="question_reply.do" method="post">
+	
 		<div class="row center">
 			<input type="hidden" name="que_no" value="<%= que_no %>">
 			<input type="hidden" name="que_pension_no" value="<%= que_pension_no %>">
 			<textarea class="form-input" name="que_reply" rows="5px" cols="100px"><%if ( qdto.getQue_reply() != null ) {%><%= qdto.getQue_reply() %><%} %></textarea>
 		</div>
-	</form>
-	
 		
 		<div class="row right">
 			<a href = "question_content.jsp?que_pension_no=<%= que_pension_no %>&que_no=<%= que_no %>">
-				<input class="form-btn form-inline" type="button" value="문의내용">
+				<input class="form-btn form-inline" type="button" value="취소">
 			</a>
 			<input class="form-btn form-inline" type="submit" value="등록">
 		</div>
+		
+	</form>
+	
+		
 	
 	<div class="row-empty"></div>
 	<div class="row-empty"></div>

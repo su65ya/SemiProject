@@ -66,8 +66,6 @@
 	}
         
 	// 폼을 전송하기 전 수행할 함수
-	// - true를 반환하면 전송o : 입력값이 있을 때
-	// - false를 반환하면 전송x : 입력값이 없을 때
 	function formCheck() {
 	    var content = editor.getContents();
 	    console.log(content);

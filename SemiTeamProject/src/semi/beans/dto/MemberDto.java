@@ -80,12 +80,12 @@ public class MemberDto {
 		return member_birth.substring(0,10);
 	}
 	// Y년 M월 D일 형식 getter
-		public String getMember_birthdayFormat() throws ParseException {
-			SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Date d = s.parse(member_birth);
-			SimpleDateFormat f = new SimpleDateFormat("y년 M월 d일");
-			return f.format(d);
-		}
+	public String getMember_birthdayFormat() throws ParseException {
+		SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date d = s.parse(member_birth);
+		SimpleDateFormat f = new SimpleDateFormat("y년 M월 d일");
+		return f.format(d);
+	}
 
 	public void setMember_birth(String member_birth) {
 		this.member_birth = member_birth;

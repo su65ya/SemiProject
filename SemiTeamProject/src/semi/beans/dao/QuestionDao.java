@@ -33,22 +33,14 @@ public class QuestionDao {
 	}
 	
 	// 문의 리스트
-	public List<QuestionDto> getlist(int que_pension_no) throws Exception {
+	public List<QuestionDto> getlist(int que_pension_no, int start, int finish) throws Exception {
 		Connection con = getConnection();
 		
-		String sql = "select * from question where que_pension_no = ? order by que_no desc";
-//		String sql ="select * from ("
-//							+ "select rownum rn, T.* from ("
-//								+ "SELECT * FROM question "
-//									+ "CONNECT BY PRIOR que_no = super_no "
-//									+ "START WITH super_no IS NULL "
-//									+ "ORDER siblings BY group_no DESC, que_no ASC"
-//								+ ")T "
-//							+ ") where rn between ? and ?";
+		String sql ="select * from (select rownum rn, T.* from ( select * from question where que_pension_no = ? order by que_no desc )T ) where rn between ? and ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, que_pension_no);
-//		ps.setInt(1, start);
-//		ps.setInt(2, finish);
+		ps.setInt(2, start);
+		ps.setInt(3, finish);
 		ResultSet rs = ps.executeQuery();
 		
 		List<QuestionDto> list = new ArrayList<>();
@@ -63,24 +55,16 @@ public class QuestionDao {
 	}
 	
 	// 문의 검색 리스트
-	public List<QuestionDto> search(int que_pension_no, String type, String keyword) throws Exception {
+	public List<QuestionDto> search(int que_pension_no, String type, String keyword, int start, int finish) throws Exception {
 		Connection con = getConnection();
 
-		String sql = "select * from question where que_pension_no = ? and inste(#1, ?) > 0 order by que_no desc"; 
-//		String sql ="select * from ("
-//				+ "select rownum rn, T.* from ("
-//					+ "SELECT * FROM question where instr(#1, ?) > 0"
-//						+ "CONNECT BY PRIOR que_no = super_no "
-//						+ "START WITH super_no IS NULL "
-//						+ "ORDER siblings BY group_no DESC, que_no ASC"
-//					+ ")T "
-//				+ ") where rn between ? and ?";
+		String sql ="select * from (select rownum rn, T.* from (select * from question where que_pension_no = ? and instr(#1, ?) > 0 order by que_no desc)T ) where rn between ? and ?";
 		sql = sql.replace("#1", type);
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, que_pension_no);
 		ps.setString(2, keyword);
-//		ps.setInt(3, start);
-//		ps.setInt(4, finish);
+		ps.setInt(3, start);
+		ps.setInt(4, finish);
 		ResultSet rs = ps.executeQuery();
 		
 		List<QuestionDto> list = new ArrayList<>();

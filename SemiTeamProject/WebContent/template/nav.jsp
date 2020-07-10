@@ -22,7 +22,7 @@
 
     </style>
 </head>
-<body test>
+<body >
 	<main>
 		<nav>
 		<%if(!isLogin){//비로그인 상태 %>
@@ -60,6 +60,7 @@
 				<li><a href="<%= root %>/member/member_logout.do">로그아웃</a></li>
 				<li><a href="#">펜션 찾기</a></li>
 				<li><a href="#">내 예약 보기</a></li>
+				<li><a href="<%= root %>/seller/pension_list.jsp">펜션관리</a></li>
 			</ul>
 		<%} %>
 		<%} %>

@@ -1,3 +1,4 @@
+<%@page import="semi.beans.dto.SellerDto"%>
 <%@page import="semi.beans.dto.MemberDto"%>
 <%@page import="java.util.HashSet"%>
 <%@page import="java.util.Set"%>
@@ -9,6 +10,8 @@
     <%
     	int que_no = Integer.parseInt(request.getParameter("que_no"));
     	int que_pension_no = Integer.parseInt(request.getParameter("que_pension_no"));
+    	
+    	SellerDto sdto = (SellerDto) session.getAttribute("sellerinfo");
     
     //////////////////////////////////////////////////////////////////////////////////
     
@@ -74,7 +77,7 @@
 	</div>
 	
 	<div class="row">
-		<%= qdto.getQue_auto() %> / 
+		<%= qdto.getQue_date() %> / 
 		<%= qdto.getQue_view() %>
 	</div>
 	
@@ -82,41 +85,49 @@
 		<hr>
 	</div>
 	
-	<div class="row" style="min-heighx`: 300px">
+	<div class="row" style="min-height: 300px">
 		<%= qdto.getQue_content() %>
+	</div>
+	
+	<div class="row-empty">
+		<hr>
 	</div>
 	
 	<div class="row">
 		<% if ( qdto.getQue_reply() != null ) { %>
+			<font>
+				<%= qdto.getReply_writer() %>
+			</font>
+			<br>
 			<%= qdto.getQue_reply() %>
 		<%} %>
 	</div>
 	
-	
-	<%-- 	
-		<form action="question_reply.do" method="post">
-			<div class="row center">
-				<input type="hidden" name="que_no" value="<%= que_no %>">
-				<input type="hidden" name="que_pension_no" value="<%= que_pension_no %>">
-			</div>
-		</form>
-	 --%>
-	
-	
+	<div class="row-empty"></div>
 
 	<div class="row right">
-		<a href="question_edit.jsp?que_no=<%= que_no %>">
-			<input class="form-btn form-inline" type="button" value="수정">
-		</a>
+		<% if (sdto == null) { %>
+			<a href="question_edit.jsp?que_no=<%= que_no %>">
+				<input class="form-btn form-inline" type="button" value="문의수정">
+			</a>
+		<%} %>
 		<a href="question_delete.do?que_no=<%= que_no %>">
 			<input class="form-btn form-inline" type="button" value="삭제">
 		</a>
 		<a href="question_write.jsp">
 			<input class="form-btn form-inline" type="button" value="글쓰기">
 		</a>
-		<a href="question_reply.jsp?que_pension_no=<%= que_pension_no %>&que_no=<%= que_no %>">
-			<input class="form-btn form-inline" type="button" value="답변">
-		</a>
+		<% if (sdto != null) {%>	
+			<% if (qdto.getQue_reply() != null) { %>
+				<a href="question_reply.jsp?que_pension_no=<%= que_pension_no %>&que_no=<%= que_no %>">
+					<input class="form-btn form-inline" type="button" value="답변수정">
+				</a>
+			<%} else {%>
+				<a href="question_reply.jsp?que_pension_no=<%= que_pension_no %>&que_no=<%= que_no %>">
+					<input class="form-btn form-inline" type="button" value="답변">
+				</a>
+				<%} %>
+		<%} %>
 		<a href="question_list.jsp?que_pension_no=<%= que_pension_no %>">
 			<input class="form-btn form-inline" type="button" value="목록">
 		</a>

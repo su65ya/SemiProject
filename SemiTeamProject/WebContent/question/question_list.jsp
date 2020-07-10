@@ -17,32 +17,32 @@
 	
 	///////////////////////////////////////////////////
 	
-	int pageSize = 10;
+	int page_size = 10;
 	
 	String pageStr = request.getParameter("page");
-	int pageNo;
+	int page_no;
 	try {
-		pageNo = Integer.parseInt(pageStr);
-		if (pageNo <= 0 ) {
+		page_no = Integer.parseInt(pageStr);
+		if (page_no <= 0 ) {
 			throw new Exception();
 		}
 	}
 	catch (Exception e) {
-		pageNo = 1;
+		page_no = 1;
 	}
 	
-	int finish = pageNo * pageSize;
-	int start = finish - (pageSize -1);
+	int finish = page_no * page_size;
+	int start = finish - (page_size -1);
 	
 	////////////////////////////////////////
-/* 	
-	int blockSize = 10;
-	int blockStart = (pageNo - 1) / blockSize * blockSize + 1;
-	int blockFinish = blockStart +blockSize - 1;
- */	
+ 	
+	int block_size = 10;
+	int blockStart = (page_no - 1) / block_size * block_size + 1;
+	int blockFinish = blockStart +block_size - 1;
+	
 
 	QuestionDao qdao = new QuestionDao();
-/*	
+	
 	int count;
 	if (isSearch) {
 		count = qdao.getSearch(type, keyword);
@@ -51,20 +51,17 @@
 		count = qdao.getCount();
 	}
 	
-	int pageCount = (count + pageSize - 1) / pageSize;
+	int pageCount = (count + page_size - 1) / page_size;
 	if (blockFinish > pageCount) {
 		blockFinish = pageCount;
 	}
-	 */
 	
 	List<QuestionDto> list;
 	if (isSearch) {
-		/* list = qdao.search(type, keyword, start, finish); */
-		list = qdao.search(que_pension_no, type, keyword);
+		list = qdao.search(que_pension_no, type, keyword, start, finish);
 	}
 	else {
-		/* list = qdao.getlist(start, finish); */
-		list = qdao.getlist(que_pension_no);
+		list = qdao.getlist(que_pension_no, start, finish);
 	}
 
 %>
@@ -100,7 +97,7 @@
 		<thead>
 			<tr>
 				<th>번호</th>
-				<th width="40%">제목</th>
+				<th width="50%">제목</th>
 				<th>작성자</th>
 				<th>작성일</th>
 				<th>조회수</th>
@@ -113,22 +110,14 @@
 				<td><%= qdto.getQue_no() %></td>
 
 				<td class="left">
-					
-					<%-- 
-					<!-- 답글 띄어쓰기 -->
-					<% if (qdto.getDepth() > 0) { %>
-						<% for(int i = 0; i < qdto.getDepth(); i++) { %>
-							&nbsp;&nbsp;&nbsp;
-						<%} %>
-						<!-- <img src="http://placehold.it/20x15"> -->
-					<%} %>
-					 --%>
-					 	
-					<font color="gray" size="3">
+				
+					<font color="red" size="2">
 					 	<% if(qdto.getQue_reply() != null) { %>
 					 		<span>답변 완료</span>					 		
 					 	<%} %>
+					</font>
 					
+					<font color="gray" size="3">
 						<% if(qdto.getQue_head() != null) { %>
 							[<%= qdto.getQue_head() %>]
 						<%} %>
@@ -158,55 +147,47 @@
 		</a>
 	</div>
 	
-	<%-- 
+	
 	<div class="row center pagination">
 	
 		<!-- 이전 -->
 		<% if (blockStart > 1) { %>
 			<%if (!isSearch) { %>
-				<a href="question_list.jsp?page=<%= blockStart - 1 %>">&lt;</a>
+				<a href="question_list.jsp?que_pension_no=<%= que_pension_no %>&page=<%= blockStart - 1 %>">&lt;</a>
 			<%} else { %>
-				<a href="question_list.jsp?page=<%= blockStart - 1 %>&type=<%= type %>&keyword=<%= keyword %>">&lt;</a>
+				<a href="question_list.jsp?&que_pension_no=<%= que_pension_no %>page=<%= blockStart - 1 %>&type=<%= type %>&keyword=<%= keyword %>">&lt;</a>
 			<%} %>
 		<%} %>
 		
 		<% for (int i = blockStart; i <= blockFinish; i++) {%>
-			<%
-				String prop;
-				if (i == pageNo) {	// 현재 페이지 번호면
-					prop = "class='on'";
-				}
-				else {	// 현재 페이지가 아니면
-					prop = "";
-			}%>
 		
 			<% if (!isSearch) { %>	
-				<a href="question_list.jsp?page=<%= i %>" <%= prop %>><%= i %></a>
+				<a href="question_list.jsp?que_pension_no=<%= que_pension_no %>&page=<%= i %>"><%= i %></a>
 			<%} else { %>
-				<a href="question_list.jsp?page=<%= i %>&type=<%= type %>&keyword=<%= keyword %>" <%= prop %>><%= i %></a>
+				<a href="question_list.jsp?que_pension_no=<%= que_pension_no %>&page=<%= i %>&type=<%= type %>&keyword=<%= keyword %>"><%= i %></a>
 			<%} %>
 		<%} %>
 		
 		<!-- 다음 -->
 		<% if (blockFinish < pageCount) { %>
 			<%if (!isSearch) { %>
-				<a href="question_list.jsp?page=<%= blockFinish + 1 %>">&gt;</a>
+				<a href="question_list.jsp?que_pension_no=<%= que_pension_no %>&page=<%= blockFinish + 1 %>">&gt;</a>
 			<%} else { %>
-				<a href="question_list.jsp?page=<%= blockFinish + 1 %>&type=<%= type %>&keyword=<%= keyword %>">&gt;</a>
+				<a href="question_list.jsp?que_pension_no=<%= que_pension_no %>&page=<%= blockFinish + 1 %>&type=<%= type %>&keyword=<%= keyword %>">&gt;</a>
 			<%} %>
 		<%} %>
 		
 	</div>
-	 --%>
 	
 	
 	
 	<!-- 검색창 -->
 	<div class="row center">
-		<form action="question_list.jsp" method="get">
+		<form action="question_list.jsp?" method="get">
+			<input type="hidden" name="que_pension_no" value="<%= que_pension_no %>">
 			<select class="form-input form-inline" name="type">
 				<option value="que_title">제목</option>
-				<option value="que_write">작성자</option>
+				<option value="que_writer">작성자</option>
 			</select>
 			
 			<% if (keyword != null) { %>
