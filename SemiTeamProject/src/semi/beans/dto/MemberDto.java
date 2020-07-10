@@ -2,9 +2,6 @@ package semi.beans.dto;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class MemberDto {
 	private int member_no;
@@ -75,17 +72,6 @@ public class MemberDto {
 	public String getMember_birth() {
 		return member_birth;
 	}
-	// member_birth의 시각 제외 getter
-	public String getMember_birthday() {
-		return member_birth.substring(0,10);
-	}
-	// Y년 M월 D일 형식 getter
-	public String getMember_birthdayFormat() throws ParseException {
-		SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date d = s.parse(member_birth);
-		SimpleDateFormat f = new SimpleDateFormat("y년 M월 d일");
-		return f.format(d);
-	}
 
 	public void setMember_birth(String member_birth) {
 		this.member_birth = member_birth;
@@ -100,7 +86,6 @@ public class MemberDto {
 	}
 
 	public String getMember_post() {
-		if(member_post == null) return "";
 		return member_post;
 	}
 
@@ -109,7 +94,6 @@ public class MemberDto {
 	}
 
 	public String getMember_basic_addr() {
-		if(member_basic_addr == null) return "";
 		return member_basic_addr;
 	}
 
@@ -118,7 +102,6 @@ public class MemberDto {
 	}
 
 	public String getMember_detail_addr() {
-		if(member_detail_addr == null) return "";
 		return member_detail_addr;
 	}
 
