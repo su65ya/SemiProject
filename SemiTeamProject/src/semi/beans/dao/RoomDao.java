@@ -81,4 +81,16 @@ private static DataSource src;
 		con.close();
 		return list;
 	}
+	
+	public void delete(int room_no)throws Exception{
+		Connection con = getConnection();
+		
+		String sql = "DELETE room WHERE room_no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, room_no);
+		ps.execute();
+		
+		con.close();
+		
+	}
 }
