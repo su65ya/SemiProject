@@ -112,21 +112,4 @@ public class PensionImageDao {
 			return list;
 		}
 
-		// 게시글 첨부파일 조회(댓글 조회와 동일)
-//			public List<BoardFileDto> getList(int board_no) throws Exception {
-//				Connection con = getConnection();
-//				String sql = "SELECT * FROM board_file "
-//									+ "WHERE board_origin = ? "
-//									+ "ORDER BY board_file_no ASC";
-//				PreparedStatement ps = con.prepareStatement(sql);
-//				ps.setInt(1, board_no);
-//				ResultSet rs = ps.executeQuery();
-//				List<BoardFileDto> list = new ArrayList<>();
-//				while(rs.next()) {
-//					BoardFileDto bfdto = new BoardFileDto(rs);
-//					list.add(bfdto);
-//				}
-//				con.close();
-//				return list;
-//			}
 }
