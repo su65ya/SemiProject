@@ -1,3 +1,4 @@
+<%@page import="semi.beans.dto.PensionInfoDto"%>
 <%@page import="semi.beans.dto.PensionDto"%>
 <%@page import="semi.beans.dao.PensionDao"%>
 <%@page import="semi.beans.dto.RoomDto"%>
@@ -14,7 +15,10 @@
 <%
 	PensionDao pdao = new PensionDao();
 	RoomDao rdao = new RoomDao();
+	
 	List<RoomDto> list = rdao.getList();
+	int pension_no = Integer.parseInt(request.getParameter("pension_no"));
+	PensionInfoDto pdto = pdao.get(pension_no);
 %>
 
 <!-- 객실 목록 리스트 -->
@@ -28,8 +32,8 @@
 			<thead>
 				<tr>
 					<th colspan="4">
-					<input type="hidden" name="pension_no" value="<%=(request.getParameter("pension_no"))%>">
-					<%=(request.getParameter("pension_name"))%>
+<%-- 					<input type="hidden" name="pension_no" value="<%=(request.getParameter("pension_no"))%>"> --%>
+					<%=pdto.getPension_name()%>
 					</th>
 				</tr>
 			</thead>
