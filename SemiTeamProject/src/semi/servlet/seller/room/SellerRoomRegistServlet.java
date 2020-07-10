@@ -32,17 +32,28 @@ public class SellerRoomRegistServlet extends HttpServlet{
 			rdto.setOn_weekday(Integer.parseInt(req.getParameter("on_weekday")));
 			rdto.setOn_weekend(Integer.parseInt(req.getParameter("on_weekend")));
 			
-			rdto.setAmenity(Integer.parseInt(req.getParameter("amenity")));
-			rdto.setMicrowave(Integer.parseInt(req.getParameter("microwave")));
-			rdto.setBed(Integer.parseInt(req.getParameter("bed")));
-			rdto.setTv(Integer.parseInt(req.getParameter("tv")));
-			rdto.setRoom_sofa(Integer.parseInt(req.getParameter("room_sofa")));
-			rdto.setRoom_aircon(Integer.parseInt(req.getParameter("room_aircon")));
-			rdto.setFridge(Integer.parseInt(req.getParameter("fridge")));
-			rdto.setTub(Integer.parseInt(req.getParameter("tub")));
-			rdto.setHairdryer(Integer.parseInt(req.getParameter("hairdryer")));
-			rdto.setCookoo(Integer.parseInt(req.getParameter("cookoo")));
-			rdto.setDog(Integer.parseInt(req.getParameter("dog")));
+			int amenity = Integer.parseInt(req.getParameter("amenity"));
+			rdto.setAmenity(amenity);
+			int microwave = Integer.parseInt(req.getParameter("microwave"));
+			rdto.setMicrowave(microwave);
+			int bed = Integer.parseInt(req.getParameter("bed"));
+			rdto.setBed(bed);
+			int tv = Integer.parseInt(req.getParameter("tv"));
+			rdto.setTv(tv);
+			int room_sofa = Integer.parseInt(req.getParameter("room_sofa"));
+			rdto.setRoom_sofa(room_sofa);
+			int room_aircon = Integer.parseInt(req.getParameter("room_aircon"));
+			rdto.setRoom_aircon(room_aircon);
+			int fridge = Integer.parseInt(req.getParameter("fridge"));
+			rdto.setFridge(fridge);
+			int tub = Integer.parseInt(req.getParameter("tub"));
+			rdto.setTub(tub);
+			int hairdryer = Integer.parseInt(req.getParameter("hairdryer"));
+			rdto.setHairdryer(hairdryer);
+			int cookoo = Integer.parseInt(req.getParameter("cookoo"));
+			rdto.setCookoo(cookoo);
+			int dog = Integer.parseInt(req.getParameter("dog"));
+			rdto.setDog(dog);
 			
 			
 			RoomDao rdao = new RoomDao();
