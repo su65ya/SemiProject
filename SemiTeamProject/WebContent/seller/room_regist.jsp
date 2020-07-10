@@ -22,56 +22,147 @@
         function changeCheckbox(){
             
             var selectAll = document.querySelector(".select-all").checked;
-            
-            var selectItem = document.querySelectorAll(".select-item");
-            
-            for(var i in selectItem){
-            	selectItem[i].checked = selectAll; 
-        	   var check_count = document.getElementsByClassName("ck").length;
+            var selectItem1 = document.querySelectorAll(".select-item");
+            var selectItem2 = document.querySelectorAll(".select-item+input");
 
-               for (var i=0; i<check_count; i++) {
-                   if (document.getElementsByClassName("ck")[i].checked == true) {
-                     	document.getElementsByClassName("ck")[i].value="1";
-                   }
-                   else if(!document.getElementsByClassName("ck")[i].checked){
-                   	
-                   	document.getElementsByClassName("ck")[i].value="0";
-                   }
-             	}
+            for(var n in selectItem1){
+            	selectItem1[n].checked = selectAll;
             	
             }
-        }
+            for(var i in selectItem2){
+            		if(selectAll){
+            			selectItem2[i].value="1";
+            		}else{
+            			selectItem2[i].value="0";
+            		}
+            	}
+            }
+            
+          
+        function ckck(){
+                var check_count = document.getElementsByClassName("ck").length;
+                var hidden= document.querySelectorAll(".ck+input");
+         
+                for (var i=0; i<check_count; i++) {
+                    if (document.getElementsByClassName("ck")[i].checked) {
+                       hidden[i].value="1";
+                    }else{
+                    	hidden[i].value="0";//이것만해결하면 완벽
+                    }
+              	}
+            }
         
-//         function value_check() {
-//         	var check_countTag = document.getElementsByClassName("ck");
-//             var check_count = check_countTag.length;
-//         	var check_countTag = document.querySelecto("input[type=checkbox] +input[type=hidden]");
-//             for (var i=0; i<check_count; i++) {
-//                 if (document.getElementsByClassName("ck")[i].checked == true) {
-
-//                   	document.getElementsByClassName("ck")[i].value="1";
-//                 }
-//                 else if(!document.getElementsByClassName("ck")[i].checked){
-                	
-//                 	document.getElementsByClassName("ck")[i].value="0";
-//                 }
-//           	}
+        
+//         function ckck1(){
+//         	var check = document.querySelector("#amenity_id").checked;
+        	
+//         	var hidden = document.querySelector("#amenity_id+input");
+//         	if(check){
+//         		hidden.value = "1";
+//         	}else{
+//         		hidden.value = "0";
+//         	}
 //         }
-        
-       /*  function value_check() {
-            var check_count = document.getElementsByClassName("ck").length;
-     		var checked=0;
-            for (var i=0; i<check_count; i++) {
-                if (document.getElementsByClassName("ck")[i].checked == true) {
-
-                  	document.getElementsByClassName("ck")[i].value="1";
-                }
-                else if(!document.getElementsByClassName("ck")[i].checked){
-                	
-                	document.getElementsByClassName("ck")[i].value="0";
-                }
-          	}
-        } */
+//         function ckck2(){
+//         	var check = document.querySelector("#micro_id").checked;
+        	
+//         	var hidden = document.querySelector("#micro_id+input");
+//         	if(check){
+//         		hidden.value = "1";
+//         	}else{
+//         		hidden.value = "0";
+//         	}
+//         }
+//         function ckck3(){
+//         	var check = document.querySelector("#bed_id").checked;
+        	
+//         	var hidden = document.querySelector("#bed_id+input");
+//         	if(check){
+//         		hidden.value = "1";
+//         	}else{
+//         		hidden.value = "0";
+//         	}
+//         }
+//         function ckck4(){
+//         	var check = document.querySelector("#tv_id").checked;
+        	
+//         	var hidden = document.querySelector("#tv_id+input");
+//         	if(check){
+//         		hidden.value = "1";
+//         	}else{
+//         		hidden.value = "0";
+//         	}
+//         }
+//         function ckck5(){
+//         	var check = document.querySelector("#room_sofa_id").checked;
+        	
+//         	var hidden = document.querySelector("#room_sofa_id+input");
+//         	if(check){
+//         		hidden.value = "1";
+//         	}else{
+//         		hidden.value = "0";
+//         	}
+//         }
+//         function ckck6(){
+//         	var check = document.querySelector("#room_aircon_id").checked;
+        	
+//         	var hidden = document.querySelector("#room_aircon_id+input");
+//         	if(check){
+//         		hidden.value = "1";
+//         	}else{
+//         		hidden.value = "0";
+//         	}
+//         }
+//         function ckck7(){
+//         	var check = document.querySelector("#fridge_id").checked;
+        	
+//         	var hidden = document.querySelector("#fridge_id+input");
+//         	if(check){
+//         		hidden.value = "1";
+//         	}else{
+//         		hidden.value = "0";
+//         	}
+//         }
+//         function ckck8(){
+//         	var check = document.querySelector("#tub_id").checked;
+        	
+//         	var hidden = document.querySelector("#tub_id+input");
+//         	if(check){
+//         		hidden.value = "1";
+//         	}else{
+//         		hidden.value = "0";
+//         	}
+//         }
+//         function ckck9(){
+//         	var check = document.querySelector("#hairdryer_id").checked;
+        	
+//         	var hidden = document.querySelector("#hairdryer_id+input");
+//         	if(check){
+//         		hidden.value = "1";
+//         	}else{
+//         		hidden.value = "0";
+//         	}
+//         }
+//         function ckck10(){
+//         	var check = document.querySelector("#cookoo_id").checked;
+        	
+//         	var hidden = document.querySelector("#cookoo_id+input");
+//         	if(check){
+//         		hidden.value = "1";
+//         	}else{
+//         		hidden.value = "0";
+//         	}
+//         }
+//         function ckck11(){
+//         	var check = document.querySelector("#dog_id").checked;
+        	
+//         	var hidden = document.querySelector("#dog_id+input");
+//         	if(check){
+//         		hidden.value = "1";
+//         	}else{
+//         		hidden.value = "0";
+//         	}
+//         }
         
         function preview(){
             var fileTag = document.querySelector("input[name=room_image]");
@@ -102,117 +193,6 @@
                 divTag.innerHTML = "";
             }
         }
-        function ckck1(){
-        	var check = document.querySelector("#amenity_id").checked;
-        	
-        	var hidden = document.querySelector("#amenity_id+input");
-        	if(check){
-        		hidden.value = "1";
-        	}else{
-        		hidden.value = "0";
-        	}
-        }
-        function ckck2(){
-        	var check = document.querySelector("#micro_id").checked;
-        	
-        	var hidden = document.querySelector("#micro_id+input");
-        	if(check){
-        		hidden.value = "1";
-        	}else{
-        		hidden.value = "0";
-        	}
-        }
-        function ckck3(){
-        	var check = document.querySelector("#bed_id").checked;
-        	
-        	var hidden = document.querySelector("#bed_id+input");
-        	if(check){
-        		hidden.value = "1";
-        	}else{
-        		hidden.value = "0";
-        	}
-        }
-        function ckck4(){
-        	var check = document.querySelector("#tv_id").checked;
-        	
-        	var hidden = document.querySelector("#tv_id+input");
-        	if(check){
-        		hidden.value = "1";
-        	}else{
-        		hidden.value = "0";
-        	}
-        }
-        function ckck5(){
-        	var check = document.querySelector("#room_sofa_id").checked;
-        	
-        	var hidden = document.querySelector("#room_sofa_id+input");
-        	if(check){
-        		hidden.value = "1";
-        	}else{
-        		hidden.value = "0";
-        	}
-        }
-        function ckck6(){
-        	var check = document.querySelector("#room_aircon_id").checked;
-        	
-        	var hidden = document.querySelector("#room_aircon_id+input");
-        	if(check){
-        		hidden.value = "1";
-        	}else{
-        		hidden.value = "0";
-        	}
-        }
-        function ckck7(){
-        	var check = document.querySelector("#fridge_id").checked;
-        	
-        	var hidden = document.querySelector("#fridge_id+input");
-        	if(check){
-        		hidden.value = "1";
-        	}else{
-        		hidden.value = "0";
-        	}
-        }
-        function ckck8(){
-        	var check = document.querySelector("#tub_id").checked;
-        	
-        	var hidden = document.querySelector("#tub_id+input");
-        	if(check){
-        		hidden.value = "1";
-        	}else{
-        		hidden.value = "0";
-        	}
-        }
-        function ckck9(){
-        	var check = document.querySelector("#hairdryer_id").checked;
-        	
-        	var hidden = document.querySelector("#hairdryer_id+input");
-        	if(check){
-        		hidden.value = "1";
-        	}else{
-        		hidden.value = "0";
-        	}
-        }
-        function ckck10(){
-        	var check = document.querySelector("#cookoo_id").checked;
-        	
-        	var hidden = document.querySelector("#cookoo_id+input");
-        	if(check){
-        		hidden.value = "1";
-        	}else{
-        		hidden.value = "0";
-        	}
-        }
-        function ckck11(){
-        	var check = document.querySelector("#dog_id").checked;
-        	
-        	var hidden = document.querySelector("#dog_id+input");
-        	if(check){
-        		hidden.value = "1";
-        	}else{
-        		hidden.value = "0";
-        	}
-        }
-        
         
     </script>
 <jsp:include page="/template/nav.jsp"></jsp:include>
@@ -277,73 +257,74 @@
 				<h4>옵션</h4>
 			</div>
 			<div>
-			<input class="select-item am" type="checkbox" id="amenity_id" onchange="ckck1();">
+			<input class="select-item ck" type="checkbox" id="amenity_id" onchange="ckck();">
 			<input type="hidden" name="amenity" value = "0">
         		<label for="amenity_id">어메니티</label>
 			</div>
 			
 			<div class="row">
-                <input class="select-item ck" type="checkbox" id="micro_id" onchange="ckck2();" >
+                <input class="select-item ck" type="checkbox" id="microwave_id" onchange="ckck();" >
                 <input type="hidden" name="microwave" value = "0">
-                <label for="mi">전자레인지</label>
+                <label for="microwave_id">전자레인지</label>
 			</div>
 			
 			<div class="row">
-        		<input class="select-item ck" type="checkbox" id="bed_id" onchange="ckck3();">
+        		<input class="select-item ck" type="checkbox" id="bed_id" onchange="ckck();">
         		<input type="hidden" name="bed" value = "0">
         		<label for="bed_id">침대</label>
 			</div>
            
             <div class="row">
-                <input class="select-item ck" type="checkbox"  id="tv_id"onchange="ckck4();">
+                <input class="select-item ck" type="checkbox"  id="tv_id"onchange="ckck();">
                 <input type="hidden" name="tv" value = "0">
         		<label for="tv_id">티비</label>
 			</div>
 			
 			<div class="row">
-                <input class="select-item ck" type="checkbox"  id="room_sofa_id" onchange="ckck5();" >
+                <input class="select-item ck" type="checkbox"  id="room_sofa_id" onchange="ckck();" >
                 <input type="hidden" name="room_sofa" value = "0">
-        		<label for="sofa_id">소파</label>
+        		<label for="room_sofa_id">소파</label>
 			</div>
 			
 			<div class="row">
-               <input class="select-item ck" type="checkbox" id="room_aircon_id" onchange="ckck6();">
+               <input class="select-item ck" type="checkbox" id="room_aircon_id" onchange="ckck();">
                <input type="hidden" name="room_aircon" value = "0">
         		<label for="room_aircon_id">에어컨</label>
 			</div>
 			
 			<div class="row">
-               <input class="select-item ck" type="checkbox" id="fridge_id" onchange="ckck7();" >
+               <input class="select-item ck" type="checkbox" id="fridge_id" onchange="ckck();" >
                <input type="hidden" name="fridge" value = "0">
         		<label for="fridge_id">냉장고</label>
 			</div>
 			
 			<div class="row">
-                <input class="select-item ck" type="checkbox" id="tub_id" onchange="ckck8();" >
+                <input class="select-item ck" type="checkbox" id="tub_id" onchange="ckck();" >
                 <input type="hidden" name="tub" value = "0">
         		<label for="tub_id">욕조</label>
 			</div>
             
             <div class="row">
-                <input class="select-item ck" type="checkbox" id="hairdryer_id" onchange="ckck9();">
+                <input class="select-item ck" type="checkbox" id="hairdryer_id" onchange="ckck();">
                 <input type="hidden" name="hairdryer" value = "0">
-        		<label for="hair_id">드라이기</label>
+        		<label for="hairdryer_id">드라이기</label>
 			</div>
             
             <div class="row">
-                <input class="select-item ck" type="checkbox"  id="cookoo_id" onchange="ckck10();" >
+                <input class="select-item ck" type="checkbox"  id="cookoo_id" onchange="ckck();" >
                 <input type="hidden" name="cookoo" value = "0">
         		<label for="cookoo_id">밥솥</label>
 			</div>
             
             <div class="row">
-                <input class="select-item ck" type="checkbox" id="dog_id" onchange="ckck11();">
+                <input class="select-item ck" type="checkbox" id="dog_id" onchange="ckck();">
                 <input type="hidden" name="dog" value = "0">
         		<label for="dog_id">반려견</label>
 			</div>
 			
 			<div class="row right">
- 				<input type="checkbox" class="select-all ck" onchange="changeCheckbox(); ckckall();" id="ck" value = "0">
+ 				<input type="checkbox" class="select-all ck" onchange="changeCheckbox();" id="ck">
+ 				
 				<label for="ck">전체선택/해제</label>
 			</div>
 	
