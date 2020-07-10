@@ -1,5 +1,10 @@
+<%@page import="semi.beans.dto.PensionImageDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+    
+   		
+    %>
         <style>
     	span{
     		color:red;
@@ -7,8 +12,66 @@
     	}
     	label{
     		font-size:13;
+    		font-weight: bold;
     	}
+    	
+    	.price {
+    		width: 60px;
+    	}
+    	span{
+    		color:red;
+    		font-size:16;
+    	}
+    	.ck + label {
+            color:black;
+        }
+        .ck:checked + label {
+            color:silver;
+        }
     </style>
+    <script>
+        function changeCheckbox(){
+            
+            var selectAll = document.querySelector(".select-all").checked;
+            
+            var selectItem = document.querySelectorAll(".select-item");
+            
+            for(var i in selectItem){
+                selectItem[i].checked = selectAll;    
+            }
+        }
+        
+        //등록 사진 미리보기
+        function preview(){
+            var fileTag = document.querySelector("input[name=pension_image]");
+            
+            var divTag = document.querySelector(".preview-wrap");
+            
+            if(fileTag.files.length > 0){
+                //선택된 파일들을 다 읽어와서 이미지 생성 후 추가
+                //미리보기 전부 삭제
+                divTag.innerHTML = "";
+                
+                for(var i=0; i < fileTag.files.length; i++){
+                    var reader = new FileReader();
+                    reader.onload = function(data){
+                        //img 생성 후 data.target.result 설정하여 추가
+                        var imgTag = document.createElement("img");
+                        imgTag.setAttribute("src", data.target.result);
+                        imgTag.setAttribute("width", "120");
+                        imgTag.setAttribute("height", "120");
+                        divTag.appendChild(imgTag);
+                    };
+                    reader.readAsDataURL(fileTag.files[i]);
+                }
+                
+            }
+            else{
+                //미리보기 전부 삭제
+                divTag.innerHTML = "";
+            }
+        }
+    </script>
 <jsp:include page="/template/nav.jsp"></jsp:include>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -60,9 +123,107 @@
             }
         }).open();
     }
+    
+    function setOption1(){
+    	var option_nameTag = document.querySelector(".option_name1");
+    	var option_priceTag = document.querySelector(".option_price1");
+    	
+    	var hidden = document.querySelector(".option_price1 + input[type=hidden]");
+    	
+    	if(option_priceTag.value){
+    		hidden.value=option_nameTag.textContent+"-"+option_priceTag.value+"-0";
+    	}else{
+    		hidden.value="";
+    	}
+    }
+    function setOption2(){
+    	var option_nameTag = document.querySelector(".option_name2");
+    	var option_priceTag = document.querySelector(".option_price2");
+    	
+    	var hidden = document.querySelector(".option_price2 + input[type=hidden]");
+    	
+    	if(option_priceTag.value){
+    		hidden.value=option_nameTag.textContent+"-"+option_priceTag.value+"-0";
+    	}else{
+    		hidden.value="";
+    	}
+    }
+    function setOption3(){
+    	var option_nameTag = document.querySelector(".option_name3");
+    	var option_priceTag = document.querySelector(".option_price3");
+    	
+    	var hidden = document.querySelector(".option_price3 + input[type=hidden]");
+    	
+    	if(option_priceTag.value){
+    		hidden.value=option_nameTag.textContent+"-"+option_priceTag.value+"-0";
+    	}else{
+    		hidden.value="";
+    	}
+    }
+    function setOption4(){
+    	var option_nameTag = document.querySelector(".option_name4");
+    	var option_priceTag = document.querySelector(".option_price4");
+    	
+    	var hidden = document.querySelector(".option_price4 + input[type=hidden]");
+    	
+    	if(option_priceTag.value){
+    		hidden.value=option_nameTag.textContent+"-"+option_priceTag.value+"-0";
+    	}else{
+    		hidden.value="";
+    	}
+    }
+    
+    function plusswim(){
+    	var swim = document.querySelector("#swim");
+    	if(swim.checked){
+    		swim.value = "수영장-0-1";
+    	}else{
+    		swim.value = "";
+    	}
+    }
+    function plusfoot(){
+    	var swim = document.querySelector("#foot");
+    	if(swim.checked){
+    		swim.value = "족구장-0-1";
+    	}else{
+    		swim.value = "";
+    	}
+    }
+    function plussing(){
+    	var swim = document.querySelector("#sing");
+    	if(swim.checked){
+    		swim.value = "노래방-0-1";
+    	}else{
+    		swim.value = "";
+    	}
+    }
+    function plustak(){
+    	var swim = document.querySelector("#tak");
+    	if(swim.checked){
+    		swim.value = "탁구장-0-1";
+    	}else{
+    		swim.value = "";
+    	}
+    }
+    function plusPublic(){
+    	var swim = document.querySelector("#public_bbq");
+    	if(swim.checked){
+    		swim.value = "공용 바베큐장-0-1";
+    	}else{
+    		swim.value = "";
+    	}
+    }
+    function plusPrivate(){
+    	var swim = document.querySelector("#private_bbq");
+    	if(swim.checked){
+    		swim.value = "개별 바베큐-0-1";
+    	}else{
+    		swim.value = "";
+    	}
+    }
 </script>
 	<article class="w-40">
-		<form action="pension_regist.do" method="post">
+		<form action="pension_regist.do" method="post"  enctype="multipart/form-data">
 			<div class="row-empty"></div>
 			<div class="row">
 				<h2>펜션 등록</h2>
@@ -74,15 +235,18 @@
 			</div>
 			
 			<div class="row">
+			
 				<label><span>*</span>주소 입력</label><br>
 				<input class="form-input form-inline" type="text" name="pension_post" placeholder="우편번호" required>
-				<input onclick="findAddress();" type="button" value="우편번호 찾기">
+				<input onclick="findAddress();" type="button" value="우편번호 찾기"><br>
 			</div>
+			<div class="row-emptyy"></div>
 			<div class="row">
-				<input class="form-input" type="text" name="pension_basic_addr" placeholder="기본주소" required>
+				<input class="form-input" type="text" name="pension_basic_addr" placeholder="기본주소" required><br>
 			</div>
+			<div class="row-emptyy"></div>
 			<div class="row">
-				<input class="form-input" type="text" name="pension_detail_addr" placeholder="상세주소" required>
+				<input class="form-input" type="text" name="pension_detail_addr" placeholder="상세주소" required><br>
 			</div>
 			<div class="row">
 				<label><span>*</span>펜션 전화번호</label>
@@ -93,11 +257,75 @@
 				<textarea rows="15" cols="77" name="pension_intro" required></textarea>
 			</div>
 			<div class="row-empty"></div>
+			<div class="row-empty"></div>
+			<div class="row"><hr></div>
+			<div class="row-empty"></div>
+			<div class="row-empty"></div>
+			<div class="row center">
+				<label>옵션</label>
+			</div>
+			<div class="row-empty"></div>
+			<div class="row">
+				<!-- 사용자에게 보여줄 화면 : 여기서 값이 입력되면 위의 태그로 자동 전송 -->
+				<label class="select option_name1">숯불</label>&nbsp;&nbsp;
+				<input class="form-input option_price1 form-inline" type="number" placeholder="가격 ex)10000" onblur="setOption1();">
+				
+				<!-- 실제 전송될 데이터 -->
+				<input type="hidden" name="option" value="">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<label class="select option_name2">성인</label>&nbsp;&nbsp;&nbsp;
+				<input class="form-input option_price2 form-inline" type="number" placeholder="가격 ex)10000" onblur="setOption2();">
+				
+				<input type="hidden" name="option" value="">
+			</div>
+			<div class="row-emptyy"></div>
+			<div class="row">
+				<!-- 사용자에게 보여줄 화면 : 여기서 값이 입력되면 위의 태그로 자동 전송 -->
+				<label class="select option_name3">아동</label>&nbsp;&nbsp;
+				<input class="form-input option_price3 form-inline" type="number" placeholder="가격 ex)10000" onblur="setOption3();">
+				
+				<!-- 실제 전송될 데이터 -->
+				<input type="hidden" name="option" value="">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<label class="select option_name4">반려견</label>&nbsp;
+				<input class="form-input option_price4 form-inline" type="number" placeholder="가격 ex)10000 (선택)" onblur="setOption4();">
+				
+				<input type="hidden" name="option" value="">
+			</div>
+			<div class="row-emptyy"></div><hr>
+			<div class="row-emptyy"></div>
+			<div class="row center">
+				<label>펜션 시설</label>
+			</div>
+			<div class="row-empty"></div>
+			<div class="row-empty"></div>
+			<div class="row-empty"></div>
+			<div class="row">
+                <input class="select-item form-inline ck swim" type="checkbox" name="option" id="swim" onchange="plusswim();" value="">
+        		<label for="swim">수영장</label>
+        		<input class="select-item form-inline ck" type="checkbox" name="option" id="foot" onchange="plusfoot();">
+        		<label for="foot">족구장</label>
+        		<input class="select-item form-inline ck" type="checkbox" name="option" id="sing" onchange="plussing();">
+        		<label for="sing">노래방</label>
+        		<input class="select-item form-inline ck" type="checkbox" name="option" id="tak"  onchange="plustak();">
+        		<label for="tak">탁구장</label>
+        		<input class="select-item form-inline ck" type="checkbox" name="option" id="public_bbq" value="" onchange="plusPublic();">
+        		<label for="public_bbq">공용 바베큐장</label>
+        		<input class="select-item form-inline ck" type="checkbox" name="option" id="private_bbq" value="" onchange="plusPrivate();">
+        		<label for="private_bbq">개별 바베큐</label>
+			</div>
+			<div class="row-empty"></div>
+			<div class="row-empty"></div>
+			<div class="row-empty"></div><hr>
+			<div class="row-empty"></div>
 			<div class="row">
 				<label>펜션 사진 등록</label><br>
 				<div class="row-empty"></div>
-				<input type="file" name="pension_image" multiple accept=".jpg,.png,.gif">
+				<input type="file" name="pension_image" multiple accept=".jpg,.png,.gif" onchange="preview();">
+				<div class="row-empty"></div>
+				<div class="preview-wrap"></div>
 			</div>
+			<div class="row-empty"></div>
 			<div class="row-empty"></div>
 			<div class="row">
 				<input class= "form-btn" type="submit" value="등록하기">
@@ -105,6 +333,4 @@
 			<div class="row"></div>
 		</form>
 	</article>
-
-
 <jsp:include page="/template/footer.jsp"></jsp:include>

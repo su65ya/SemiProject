@@ -11,6 +11,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import semi.beans.dto.PensionDto;
+import semi.beans.dto.PensionInfoDto;
 import semi.beans.dto.SellerDto;
 
 public class PensionDao {
@@ -28,56 +29,55 @@ public class PensionDao {
 
 	// 연결메소드
 	public Connection getConnection() throws Exception {
-//		Class.forName("oracle.jdbc.OracleDriver");
-//		return DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","c##kh","c##kh");
 		return src.getConnection();
 	}
 
-	
-	//펜션 등록 메소드
-	public void regist(PensionDto pdto) throws Exception{
+	// 펜션 등록 메소드
+	public void regist(PensionDto pdto) throws Exception {
 		Connection con = getConnection();
-		String sql = "INSERT INTO pension VALUES(pension_seq.nextval,?,?,?,?,?,sysdate,?,?)";
+		String sql = "INSERT INTO pension VALUES(?,?,?,?,?,?,sysdate,?,?)";
 		PreparedStatement ps = con.prepareStatement(sql);
-		
-		ps.setInt(1, pdto.getPension_seller_no());
-		ps.setString(2, pdto.getPension_name());
-		ps.setString(3, pdto.getPension_post());
-		ps.setString(4, pdto.getPension_basic_addr());
-		ps.setString(5, pdto.getPension_detail_addr());
-		ps.setString(6, pdto.getPension_phone());
-		ps.setString(7, pdto.getPension_intro());
-		
+
+		ps.setInt(1, pdto.getPension_no());
+		ps.setInt(2, pdto.getPension_seller_no());
+		ps.setString(3, pdto.getPension_name());
+		ps.setString(4, pdto.getPension_post());
+		ps.setString(5, pdto.getPension_basic_addr());
+		ps.setString(6, pdto.getPension_detail_addr());
+		ps.setString(7, pdto.getPension_phone());
+		ps.setString(8, pdto.getPension_intro());
+
 		ps.execute();
 		con.close();
 	}
-	
-	//펜션 시퀀스 미리 생성 메소드
-	public int getSequence() throws Exception{
+
+	// 펜션 시퀀스 미리 생성 메소드
+	public int getSequence() throws Exception {
 		Connection con = getConnection();
-		
+
 		String sql = "SELECT pension_seq.nextval FROM dual";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 		rs.next();
 		int seq = rs.getInt(1);
-		
+
 		con.close();
-		
+
 		return seq;
 	}
-	
-	//펜션 리스트 메소드
-	public List<PensionDto> getList() throws Exception{
+
+	// 펜션 리스트 메소드
+	public List<PensionDto> getList(int pension_seller_no) throws Exception {
 		Connection con = getConnection();
-		
-		String sql = "SELECT * FROM pension";
-		
+
+		String sql = "SELECT * FROM pension WHERE pension_seller_no =? ORDER BY pension_no ASC";
+
 		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, pension_seller_no);
 		ResultSet rs = ps.executeQuery();
-		
+
 		List<PensionDto> list = new ArrayList<>();
-		while(rs.next()) {
+		while (rs.next()) {
 			PensionDto pdto = new PensionDto();
 			pdto.setPension_no(rs.getInt("pension_no"));
 			pdto.setPension_seller_no(rs.getInt("pension_seller_no"));
@@ -88,46 +88,91 @@ public class PensionDao {
 			pdto.setPension_phone(rs.getString("pension_phone"));
 			pdto.setPension_regist_date(rs.getString("pension_regist_date"));
 			pdto.setPension_intro(rs.getString("pension_intro"));
-			
+
 			list.add(pdto);
 		}
-		
+
 		con.close();
 		return list;
-		
+
 	}
-	
-	//펜션 삭제
-	public void delete(int pension_no)throws Exception{
+
+	// 펜션 삭제
+	public void delete(int pension_no) throws Exception {
 		Connection con = getConnection();
 		String sql = "DELETE pension WHERE pension_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, pension_no);
 		ps.execute();
-		
+
 		con.close();
 	}
-	
-	//펜션 단일조회 메소드
-	public PensionDto get(int pension_no) throws Exception {
+
+	// 펜션 단일조회 메소드
+//	public PensionDto get(int pension_no) throws Exception {
+//		Connection con = getConnection();
+//		
+//		String sql = "select * from pension where pension_no = ?";
+//		PreparedStatement ps = con.prepareStatement(sql);
+//		ps.setInt(1, pension_no);
+//		ResultSet rs = ps.executeQuery();
+//		
+//		PensionDto pdto;
+//		if (rs.next()) {
+//			pdto = new PensionDto(rs);
+//		}else {
+//			pdto=null;
+//		}
+//		
+//		con.close();
+//		return pdto;
+//	}
+
+	public PensionInfoDto get(int pension_no) throws Exception {
 		Connection con = getConnection();
-		
-		String sql = "select * from pension where pension_no = ?";
+
+		String sql = "SELECT * FROM pension_info WHERE pension_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
+
 		ps.setInt(1, pension_no);
 		ResultSet rs = ps.executeQuery();
 		
-		PensionDto pdto;
-		if (rs.next()) {
-			pdto = new PensionDto(rs);
+		PensionInfoDto pidto;
+		if(rs.next()) {
+			pidto = new PensionInfoDto();
+			pidto.setPension_no(pension_no);
+			pidto.setPension_seller_no(rs.getInt("pension_seller_no"));
+			pidto.setSeller_id(rs.getString("seller_id"));
+			pidto.setPension_name(rs.getString("pension_name"));
+			pidto.setPension_post(rs.getString("pension_post"));
+			pidto.setPension_basic_addr(rs.getString("pension_basic_addr"));
+			pidto.setPension_detail_addr(rs.getString("pension_detail_addr"));
+			pidto.setPension_intro(rs.getString("pension_intro"));
+			pidto.setPension_phone(rs.getString("pension_phone"));
+			pidto.setPension_regist_date(rs.getString("pension_regist_date"));
+			
 		}else {
-			pdto=null;
+			pidto = null;
 		}
-		
 		con.close();
-		return pdto;
+		return pidto;
 	}
-	
-	
-	//펜션 수정
+
+	// 펜션 정보 수정
+	public void edit(PensionDto pdto) throws Exception {
+		Connection con = getConnection();
+		String sql = "UPDATE pension SET pension_name=? , pension_post=?, pension_basic_addr=?,pension_detail_addr=?,pension_phone=?,pension_intro=? WHERE pension_no=?";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, pdto.getPension_name());
+		ps.setString(2, pdto.getPension_post());
+		ps.setString(3, pdto.getPension_basic_addr());
+		ps.setString(4, pdto.getPension_detail_addr());
+		ps.setString(5, pdto.getPension_phone());
+		ps.setString(6, pdto.getPension_intro());
+		ps.setInt(7, pdto.getPension_no());
+
+		ps.execute();
+		con.close();
+	}
 }

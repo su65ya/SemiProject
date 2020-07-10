@@ -7,15 +7,19 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(urlPatterns = "/member/logout.do")
 public class MemberLogoutServlet extends HttpServlet{
 	
 	@Override
-	public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
-		req.getSession().removeAttrubute("userinfo"); //삭제
+	public void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		resp.sendRedirect(req.getContextPath());
+		req.getSession().removeAttribute("userinfo"); //삭제
+		
+		resp.sendRedirect(req.getContextPath()); // 루트
+		
 	}
 
 }
