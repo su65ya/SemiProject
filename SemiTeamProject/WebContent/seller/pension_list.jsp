@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@page import="semi.beans.dto.PensionOptionDto"%>
 <%@page import="semi.beans.dao.PensionOptionDao"%>
 <%@page import="semi.beans.dto.PenImgViewDto"%>
@@ -5,8 +7,6 @@
 <%@page import="semi.beans.dao.PensionDao"%>
 <%@page import="semi.beans.dto.PensionDto"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <jsp:include page = "/template/nav.jsp"></jsp:include>
 
 <%
@@ -59,6 +59,7 @@
 					<td><a href="room_regist.jsp?pension_no=<%= pdto.getPension_no()%>">객실등록</a></td>
 				</tr>
 				
+				<!-- 옵션에 따른 아이콘  표시 -->
 				<tr><td colspan="6" height="50px"  class="left">
 					<%
 					List<PensionOptionDto> optionList = podao.getList(pdto.getPension_no());

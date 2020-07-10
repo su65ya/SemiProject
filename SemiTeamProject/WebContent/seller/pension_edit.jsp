@@ -1,15 +1,9 @@
-<<<<<<< HEAD
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<jsp:include page="/template/nav.jsp"></jsp:include>
-=======
 <%@page import="semi.beans.dto.PensionImageDto"%>
 <%@page import="java.util.List"%>
 <%@page import="semi.beans.dao.PensionImageDao"%>
 <%@page import="semi.beans.dto.PensionInfoDto"%>
 <%@page import="semi.beans.dto.PensionOptionDto"%>
 <%@page import="semi.beans.dao.PensionOptionDao"%>
->>>>>>> branch 'yeonjae' of https://github.com/su65ya/SemiProject
 <%@page import="semi.beans.dao.PensionDao"%>
 <%@page import="semi.beans.dto.PensionDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -21,11 +15,15 @@
 	PensionInfoDto pdto = pdao.get(pension_no);
     
 	PensionOptionDao podao = new PensionOptionDao();
-	PensionOptionDto podto = podao.get(pension_no);
-	
 	
 	PensionImageDao pidao = new PensionImageDao();
 	List<PensionImageDto> imageList = pidao.getList(pension_no);
+	
+	int fire_price = podao.getPrice(pension_no, "숯불");
+	int adult_price = podao.getPrice(pension_no, "성인");
+	int child_price = podao.getPrice(pension_no, "아동");
+	int dog_price = podao.getPrice(pension_no, "반려견");
+	
     %>
             <style>
     	span{
@@ -153,31 +151,47 @@
 			<div class="row-empty"></div>
 			<div class="row-empty"></div>
 			<div class="row">
-				<!-- 사용자에게 보여줄 화면 : 여기서 값이 입력되면 위의 태그로 자동 전송 -->
+				<%if(fire_price!=-1){ %>
 				<label class="select option_name1">숯불</label>&nbsp;&nbsp;
-				<input class="form-input option_price1 form-inline" type="number" onblur="setOption1();">
-				
-				<!-- 실제 전송될 데이터 -->
+				<input class="form-input option_price1 form-inline" type="number" value="<%=fire_price %>" onblur="setOption1();">
 				<input type="hidden" name="option" value="">
+				<%}else{ %>
+				<label class="select option_name1">숯불</label>&nbsp;&nbsp;
+				<input class="form-input option_price1 form-inline" type="number" placeholder="가격 ex)10000" onblur="setOption1();">
+				<input type="hidden" name="option" value="">
+				<%} %>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<%if(adult_price!=-1){ %>
+				<label class="select option_name2">성인</label>&nbsp;&nbsp;&nbsp;
+				<input class="form-input option_price2 form-inline" type="number" value =<%=adult_price %> onblur="setOption2();">
+				<input type="hidden" name="option" value="">
+				<%}else{ %>
 				<label class="select option_name2">성인</label>&nbsp;&nbsp;&nbsp;
 				<input class="form-input option_price2 form-inline" type="number" placeholder="가격 ex)10000" onblur="setOption2();">
-				
 				<input type="hidden" name="option" value="">
+				<%} %>
 			</div>
 			<div class="row-emptyy"></div>
 			<div class="row">
-				<!-- 사용자에게 보여줄 화면 : 여기서 값이 입력되면 위의 태그로 자동 전송 -->
+				<%if(child_price!=-1){ %>
+				<label class="select option_name3">아동</label>&nbsp;&nbsp;
+				<input class="form-input option_price3 form-inline" type="number" value="<%=child_price %>" onblur="setOption3();">
+				<input type="hidden" name="option" value="">
+				<%}else{ %>
 				<label class="select option_name3">아동</label>&nbsp;&nbsp;
 				<input class="form-input option_price3 form-inline" type="number" placeholder="가격 ex)10000" onblur="setOption3();">
-				
-				<!-- 실제 전송될 데이터 -->
 				<input type="hidden" name="option" value="">
+				<%} %>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<%if(dog_price!=-1){ %>
 				<label class="select option_name4">반려견</label>&nbsp;
-				<input class="form-input option_price4 form-inline" type="number" placeholder="가격 ex)10000 (선택)" onblur="setOption4();">
-				
+				<input class="form-input option_price4 form-inline" type="number" value="<%=dog_price %>" onblur="setOption4();">
 				<input type="hidden" name="option" value="">
+				<%}else{ %>
+				<label class="select option_name4">반려견</label>&nbsp;
+				<input class="form-input option_price4 form-inline" type="number" placeholder="가격 ex)10000" onblur="setOption4();">
+				<input type="hidden" name="option" value="">
+				<%} %>
 			</div>
 			<div class="row-emptyy"></div><hr>
 			<div class="row-emptyy"></div>
