@@ -1,6 +1,15 @@
+<<<<<<< HEAD
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<jsp:include page="/template/nav.jsp"></jsp:include>
+=======
+<%@page import="semi.beans.dto.PensionImageDto"%>
+<%@page import="java.util.List"%>
+<%@page import="semi.beans.dao.PensionImageDao"%>
 <%@page import="semi.beans.dto.PensionInfoDto"%>
 <%@page import="semi.beans.dto.PensionOptionDto"%>
 <%@page import="semi.beans.dao.PensionOptionDao"%>
+>>>>>>> branch 'yeonjae' of https://github.com/su65ya/SemiProject
 <%@page import="semi.beans.dao.PensionDao"%>
 <%@page import="semi.beans.dto.PensionDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -13,6 +22,10 @@
     
 	PensionOptionDao podao = new PensionOptionDao();
 	PensionOptionDto podto = podao.get(pension_no);
+	
+	
+	PensionImageDao pidao = new PensionImageDao();
+	List<PensionImageDto> imageList = pidao.getList(pension_no);
     %>
             <style>
     	span{
@@ -198,7 +211,13 @@
 				<input type="file" name="pension_image" multiple accept=".jpg,.png,.gif">
 			</div>
 			<div class="row-empty"></div>
+			<div class="row">
+			<%for(PensionImageDto pidto : imageList){ %>
+				<img src="D:/upload/pension/pen_image_no=<%=pidto.getPen_image_no()%>" width="50" height="50">
+			<%} %>
+			</div>
 			<div class="row right">
+			
 				<input class= "form-btn form-inline center" type="submit" value="수정하기">
 				<a href="pension_list.jsp">
 					<input class="form-btn form-inline center" type="button" value="목록보기">
@@ -207,4 +226,5 @@
 			<div class="row"></div>
 		</form>
 	</article>
+
 <jsp:include page="/template/footer.jsp"></jsp:include>

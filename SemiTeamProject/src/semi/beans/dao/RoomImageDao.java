@@ -2,16 +2,22 @@ package semi.beans.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.sun.org.apache.regexp.internal.recompile;
+
+import semi.beans.dto.PensionImageDto;
 import semi.beans.dto.RoomImageDto;
 
 public class RoomImageDao {
 	private static DataSource src;
-	
+
 	static {
 		try {
 			Context ctx = new InitialContext();// 탐색파일
@@ -21,17 +27,19 @@ public class RoomImageDao {
 			e.printStackTrace();
 		}
 	}
-	//연결메소드
+
+	// 연결메소드
 	public Connection getConnection() throws Exception {
 		return src.getConnection();
 	}
-	//사진저장메소드
-	public void save(RoomImageDto ridto) throws Exception{
+
+	// 사진저장메소드
+	public void save(RoomImageDto ridto) throws Exception {
 		Connection con = getConnection();
-		
-		String sql="INSERT INTO room_image VALUES(?,?,?,?,?)";
+
+		String sql = "INSERT INTO room_image VALUES(?,?,?,?,?)";
 		PreparedStatement ps = con.prepareStatement(sql);
-		
+
 		ps.setInt(1, ridto.getRoom_image_no());
 		ps.setInt(2, ridto.getRoom_image_room_no());
 		ps.setString(3, ridto.getRoom_image_name());
@@ -40,4 +48,7 @@ public class RoomImageDao {
 		ps.execute();
 		con.close();
 	}
+
+	
+
 }

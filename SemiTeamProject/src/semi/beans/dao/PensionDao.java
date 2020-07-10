@@ -10,6 +10,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import oracle.jdbc.proxy.annotation.Pre;
+import semi.beans.dto.PenImgViewDto;
 import semi.beans.dto.PensionDto;
 import semi.beans.dto.PensionInfoDto;
 import semi.beans.dto.SellerDto;
@@ -96,6 +98,35 @@ public class PensionDao {
 		return list;
 
 	}
+	
+	//펜션 이미지뷰 포함 목록 메소드
+	public PenImgViewDto getListWithImg(int pension_no)throws Exception{
+		Connection con = getConnection();
+		String sql = "SELECT * FROM pen_img WHERE pension_no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, pension_no);
+		ResultSet rs = ps.executeQuery();
+
+		PenImgViewDto viewDto;
+		if(rs.next()) {
+			viewDto  = new PenImgViewDto();
+			viewDto.setPension_seller_no(rs.getInt("pension_seller_no"));
+			viewDto.setPension_no(rs.getInt("pension_no"));
+			viewDto.setPension_name(rs.getString("pension_name"));
+			viewDto.setPension_regist_date(rs.getString("pension_regist_date"));
+			viewDto.setPen_img_no(rs.getInt("pen_image_no"));
+			viewDto.setPen_image_pen_no(rs.getInt("pen_image_pen_no"));
+			viewDto.setPen_image_name(rs.getString("pen_image_name"));
+			viewDto.setPen_image_size(rs.getLong("pen_image_size"));
+			viewDto.setPen_image_type(rs.getString("pen_image_type"));
+
+		}else {
+			viewDto = null;
+		}
+		con.close();
+		return viewDto;
+		
+	}
 
 	// 펜션 삭제
 	public void delete(int pension_no) throws Exception {
@@ -128,6 +159,7 @@ public class PensionDao {
 //		return pdto;
 //	}
 
+	
 	public PensionInfoDto get(int pension_no) throws Exception {
 		Connection con = getConnection();
 

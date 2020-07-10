@@ -17,21 +17,25 @@
 	<table border="1" width="650">
 		<thead>
 			<tr>
+				<th>no</th>
 				<th>아이디 </th>
 				<th>이름</th>
 				<th>권한 </th>
-				<th>관리메뉴</th>
+				<th>상세정보</th>
 			</tr>
 			
 		</thead>
 		<tbody align="center">
 			<%for(MemberDto mdto : list) {%>
 			<tr>
+				<th><%=mdto.getMember_no()%></th>
 				<th><%=mdto.getMember_id() %></th>
 				<th><%=mdto.getMember_name()%></th>
 				<th><%=mdto.getMember_rate() %></th>
 				<th>
-					<a href="admin_member_detail.jsp?member_id=<%=mdto.getMember_id() %>">상세보기</a>
+					<a href="admin_member_detail.jsp?member_id=<%=mdto.getMember_id() %>">
+						<input type="button" value="상세정보보기">
+					</a>
 				</th>
 			</tr>
 			<%} %>
@@ -42,15 +46,14 @@
 	
 	<!-- 검색창 -->
 	<form action="admin_member_list.jsp" method="get">
-		<select>
-			<option>아이디</option>
-			<option>이름</option>	
+		<select name="type">
+			<option value="member_id">아이디</option>
+			<option value="member_name">이름</option>
+			<option value="member_rate">권한</option>
 		</select>
-		<%if (member_id == null) {%>
-		<input type="text" name="member_id" required>
-		<%} else {%>
-		<input type="text" name="member_id" required value="<%=member_id%>">
-		<%} %>
+
+
+		<input type="text" name="keyword" required placeholder="검색어 입력" >
 		<input type="submit" value="검색">
 	</form>
 	

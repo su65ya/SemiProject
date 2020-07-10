@@ -65,6 +65,8 @@ private static DataSource src;
 		con.close();
 	}
 	
+	
+	//객실 리스트 메소드
 	public List<RoomDto> getList() throws Exception{
 		Connection con = getConnection();
 		
@@ -82,6 +84,7 @@ private static DataSource src;
 		return list;
 	}
 	
+	//객실 삭제 메소드
 	public void delete(int room_no)throws Exception{
 		Connection con = getConnection();
 		
@@ -92,5 +95,24 @@ private static DataSource src;
 		
 		con.close();
 		
+	}
+	
+	//객실 단일조회 메소드
+	public RoomDto get(int pension_no) throws Exception{
+		Connection con = getConnection();
+		String sql = "SELECT * FROM room WHERE room_pension_no=?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, pension_no);
+		ResultSet rs = ps.executeQuery();
+		RoomDto rdto;
+		if(rs.next()) {
+			rdto = new RoomDto(rs);
+		}else {
+			rdto = null;
+		}
+		
+		con.close();
+		return rdto;
 	}
 }
