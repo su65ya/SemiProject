@@ -20,7 +20,7 @@
 		
 	<div class = "row">
 		<h4>
-			<a href="index.jsp">홈으로</a>
+			<a href="<%= request.getContextPath()%>">홈으로</a>
 		</h4>
 	</div>	
 	
