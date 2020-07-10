@@ -26,7 +26,7 @@
 				<tr>
 					<th>비밀번호</th>
 					<td class="left">
-						<a href="change_password.jsp">
+						<a href="#">
 						<input class="form-btn2" type="button"  value="비밀번호 변경">
 						</a>
 					</td>
@@ -73,7 +73,7 @@
 		</a>
 	</div>
 	<div class="row" style="float: right;">
-		<a href="change_info.jsp">
+		<a href="#">
 			<input class= "form-btn" style="width: 150px;" type="button" value="회원정보 수정">
 		</a>
 	</div>
