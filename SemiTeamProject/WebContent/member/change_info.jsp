@@ -43,13 +43,13 @@
 				<tr>
 					<th>생년월일</th>
 					<td class="left">
-						<input class="intext" type="text" name="member_birth" value="<%=user.getMember_birthdayFormat() %>" required>
+						<input class="intext" type="text" name="member_birth" value="<%=user.getMember_birth()) %>" required>
 					</td>
 				</tr>
 				<tr>
 					<th>생년월일</th>
 					<td class="left">
-						<input class="intext" type="text" name="member_birth" value="<%=user.getMember_birthdayFormat() %>" required>
+						<input class="intext" type="text" name="member_birth" value="<%=user.getMember_birth() %>" required>
 					</td>
 				</tr>
 				<tr>
