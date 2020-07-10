@@ -32,7 +32,6 @@ public class SellerRoomRegistServlet extends HttpServlet{
 			rdto.setOn_weekday(Integer.parseInt(req.getParameter("on_weekday")));
 			rdto.setOn_weekend(Integer.parseInt(req.getParameter("on_weekend")));
 			
-			
 			rdto.setAmenity(Integer.parseInt(req.getParameter("amenity")));
 			rdto.setMicrowave(Integer.parseInt(req.getParameter("microwave")));
 			rdto.setBed(Integer.parseInt(req.getParameter("bed")));

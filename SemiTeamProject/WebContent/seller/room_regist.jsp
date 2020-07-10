@@ -28,15 +28,19 @@
             for(var i in selectItem){
             	selectItem[i].checked = selectAll; 
         	   var check_count = document.getElementsByClassName("ck").length;
-        	   var checked=0;
+
                for (var i=0; i<check_count; i++) {
                    if (document.getElementsByClassName("ck")[i].checked == true) {
-                     	checked+=1;
-                     	document.getElementsByClassName("ck")[i].value=checked;
+
+                     	document.getElementsByClassName("ck")[i].value="1";
                    }
-                   else if(document.getElementsByClassName("ck")[i].checked == false){
+                   else if(!document.getElementsByClassName("ck")[i].checked){
                    	
-                   	document.getElementsByClassName("ck")[i].value=checked;
+                   	document.getElementsByClassName("ck")[i].value="0";
+                   	if(check_count==null){
+                		check_count.value="0";
+                	}
+                   	
                    }
              	}
             	
@@ -44,18 +48,19 @@
         }
         function value_check() {
             var check_count = document.getElementsByClassName("ck").length;
-     		var checked=0;
+
             for (var i=0; i<check_count; i++) {
                 if (document.getElementsByClassName("ck")[i].checked == true) {
-                  	checked+=1;
-                  	document.getElementsByClassName("ck")[i].value=checked;
+                  	document.getElementsByClassName("ck")[i].value="1";
                 }
-                else if(document.getElementsByClassName("ck")[i].checked == false){
+                else if(!document.getElementsByClassName("ck")[i].checked){
                 	
-                	document.getElementsByClassName("ck")[i].value=checked;
-                }
-          	}
-        }
+                		return value;
+		             }
+            }
+         }
+          
+        
         
         function preview(){
             var fileTag = document.querySelector("input[name=room_image]");
