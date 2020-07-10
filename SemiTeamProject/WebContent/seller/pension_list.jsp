@@ -45,8 +45,8 @@
 					<td><%=pdto.getPension_name() %></td>
 					<td><%=pdto.getPension_regist_date() %></td>
 					<td><a href="pension_detail.jsp?pension_no=<%=pdto.getPension_no()%>">상세보기</a></td>
-					<td><a href="room_regist.jsp?pension_no=<%=pdto.getPension_no()%>">객실목록</a></td>
-					<td><a href="room_regist.jsp?pension_no=<%=pdto.getPension_no()%>">객실등록</a></td>
+					<td><a href="room_list.jsp?pension_no=<%=pdto.getPension_no()%>">객실목록</a></td>
+					<td><a href="room_regist.jsp?pension_no=<%= pdto.getPension_no()%>">객실등록</a></td>
 				</tr>
 				<%} %>
 			</tbody>
