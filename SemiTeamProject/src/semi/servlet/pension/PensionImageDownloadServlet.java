@@ -2,6 +2,7 @@ package semi.servlet.pension;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,11 +38,12 @@ public class PensionImageDownloadServlet extends HttpServlet {
 //			- 위의 명령은 주소에 포함될 수 없는 형태의 글자들(%, ? 등)을 가능한 형태로 변환해준다.
 			
 			resp.setHeader("Content-Type", "application/octet-stream; charset=UTF-8");
+			resp.setHeader("Content-Disposition", "attachment; filename=\""+URLEncoder.encode(pidto.getPen_image_name(), "UTF-8")+"\"");
 ////			resp.setHeader("Content-Disposition", "attachment; filename="+bfdto.getBoard_file_name());
 //			resp.setHeader("Content-Disposition", "attachment; filename=\""+URLEncoder.encode(bfdto.getBoard_file_name(), "UTF-8")+"\"");
-//			resp.setHeader("Content-Length", String.valueOf(bfdto.getBoard_file_size()));
+			resp.setHeader("Content-Length", String.valueOf(pidto.getPen_image_size()));
 			
-			File target = new File("D:/upload/jsphome/board", String.valueOf(pidao.get(pension_no)));
+			File target = new File("D:/upload/pension", String.valueOf(pidao.get(pension_no)));
 			byte[] data = FileUtils.readFileToByteArray(target);//파일 데이터 로드
 			resp.getOutputStream().write(data);//사용자
 		} catch (Exception e) {
