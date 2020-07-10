@@ -8,7 +8,7 @@
     		color:red;
     		font-size:16;
     	}
-    	label{
+    	label{S
     		font-size:13;
     	}
     	.ck + label {

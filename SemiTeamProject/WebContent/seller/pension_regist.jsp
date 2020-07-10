@@ -1,9 +1,9 @@
+<%@page import="semi.beans.dto.PensionImageDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%
-    	String option_name=request.getParameter("option_name");
-   		String option_price = request.getParameter("option_price");
-   		String option = option_name+"-"+option_price;
+    
+   		
     %>
         <style>
     	span{
@@ -321,7 +321,7 @@
 			<div class="row">
 				<label>펜션 사진 등록</label><br>
 				<div class="row-empty"></div>
-				<input type="file" name="pension_image" multiple accept=".jpg,.png,.gif" onchange="preview();">
+				<input type="file"  name="pension_image" multiple accept=".jpg,.png,.gif" onchange="preview();">
 				<div class="row-empty"></div>
 				<div class="preview-wrap"></div>
 			</div>
