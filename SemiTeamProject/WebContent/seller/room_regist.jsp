@@ -8,7 +8,7 @@
     		color:red;
     		font-size:16;
     	}
-    	label{S
+    	label{
     		font-size:13;
     	}
     	.ck + label {
@@ -28,19 +28,15 @@
             for(var i in selectItem){
             	selectItem[i].checked = selectAll; 
         	   var check_count = document.getElementsByClassName("ck").length;
-
+        	   var checked=0;
                for (var i=0; i<check_count; i++) {
                    if (document.getElementsByClassName("ck")[i].checked == true) {
-
-                     	document.getElementsByClassName("ck")[i].value="1";
+                     	checked+=1;
+                     	document.getElementsByClassName("ck")[i].value=checked;
                    }
-                   else if(!document.getElementsByClassName("ck")[i].checked){
+                   else if(document.getElementsByClassName("ck")[i].checked == false){
                    	
-                   	document.getElementsByClassName("ck")[i].value="0";
-                   	if(check_count==null){
-                		check_count.value="0";
-                	}
-                   	
+                   	document.getElementsByClassName("ck")[i].value=checked;
                    }
              	}
             	
@@ -48,19 +44,18 @@
         }
         function value_check() {
             var check_count = document.getElementsByClassName("ck").length;
-
+     		var checked=0;
             for (var i=0; i<check_count; i++) {
                 if (document.getElementsByClassName("ck")[i].checked == true) {
-                  	document.getElementsByClassName("ck")[i].value="1";
+                  	checked+=1;
+                  	document.getElementsByClassName("ck")[i].value=checked;
                 }
-                else if(!document.getElementsByClassName("ck")[i].checked){
+                else if(document.getElementsByClassName("ck")[i].checked == false){
                 	
-                		return value;
-		             }
-            }
-         }
-          
-        
+                	document.getElementsByClassName("ck")[i].value=checked;
+                }
+          	}
+        }
         
         function preview(){
             var fileTag = document.querySelector("input[name=room_image]");
