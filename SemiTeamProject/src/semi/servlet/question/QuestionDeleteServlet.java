@@ -17,10 +17,12 @@ public class QuestionDeleteServlet extends HttpServlet{
 		try {
 			
 			int que_no = Integer.parseInt(req.getParameter("que_no"));
+			int que_pension_no = Integer.parseInt(req.getParameter("que_pension_no"));
 			QuestionDao qdao = new QuestionDao();
 			qdao.delete(que_no);
 			
-			resp.sendRedirect("question_list.jsp");
+			
+			resp.sendRedirect("question_list.jsp?que_pension_no="+ que_pension_no);
 			
 			
 		} catch (Exception e) {

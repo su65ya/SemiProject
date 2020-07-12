@@ -32,7 +32,7 @@
  					<td class="left"><%=pidto.getPension_no() %></td>
  				</tr>
  				<tr>
- 					<th>펜션등록자</th>
+ 					<th>펜션관리자</th>
  					<td class="left"><%=pidto.getSeller_id() %></td>
  				</tr>
  				<tr>
@@ -70,11 +70,10 @@
  		</div>
  		<div class="row-empty"></div>
  		<div class="row center a">
- 			<a href = "<%=request.getContextPath() %>/seller/password_check.jsp?go=<%=request.getContextPath() %>/seller/pension_edit.jsp?pension_no=<%=pension_no%>">수정하기</a>&nbsp;&nbsp;
- 			<a href = "room_regist.jsp">객실 등록</a>&nbsp;&nbsp;
- 			<a href = "<%=request.getContextPath() %>/seller/password_check.jsp?go=pension_delete.do?pension_no=<%=pension_no%>">펜션 삭제</a>&nbsp;&nbsp;
- 			<a href = "pension_list.jsp">목록보기</a>&nbsp;&nbsp;
- 			<a href = "<%= request.getContextPath() %>/question/question_list.jsp?que_pension_no=<%= pension_no %>">문의내역</a>
+ 			<a href = "<%= request.getContextPath() %>/reservation/res.jsp">예약하기</a>&nbsp;&nbsp;
+ 			<a href = "#">객실목록</a>&nbsp;&nbsp;
+ 			<a href = "search_pension_list.jsp">목록보기</a>&nbsp;&nbsp;
+ 			<a href = "<%= request.getContextPath() %>/question/question_list.jsp?que_pension_no=<%= pension_no %>">문의하기</a>
  		</div>
  	</article>
 

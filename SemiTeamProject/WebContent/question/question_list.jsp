@@ -1,3 +1,5 @@
+<%@page import="semi.beans.dto.SellerDto"%>
+<%@page import="semi.beans.dto.MemberDto"%>
 <%@page import="oracle.net.aso.e"%>
 <%@page import="semi.beans.dao.QuestionDao"%>
 <%@page import="semi.beans.dto.QuestionDto"%>
@@ -8,7 +10,11 @@
 
 
 <%
+	MemberDto mdto = (MemberDto) session.getAttribute("userinfo");
+	SellerDto sdto = (SellerDto) session.getAttribute("sellerinfo");
+
 	int que_pension_no = Integer.parseInt(request.getParameter("que_pension_no"));
+	
 
 	String type = request.getParameter("type");
 	String keyword = request.getParameter("keyword");
@@ -83,7 +89,7 @@
 </style>
 
 
-<article class = "w-50">
+<article class = "w-70">
 	
 	<div class="row-empty"></div>
 	
@@ -92,12 +98,25 @@
 	</div>
 	
 	<div class="row-empty"></div>
-	
+	<%-- 
+	<div class="row right">
+		<% if (mdto != null) { %>	
+			<a href="<%= request.getContextPath() %>/member/search_pension_derail.jsp?pension_no=<%= pension_no %>">
+				<input class="form-btn form-inline" type="button" value="펜션정보">
+			</a>
+		<%} else {%>
+			<a href="<%= request.getContextPath() %>/seller/pension_detail.jsp?pension_no=<%= que_pension_no %>">
+				<input class="form-btn form-inline" type="button" value="펜션정보">
+			</a>
+		<%} %>
+	</div>
+	 --%>
 	<table class="table table-sideopen table-hover">
 		<thead>
 			<tr>
 				<th>번호</th>
-				<th width="50%">제목</th>
+				<th>펜션</th>
+				<th width="40%">제목</th>
 				<th>작성자</th>
 				<th>작성일</th>
 				<th>조회수</th>
@@ -108,9 +127,11 @@
 			<% for (QuestionDto qdto : list) { %>			
 			<tr>
 				<td><%= qdto.getQue_no() %></td>
+				
+				<td><%= qdto.getQue_pension_no()%></td>
 
 				<td class="left">
-				
+					
 					<font color="red" size="2">
 					 	<% if(qdto.getQue_reply() != null) { %>
 					 		<span>답변 완료</span>					 		
@@ -153,9 +174,9 @@
 		<!-- 이전 -->
 		<% if (blockStart > 1) { %>
 			<%if (!isSearch) { %>
-				<a href="question_list.jsp?que_pension_no=<%= que_pension_no %>&page=<%= blockStart - 1 %>">&lt;</a>
+				<a href="question_list.jsp?que_pension_no=<%= que_pension_no %>&page=<%= blockStart - 1 %>">이전</a>
 			<%} else { %>
-				<a href="question_list.jsp?&que_pension_no=<%= que_pension_no %>page=<%= blockStart - 1 %>&type=<%= type %>&keyword=<%= keyword %>">&lt;</a>
+				<a href="question_list.jsp?&que_pension_no=<%= que_pension_no %>page=<%= blockStart - 1 %>&type=<%= type %>&keyword=<%= keyword %>">이전</a>
 			<%} %>
 		<%} %>
 		
@@ -171,9 +192,9 @@
 		<!-- 다음 -->
 		<% if (blockFinish < pageCount) { %>
 			<%if (!isSearch) { %>
-				<a href="question_list.jsp?que_pension_no=<%= que_pension_no %>&page=<%= blockFinish + 1 %>">&gt;</a>
+				<a href="question_list.jsp?que_pension_no=<%= que_pension_no %>&page=<%= blockFinish + 1 %>">다음</a>
 			<%} else { %>
-				<a href="question_list.jsp?que_pension_no=<%= que_pension_no %>&page=<%= blockFinish + 1 %>&type=<%= type %>&keyword=<%= keyword %>">&gt;</a>
+				<a href="question_list.jsp?que_pension_no=<%= que_pension_no %>&page=<%= blockFinish + 1 %>&type=<%= type %>&keyword=<%= keyword %>">다음</a>
 			<%} %>
 		<%} %>
 		

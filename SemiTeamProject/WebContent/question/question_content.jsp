@@ -58,6 +58,14 @@
 	</div>	
 	
 	<div class="row">
+	
+		<font color="red" size="2">
+			<% if(qdto.getQue_reply() != null) { %>
+				<span>답변 완료</span>					 		
+			<%} %>
+		</font>
+		
+	
 		<font size="5">
 			<font color="gray" size="4">
 			<% if (qdto.getQue_head() != null) { %>
@@ -111,7 +119,7 @@
 				<input class="form-btn form-inline" type="button" value="문의수정">
 			</a>
 		<%} %>
-		<a href="question_delete.do?que_no=<%= que_no %>">
+		<a href="question_delete.do?que_pension_no=<%= que_pension_no %>&que_no=<%= que_no %>">
 			<input class="form-btn form-inline" type="button" value="삭제">
 		</a>
 		<a href="question_write.jsp">
