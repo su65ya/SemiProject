@@ -151,47 +151,27 @@
 			<div class="row-empty"></div>
 			<div class="row-empty"></div>
 			<div class="row">
-				<%if(fire_price!=-1){ %>
+			<!-- 숯불  -->
 				<label class="select option_name1">숯불</label>&nbsp;&nbsp;
-				<input class="form-input option_price1 form-inline" type="number" value="<%=fire_price %>" onblur="setOption1();">
+				<input class="form-input option_price1 form-inline" type="number" <%if(fire_price!=-1){ %>value="<%=fire_price %>" <%}else{ %>placeholder="가격 ex)10000" <%} %>onblur="setOption1();">
 				<input type="hidden" name="option" value="">
-				<%}else{ %>
-				<label class="select option_name1">숯불</label>&nbsp;&nbsp;
-				<input class="form-input option_price1 form-inline" type="number" placeholder="가격 ex)10000" onblur="setOption1();">
-				<input type="hidden" name="option" value="">
-				<%} %>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<%if(adult_price!=-1){ %>
+			<!-- 성인  -->
 				<label class="select option_name2">성인</label>&nbsp;&nbsp;&nbsp;
-				<input class="form-input option_price2 form-inline" type="number" value =<%=adult_price %> onblur="setOption2();">
+				<input class="form-input option_price2 form-inline" type="number" <%if(adult_price!=-1){ %>value =<%=adult_price %> <%}else{ %>placeholder="가격 ex)10000" <%} %>onblur="setOption2();">
 				<input type="hidden" name="option" value="">
-				<%}else{ %>
-				<label class="select option_name2">성인</label>&nbsp;&nbsp;&nbsp;
-				<input class="form-input option_price2 form-inline" type="number" placeholder="가격 ex)10000" onblur="setOption2();">
-				<input type="hidden" name="option" value="">
-				<%} %>
 			</div>
 			<div class="row-emptyy"></div>
 			<div class="row">
-				<%if(child_price!=-1){ %>
+			<!-- 아동  -->
 				<label class="select option_name3">아동</label>&nbsp;&nbsp;
-				<input class="form-input option_price3 form-inline" type="number" value="<%=child_price %>" onblur="setOption3();">
+				<input class="form-input option_price3 form-inline" type="number" <%if(child_price!=-1){ %> value="<%=child_price %>"  <%}else{ %>placeholder="가격 ex)10000" <%} %> onblur="setOption3();">
 				<input type="hidden" name="option" value="">
-				<%}else{ %>
-				<label class="select option_name3">아동</label>&nbsp;&nbsp;
-				<input class="form-input option_price3 form-inline" type="number" placeholder="가격 ex)10000" onblur="setOption3();">
-				<input type="hidden" name="option" value="">
-				<%} %>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<%if(dog_price!=-1){ %>
+			<!-- 반려견 -->
 				<label class="select option_name4">반려견</label>&nbsp;
-				<input class="form-input option_price4 form-inline" type="number" value="<%=dog_price %>" onblur="setOption4();">
+				<input class="form-input option_price4 form-inline" type="number" <%if(dog_price!=-1){ %> value="<%=dog_price %>" <%}else{ %> placeholder="가격 ex)10000" <%} %> onblur="setOption4();">
 				<input type="hidden" name="option" value="">
-				<%}else{ %>
-				<label class="select option_name4">반려견</label>&nbsp;
-				<input class="form-input option_price4 form-inline" type="number" placeholder="가격 ex)10000" onblur="setOption4();">
-				<input type="hidden" name="option" value="">
-				<%} %>
 			</div>
 			<div class="row-emptyy"></div><hr>
 			<div class="row-emptyy"></div>
@@ -202,7 +182,7 @@
 			<div class="row-empty"></div>
 			<div class="row-empty"></div>
 			<div class="row">
-                <input class="select-item form-inline ck swim" type="checkbox" name="option" id="swim" onchange="plusswim();" value="">
+                <input class="select-item form-inline ck swim" type="checkbox" name="option" id="swim" onchange="plusswim();">
         		<label for="swim">수영장</label>
         		<input class="select-item form-inline ck" type="checkbox" name="option" id="foot" onchange="plusfoot();">
         		<label for="foot">족구장</label>
