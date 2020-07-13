@@ -15,7 +15,7 @@ import org.apache.commons.io.FileUtils;
 import semi.beans.dao.PensionImageDao;
 import semi.beans.dto.PensionImageDto;
 
-@WebServlet(urlPatterns = "/seller/download.do")
+@WebServlet(urlPatterns = {"/seller/download.do","/member/download.do"})
 public class PensionImageDownloadServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

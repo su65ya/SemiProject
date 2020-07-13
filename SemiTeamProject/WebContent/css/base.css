@@ -116,13 +116,13 @@
 		
 		/* 확장 스타일 3번 : .table-sideopen 으로 옆트임 테이블 구현 */
 		.table.table-sideopen {
-		    border-top: 3px solid black;
-		    border-bottom: 3px solid black;
+		    border-top: 2px solid black;
+		    border-bottom: 2px solid black;
 		    border-collapse: collapse;
 		}
 		.table.table-sideopen > tbody {
-		    border-top: 3px solid black;
-		    border-bottom: 3px solid black;
+		    border-top: 2px solid black;
+		    border-bottom: 2px solid black;
 		}
 		.table.table-sideopen > tbody > tr {
 			
