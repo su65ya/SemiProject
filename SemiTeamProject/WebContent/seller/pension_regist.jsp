@@ -30,6 +30,11 @@
         }
     </style>
     <script>
+    	function removeHidden() {
+			var hidden = document.querySelectorAll("input[type=hidden]");
+			
+			
+		}
         function changeCheckbox(){
             
             var selectAll = document.querySelector(".select-all").checked;
@@ -129,13 +134,18 @@
     	var option_priceTag = document.querySelector(".option_price1");
     	
     	var hidden = document.querySelector(".option_price1 + input[type=hidden]");
-    	
+    	var isInput;
     	if(option_priceTag.value){
+    		isInput = true;
     		hidden.value=option_nameTag.textContent+"-"+option_priceTag.value+"-0";
     	}else{
+    		isInput = false;
     		hidden.value="";
     	}
+    	
+    	return isInput;
     }
+    
     function setOption2(){
     	var option_nameTag = document.querySelector(".option_name2");
     	var option_priceTag = document.querySelector(".option_price2");
@@ -221,6 +231,7 @@
     		swim.value = "";
     	}
     }
+    
 </script>
 	<article class="w-40">
 		<form action="pension_regist.do" method="post"  enctype="multipart/form-data">
@@ -265,18 +276,18 @@
 				<label>옵션</label>
 			</div>
 			<div class="row-empty"></div>
-			<div class="row">
+			<div class="row option1">
 				<!-- 사용자에게 보여줄 화면 : 여기서 값이 입력되면 위의 태그로 자동 전송 -->
 				<label class="select option_name1">숯불</label>&nbsp;&nbsp;
 				<input class="form-input option_price1 form-inline" type="number" placeholder="가격 ex)10000" onblur="setOption1();">
 				
 				<!-- 실제 전송될 데이터 -->
-				<input type="hidden" name="option" value="">
+				<input type="hidden" class = "fire" name="option" value="">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<label class="select option_name2">성인</label>&nbsp;&nbsp;&nbsp;
 				<input class="form-input option_price2 form-inline" type="number" placeholder="가격 ex)10000" onblur="setOption2();">
 				
-				<input type="hidden" name="option" value="">
+				<input type="hidden" class="adult" name="option" value="">
 			</div>
 			<div class="row-emptyy"></div>
 			<div class="row">
@@ -328,7 +339,7 @@
 			<div class="row-empty"></div>
 			<div class="row-empty"></div>
 			<div class="row">
-				<input class= "form-btn" type="submit" value="등록하기">
+				<input class= "form-btn" type="submit" value="등록하기" onsubmit="removeHidden();">
 			</div>
 			<div class="row"></div>
 		</form>

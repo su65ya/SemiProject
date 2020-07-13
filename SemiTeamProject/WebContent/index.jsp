@@ -3,6 +3,7 @@
 
 <jsp:include page="/template/nav.jsp"></jsp:include>
 			
+<%-- <jsp:include page="/template/search.jsp"></jsp:include>			 --%>
 			
 			
 			<article>
@@ -10,6 +11,5 @@
 					<img src="https://placehold.it/1280x1000">
 				</div>
 			</article>
-<jsp:include page="/template/Search.jsp"></jsp:include>			
 			
 <jsp:include page="/template/footer.jsp"></jsp:include>
