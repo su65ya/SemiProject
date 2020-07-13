@@ -1,13 +1,23 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="semi.beans.dto.MemberDto"%>
 <%@page import="java.util.List"%>
 <%@page import="semi.beans.dao.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	String member_id = request.getParameter("member_id");	
+	String type = request.getParameter("type");
+	String keyword = request.getParameter("keyword");
 
 	MemberDao mdao = new MemberDao();
-	List<MemberDto> list = mdao.search(member_id);
+	
+	//타입과 키워드가 없다면
+	List<MemberDto> list;
+	if( type == null || keyword == null ) {
+		list = new ArrayList<>();
+	}
+	else {
+		list = mdao.search(type, keyword);		
+	}
 %>
 <jsp:include page="/template/nav.jsp"></jsp:include>
 
@@ -56,6 +66,11 @@
 		<input type="text" name="keyword" required placeholder="검색어 입력" >
 		<input type="submit" value="검색">
 	</form>
+	
+	<hr>
+	
+	<h4>총 <%= list.size() %>개의 데이터 발견</h4>
+	
 	
 </div>
 

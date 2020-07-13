@@ -212,5 +212,30 @@ public class MemberDao {
 		con.close();
 		return list;
 	}
+	
+	//(관리자) 회원 검색 기능 (타입추가)
+	public List<MemberDto> search(String type, String keyword) throws Exception {
+		Connection con = getConnection();
+		
+		String sql = "SELECT * FROM member WHERE instr(#1, ?) > 0 ORDER BY #1 ASC";
+		sql = sql.replace("#1", type);
+		System.out.println("sql = " + sql);
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, keyword);
+		ResultSet rs = ps.executeQuery();
+		
+		List<MemberDto> list = new ArrayList<>();
+		while(rs.next()) {
+			MemberDto mdto = new MemberDto(rs);	
+			list.add(mdto);
+		}
+		con.close();
+		return list;
+	}
+	
+	
+	
+	
 }
 
