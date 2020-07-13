@@ -62,6 +62,24 @@ private static DataSource src;
 		return list;
 	}
 	
+	// 예약 단일 조회
+	public ReservationDto get(int res_no) throws Exception {
+		Connection con = getConnection();
+		
+		String sql = "select * from reservation where res_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, res_no);
+		ResultSet rs = ps.executeQuery();
+
+		ReservationDto rvdto = null;
+		if (rs.next()) {
+			rvdto = new ReservationDto(rs);
+		}
+		
+		con.close();
+		return rvdto;		
+	}
+	
 	
 	// 예약 등록 메소드
 	

@@ -149,11 +149,11 @@ public class QuestionDao {
 		ps.setInt(1, que_no);
 		ResultSet rs = ps.executeQuery();
 		
-		QuestionViewDto qdto = rs.next() ? new QuestionViewDto(rs) : null;
+		QuestionViewDto qvdto = rs.next() ? new QuestionViewDto(rs) : null;
 		
 		
 		con.close();
-		return qdto;
+		return qvdto;
 	}
 	
 	

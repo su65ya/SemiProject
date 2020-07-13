@@ -52,7 +52,7 @@
 				<tr>
 					<td><%= rvdto.getRes_date() %></td>
 					<td class="left">
-						<a href="#">
+						<a href="reservation_detail.jsp?res_no=<%= rvdto.getRes_no() %>">
 							<%= rvdto.getRes_room_no() %>
 						</a>
 					</td>
