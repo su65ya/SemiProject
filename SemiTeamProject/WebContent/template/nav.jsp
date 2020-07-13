@@ -49,7 +49,7 @@
 				<li><a href="<%= root %>/admin/info.jsp">내 정보</a></li>
 				<li><a href="<%= root %>/admin/admin_logout.do">로그아웃</a></li>
 				<li><a href="#">판매자 회원 관리</a></li>
-				<li><a href="#">사용자 회원관리</a></li>
+				<li><a href="<%= root %>/admin/admin_member_list.jsp">사용자 회원관리</a></li>
 				<li><a href="#">통계보기</a></li>
 			</ul>
 			<%}else if(sdto !=null){//판매자면 %>
@@ -69,6 +69,13 @@
 			</ul>
 			<%} %>
 		<%} %>
+<!-- 		<ul class="menuu"> -->
+<!-- 				<li><a href="#">업소관리</a></li> -->
+<!-- 				<li><a href="#">입점신청</a></li> -->
+<!-- 				<li><a href="#">펜션 찾기</a></li> -->
+<!-- 				<li><a href="#">내 예약 보기</a></li> -->
+<!-- 			</ul> -->
+		</nav>
 		<section>
 			<div class="row-empty"></div>
 			<div class="row-empty"></div>
