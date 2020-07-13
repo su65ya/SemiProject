@@ -86,7 +86,7 @@
 		</a>
 	</div>
 	<div class="row" style="float: right;">
-		<a href="check.jsp>change_info.jsp">
+		<a href="check.jsp?go=change_info.jsp">
 			<input class= "form-btn" style="width: 150px;" type="button" value="회원정보 수정">
 		</a>
 	</div>
