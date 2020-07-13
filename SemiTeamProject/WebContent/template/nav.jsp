@@ -18,9 +18,15 @@
 <meta charset="UTF-8">
 <title>index</title>
 <link rel="stylesheet" type="text/css" href="<%= root %>/css/base.css">
-	<style>
+<link rel="stylesheet" href="./css/swiper.min.css">
 
+	 <style>
+    .swiper-container {
+        width: 600px;
+        height: 300px;
+    }
     </style>
+    
 </head>
 <body>
 	<main>
