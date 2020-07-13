@@ -219,7 +219,6 @@ public class MemberDao {
 		
 		String sql = "SELECT * FROM member WHERE instr(#1, ?) > 0 ORDER BY #1 ASC";
 		sql = sql.replace("#1", type);
-		System.out.println("sql = " + sql);
 		
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, keyword);
@@ -234,6 +233,23 @@ public class MemberDao {
 		return list;
 	}
 	
+	//(관리자) 회원 검색 기능 (모든 회원 보기)
+		public List<MemberDto> search() throws Exception {
+			Connection con = getConnection();
+			
+			String sql = "SELECT * FROM member ORDER BY member_no ASC";
+			
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			
+			List<MemberDto> list = new ArrayList<>();
+			while(rs.next()) {
+				MemberDto mdto = new MemberDto(rs);	
+				list.add(mdto);
+			}
+			con.close();
+			return list;
+		}
 	
 	
 	

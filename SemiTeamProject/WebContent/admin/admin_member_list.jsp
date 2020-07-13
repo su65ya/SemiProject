@@ -13,7 +13,7 @@
 	//타입과 키워드가 없다면
 	List<MemberDto> list;
 	if( type == null || keyword == null ) {
-		list = new ArrayList<>();
+		list = mdao.search();
 	}
 	else {
 		list = mdao.search(type, keyword);		
@@ -60,6 +60,10 @@
 			<option value="member_id">아이디</option>
 			<option value="member_name">이름</option>
 			<option value="member_rate">권한</option>
+			<option value="member_mail">메일</option>
+			<option value="member_phone">폰번호</option>
+			<option value="member_basic_addr">주소</option>
+			
 		</select>
 
 
