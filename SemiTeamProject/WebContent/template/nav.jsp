@@ -64,7 +64,7 @@
 				<li><a href="<%= root %>/index.jsp">사이트명(홈으로 가게 하는 사이트명)</a></li>
 				<li><a href="<%= root %>/member/info.jsp">내 정보</a></li>
 				<li><a href="<%= root %>/member/member_logout.do">로그아웃</a></li>
-				<li><a href="<%= root %>/member/search_pension_list.jsp">펜션 찾기</a></li>
+				<li><a href="<%= root %>/member/pension_list.jsp">펜션 찾기</a></li>
 				<li><a href="<%= root %>/member/reservation_list.jsp?res_write=<%= mdto.getMember_no() %>">내 예약 보기</a></li>
 			</ul>
 			<%} %>

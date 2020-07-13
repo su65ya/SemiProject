@@ -32,8 +32,53 @@ public class QuestionDao {
 		return src.getConnection();
 	}
 	
-	// 문의 리스트
-	public List<QuestionViewDto> getlist(int que_pension_no, int start, int finish) throws Exception {
+	// 모든 문의 리스트
+	public List<QuestionViewDto> getTotalList(int start, int finish) throws Exception {
+		Connection con = getConnection();
+		
+		String sql ="select * from (select rownum rn, T.* from ( select * from que_list order by que_no desc )T ) where rn between ? and ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, start);
+		ps.setInt(2, finish);
+		ResultSet rs = ps.executeQuery();
+		
+		List<QuestionViewDto> list = new ArrayList<>();
+		while(rs.next()) {
+			QuestionViewDto qvdto = new QuestionViewDto(rs);
+			
+			list.add(qvdto);
+		}
+		
+		con.close();
+		return list;
+	}
+	
+	// 전체 문의 검색 리스트
+	public List<QuestionViewDto> totalSearch(String type, String keyword, int start, int finish) throws Exception {
+		Connection con = getConnection();
+
+		String sql ="select * from (select rownum rn, T.* from (select * from que_list where instr(#1, ?) > 0 order by que_no desc)T ) where rn between ? and ?";
+		sql = sql.replace("#1", type);
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, keyword);
+		ps.setInt(2, start);
+		ps.setInt(3, finish);
+		ResultSet rs = ps.executeQuery();
+			
+		List<QuestionViewDto> list = new ArrayList<>();
+		while(rs.next()) {
+			QuestionViewDto qvdto = new QuestionViewDto(rs);
+			
+			list.add(qvdto);
+		}
+			
+		con.close();
+		return list;
+			
+	}
+	
+	// 펜션 별 문의 리스트
+	public List<QuestionViewDto> getList(int que_pension_no, int start, int finish) throws Exception {
 		Connection con = getConnection();
 		
 		String sql ="select * from (select rownum rn, T.* from ( select * from que_list where que_pension_no = ? order by que_no desc )T ) where rn between ? and ?";
@@ -45,16 +90,16 @@ public class QuestionDao {
 		
 		List<QuestionViewDto> list = new ArrayList<>();
 		while(rs.next()) {
-			QuestionViewDto qdto = new QuestionViewDto(rs);
+			QuestionViewDto qvdto = new QuestionViewDto(rs);
 			
-			list.add(qdto);
+			list.add(qvdto);
 		}
 		
 		con.close();
 		return list;
 	}
 	
-	// 문의 검색 리스트
+	// 펜션 별 문의 검색 리스트
 	public List<QuestionViewDto> search(int que_pension_no, String type, String keyword, int start, int finish) throws Exception {
 		Connection con = getConnection();
 
@@ -69,9 +114,9 @@ public class QuestionDao {
 		
 		List<QuestionViewDto> list = new ArrayList<>();
 		while(rs.next()) {
-			QuestionViewDto qdto = new QuestionViewDto(rs);
+			QuestionViewDto qvdto = new QuestionViewDto(rs);
 			
-			list.add(qdto);
+			list.add(qvdto);
 		}
 		
 		con.close();

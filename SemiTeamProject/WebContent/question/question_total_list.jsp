@@ -10,15 +10,13 @@
     pageEncoding="UTF-8"%>
 
 
-
 <%
 
-	// 펜션 별 펜션 리스트
+	// 펜션 전체 리스트
 
 	MemberDto mdto = (MemberDto) session.getAttribute("userinfo");
 	SellerDto sdto = (SellerDto) session.getAttribute("sellerinfo");
 	
-	int que_pension_no = Integer.parseInt(request.getParameter("que_pension_no"));
 	
 
 	String type = request.getParameter("type");
@@ -69,13 +67,14 @@
 	
 	List<QuestionViewDto> list;
 	if (isSearch) {
-		list = qdao.search(que_pension_no, type, keyword, start, finish);
+		list = qdao.totalSearch(type, keyword, start, finish);
 	}
 	else {
-		list = qdao.getList(que_pension_no, start, finish);
+		/* list = qdao.getList(que_pension_no, start, finish); */
+		list = qdao.getTotalList(start, finish);
 	}
 
-
+	QuestionViewDto pension_no = new QuestionViewDto();
 %>
 
 
@@ -121,6 +120,7 @@
 		<thead>
 			<tr>
 				<th>번호</th>
+				<th>펜션</th>
 				<th width="40%">제목</th>
 				<th>작성자</th>
 				<th>작성일</th>
@@ -133,6 +133,12 @@
 			<tr>
 				<td><%= qvdto.getQue_no() %></td>
 				
+				<td>
+					<a href="<%= request.getContextPath() %>/member/room_list.jsp?pension_no=<%= qvdto.getQue_pension_no() %>">
+						<%= qvdto.getPension_name() %>
+					</a>
+				</td>
+
 				<td class="left">
 					
 					<font color="red" size="2">
@@ -164,40 +170,41 @@
 			<%} %>
 		</tbody>
 	</table>
-
+	
+<%-- 
 	<div class="row right">
-		<a href="question_write.jsp?que_pension_no=<%= que_pension_no %>">
+		<a href="question_write.jsp?que_pension_no=<%= pension_no.getQue_pension_no() %>">
 			<input class="form-btn form-inline" type="button" value="글쓰기">
 		</a>
 	</div>
 	
-	
+ --%>	
 	<div class="row center pagination">
 	
 		<!-- 이전 -->
 		<% if (blockStart > 1) { %>
 			<%if (!isSearch) { %>
-				<a href="question_list.jsp?que_pension_no=<%= que_pension_no %>&page=<%= blockStart - 1 %>">이전</a>
+				<a href="question_total_list.jsp?page=<%= blockStart - 1 %>">이전</a>
 			<%} else { %>
-				<a href="question_list.jsp?&que_pension_no=<%= que_pension_no %>page=<%= blockStart - 1 %>&type=<%= type %>&keyword=<%= keyword %>">이전</a>
+				<a href="question_total_list.jsp?page=<%= blockStart - 1 %>&type=<%= type %>&keyword=<%= keyword %>">이전</a>
 			<%} %>
 		<%} %>
 		
 		<% for (int i = blockStart; i <= blockFinish; i++) {%>
 		
 			<% if (!isSearch) { %>	
-				<a href="question_list.jsp?que_pension_no=<%= que_pension_no %>&page=<%= i %>"><%= i %></a>
+				<a href="question_total_list.jsp?page=<%= i %>"><%= i %></a>
 			<%} else { %>
-				<a href="question_list.jsp?que_pension_no=<%= que_pension_no %>&page=<%= i %>&type=<%= type %>&keyword=<%= keyword %>"><%= i %></a>
+				<a href="question_total_list.jsp?page=<%= i %>&type=<%= type %>&keyword=<%= keyword %>"><%= i %></a>
 			<%} %>
 		<%} %>
 		
 		<!-- 다음 -->
 		<% if (blockFinish < pageCount) { %>
 			<%if (!isSearch) { %>
-				<a href="question_list.jsp?que_pension_no=<%= que_pension_no %>&page=<%= blockFinish + 1 %>">다음</a>
+				<a href="question_total_list.jsp?page=<%= blockFinish + 1 %>">다음</a>
 			<%} else { %>
-				<a href="question_list.jsp?que_pension_no=<%= que_pension_no %>&page=<%= blockFinish + 1 %>&type=<%= type %>&keyword=<%= keyword %>">다음</a>
+				<a href="question_total_list.jsp?page=<%= blockFinish + 1 %>&type=<%= type %>&keyword=<%= keyword %>">다음</a>
 			<%} %>
 		<%} %>
 		
@@ -208,7 +215,7 @@
 	<!-- 검색창 -->
 	<div class="row center">
 		<form action="question_list.jsp?" method="get">
-			<input type="hidden" name="que_pension_no" value="<%= que_pension_no %>">
+			<input type="hidden" name="que_pension_no" value="<%= pension_no.getQue_pension_no() %>">
 			<select class="form-input form-inline" name="type">
 				<option value="que_title">제목</option>
 				<option value="que_writer">작성자</option>
