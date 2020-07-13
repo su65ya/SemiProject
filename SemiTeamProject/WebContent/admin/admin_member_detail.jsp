@@ -67,8 +67,13 @@
 		</table>
 
 	</div>
+	<div class="row" style="float: left;">
+		<a href="admin_member_list.jsp">
+			<input class= "form-btn" style="width: 150px;" type="button" value="◀회원 리스트">
+		</a>
+	</div>
 	<div class="row" style="float: right;">
-		<a href="#">
+		<a href="<%=request.getContextPath() %>/admin/memberDrop.do?=member_id=<%=user.getMember_id()%>">
 			<input class= "form-btn" style="width: 150px;" type="button" value="회원 탈퇴">
 		</a>
 	</div>
