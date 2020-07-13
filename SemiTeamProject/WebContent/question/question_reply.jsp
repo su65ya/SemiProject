@@ -1,3 +1,4 @@
+<%@page import="semi.beans.dto.QuestionViewDto"%>
 <%@page import="semi.beans.dto.QuestionDto"%>
 <%@page import="semi.beans.dao.QuestionDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -8,7 +9,7 @@
 	int que_pension_no = Integer.parseInt(request.getParameter("que_pension_no"));
 	
 	QuestionDao qdao = new QuestionDao();
-	QuestionDto qdto = qdao.get(que_no);
+	QuestionViewDto qvdto = qdao.get(que_no);
 %>
 
 
@@ -122,25 +123,25 @@
 		<div class="row">
 		<font size="5">
 			<font color="gray" size="4">
-			<% if (qdto.getQue_head() != null) { %>
-				[<%= qdto.getQue_head() %>]
+			<% if (qvdto.getQue_head() != null) { %>
+				[<%= qvdto.getQue_head() %>]
 			<%} %>
 			</font>
-			<%= qdto.getQue_title() %>
+			<%= qvdto.getQue_title() %>
 		</font>
 	</div>
 	
 	<div class="row">
-		<% if (qdto.getQue_writer() != 0) {%>
-			<%= qdto.getQue_writer() %>
+		<% if (qvdto.getQue_writer() != 0) {%>
+			<%= qvdto.getMember_id() %>
 		<%} else {%>
 			<font color="gray">XXX</font>
 		<%} %>
 	</div>
 	
 	<div class="row">
-		<%= qdto.getQue_date() %> / 
-		<%= qdto.getQue_view() %>
+		<%= qvdto.getQue_date() %> / 
+		<%= qvdto.getQue_view() %>
 	</div>
 
 	
@@ -149,7 +150,7 @@
 	</div>
 	
 	<div class="row" style="min-height: 300px">
-		<%= qdto.getQue_content() %>
+		<%= qvdto.getQue_content() %>
 	</div>
 	
 	
@@ -158,7 +159,7 @@
 		<div class="row center">
 			<input type="hidden" name="que_no" value="<%= que_no %>">
 			<input type="hidden" name="que_pension_no" value="<%= que_pension_no %>">
-			<textarea class="form-input" name="que_reply" rows="5px" cols="100px"><%if ( qdto.getQue_reply() != null ) {%><%= qdto.getQue_reply() %><%} %></textarea>
+			<textarea class="form-input" name="que_reply" rows="5px" cols="100px"><%if ( qvdto.getQue_reply() != null ) {%><%= qvdto.getQue_reply() %><%} %></textarea>
 		</div>
 		
 		<div class="row right">

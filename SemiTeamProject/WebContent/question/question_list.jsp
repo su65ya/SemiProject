@@ -1,3 +1,4 @@
+<%@page import="semi.beans.dto.QuestionViewDto"%>
 <%@page import="semi.beans.dto.SellerDto"%>
 <%@page import="semi.beans.dto.MemberDto"%>
 <%@page import="oracle.net.aso.e"%>
@@ -62,7 +63,7 @@
 		blockFinish = pageCount;
 	}
 	
-	List<QuestionDto> list;
+	List<QuestionViewDto> list;
 	if (isSearch) {
 		list = qdao.search(que_pension_no, type, keyword, start, finish);
 	}
@@ -124,39 +125,39 @@
 		</thead>
 		<tbody>
 			
-			<% for (QuestionDto qdto : list) { %>			
+			<% for (QuestionViewDto qvdto : list) { %>			
 			<tr>
-				<td><%= qdto.getQue_no() %></td>
+				<td><%= qvdto.getQue_no() %></td>
 				
-				<td><%= qdto.getQue_pension_no()%></td>
+				<td><%= qvdto.getPension_name() %></td>
 
 				<td class="left">
 					
 					<font color="red" size="2">
-					 	<% if(qdto.getQue_reply() != null) { %>
+					 	<% if(qvdto.getQue_reply() != null) { %>
 					 		<span>답변 완료</span>					 		
 					 	<%} %>
 					</font>
 					
 					<font color="gray" size="3">
-						<% if(qdto.getQue_head() != null) { %>
-							[<%= qdto.getQue_head() %>]
+						<% if(qvdto.getQue_head() != null) { %>
+							[<%= qvdto.getQue_head() %>]
 						<%} %>
 					</font>
 					
-					<a href="question_content.jsp?que_pension_no=<%= qdto.getQue_pension_no() %>&que_no=<%= qdto.getQue_no() %>">
-						<%= qdto.getQue_title() %>
+					<a href="question_content.jsp?que_pension_no=<%= qvdto.getQue_pension_no() %>&que_no=<%= qvdto.getQue_no() %>">
+						<%= qvdto.getQue_title() %>
 					</a>
 				</td>
 				<td>
-					<% if (qdto.getQue_writer() != 0) {%>
-						<%= qdto.getQue_writer() %>
+					<% if (qvdto.getQue_writer() != 0) {%>
+						<%= qvdto.getMember_id() %>
 					<%} else {%>
 						<font color="gray">XXX</font>
 					<%} %>
 				</td>
-				<td><%= qdto.getQue_auto() %></td>
-				<td><%= qdto.getQue_view() %></td>
+				<td><%= qvdto.getQue_auto() %></td>
+				<td><%= qvdto.getQue_view() %></td>
 			</tr>
 			<%} %>
 		</tbody>

@@ -1,3 +1,4 @@
+<%@page import="semi.beans.dto.QuestionViewDto"%>
 <%@page import="semi.beans.dto.SellerDto"%>
 <%@page import="semi.beans.dto.MemberDto"%>
 <%@page import="java.util.HashSet"%>
@@ -26,15 +27,17 @@
 	    session.setAttribute("memory", memory);
 	    
 	    QuestionDao qdao = new QuestionDao();
+		QuestionViewDto qvdto = qdao.get(que_no);	    
     	
+		
 	    MemberDto user = (MemberDto) session.getAttribute("userinfo");
-	    if (isCount) {
-	    	qdao.viewCount(que_no, user.getMember_no());
+	    
+	    if (user != null) {
+		    if (isCount) {
+		    	qdao.viewCount(que_no, user.getMember_no());
+		    }
 	    }
-	    
-	    
     	
-		QuestionDto qdto = qdao.get(que_no);
     	
     %>
 <jsp:include page="/template/nav.jsp"></jsp:include>
@@ -60,7 +63,7 @@
 	<div class="row">
 	
 		<font color="red" size="2">
-			<% if(qdto.getQue_reply() != null) { %>
+			<% if(qvdto.getQue_reply() != null) { %>
 				<span>답변 완료</span>					 		
 			<%} %>
 		</font>
@@ -68,25 +71,27 @@
 	
 		<font size="5">
 			<font color="gray" size="4">
-			<% if (qdto.getQue_head() != null) { %>
-				[<%= qdto.getQue_head() %>]
+			<% if (qvdto.getQue_head() != null) { %>
+				[<%= qvdto.getQue_head() %>]
 			<%} %>
 			</font>
-			<%= qdto.getQue_title() %>
+			<%= qvdto.getQue_title() %>
 		</font>
 	</div>
 	
 	<div class="row">
-		<% if (qdto.getQue_writer() != 0) {%>
-			<%= qdto.getQue_writer() %>
-		<%} else {%>
-			<font color="gray">XXX</font>
-		<%} %>
+		<font size="5">
+			<% if (qvdto.getQue_writer() != 0) {%>
+				<%= qvdto.getMember_id() %>
+			<%} else {%>
+				<font color="gray">XXX</font>
+			<%} %>
+		</font>
 	</div>
 	
 	<div class="row">
-		<%= qdto.getQue_date() %> / 
-		<%= qdto.getQue_view() %>
+		<%= qvdto.getQue_date() %> / 
+		<%= qvdto.getQue_view() %>
 	</div>
 	
 	<div class="row-empty">
@@ -94,22 +99,19 @@
 	</div>
 	
 	<div class="row" style="min-height: 300px">
-		<%= qdto.getQue_content() %>
+		<%= qvdto.getQue_content() %>
 	</div>
 	
 	<div class="row-empty">
 		<hr>
 	</div>
 	
-	<div class="row">
-		<% if ( qdto.getQue_reply() != null ) { %>
-			<font>
-				<%= qdto.getReply_writer() %>
-			</font>
-			<br>
-			<%= qdto.getQue_reply() %>
-		<%} %>
-	</div>
+	<% if ( qvdto.getQue_reply() != null ) { %>
+		<div class="row">
+			<h4 class="left">관리자</h4>
+			<%= qvdto.getQue_reply() %>
+		</div>
+	<%} %>
 	
 	<div class="row-empty"></div>
 
@@ -126,7 +128,7 @@
 			<input class="form-btn form-inline" type="button" value="글쓰기">
 		</a>
 		<% if (sdto != null) {%>	
-			<% if (qdto.getQue_reply() != null) { %>
+			<% if (qvdto.getQue_reply() != null) { %>
 				<a href="question_reply.jsp?que_pension_no=<%= que_pension_no %>&que_no=<%= que_no %>">
 					<input class="form-btn form-inline" type="button" value="답변수정">
 				</a>

@@ -3,7 +3,6 @@ package semi.beans.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +12,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import semi.beans.dto.QuestionDto;
+import semi.beans.dto.QuestionViewDto;
 
 public class QuestionDao {
 	
@@ -33,19 +33,19 @@ public class QuestionDao {
 	}
 	
 	// 문의 리스트
-	public List<QuestionDto> getlist(int que_pension_no, int start, int finish) throws Exception {
+	public List<QuestionViewDto> getlist(int que_pension_no, int start, int finish) throws Exception {
 		Connection con = getConnection();
 		
-		String sql ="select * from (select rownum rn, T.* from ( select * from question where que_pension_no = ? order by que_no desc )T ) where rn between ? and ?";
+		String sql ="select * from (select rownum rn, T.* from ( select * from que_list where que_pension_no = ? order by que_no desc )T ) where rn between ? and ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, que_pension_no);
 		ps.setInt(2, start);
 		ps.setInt(3, finish);
 		ResultSet rs = ps.executeQuery();
 		
-		List<QuestionDto> list = new ArrayList<>();
+		List<QuestionViewDto> list = new ArrayList<>();
 		while(rs.next()) {
-			QuestionDto qdto = new QuestionDto(rs);
+			QuestionViewDto qdto = new QuestionViewDto(rs);
 			
 			list.add(qdto);
 		}
@@ -55,10 +55,10 @@ public class QuestionDao {
 	}
 	
 	// 문의 검색 리스트
-	public List<QuestionDto> search(int que_pension_no, String type, String keyword, int start, int finish) throws Exception {
+	public List<QuestionViewDto> search(int que_pension_no, String type, String keyword, int start, int finish) throws Exception {
 		Connection con = getConnection();
 
-		String sql ="select * from (select rownum rn, T.* from (select * from question where que_pension_no = ? and instr(#1, ?) > 0 order by que_no desc)T ) where rn between ? and ?";
+		String sql ="select * from (select rownum rn, T.* from (select * from que_list where que_pension_no = ? and instr(#1, ?) > 0 order by que_no desc)T ) where rn between ? and ?";
 		sql = sql.replace("#1", type);
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, que_pension_no);
@@ -67,9 +67,9 @@ public class QuestionDao {
 		ps.setInt(4, finish);
 		ResultSet rs = ps.executeQuery();
 		
-		List<QuestionDto> list = new ArrayList<>();
+		List<QuestionViewDto> list = new ArrayList<>();
 		while(rs.next()) {
-			QuestionDto qdto = new QuestionDto(rs);
+			QuestionViewDto qdto = new QuestionViewDto(rs);
 			
 			list.add(qdto);
 		}
@@ -96,15 +96,15 @@ public class QuestionDao {
 	}
 	
 	// 단일 조회
-	public QuestionDto get(int que_no) throws Exception {
+	public QuestionViewDto get(int que_no) throws Exception {
 		Connection con = getConnection();
 		
-		String sql = "select * from question where que_no = ?";
+		String sql = "select * from que_list where que_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, que_no);
 		ResultSet rs = ps.executeQuery();
 		
-		QuestionDto qdto = rs.next() ? new QuestionDto(rs) : null;
+		QuestionViewDto qdto = rs.next() ? new QuestionViewDto(rs) : null;
 		
 		
 		con.close();

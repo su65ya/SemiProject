@@ -1,3 +1,4 @@
+<%@page import="semi.beans.dto.QuestionViewDto"%>
 <%@page import="semi.beans.dto.QuestionDto"%>
 <%@page import="semi.beans.dao.QuestionDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -7,7 +8,7 @@
 	int que_no = Integer.parseInt(request.getParameter("que_no"));
 	
 	QuestionDao qdao = new QuestionDao();
-	QuestionDto qdto = qdao.get(que_no);
+	QuestionViewDto qvdto = qdao.get(que_no);
 %>
 
 
@@ -121,11 +122,11 @@
 		
 		<div class="row">
 			<label>&nbsp;&nbsp;&nbsp;제목&nbsp;&nbsp;&nbsp;</label>
-			<input class="form-input" type="text" name="que_title" value="<%= qdto.getQue_title() %>" required  style="width: 85%">
+			<input class="form-input" type="text" name="que_title" value="<%= qvdto.getQue_title() %>" required  style="width: 85%">
 		</div>
 		
 		<div class="row">
-			<textarea name="que_content" cols="100px" rows="20px"><%= qdto.getQue_content() %></textarea>
+			<textarea name="que_content" cols="100px" rows="20px"><%= qvdto.getQue_content() %></textarea>
 		</div>
 		
 		<div class="row">
