@@ -233,7 +233,7 @@ public class MemberDao {
 		return list;
 	}
 	
-	//(관리자) 회원 검색 기능 (모든 회원 보기)
+	//(관리자) 회원 리스트 기능 (모든 회원 보기)
 		public List<MemberDto> search() throws Exception {
 			Connection con = getConnection();
 			

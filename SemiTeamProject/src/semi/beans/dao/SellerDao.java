@@ -3,6 +3,8 @@ package semi.beans.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -117,7 +119,44 @@ public class SellerDao {
 		con.close();
 	}
 	
+	//(관리자) 판매자 리스트 기능 (모든 판매자 보기)
+	public List<SellerDto> search() throws Exception {
+		Connection con = getConnection();
+		
+		String sql = "SELECT * FROM seller ORDER BY seller_no ASC";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		
+		List<SellerDto> list = new ArrayList<>();
+		while(rs.next()) {
+			SellerDto sdto = new SellerDto(rs);
+			list.add(sdto);
+		}
+		con.close();
+		return list;
+	}
 	
+	// (관리자) 판매자 검색 기능 (타입추가)
+	public List<SellerDto> search(String type, String keyword) throws Exception{
+		Connection con = getConnection();
+		
+		String sql = "SELECT * FROM seller WHERE instr(#1 , ?) > 0 ORDER BY #1 ASC";
+		sql = sql.replace("#1", type);
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, keyword);
+		ResultSet rs = ps.executeQuery();
+		
+		List<SellerDto> list = new ArrayList<>();
+		while(rs.next()) {
+			SellerDto sdto = new SellerDto(rs);
+			list.add(sdto);
+		}
+		
+		con.close();
+		return list;
+	}
 
 }
 

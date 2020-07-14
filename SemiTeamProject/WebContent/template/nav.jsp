@@ -48,7 +48,7 @@
 				<li><a href="<%= root %>/index.jsp">사이트명(홈으로 가게 하는 사이트명)</a></li>
 				<li><a href="<%= root %>/admin/info.jsp">내 정보</a></li>
 				<li><a href="<%= root %>/admin/admin_logout.do">로그아웃</a></li>
-				<li><a href="#">판매자 회원 관리</a></li>
+				<li><a href="<%= root %>/admin/admin_seller_list.jsp">판매자 회원 관리</a></li>
 				<li><a href="<%= root %>/admin/admin_member_list.jsp">사용자 회원관리</a></li>
 				<li><a href="#">통계보기</a></li>
 			</ul>
