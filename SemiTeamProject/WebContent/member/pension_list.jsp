@@ -48,6 +48,7 @@
 					<td rowspan="3">
 						<a href="room_list.jsp?pension_no=<%=pdto.getPension_no()%>"><button class='form-btn form-inline'>객실보기</button></a>
 						<a href="#"><button class='form-btn form-inline'>예약하기</button></a>
+						<a href="<%= request.getContextPath() %>/review/review_list.jsp?review_pension_no=<%= pdto.getPension_no()%>"><button class='form-btn form-inline'>리뷰보기</button></a>
 						<a href='<%= request.getContextPath() %>/question/question_list.jsp?que_pension_no=<%= pdto.getPension_no()%>'><button class='form-btn form-inline'>문의하기</button></a>
 					</td>
 				</tr>

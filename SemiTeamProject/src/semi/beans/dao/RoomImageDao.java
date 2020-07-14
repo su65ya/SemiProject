@@ -55,14 +55,14 @@ public class RoomImageDao {
 	public RoomImageDto get(int room_image_no) throws Exception {
 		Connection con = getConnection();
 		
-		String sql = "SELECT room_image WHERE room_image_no=?";
+		String sql = "SELECT * FROM room_image WHERE room_image_no=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		
 		ps.setInt(1, room_image_no);
 		ResultSet rs = ps.executeQuery();
 		RoomImageDto ridto;
 		if(rs.next()) {
-			ridto=new RoomImageDto(rs);
+			ridto = new RoomImageDto(rs);
 		}else {
 			ridto=null;
 		}
