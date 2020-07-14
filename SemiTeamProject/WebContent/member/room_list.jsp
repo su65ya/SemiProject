@@ -76,7 +76,7 @@
 	RoomDao rdao = new RoomDao();
 	int pension_no = Integer.parseInt(request.getParameter("pension_no"));
 	
-	List<RoomDto> list = rdao.getList();
+	List<RoomDto> list = rdao.getList(pension_no);
 	PensionInfoDto pdto = pdao.get(pension_no);
 	
 	PensionImageDao pidao = new PensionImageDao();
@@ -113,20 +113,20 @@
     </div>
     <article class="w-80">
     <div class="row left">
-        <h2 style="height: 15px;" class="left">용추 별천지 펜션</h2>
+        <h2 style="height: 15px;" class="left"><%=pdto.getPension_name() %></h2>
     </div>
     <div class="row left">
-        <h6  class="left" style="height: 15px; margin: 0;">경기 가평군 가평읍 용추로 508-36 (지번 : 경기 가평군 가평읍 승안리 631-4)</h6>
-    </div><hr style="border: 1px solid gray;">
+        <h6  class="left" style="height: 15px; margin: 0;">[<%=pdto.getPension_post() %>] <%=pdto.getPension_basic_addr() %> <%=pdto.getPension_detail_addr() %></h6>
+    </div><hr style="width:100%; border: 1px solid gray;">
 
     <div class="row left">
        <dl>
            <dt>예약문의</dt>
-           <dd>0254645456</dd>
+           <dd><%=pdto.getPension_phone() %></dd>
            <dt>입/퇴실안내</dt>
            <dd>이용/시설 안내 참조</dd>
            <dt>판매가</dt>
-           <dd>최소가격~최대가격</dd>
+           <dd><%=rdao.minPrice(pension_no) %>~<%=rdao.maxPrice(pension_no) %></dd>
        </dl>
         
     </div>
@@ -135,7 +135,7 @@
         <table class="table table-border center">
             <thead>
                 <tr>
-                    <th>객실</th>
+                    <th style="width: 90px;">객실</th>
                 	<%for(int i = 0;i<14;i++){
                     	cal.add(cal.DATE,+i);
                     	String date111 = dateFormat.format(cal.getTime());
@@ -148,15 +148,15 @@
             </thead>
             <tbody>
                 <%for(RoomDto rdto : list){%>
-                <tr>
-                    <td rowspan="2">객실사진</td>
-                    <%for(int j = 0;j<14;j++){ %>
-                    	<td style="height: 60px;"><%=rdto.getOff_weekday() %></td>
-                    <%} %>
-                </tr>
-                <%}%>
-                <tr>
+		                <tr>
+		                    <td rowspan="2" style="width: 90px; padding: 0;"><img src="https://placehold.it/90x90"></td>
+		                    <%for(int j = 0;j<14;j++){ %>
+		                    	<td style="height: 60px;"><%=rdto.getOff_weekday() %></td>
+		                    <%} %>
+		                </tr>
+               		 <tr>
                 	<%for(int i = 0;i<14;i++){%>
+<!--                 		<td></td> -->
 <%--                 		<%if(예약된 객실이 아니면){ %> --%>
                     		<td style="height: 30px;"><input type="checkbox" ></td>
 <%--                     	<%}else{예약된 객실이면 %> --%>
@@ -164,7 +164,7 @@
 <%--                     	<%} %> --%>
                     <%} %>
                 </tr>
-
+                <%}%>
             </tbody>
         </table>
         
