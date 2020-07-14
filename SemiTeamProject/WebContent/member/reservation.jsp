@@ -1,6 +1,54 @@
+<%@page import="semi.beans.dto.RoomDto"%>
+<%@page import="semi.beans.dao.RoomDao"%>
+<%@page import="semi.beans.dao.PensionOptionDao"%>
+<%@page import="semi.beans.dto.PensionDto"%>
+<%@page import="semi.beans.dao.PensionDao"%>
+<%@page import="semi.beans.dao.ReservationOptionInfoDao"%>
+<%@page import="semi.beans.dto.ReservationOptionInfoDto"%>
+<%@page import="java.util.List"%>
+<%@page import="semi.beans.dto.ReservationInfoDto"%>
+<%@page import="semi.beans.dao.ReservationDao"%>
+<%@page import="semi.beans.dao.ReservationInfoDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%
+	ReservationInfoDto redto = new ReservationInfoDto();
+	ReservationInfoDao redao = new ReservationInfoDao();
+	ReservationOptionInfoDto ridto = new ReservationOptionInfoDto();
+	ReservationOptionInfoDao ridao = new ReservationOptionInfoDao();
+	RoomDao roomdao = new RoomDao();
+	
+	PensionOptionDao podao = new PensionOptionDao();
+	PensionDao pdao = new PensionDao();
+	ridto = ridao.get();
+	List<ReservationInfoDto> list = redao.getList();
+	int pension_no = ridto.getPension_no();
+	int total_adlut_price;
+	if(ridto.getAdult()!=null){
+		int adult = Integer.parseInt(ridto.getAdult());
+		int adult_price = podao.getPrice(pension_no, "성인");
+		total_adlut_price = adult_price * adult;
+	}else{
+		total_adlut_price = 0;
+	}
+	int fire_price;
+	if(ridto.getFire().equals(1)){
+		fire_price = podao.getPrice(pension_no, "숯불");
+	}else{
+		fire_price = 0;
+	}
+	int total_children_price;
+	if(ridto.getChildren()!=null){
+		int children = Integer.parseInt(ridto.getChildren());
+		int children_price = podao.getPrice(pension_no, "아동");
+		total_children_price = children_price*children;
+	}else{
+		total_children_price = 0;
+	}
+	
+	int extraPrice = total_children_price+fire_price+total_adlut_price;
+	
+%>
 <jsp:include page="/template/nav.jsp"></jsp:include>
     <style>
         .table > tbody > tr > td{
@@ -31,36 +79,24 @@
 					<th width="50%">객실명</th>
 					<th>이용일</th>
 					<th>인원</th>
-					<th>요금타입</th>
 					<th>이용요금</th>
+					<th>추가요금</th>
 					<th>결제금액</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td class="left">펜션객실이름</td>
-					<td style="color: #ea1f62">2020-07-15</td>
-					<td>성인 5명</td>
-					<td>비수기/주중</td>
-					<td>500,000원</td>
-					<td>700,000원</td>
+				<%for(ReservationInfoDto rdto : list){ %>
+				<tr>	
+				<%RoomDto roomdto = roomdao.get(rdto.getRes_room_no()); %>
+					<td class="left"><%=rdto.getRes_room_name() %></td>
+					<td style="color: #ea1f62"><%=rdto.getRes_date() %></td>
+					<td>성인 <%=roomdto.getStandard_people()%>명</td>
+					<td><%=rdto.getRes_room_price() %>원</td>
+					<%int room_price = Integer.parseInt(rdto.getRes_room_price()); %>
+					<td><%=extraPrice %>원</td>
+					<td><%=extraPrice+room_price%>원</td>
 				</tr>
-				<tr>
-					<td class="left">펜션객실이름</td>
-					<td style="color:#ea1f62 ">2020-07-15</td>
-					<td>성인 5명</td>
-					<td>비수기/주중</td>
-					<td>500,000원</td>
-					<td>700,000원</td>
-				</tr>
-				<tr>
-					<td class="left">펜션객실이름</td>
-					<td style="color: #ea1f62">2020-07-15</td>
-					<td>성인 5명</td>
-					<td>비수기/주중</td>
-					<td>500,000원</td>
-					<td>700,000원</td>
-				</tr>
+				<%} %>
 			</tbody>
 		</table>
 		<div class="row right">
