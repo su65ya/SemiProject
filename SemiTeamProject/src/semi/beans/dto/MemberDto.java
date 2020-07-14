@@ -82,7 +82,6 @@ public class MemberDto {
 		SimpleDateFormat f = new SimpleDateFormat("y년 M월 d일");
 		return f.format(d);
 	}
-	
 
 	public void setMember_birth(String member_birth) {
 		this.member_birth = member_birth;
