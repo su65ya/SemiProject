@@ -69,7 +69,7 @@
 		</a>
 	</div>
 	<div class="row" style="float: right;">
-		<a href="#">
+		<a href="<%=request.getContextPath()%>/admin/admin_check.jsp?go=<%=request.getContextPath() %>/admin/sellerDrop.do?seller_id=<%=sdto.getSeller_id()%>">
 			<input class= "form-btn" style="width: 150px;" type="button" value="판매자 탈퇴">
 		</a>
 	</div>

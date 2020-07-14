@@ -121,6 +121,19 @@ public class SellerDao {
 		con.close();
 	}
 	
+	// 판매자 탈퇴
+	public void delete(String seller_id) throws Exception {
+		Connection con = getConnection();
+		
+		String sql = "DELETE seller WHERE seller_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, seller_id);
+		ps.execute();
+		
+		con.close();
+	}
+
+	
 	//(관리자) 판매자 리스트 기능 (모든 판매자 보기)
 	public List<SellerDto> search() throws Exception {
 		Connection con = getConnection();
