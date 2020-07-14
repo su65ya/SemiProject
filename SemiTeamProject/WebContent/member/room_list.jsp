@@ -1,3 +1,5 @@
+<%@page import="semi.beans.dto.MemberDto"%>
+<%@page import="semi.util.DateChecker"%>
 <%@page import="semi.beans.dto.PenImgViewDto"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="java.util.GregorianCalendar"%>
@@ -70,13 +72,53 @@
                 });
             
         }
+        
+        /*
+        	알아야 할 명령
+        	.parentNode : 상위 태그 객체
+        	.previousSibling : 
+        */
+        function reservation(tag) {//tag는 변화된 태그 객체(this)
+        	var td = tag.parentNode;
+        	var friendTd = td.previousElementSibling;
+        	var re_infoTag = friendTd.children[0];
+
+        	if(tag.checked){
+        		var re_info = friendTd.children[1];
+        		re_infoTag.value = re_info.value;
+        	}else{
+        		re_infoTag.value = "";
+        	}
+        	}
+        
+        function option_modal(){
+        	var tag = document.querySelector(".modal-wrap");
+        	tag.classList.remove("on");
+        	tag.classList.add("on");
+        }
+        function option_modal_hidden(){
+        	var tag = document.querySelector(".modal-wrap");
+        	tag.classList.remove("on");
+        }
+        
+        function change_check() {
+			var tag = document.querySelector("#fire");
+			var hidden = document.querySelector("input[name=fire]");
+			
+			if(tag.checked){
+				hidden.value = "1";
+			}else{
+				hidden.value = "0";
+			}
+			
+		}
     </script>
 <%
 	PensionDao pdao = new PensionDao();
 	RoomDao rdao = new RoomDao();
 	int pension_no = Integer.parseInt(request.getParameter("pension_no"));
 	
-	List<RoomDto> list = rdao.getList(pension_no);
+	List<RoomDto> list = rdao.getList(pension_no); 
 	PensionInfoDto pdto = pdao.get(pension_no);
 	
 	PensionImageDao pidao = new PensionImageDao();
@@ -88,6 +130,8 @@
 	
 	PenImgViewDto viewDto = new PenImgViewDto();
 	
+	MemberDto mdto = (MemberDto)session.getAttribute("userinfo");
+
 %>
 
     <div class="swiper-container">
@@ -111,6 +155,8 @@
         <div class="swiper-button-next"></div>
 -->
     </div>
+    
+    <form action="save_reservation_info.do" method="post">
     <article class="w-80">
     <div class="row left">
         <h2 style="height: 15px;" class="left"><%=pdto.getPension_name() %></h2>
@@ -130,7 +176,11 @@
        </dl>
         
     </div>
-    
+    <div class="row-empty"></div>
+    <div class="row-empty"></div>
+    <div> 
+    	<h4  class="left">"먼저 아래 달력에서 예약할 객실을 선택하고 오른쪽에서 인원을 입력 후 예약하기를 눌러주세요."</h4>
+    </div>
     <div class="center">
         <table class="table table-border center">
             <thead>
@@ -140,34 +190,92 @@
                     	cal.add(cal.DATE,+i);
                     	String date111 = dateFormat.format(cal.getTime());
                     	cal = Calendar.getInstance();%>
-                    <th>
-                    <%=date111 %>
-                    </th>
+	                    <th>
+	                    <%=date111 %>
+	                    </th>
                     <%}%>
+                    <th>옵션</th>
                 </tr>
             </thead>
             <tbody>
                 <%for(RoomDto rdto : list){%>
+                <%cal = Calendar.getInstance(); %>
 		                <tr>
-		                    <td rowspan="2" style="width: 90px; padding: 0;"><img src="https://placehold.it/90x90"></td>
+		                    <td style="width: 90px; padding: 0;"><img src="https://placehold.it/90x90"></td>
 		                    <%for(int j = 0;j<14;j++){ %>
-		                    	<td style="height: 60px;"><%=rdto.getOff_weekday() %></td>
-		                    <%} %>
-		                </tr>
-               		 <tr>
-                	<%for(int i = 0;i<14;i++){%>
-<!--                 		<td></td> -->
-<%--                 		<%if(예약된 객실이 아니면){ %> --%>
-                    		<td style="height: 30px;"><input type="checkbox" ></td>
-<%--                     	<%}else{예약된 객실이면 %> --%>
-<!--                     		<td style="height: 2px;"><h6 >예약 완료</h6></td> -->
-<%--                     	<%} %> --%>
-                    <%} %>
-                </tr>
+		                    <% 
+		                    if(j > 0) cal.add(Calendar.DATE, 1); %>
+		                    <td>
+		                    	<div style="height: 70px; text-align: center; padding-top: 1.5rem;"><%=DateChecker.calculatePriceWithFormat(cal, rdto)%>
+		                    	<input type="hidden" name="res_info">
+		                    	<input type="hidden" id="re_info" value="<%=pension_no %>/<%=mdto.getMember_no() %>/<%=mdto.getMember_id() %>/<%=rdto.getRoom_no() %>/<%=rdto.getRoom_name() %>/<%=DateChecker.year(cal) %>/<%=DateChecker.month(cal) %>/<%=DateChecker.day(cal)%>/<%=DateChecker.calculatePrice(cal, rdto)%>">
+		                    	
+		                    	</div>
+		                    	 <div>
+		                    	<input type="checkbox" onchange="reservation(this);">
+		            		</div>
+		                    </td>
+			               <%} %>
+		                    <td><input type="button" value = "옵션 선택하기" onclick = "option_modal();">
+		                    
+		                    <div class = "modal-wrap">
+						        <div class="modal">
+						            <h2>옵션 선택</h2>
+						            <div class="row-empty"></div>
+							        <div class="row">
+							        	<div>
+							        	<label>숯불추가</label>
+							        	<input type = "checkbox" onchange = "change_check();" id="fire">
+							        	<input type = "hidden" name = "fire">
+							        	</div>
+							        	<div class="row-empty"></div>
+							        	<div>
+							        	<div>
+							        		<label style = "color: red; font-size: 2px;">기본 인원 <%=rdto.getStandard_people() %>명/최대인원 <%=rdto.getMax_people() %>명입니다</label>
+							        	</div>
+							        	<div class="row-empty"></div>
+							        	<label>성인 추가</label>
+							        	<select  name ="adult" >
+							        		<option value = 0>선택</option>
+							        		<option value = 1>1명</option>
+							        		<option value = 2>2명</option>
+							        		<option value = 3>3명</option>
+							        		<option value = 4>4명</option>
+							        	</select>
+							        	</div>
+							        	<div class="row-emptyy"></div>
+							        	<div class="row-empty"></div>
+							        	<label>아동 추가</label>
+							        	<select name = "chilren">
+							        		<option value = 0>선택</option>
+							        		<option value = 1>1명</option>
+							        		<option value = 2>2명</option>
+							        		<option value = 3>3명</option>
+							        		<option value = 4>4명</option>
+							        	</select>
+							        	<div class="row-empty"></div>
+							        	<div class="row-empty"></div>
+							        	<div class="row">
+							        	<input type="hidden" name = "pension_no" value="<%=pension_no %>">
+							        	<input type="hidden" name = "res_room_no" value="<%=rdto.getRoom_no() %>">
+							        	<input type="hidden" name = "res_room_name" value="<%=rdto.getRoom_name() %>">
+							        		<button type = "button" onclick = "option_modal_hidden();" value = "확인" >확인</button>
+							        	</div>
+							        </div>
+						        </div>
+						    </div>
+		                    </td>
+		              </tr>
                 <%}%>
             </tbody>
         </table>
-        
+        <div class="row-empty"></div>
+        <div class="row-empty"></div>
+        <div class="row-empty"></div>
+        <div class="row">
+        	<input type = "submit" value = "선택완료">
+        </div>
     </div>
     </article>
+    </form>
 <jsp:include page="/template/footer.jsp"></jsp:include>
