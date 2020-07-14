@@ -20,6 +20,7 @@ public class PensionDto {
 	private String pension_phone;
 	private String pension_intro;
 
+	
 	public String getPension_intro() {
 		return pension_intro;
 	}

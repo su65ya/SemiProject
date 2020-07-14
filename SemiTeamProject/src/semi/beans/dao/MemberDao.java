@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -73,7 +75,6 @@ public class MemberDao {
 		return user;
 	}
 	
-
 	//사용자 비밀번호 변경
 	public void changePassword(MemberDto mdto) throws Exception {
 		Connection con = getConnection();
@@ -118,12 +119,13 @@ public class MemberDao {
 		con.close();
 	}
 
+
 	//아이디 찾기 메소드
-	
 	public String findId(MemberDto mdto) throws Exception{
 		Connection con = getConnection();
 		String sql = "SELECT member_id FROM member WHERE member_name=? and member_phone=? and member_birth=?";
 		
+
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, mdto.getMember_name());
 		ps.setString(2, mdto.getMember_phone());
@@ -140,9 +142,9 @@ public class MemberDao {
 		}
 		
 		con.close();
-		
 		return member_id;
 	}
+	
 	
 
 
@@ -192,5 +194,64 @@ public class MemberDao {
 		con.close();
 		return mdto;
 	}
+	
+	//(관리자) 회원 검색 기능
+	public List<MemberDto> search(String member_id) throws Exception{
+		Connection con = getConnection();
+		
+		String sql = "SELECT * FROM member WHERE instr(member_id, ?) > 0 ORDER BY member_id ASC";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, member_id);
+		ResultSet rs = ps.executeQuery();
+		
+		List<MemberDto> list = new ArrayList<>();
+		while(rs.next()) {
+			MemberDto mdto = new MemberDto(rs);	
+			list.add(mdto);
+		}		
+		con.close();
+		return list;
+	}
+	
+	//(관리자) 회원 검색 기능 (타입추가)
+	public List<MemberDto> search(String type, String keyword) throws Exception {
+		Connection con = getConnection();
+		
+		String sql = "SELECT * FROM member WHERE instr(#1, ?) > 0 ORDER BY #1 ASC";
+		sql = sql.replace("#1", type);
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, keyword);
+		ResultSet rs = ps.executeQuery();
+		
+		List<MemberDto> list = new ArrayList<>();
+		while(rs.next()) {
+			MemberDto mdto = new MemberDto(rs);	
+			list.add(mdto);
+		}
+		con.close();
+		return list;
+	}
+	
+	//(관리자) 회원 검색 기능 (모든 회원 보기)
+		public List<MemberDto> search() throws Exception {
+			Connection con = getConnection();
+			
+			String sql = "SELECT * FROM member ORDER BY member_no ASC";
+			
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			
+			List<MemberDto> list = new ArrayList<>();
+			while(rs.next()) {
+				MemberDto mdto = new MemberDto(rs);	
+				list.add(mdto);
+			}
+			con.close();
+			return list;
+		}
+	
+	
+	
 }
 

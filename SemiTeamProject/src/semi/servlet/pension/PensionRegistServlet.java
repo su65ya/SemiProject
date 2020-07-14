@@ -26,9 +26,9 @@ import semi.beans.dto.SellerDto;
 
 @WebServlet(urlPatterns = "/seller/pension_regist.do")
 public class PensionRegistServlet extends HttpServlet {
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	@Override
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-//			
 			String charset= "UTF-8";//해석할 인코딩 방식
 			int limit = 10*1024*1024;
 			File baseDir = new File("D:/upload/pension");
@@ -72,7 +72,7 @@ public class PensionRegistServlet extends HttpServlet {
 			List<FileItem> option = map.get("option");
 			for(int i =0;i<option.size();i++) {//리스트 안에 있는 값을 차례대로 뽑아내기 위한 반복문
 				String option_req = option.get(i).getString();//ㅇㅇ-ㅇㅇ-ㅇ
-				for(int j = 0;j<1;j++) {
+				if(option_req.length()>0) {
 					String option_split[] = option_req.split("-");
 					String option_name = option_split[0];
 					int option_price = Integer.parseInt(option_split[1]);
@@ -83,16 +83,16 @@ public class PensionRegistServlet extends HttpServlet {
 					podto.setOption_name(option_name);
 					podto.setOption_price(option_price);
 					podto.setOption_select(option_select);// 선택
-	
-					podao.regist(podto);
+					
+					podao.regist(podto);					
 				}
 			}
 			List<FileItem> fileList = map.get("pension_image");
+			PensionImageDao pidao = new PensionImageDao();
 			for(FileItem item : fileList) {
 				if(item.getSize()>0) {//파일이 있는 경우
 					
 					//데이터베이스에 저장
-					PensionImageDao pidao = new PensionImageDao();
 					int pension_image_no = pidao.getSequence();//image번호를 미리 추출
 					
 					PensionImageDto pidto = new PensionImageDto();//dto생성
@@ -108,12 +108,12 @@ public class PensionRegistServlet extends HttpServlet {
 					item.write(target);
 				}
 			}
-//			// 출력
-			resp.sendRedirect("pension_list.jsp");
+			//출력
+			resp.sendRedirect("pension_detail.jsp?pension_no="+pension_no);
 
 		} catch (Exception e) {
-			e.printStackTrace();
 			resp.sendError(500);
+			e.printStackTrace();
 		}
 	}
 }

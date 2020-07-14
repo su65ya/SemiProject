@@ -12,6 +12,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import semi.beans.dto.RoomDto;
+import semi.beans.dto.RoomImgViewDto;
 
 public class RoomDao {
 
@@ -65,6 +66,8 @@ private static DataSource src;
 		con.close();
 	}
 	
+	
+	//객실 리스트 메소드
 	public List<RoomDto> getList() throws Exception{
 		Connection con = getConnection();
 		
@@ -80,5 +83,70 @@ private static DataSource src;
 		}
 		con.close();
 		return list;
+	}
+	
+	//객실 삭제 메소드
+	public void delete(int room_no)throws Exception{
+		Connection con = getConnection();
+		
+		String sql = "DELETE room WHERE room_no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, room_no);
+		ps.execute();
+		
+		con.close();
+		
+	}
+	
+	//객실 단일조회 메소드
+	public RoomDto get(int room_pension_no) throws Exception{
+		Connection con = getConnection();
+		String sql = "SELECT * FROM room WHERE room_pension_no=?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1,  room_pension_no);
+		ResultSet rs = ps.executeQuery();
+		RoomDto rdto;
+		if(rs.next()) {
+			rdto = new RoomDto(rs);
+		}else {
+			rdto = null;
+		}
+		
+		con.close();
+		return rdto;
+	}
+	
+	public RoomImgViewDto getImgView(int room_pension_no) throws Exception{
+		Connection con = getConnection();
+		
+		String sql = "SELECT * FROM room_img WHERE room_pension_no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, room_pension_no);
+		ResultSet rs = ps.executeQuery();
+		
+		RoomImgViewDto rivdto;
+		if(rs.next()) {
+			rivdto = new RoomImgViewDto(rs);
+		}else {
+			rivdto = null;
+		}
+		con.close();
+		return rivdto;
+		
+		
+	}
+	
+	public int getSequence() throws Exception{
+		Connection con = getConnection();
+		
+		String sql = "SELECT room_seq.nextval FROM dual";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		int seq = rs.getInt(1);
+		
+		con.close();
+		return seq;
 	}
 }

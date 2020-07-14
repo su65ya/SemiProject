@@ -18,11 +18,17 @@
 <meta charset="UTF-8">
 <title>index</title>
 <link rel="stylesheet" type="text/css" href="<%= root %>/css/base.css">
-	<style>
+<link rel="stylesheet" href="./css/swiper.min.css">
 
+	 <style>
+    .swiper-container {
+        width: 600px;
+        height: 300px;
+    }
     </style>
+    
 </head>
-<body >
+<body>
 	<main>
 		<nav>
 		<%if(!isLogin){//비로그인 상태 %>
@@ -43,7 +49,7 @@
 				<li><a href="<%= root %>/admin/info.jsp">내 정보</a></li>
 				<li><a href="<%= root %>/admin/admin_logout.do">로그아웃</a></li>
 				<li><a href="#">판매자 회원 관리</a></li>
-				<li><a href="#">사용자 회원관리</a></li>
+				<li><a href="<%= root %>/admin/admin_member_list.jsp">사용자 회원관리</a></li>
 				<li><a href="#">통계보기</a></li>
 			</ul>
 			<%}else if(sdto !=null){//판매자면 %>
@@ -58,21 +64,17 @@
 				<li><a href="<%= root %>/index.jsp">사이트명(홈으로 가게 하는 사이트명)</a></li>
 				<li><a href="<%= root %>/member/info.jsp">내 정보</a></li>
 				<li><a href="<%= root %>/member/member_logout.do">로그아웃</a></li>
-				<li><a href="#">펜션 찾기</a></li>
-				<li><a href="#">내 예약 보기</a></li>
+				<li><a href="<%= root %>/member/pension_list.jsp">펜션 찾기</a></li>
+				<li><a href="<%= root %>/member/reservation_list.jsp?res_write=<%= mdto.getMember_no() %>">내 예약 보기</a></li>
 			</ul>
+			<%} %>
 		<%} %>
-		<%} %>
-		<ul class="menuu">
-				<li><a href="<%= root %>/index.jsp">사이트명(홈으로 가게 하는 사이트명)</a></li>
-				<li><a href="<%= root %>/admin/info.jsp">내 정보</a></li>
-				<li><a href="<%= root %>/admin/admin_logout.do">로그아웃</a></li>
-				<li><a href="<%= root %>/seller/pension_list.jsp">펜션관리</a></li>
-				<li><a href="#">업소관리</a></li>
-				<li><a href="#">입점신청</a></li>
-				<li><a href="#">펜션 찾기</a></li>
-				<li><a href="#">내 예약 보기</a></li>
-			</ul>
+<!-- 		<ul class="menuu"> -->
+<!-- 				<li><a href="#">업소관리</a></li> -->
+<!-- 				<li><a href="#">입점신청</a></li> -->
+<!-- 				<li><a href="#">펜션 찾기</a></li> -->
+<!-- 				<li><a href="#">내 예약 보기</a></li> -->
+<!-- 			</ul> -->
 		</nav>
 		<section>
 			<div class="row-empty"></div>

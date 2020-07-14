@@ -108,23 +108,24 @@
 		/* 확장 스타일 2번 : .table-stripe 로 줄무늬 부여 */
 		.table.table-stripe > tbody > tr:nth-child(2n) {
 		    /* RGB Hex String */
-		    background-color: #ffeaa7;
+		    background-color: #fb97c1;
 		}
 		.table.table-stripe > thead > tr {
-		    background-color: #fdcb6e;
+		    background-color: #ea1f62;;
 		}
 		
 		/* 확장 스타일 3번 : .table-sideopen 으로 옆트임 테이블 구현 */
 		.table.table-sideopen {
-		    border-top: 3px solid black;
-		    border-bottom: 3px solid black;
+		    border-top: 2px solid black;
+		    border-bottom: 2px solid black;
 		    border-collapse: collapse;
 		}
 		.table.table-sideopen > tbody {
-		    border-top: 3px solid black;
-		    border-bottom: 3px solid black;
+		    border-top: 2px solid black;
+		    border-bottom: 2px solid black;
 		}
 		.table.table-sideopen > tbody > tr {
+			
 		    border-bottom: 1px solid black;
 		}
 		
@@ -412,6 +413,7 @@
 	.right {text-align: right !important;}
 
 
+
 	/*textarea는 수직으로만 크기 조정이 가능하도록 구현*/
 	textarea:form-input{
 		resize: vertical;
@@ -424,8 +426,8 @@
             color: dimgray;
             display: inline-block;
             border:1px solid transparent;
-            padding: 0.5rem;
-            min-width: 2.5rem;
+            padding: 0.2rem;
+            min-width: 1.5rem;
             text-align: center;
         }
         .pagination a:hover,

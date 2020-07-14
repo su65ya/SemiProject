@@ -3,6 +3,8 @@ package semi.beans.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -61,8 +63,48 @@ public class PensionImageDao {
 		con.close();
 	}
 	
-	//펜션 삭제 메소드
-	public void delete(int pension_no)throws Exception{
-		
-	}
+	
+	// 펜션별 사진 뽑기
+		public PensionImageDto get(int pen_image_no) throws Exception {
+			Connection con = getConnection();
+			String sql = "SELECT * FROM pension_image WHERE pen_image_no=?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, pen_image_no);
+			ResultSet rs = ps.executeQuery();
+			PensionImageDto pidto;
+			if (rs.next()) {
+				pidto = new PensionImageDto();
+				pidto.setPen_image_no(pen_image_no);
+				pidto.setPen_image_pen_no(rs.getInt("pen_image_pen_no"));
+				pidto.setPen_image_name(rs.getString("pen_image_name"));
+				pidto.setPen_image_size(rs.getLong("pen_image_size"));
+				pidto.setPen_image_type(rs.getString("pen_image_type"));
+			} else {
+				pidto = null;
+			}
+
+			con.close();
+			return pidto;
+		}
+
+		// 펜션번호별 첨부된 파일 조회
+		public List<PensionImageDto> getList(int pen_img_pen_no) throws Exception {
+			Connection con = getConnection();
+			String sql = "SELECT * FROM pension_image WHERE pen_image_pen_no=? ORDER BY pen_image_no ASC";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, pen_img_pen_no);
+			ResultSet rs = ps.executeQuery();
+			List<PensionImageDto> list = new ArrayList<>();
+			while(rs.next()) {
+				PensionImageDto pidto = new PensionImageDto();
+				pidto.setPen_image_no(rs.getInt("pen_image_no"));
+				pidto.setPen_image_pen_no(pen_img_pen_no);
+				pidto.setPen_image_name(rs.getString("pen_image_name"));
+				pidto.setPen_image_size(rs.getLong("pen_image_size"));
+				pidto.setPen_image_type(rs.getString("pen_image_type"));
+				list.add(pidto);
+			}
+			con.close();
+			return list;
+		}
 }

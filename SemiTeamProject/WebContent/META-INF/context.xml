@@ -4,31 +4,18 @@
 <Context>
 
 	<!-- Resource 태그는 자원을 등록하기 위한 태그이며 첫글자가 대문자여야 한다 -->
-	<!-- 
-		name : 외부에서 접근하는 이름을 이렇게 하겠다 
-		type : 실제로 구동시키는 자바파일의 대상
-		auth : 전체를 관리하는 애를 누구로 할꺼야? 담당자 지정 container은 서버자체를 의미
-		
-		driverClassName : DB에 연결하기 위해 필요한 클래스 이름
-		
-		maxTotal : 최대 연결 개수
-		maxIdle : 최대 여유 개수
-		maxWait : 최대 대기시간(밀리초)
-	-->
+	<Resource name="jdbc/oracle"
+					 type="javax.sql.DataSource"
+					 auth="Container"
+					 
+					 driverClassName="oracle.jdbc.OracleDriver"
+					 url="jdbc:oracle:thin:@localhost:1521:xe"
+					 username="c##semi"
+					 password="c##semi"
+					 
+					 maxTotal="20"
+					 maxIdle="5"
+					 maxWait="3000"></Resource>
+					 
 	
-	<Resource name = "jdbc/oracle"
-			  type = "javax.sql.DataSource"
-			  auth = "Container"
-			  
-			  driverClassName = "oracle.jdbc.OracleDriver"
-			  url = "jdbc:oracle:thin:@localhost:1521:xe"
-			  username = "c##semi"
-			  password = "c##semi"
-			  
-			  maxTotal="20"
-			  maxIdle = "5"
-			  maxWait = "3000">
-	
-	</Resource>
-
 </Context>
