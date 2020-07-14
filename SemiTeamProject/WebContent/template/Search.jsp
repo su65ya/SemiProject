@@ -2,6 +2,47 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>날짜 선택기(Date Picker)</title>
+  
+    <style>
+        
+        .Search{
+            text-align: center;
+        }
+		
+
+   
+    </style>  
+  
+    <!-- moment js : datepicker를 사용하기 위한 필수 의존성 파일 -->
+    <script src="./js/moment.min.js"></script>
+    <!-- date-range-picker -->
+    <link rel="stylesheet" type="text/css" href="./css/lightpick.css">
+    <script src="./js/lightpick.js"></script>
+    
+    <script>
+        window.onload = function(){
+            var options = {
+                //선택1 날짜
+                field: document.querySelector(".picker-start"),
+                
+                //선택택2 날짜
+                secondField: document.querySelector(".picker-end"),
+                
+                //날짜 표시 형식 지정
+                format: 'YYYY-MM-DD',
+                
+                //한 화면에 표시될 달의 개수
+                numberOfMonths: 2,
+                
+                //시작일 지정
+                //minDate:new Date(),//- 오늘부터 선택 가능
+                minDate:moment(new Date())
+
+
 <style>
 .Search {
 	text-align: center;

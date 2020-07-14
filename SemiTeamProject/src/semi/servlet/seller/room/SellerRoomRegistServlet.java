@@ -51,7 +51,9 @@ public class SellerRoomRegistServlet extends HttpServlet{
 			RoomDao rdao = new RoomDao();
 			
 			int room_no = rdao.getSequence();
+			int pension_no = Integer.parseInt(map.get("pension_no").get(0).getString());
 			
+			rdto.setRoom_no(room_no);
 			rdto.setRoom_pension_no(Integer.parseInt(map.get("pension_no").get(0).getString()));
 			rdto.setRoom_name(map.get("room_name").get(0).getString());//get(0)=>1개의 데이터
 			rdto.setRoom_type(map.get("room_type").get(0).getString());
@@ -63,6 +65,7 @@ public class SellerRoomRegistServlet extends HttpServlet{
 			rdto.setOff_weekend(Integer.parseInt(map.get("off_weekend").get(0).getString()));
 			rdto.setOn_weekday(Integer.parseInt(map.get("on_weekday").get(0).getString()));
 			rdto.setOn_weekend(Integer.parseInt(map.get("on_weekend").get(0).getString()));
+			System.out.println(map);
 			
 			int amenity = Integer.parseInt(map.get("amenity").get(0).getString());
 			rdto.setAmenity(amenity);
@@ -87,12 +90,13 @@ public class SellerRoomRegistServlet extends HttpServlet{
 			int dog = Integer.parseInt(map.get("dog").get(0).getString());
 			rdto.setDog(dog);
 			
+			rdao.regist(rdto);
+			
 			List<FileItem> fileList = map.get("room_image");
 			RoomImageDao ridao = new RoomImageDao();
 			for(FileItem item : fileList) {
 				if(item.getSize()>0) {
 					int room_image_no = ridao.getSequence();
-					
 					RoomImageDto ridto = new RoomImageDto();
 					ridto.setRoom_image_no(room_image_no);
 					ridto.setRoom_image_name(item.getName());
@@ -106,7 +110,7 @@ public class SellerRoomRegistServlet extends HttpServlet{
 				}
 			}
 
-			resp.sendRedirect("room_result.jsp");
+			resp.sendRedirect("room_list.jsp?pension_no="+pension_no);
 		}catch(Exception e){
 			e.printStackTrace();
 			resp.sendError(500);

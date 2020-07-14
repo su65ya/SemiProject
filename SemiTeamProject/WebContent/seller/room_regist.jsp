@@ -89,6 +89,7 @@
 
    <article class="w-40">
 		<form action="room_regist.do" method="post" enctype="multipart/form-data">
+		<input type = "hidden" name = "pension_no" value = "<%=pension_no%>">
 			<div class="row">
 				<h2>객실 등록관리</h2>
 			</div>
@@ -229,7 +230,6 @@
             <div class="row-empty"></div>
             <div class="row-empty"></div>
             <div class="row">
-        		<input type = "hidden" name = "pension_no" value = "<%=pension_no%>">
         		<input class="form-btn" type="submit" value="객실등록하기">
 			</div>
             

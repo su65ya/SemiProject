@@ -4,35 +4,43 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import semi.beans.dto.MemberDto;
 import semi.beans.dao.MemberDao;
- 
-@WebServlet(urlPatterns = "/member/member_delete.do")
-public class MemberDeleteServlet extends HttpServlet {
+import semi.beans.dto.MemberDto;
+
+@WebServlet(urlPatterns = "/member/check.do")
+public class MemberCheckServlet extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		try {// 입력
+		
+		try {
+			String go = req.getParameter("go");
+			
+			String member_pw = req.getParameter("member_pw");
+			
 			MemberDto mdto = (MemberDto) req.getSession().getAttribute("userinfo");
 			String member_id = mdto.getMember_id();
-
-			// 처리
+			
 			MemberDao mdao = new MemberDao();
-			mdao.delete(member_id);
-
-			req.getSession().removeAttribute("userinfo");
-
-			resp.sendRedirect("delete_result.jsp");
-
-		} catch (Exception e) {
+			MemberDto user = new MemberDto();
+			user.setMember_id(member_id);
+			user.setMember_pw(member_pw);
+			MemberDto result = mdao.login(user);
+			
+			if(result == null) {
+				resp.sendRedirect("check.jsp?error&go=" +go);
+			}
+			else {
+				resp.sendRedirect(go);
+			}
+		}
+		
+		catch (Exception e) {
 			e.printStackTrace();
 			resp.sendError(500);
 		}
 	}
-
 }

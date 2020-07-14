@@ -25,8 +25,9 @@
 <%
 	PensionDao pdao = new PensionDao();
 	RoomDao rdao = new RoomDao();
-	List<RoomDto> list = rdao.getList();
 	int pension_no = Integer.parseInt(request.getParameter("pension_no"));
+	
+	List<RoomDto> list = rdao.getList(pension_no);
 	PensionInfoDto pdto = pdao.get(pension_no);
 	RoomImgViewDto rivdto = new RoomImgViewDto();
 

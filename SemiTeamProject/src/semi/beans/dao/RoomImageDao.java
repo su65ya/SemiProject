@@ -46,6 +46,7 @@ public class RoomImageDao {
 		ps.setString(3, ridto.getRoom_image_name());
 		ps.setLong(4, ridto.getRoom_image_size());
 		ps.setString(5, ridto.getRoom_image_type());
+		
 		ps.execute();
 		con.close();
 	}
@@ -69,6 +70,7 @@ public class RoomImageDao {
 		return ridto;
 	}
 
+	
 	public int getSequence() throws Exception{
 		Connection con = getConnection();
 		
