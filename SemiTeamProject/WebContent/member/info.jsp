@@ -93,6 +93,16 @@
 	
 	<div class="row-empty"></div> 
 	
+
+	<h5><a href="#">비밀번호 변경</a></h5>
+	<h5><a href="#">개인정보 변경</a></h5>
+	<h5><a href="#">로그아웃</a></h5>
+	<h5><a href="../member/delete.jsp">회원탈퇴</a></h5>
+
+</div>
+
+
 </article>
+
 
 <jsp:include page="/template/footer.jsp"></jsp:include>
