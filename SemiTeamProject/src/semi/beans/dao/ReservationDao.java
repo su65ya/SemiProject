@@ -82,7 +82,12 @@ private static DataSource src;
 	
 	
 	// 예약 등록 메소드
-	
+	public void reservation(ReservationDto redto)throws Exception{
+		Connection con = getConnection();
+		String sql = "INSERT INTO reservation VALUES(?,?,?,?,?,?,?,?,?)";
+		
+		con.close();
+	}
 	
 
 }
