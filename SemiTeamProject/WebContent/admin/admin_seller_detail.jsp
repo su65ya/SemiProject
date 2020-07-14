@@ -14,7 +14,7 @@
 
 <article class="w-50">
 	<div class="row">
-		<h2>[<%=sdto.getSeller_name()%>(<%=sdto.getCompany_no()%>)]님의 회원정보</h2>
+		<h2>[<%=sdto.getSeller_name()%> (사업자번호 : <%=sdto.getCompany_no()%>)]님의 회원정보</h2>
 	</div>
 	<div class="row">
 		<table class="table table-sideopen table-hover">
@@ -74,7 +74,7 @@
 		</a>
 	</div>
 	<div class="row" style="float: right;">
-		<a href="#">
+		<a href="<%=request.getContextPath()%>/admin/admin_check.jsp?go=<%=request.getContextPath() %>/admin/admin_seller_edit.jsp?seller_id=<%=sdto.getSeller_id()%>">
 			<input class= "form-btn" style="width: 150px;" type="button" value="판매자정보 수정">
 		</a>
 	</div>

@@ -3,7 +3,9 @@ package semi.beans.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.naming.Context;
@@ -156,6 +158,39 @@ public class SellerDao {
 		
 		con.close();
 		return list;
+	}
+	
+	// (관리자) 판매자 정보 수정
+	public void editByAdmin(SellerDto sdto) throws Exception {
+		Connection con = getConnection();
+		
+		String sql = "UPDATE seller SET "
+							+ "seller_pw=?, seller_name=?, seller_birth=?, seller_email=?, seller_post=?, "
+							+ "seller_basic_addr=?, seller_detail_addr=?, seller_phone=?, company_no=? "
+							+ "WHERE seller_id=?";
+		
+		String birth = sdto.getSeller_birth();
+
+		SimpleDateFormat original_format = new SimpleDateFormat("yyyy년 M월 d일");	
+		SimpleDateFormat new_format = new SimpleDateFormat("yyyy-MM-dd");
+		
+		Date original_birth = original_format.parse(birth);
+		String birthConvert = new_format.format(original_birth);
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, sdto.getSeller_pw());
+		ps.setString(2, sdto.getSeller_name());
+		ps.setString(3, birthConvert);
+		ps.setString(4, sdto.getSeller_email());
+		ps.setString(5, sdto.getSeller_post());
+		ps.setString(6, sdto.getSeller_basic_addr());
+		ps.setString(7, sdto.getSeller_detail_addr());
+		ps.setString(8, sdto.getSeller_phone());
+		ps.setString(9, sdto.getCompany_no());
+		ps.setString(10, sdto.getSeller_id());
+		ps.execute();
+		
+		con.close();
 	}
 
 }
