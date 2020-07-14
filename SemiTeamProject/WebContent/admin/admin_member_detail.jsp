@@ -14,7 +14,7 @@
 
 <article class="w-50">
 	<div class="row">
-		<h2>회원정보</h2>
+		<h2>[<%=user.getMember_name()%>(<%=user.getMember_id()%>)]님의 회원정보</h2>
 	</div>
 	<div class="row">
 		<table class="table table-sideopen table-hover">
@@ -25,11 +25,7 @@
 				</tr>
 				<tr>
 					<th>비밀번호</th>
-					<td class="left">
-						<a href="#">
-						<input class="form-btn2" type="button"  value="비밀번호 변경">
-						</a>
-					</td>
+					<td class="left"><%=user.getMember_pw() %></td>
 				</tr>
 				<tr>
 					<th>이름</th>
@@ -37,7 +33,7 @@
 				</tr>
 				<tr>
 					<th>생년월일</th>
-					<td class="left"><%=user.getMember_birth()%></td>
+					<td class="left"><%=user.getMember_birthdayFormat()%></td>
 				</tr>
 				<tr>
 					<th>이메일</th>
@@ -47,8 +43,8 @@
 					<th>주소</th>
 					<td class="left">
 						[<%=user.getMember_post() %>]
-						<%=user.getMember_basic_addr() %>
-						<%=user.getMember_detail_addr() %>
+						<%=user.getMember_basic_addr()%>
+						<%=user.getMember_detail_addr()%>
 					</td>
 				</tr>
 				<tr>
@@ -67,13 +63,18 @@
 		</table>
 
 	</div>
+	<div class="row" style="float: left;">
+		<a href="admin_member_list.jsp">
+			<input class= "form-btn" style="width: 150px;" type="button" value="◀회원 리스트">
+		</a>
+	</div>
 	<div class="row" style="float: right;">
-		<a href="#">
+		<a href="<%=request.getContextPath()%>/admin/admin_check.jsp?go=<%=request.getContextPath() %>/admin/memberDrop.do?member_id=<%=user.getMember_id()%>">
 			<input class= "form-btn" style="width: 150px;" type="button" value="회원 탈퇴">
 		</a>
 	</div>
 	<div class="row" style="float: right;">
-		<a href="#">
+		<a href="<%=request.getContextPath()%>/admin/admin_check.jsp?go=<%=request.getContextPath() %>/admin/admin_member_edit.jsp?member_id=<%=user.getMember_id()%>">
 			<input class= "form-btn" style="width: 150px;" type="button" value="회원정보 수정">
 		</a>
 	</div>

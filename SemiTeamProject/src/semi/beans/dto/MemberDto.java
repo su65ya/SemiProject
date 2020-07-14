@@ -2,6 +2,9 @@ package semi.beans.dto;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MemberDto {
 	private int member_no;
@@ -71,6 +74,13 @@ public class MemberDto {
 
 	public String getMember_birth() {
 		return member_birth;
+	}
+	
+	public String getMember_birthdayFormat() throws ParseException{
+		SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date d = s.parse(member_birth);
+		SimpleDateFormat f = new SimpleDateFormat("y년 M월 d일");
+		return f.format(d);
 	}
 
 	public void setMember_birth(String member_birth) {
