@@ -1,3 +1,9 @@
+<%@page import="semi.beans.dto.PensionImageDto"%>
+<%@page import="java.util.List"%>
+<%@page import="semi.beans.dao.PensionImageDao"%>
+<%@page import="semi.beans.dto.PensionInfoDto"%>
+<%@page import="semi.beans.dto.PensionOptionDto"%>
+<%@page import="semi.beans.dao.PensionOptionDao"%>
 <%@page import="semi.beans.dao.PensionDao"%>
 <%@page import="semi.beans.dto.PensionDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -6,9 +12,47 @@
     <%
     int pension_no = Integer.parseInt(request.getParameter("pension_no"));
 	PensionDao pdao = new PensionDao();
-	PensionDto pdto = pdao.get(pension_no);
+	PensionInfoDto pdto = pdao.get(pension_no);
     
+	PensionOptionDao podao = new PensionOptionDao();
+	
+	PensionImageDao pidao = new PensionImageDao();
+	List<PensionImageDto> imageList = pidao.getList(pension_no);
+	
+	int fire_price = podao.getPrice(pension_no, "숯불");
+	int adult_price = podao.getPrice(pension_no, "성인");
+	int child_price = podao.getPrice(pension_no, "아동");
+	int dog_price = podao.getPrice(pension_no, "반려견");
+	
     %>
+            <style>
+    	span{
+    		color:red;
+    		font-size:16;
+    	}
+    	label{
+    		font-size:13;
+    		font-weight: bold;
+    	}
+    	
+    	.select{
+    		height: 36px;
+            width: 70px;
+    	}
+    	.price {
+    		width: 60px;
+    	}
+    	span{
+    		color:red;
+    		font-size:16;
+    	}
+    	.ck + label {
+            color:black;
+        }
+        .ck:checked + label {
+            color:silver;
+        }
+    </style>
 <jsp:include page="/template/nav.jsp"></jsp:include>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -80,9 +124,11 @@
 				<input class="form-input form-inline" type="text" name="pension_post" value="<%=pdto.getPension_post() %>" required>
 				<input onclick="findAddress();" type="button" value="우편번호 찾기">
 			</div>
+			<div class="row-emptyy"></div>
 			<div class="row">
 				<input class="form-input" type="text" name="pension_basic_addr" <%=pdto.getPension_basic_addr() %> required>
 			</div>
+			<div class="row-emptyy"></div>
 			<div class="row">
 				<input class="form-input" type="text" name="pension_detail_addr" value="<%=pdto.getPension_detail_addr() %>" required>
 			</div>
@@ -95,6 +141,64 @@
 				<textarea rows="15" cols="77" name="pension_intro" required><%=pdto.getPension_intro() %></textarea>
 			</div>
 			<div class="row-empty"></div>
+			<div class="row-empty"></div>
+			<div class="row"><hr></div>
+			<div class="row-empty"></div>
+			<div class="row-empty"></div>
+			<div class="row center">
+				<label>옵션</label>
+			</div>
+			<div class="row-empty"></div>
+			<div class="row-empty"></div>
+			<div class="row">
+			<!-- 숯불  -->
+				<label class="select option_name1">숯불</label>&nbsp;&nbsp;
+				<input class="form-input option_price1 form-inline" type="number" <%if(fire_price!=-1){ %>value="<%=fire_price %>" <%}else{ %>placeholder="가격 ex)10000" <%} %>onblur="setOption1();">
+				<input type="hidden" name="option" value="">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<!-- 성인  -->
+				<label class="select option_name2">성인</label>&nbsp;&nbsp;&nbsp;
+				<input class="form-input option_price2 form-inline" type="number" <%if(adult_price!=-1){ %>value =<%=adult_price %> <%}else{ %>placeholder="가격 ex)10000" <%} %>onblur="setOption2();">
+				<input type="hidden" name="option" value="">
+			</div>
+			<div class="row-emptyy"></div>
+			<div class="row">
+			<!-- 아동  -->
+				<label class="select option_name3">아동</label>&nbsp;&nbsp;
+				<input class="form-input option_price3 form-inline" type="number" <%if(child_price!=-1){ %> value="<%=child_price %>"  <%}else{ %>placeholder="가격 ex)10000" <%} %> onblur="setOption3();">
+				<input type="hidden" name="option" value="">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<!-- 반려견 -->
+				<label class="select option_name4">반려견</label>&nbsp;
+				<input class="form-input option_price4 form-inline" type="number" <%if(dog_price!=-1){ %> value="<%=dog_price %>" <%}else{ %> placeholder="가격 ex)10000" <%} %> onblur="setOption4();">
+				<input type="hidden" name="option" value="">
+			</div>
+			<div class="row-emptyy"></div><hr>
+			<div class="row-emptyy"></div>
+			<div class="row center">
+				<label>펜션 시설</label>
+			</div>
+			<div class="row-empty"></div>
+			<div class="row-empty"></div>
+			<div class="row-empty"></div>
+			<div class="row">
+                <input class="select-item form-inline ck swim" type="checkbox" name="option" id="swim" onchange="plusswim();">
+        		<label for="swim">수영장</label>
+        		<input class="select-item form-inline ck" type="checkbox" name="option" id="foot" onchange="plusfoot();">
+        		<label for="foot">족구장</label>
+        		<input class="select-item form-inline ck" type="checkbox" name="option" id="sing" onchange="plussing();">
+        		<label for="sing">노래방</label>
+        		<input class="select-item form-inline ck" type="checkbox" name="option" id="tak"  onchange="plustak();">
+        		<label for="tak">탁구장</label>
+        		<input class="select-item form-inline ck" type="checkbox" name="option" id="public_bbq" value="" onchange="plusPublic();">
+        		<label for="public_bbq">공용 바베큐장</label>
+        		<input class="select-item form-inline ck" type="checkbox" name="option" id="private_bbq" value="" onchange="plusPrivate();">
+        		<label for="private_bbq">개별 바베큐</label>
+			</div>
+			<div class="row-empty"></div>
+			<div class="row-empty"></div>
+			<div class="row-empty"></div><hr>
+			<div class="row-empty"></div>
 			<div class="row">
 				<label>펜션 사진 등록</label><br>
 				<div class="row-empty"></div>
@@ -102,10 +206,18 @@
 			</div>
 			<div class="row-empty"></div>
 			<div class="row">
-				<input class= "form-btn" type="submit" value="수정하기">
+			<%for(PensionImageDto pidto : imageList){ %>
+				<img src="D:/upload/pension/pen_image_no=<%=pidto.getPen_image_no()%>" width="50" height="50">
+			<%} %>
+			</div>
+			<div class="row right">
+			
+				<input class= "form-btn form-inline center" type="submit" value="수정하기">
+				<a href="pension_list.jsp">
+					<input class="form-btn form-inline center" type="button" value="목록보기">
+				</a>
 			</div>
 			<div class="row"></div>
-		
 		</form>
 	</article>
 
