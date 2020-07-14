@@ -1,3 +1,5 @@
+<%@page import="semi.beans.dto.RoomImgViewDto"%>
+<%@page import="semi.beans.dto.RoomImageDto"%>
 <%@page import="semi.beans.dto.PensionInfoDto"%>
 <%@page import="semi.beans.dto.PensionDto"%>
 <%@page import="semi.beans.dao.PensionDao"%>
@@ -8,17 +10,27 @@
     pageEncoding="UTF-8"%>
 
 <style>
-
+	th {
+	color:white;
+    background-color: #ff5990;
+    
+  }
+  tbody tr:nth-child(2n+1) {
+    background-color: #ffe6ee;
+  }
+  
 
 </style>
 <jsp:include page="/template/nav.jsp"></jsp:include>
 <%
 	PensionDao pdao = new PensionDao();
 	RoomDao rdao = new RoomDao();
-	
 	int pension_no = Integer.parseInt(request.getParameter("pension_no"));
+	
 	List<RoomDto> list = rdao.getList(pension_no);
 	PensionInfoDto pdto = pdao.get(pension_no);
+	RoomImgViewDto rivdto = new RoomImgViewDto();
+
 %>
 
 <!-- 객실 목록 리스트 -->
@@ -31,7 +43,7 @@
 		<table class="table table-sideopen">
 			<thead>
 				<tr>
-					<th colspan="4">
+					<th colspan="7">
 <%-- 					<input type="hidden" name="pension_no" value="<%=(request.getParameter("pension_no"))%>"> --%>
 					<%=pdto.getPension_name()%>
 					</th>
@@ -40,29 +52,36 @@
 			<tbody>
 			<%for(RoomDto rdto : list){ %>
 				<tr>
-  					<td rowspan="7">객실 사진</td>
-   					<td class="left" >객실명 : <%=rdto.getRoom_name() %></td>
+					<%rivdto = rdao.getImgView(rdto.getRoom_pension_no()); 
+					if(rivdto != null){%>
+  					<td rowspan="8"><img src="roomdownload.do?room_image_no=<%=rivdto.getRoom_image_no() %>" width="200" height="200"></td>
+   					<%}else{ %>
+					<td rowspan="8" style="background-color:white"><img src="https://placehold.it/250x250"></td>
+					<%} %>
+				</tr>
+				<tr>
+   					<td class="left" style="padding:0.7em">객실명 : <%=rdto.getRoom_name() %></td>
+   				</tr>
+				<tr>	
+  					<td class="left" style="padding:0.7em">객실 유형 : <%=rdto.getRoom_type() %></td>
   				</tr>
-  				<tr>
-  					<td class="left">객실 유형 : <%=rdto.getRoom_type() %></td>
+				<tr>
+    				<td class="left" style="padding:0.7em">인원 : 기준<%=rdto.getStandard_people() %>명 / 최대<%=rdto.getMax_people() %>명</td>
+    			</tr>
+				<tr>	
+    				<td class="left" style="padding:0.7em">방평수 : <%=rdto.getRoom_width() %>형</td>
   				</tr>
-  				<tr>
-    				<td class="left">인원 : 기준<%=rdto.getStandard_people() %>명 / 최대<%=rdto.getMax_people() %>명</td>
+				<tr>	
+  					<td class="left" style="padding:0.7em">화장실개수 : <%=rdto.getToilet_count() %>개  </td>
   				</tr>
-  				<tr>
-    				<td class="left">방평수 : <%=rdto.getRoom_width() %>형</td>
-  				</tr>
-  				<tr>
-  					<td class="left">화장실개수 : <%=rdto.getToilet_count() %>개  </td>
-  				</tr>
-  				<tr>
-  					<td class="left">
+				<tr>	
+  					<td class="left" style="padding:0.7em">
   						비수기 평일/주말가격 : <%=rdto.getOff_weekday() %>원 / <%=rdto.getOff_weekend() %>원<br>
   						성수기 평일/주말가격 : <%=rdto.getOn_weekday() %>원 / <%=rdto.getOn_weekend() %>원
   					</td>
   				</tr>
   				<tr>
-    				<td class="row right">
+    				<td class="row right" colspan="7" >
 					<a href = "password_check.jsp?go=room_delete.do?room_no=<%=rdto.getRoom_no()%>">
 					<input class = "form-btn form-inline" type="button" value = "객실삭제">
 					</a>

@@ -12,6 +12,7 @@ import javax.sql.DataSource;
 
 import com.sun.org.apache.regexp.internal.recompile;
 
+import oracle.jdbc.proxy.annotation.Pre;
 import semi.beans.dto.PensionImageDto;
 import semi.beans.dto.RoomImageDto;
 
@@ -45,8 +46,42 @@ public class RoomImageDao {
 		ps.setString(3, ridto.getRoom_image_name());
 		ps.setLong(4, ridto.getRoom_image_size());
 		ps.setString(5, ridto.getRoom_image_type());
+		
 		ps.execute();
 		con.close();
+	}
+	
+	//객실 이미지 가져오기
+	public RoomImageDto get(int room_image_no) throws Exception {
+		Connection con = getConnection();
+		
+		String sql = "SELECT room_image WHERE room_image_no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setInt(1, room_image_no);
+		ResultSet rs = ps.executeQuery();
+		RoomImageDto ridto;
+		if(rs.next()) {
+			ridto=new RoomImageDto(rs);
+		}else {
+			ridto=null;
+		}
+		con.close();
+		return ridto;
+	}
+
+	
+	public int getSequence() throws Exception{
+		Connection con = getConnection();
+		
+		String sql = "SELECT room_image_seq.nextval FROM dual";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		int seq = rs.getInt(1);
+		
+		con.close();
+		return seq;
 	}
 
 	

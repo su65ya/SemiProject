@@ -39,131 +39,21 @@
             }
             
           
-        function ckck(){
-                var check_count = document.getElementsByClassName("ck").length;
-                var hidden= document.querySelectorAll(".ck+input");
-         
-                for (var i=0; i<check_count; i++) {
-                    if (document.getElementsByClassName("ck")[i].checked) {
-                       hidden[i].value="1";
-                    }else{
-                    	hidden[i].value="0";//이것만해결하면 완벽
-                    }
-              	}
-            }
+
+        function ckck() {
+            var check_count = document.getElementsByClassName("select-item");
+            var hidden= document.querySelectorAll(".select-item+input");
+            
+            for (var i=0; i<check_count.length; i++) {
+                if (check_count[i].checked) {
+                	hidden[i].value="1";
+                }else{
+                	hidden[i].value="0";
+                }
+          	}
+        }
         
-        
-//         function ckck1(){
-//         	var check = document.querySelector("#amenity_id").checked;
-        	
-//         	var hidden = document.querySelector("#amenity_id+input");
-//         	if(check){
-//         		hidden.value = "1";
-//         	}else{
-//         		hidden.value = "0";
-//         	}
-//         }
-//         function ckck2(){
-//         	var check = document.querySelector("#micro_id").checked;
-        	
-//         	var hidden = document.querySelector("#micro_id+input");
-//         	if(check){
-//         		hidden.value = "1";
-//         	}else{
-//         		hidden.value = "0";
-//         	}
-//         }
-//         function ckck3(){
-//         	var check = document.querySelector("#bed_id").checked;
-        	
-//         	var hidden = document.querySelector("#bed_id+input");
-//         	if(check){
-//         		hidden.value = "1";
-//         	}else{
-//         		hidden.value = "0";
-//         	}
-//         }
-//         function ckck4(){
-//         	var check = document.querySelector("#tv_id").checked;
-        	
-//         	var hidden = document.querySelector("#tv_id+input");
-//         	if(check){
-//         		hidden.value = "1";
-//         	}else{
-//         		hidden.value = "0";
-//         	}
-//         }
-//         function ckck5(){
-//         	var check = document.querySelector("#room_sofa_id").checked;
-        	
-//         	var hidden = document.querySelector("#room_sofa_id+input");
-//         	if(check){
-//         		hidden.value = "1";
-//         	}else{
-//         		hidden.value = "0";
-//         	}
-//         }
-//         function ckck6(){
-//         	var check = document.querySelector("#room_aircon_id").checked;
-        	
-//         	var hidden = document.querySelector("#room_aircon_id+input");
-//         	if(check){
-//         		hidden.value = "1";
-//         	}else{
-//         		hidden.value = "0";
-//         	}
-//         }
-//         function ckck7(){
-//         	var check = document.querySelector("#fridge_id").checked;
-        	
-//         	var hidden = document.querySelector("#fridge_id+input");
-//         	if(check){
-//         		hidden.value = "1";
-//         	}else{
-//         		hidden.value = "0";
-//         	}
-//         }
-//         function ckck8(){
-//         	var check = document.querySelector("#tub_id").checked;
-        	
-//         	var hidden = document.querySelector("#tub_id+input");
-//         	if(check){
-//         		hidden.value = "1";
-//         	}else{
-//         		hidden.value = "0";
-//         	}
-//         }
-//         function ckck9(){
-//         	var check = document.querySelector("#hairdryer_id").checked;
-        	
-//         	var hidden = document.querySelector("#hairdryer_id+input");
-//         	if(check){
-//         		hidden.value = "1";
-//         	}else{
-//         		hidden.value = "0";
-//         	}
-//         }
-//         function ckck10(){
-//         	var check = document.querySelector("#cookoo_id").checked;
-        	
-//         	var hidden = document.querySelector("#cookoo_id+input");
-//         	if(check){
-//         		hidden.value = "1";
-//         	}else{
-//         		hidden.value = "0";
-//         	}
-//         }
-//         function ckck11(){
-//         	var check = document.querySelector("#dog_id").checked;
-        	
-//         	var hidden = document.querySelector("#dog_id+input");
-//         	if(check){
-//         		hidden.value = "1";
-//         	}else{
-//         		hidden.value = "0";
-//         	}
-//         }
-        
+
         function preview(){
             var fileTag = document.querySelector("input[name=room_image]");
             
@@ -198,7 +88,8 @@
 <jsp:include page="/template/nav.jsp"></jsp:include>
 
    <article class="w-40">
-		<form action="room_regist.do" method="post">
+		<form action="room_regist.do" method="post" enctype="multipart/form-data">
+		<input type = "hidden" name = "pension_no" value = "<%=pension_no%>">
 			<div class="row">
 				<h2>객실 등록관리</h2>
 			</div>
@@ -339,7 +230,6 @@
             <div class="row-empty"></div>
             <div class="row-empty"></div>
             <div class="row">
-        		<input type = "hidden" name = "pension_no" value = "<%=pension_no%>">
         		<input class="form-btn" type="submit" value="객실등록하기">
 			</div>
             

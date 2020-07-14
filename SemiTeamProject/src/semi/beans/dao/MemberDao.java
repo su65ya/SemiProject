@@ -75,7 +75,6 @@ public class MemberDao {
 		return user;
 	}
 	
-
 	//사용자 비밀번호 변경
 	public void changePassword(MemberDto mdto) throws Exception {
 		Connection con = getConnection();
@@ -120,12 +119,13 @@ public class MemberDao {
 		con.close();
 	}
 
+
 	//아이디 찾기 메소드
-	
 	public String findId(MemberDto mdto) throws Exception{
 		Connection con = getConnection();
 		String sql = "SELECT member_id FROM member WHERE member_name=? and member_phone=? and member_birth=?";
 		
+
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, mdto.getMember_name());
 		ps.setString(2, mdto.getMember_phone());
@@ -142,9 +142,9 @@ public class MemberDao {
 		}
 		
 		con.close();
-		
 		return member_id;
 	}
+	
 	
 
 

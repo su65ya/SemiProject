@@ -1,5 +1,8 @@
 package semi.beans.dto;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class RoomImageDto {
 	private int room_image_no;   
 	private int room_image_room_no; 
@@ -9,6 +12,14 @@ public class RoomImageDto {
 	
 	public RoomImageDto() {
 		super();
+	}
+	
+	public RoomImageDto(ResultSet rs)throws SQLException{
+		this.setRoom_image_no(rs.getInt("room_image_no"));
+		this.setRoom_image_room_no(rs.getInt("room_image_room_no"));
+		this.setRoom_image_name(rs.getString("room_image_name"));
+		this.setRoom_image_size(rs.getLong("room_image_size"));
+		this.setRoom_image_type(rs.getString("room_image_type"));
 	}
 
 	public int getRoom_image_no() {
@@ -50,5 +61,5 @@ public class RoomImageDto {
 	public void setRoom_image_type(String room_image_type) {
 		this.room_image_type = room_image_type;
 	}
-	
+
 }
