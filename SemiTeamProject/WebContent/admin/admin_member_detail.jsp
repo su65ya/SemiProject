@@ -37,7 +37,7 @@
 				</tr>
 				<tr>
 					<th>생년월일</th>
-					<td class="left"><%=user.getMember_birthdayFormat()%></td>
+					<td class="left"><%=user.getMember_birth()%></td>
 				</tr>
 				<tr>
 					<th>이메일</th>
