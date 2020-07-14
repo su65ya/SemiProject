@@ -1,4 +1,4 @@
-package semi.servlet.member;
+package semi.servlet.admin;
 
 import java.io.IOException;
 
@@ -8,30 +8,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import semi.beans.dao.MemberDao;
-import semi.beans.dto.MemberDto;
+import semi.beans.dao.AdminDao;
+import semi.beans.dto.AdminDto;
 
-@WebServlet(urlPatterns = "/member/check.do")
-public class MemberCheckServlet extends HttpServlet{
+@WebServlet(urlPatterns = "/admin/admin_check.do")
+public class AdminCheckServlet extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		try {
 			String go = req.getParameter("go");
 			
-			String member_pw = req.getParameter("member_pw");
+			String admin_pw = req.getParameter("admin_pw");
 			
-			MemberDto mdto = (MemberDto) req.getSession().getAttribute("userinfo");
-			String member_id = mdto.getMember_id();
+			AdminDto adto = (AdminDto) req.getSession().getAttribute("admininfo");
+			String admin_id = adto.getAdmin_id();
 			
-			MemberDao mdao = new MemberDao();
-			MemberDto user = new MemberDto();
-			user.setMember_id(member_id);
-			user.setMember_pw(member_pw);
-			MemberDto result = mdao.login(user);
+			AdminDao adao = new AdminDao();
+			AdminDto user = new AdminDto();
+			user.setAdmin_id(admin_id);
+			user.setAdmin_pw(admin_pw);
+			AdminDto result = adao.login(user);
 			
 			if(result == null) {
-				resp.sendRedirect("check.jsp?error&go=" +go);
+				resp.sendRedirect("admin_check.jsp?error&go=" +go);
 			}
 			else {
 				resp.sendRedirect(go);

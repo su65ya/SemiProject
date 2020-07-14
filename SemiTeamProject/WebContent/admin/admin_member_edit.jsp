@@ -57,12 +57,12 @@
 				</tr>
 				<tr>
 					<td>
-						<input type="text" name="member_basic_add" value="<%=mdto.getMember_basic_addr()%>">
+						<input type="text" name="member_basic_addr" value="<%=mdto.getMember_basic_addr()%>">
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<input type="text" name="member_detail_addr()" value="<%=mdto.getMember_detail_addr()%>">
+						<input type="text" name="member_detail_addr" value="<%=mdto.getMember_detail_addr()%>">
 					</td>
 				</tr>
 				<tr>
