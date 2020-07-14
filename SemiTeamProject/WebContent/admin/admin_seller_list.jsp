@@ -43,7 +43,7 @@
 				<th><%=sdto.getSeller_id() %></th>
 				<th><%=sdto.getSeller_name()%></th>
 				<th>
-					<a href="">
+					<a href="admin_seller_detail.jsp?seller_id=<%=sdto.getSeller_id() %>">
 						<input type="button" value="상세정보보기">
 					</a>
 				</th>

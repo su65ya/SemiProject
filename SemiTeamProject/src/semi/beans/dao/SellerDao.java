@@ -123,7 +123,7 @@ public class SellerDao {
 	public List<SellerDto> search() throws Exception {
 		Connection con = getConnection();
 		
-		String sql = "SELECT * FROM seller ORDER BY seller_no ASC";
+		String sql = "SELECT * FROM seller ORDER BY seller_no DESC";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
@@ -141,7 +141,7 @@ public class SellerDao {
 	public List<SellerDto> search(String type, String keyword) throws Exception{
 		Connection con = getConnection();
 		
-		String sql = "SELECT * FROM seller WHERE instr(#1 , ?) > 0 ORDER BY #1 ASC";
+		String sql = "SELECT * FROM seller WHERE instr(#1 , ?) > 0 ORDER BY #1 DESC";
 		sql = sql.replace("#1", type);
 		
 		PreparedStatement ps = con.prepareStatement(sql);

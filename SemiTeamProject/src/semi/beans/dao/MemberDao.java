@@ -199,7 +199,7 @@ public class MemberDao {
 	public List<MemberDto> search(String member_id) throws Exception{
 		Connection con = getConnection();
 		
-		String sql = "SELECT * FROM member WHERE instr(member_id, ?) > 0 ORDER BY member_id ASC";
+		String sql = "SELECT * FROM member WHERE instr(member_id, ?) > 0 ORDER BY member_id DESC";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, member_id);
 		ResultSet rs = ps.executeQuery();
@@ -217,7 +217,7 @@ public class MemberDao {
 	public List<MemberDto> search(String type, String keyword) throws Exception {
 		Connection con = getConnection();
 		
-		String sql = "SELECT * FROM member WHERE instr(#1, ?) > 0 ORDER BY #1 ASC";
+		String sql = "SELECT * FROM member WHERE instr(#1, ?) > 0 ORDER BY #1 DESC";
 		sql = sql.replace("#1", type);
 		
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -237,7 +237,7 @@ public class MemberDao {
 		public List<MemberDto> search() throws Exception {
 			Connection con = getConnection();
 			
-			String sql = "SELECT * FROM member ORDER BY member_no ASC";
+			String sql = "SELECT * FROM member ORDER BY member_no DESC";
 			
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
