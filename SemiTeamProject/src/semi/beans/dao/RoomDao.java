@@ -67,12 +67,13 @@ private static DataSource src;
 	
 	
 	//객실 리스트 메소드
-	public List<RoomDto> getList() throws Exception{
+	public List<RoomDto> getList(int room_pension_no) throws Exception{
 		Connection con = getConnection();
 		
-		String sql = "SELECT * FROM room ORDER BY room_no ASC";
+		String sql = "SELECT * FROM room WHERE  room_pension_no = ? ORDER BY room_no ASC";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, room_pension_no);
 		ResultSet rs = ps.executeQuery();
 		
 		List<RoomDto> list = new ArrayList<>();
@@ -98,12 +99,12 @@ private static DataSource src;
 	}
 	
 	//객실 단일조회 메소드
-	public RoomDto get(int pension_no) throws Exception{
+	public RoomDto get(int room_pension_no) throws Exception{
 		Connection con = getConnection();
 		String sql = "SELECT * FROM room WHERE room_pension_no=?";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, pension_no);
+		ps.setInt(1, room_pension_no);
 		ResultSet rs = ps.executeQuery();
 		RoomDto rdto;
 		if(rs.next()) {
