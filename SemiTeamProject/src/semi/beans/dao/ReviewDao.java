@@ -181,17 +181,14 @@ public class ReviewDao {
 			con.close();
 		}
 	
-		// 답글 작성 메소드
-		public void replywrite(ReviewDto revdto) throws Exception {
+
+		public void delete(int review_no) throws Exception{
 			Connection con = getConnection();
 			
-			String sql = "UPDATE review SET reply_writer = ?, review_reply = ? WHERE review_no = ?";
+			String sql = "DELETE review WHERE review_no=?";
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, revdto.getReply_writer());
-			ps.setString(2, revdto.getReview_reply());
-			ps.setInt(3, revdto.getReview_no());
+			ps.setInt(1, review_no);
 			ps.execute();
-			
 			
 			con.close();
 		}
