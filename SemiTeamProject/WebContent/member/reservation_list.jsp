@@ -60,7 +60,7 @@
 					<td><%= rvdto.getRes_name() %></td>
 					<td>성인2명</td>
 					<td class="in-out"><%= rvdto.getRes_date_day()%></td>
-					<td><%=DateChecker.cal(rvdto.getRes_price()) %> 원</td>
+					<td style="text-align: right;"><%=DateChecker.cal(rvdto.getRes_price()) %> 원</td>
 					
 				</tr>
 			<%} %>
