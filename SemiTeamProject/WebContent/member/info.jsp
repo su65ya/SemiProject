@@ -12,22 +12,19 @@
  
 <jsp:include page="/template/nav.jsp"></jsp:include>
 
- <style>
-        .form-input,.form-btn2{
-            padding: 0.3rem;
-            outline: none;/*선택시 자동 부여되는 테두리 제거*/
-            border: 1px solid black;
-        }
-        .form-btn2{
-        	background-color:lightgray;
-            color: black;
-            cursor: pointer;
-        }
-        
-        a {
-        	text-decoration: none;
-        }  
- </style>
+<style>
+
+	a {
+    	text-decoration: none;
+    }
+
+    
+    .form-btn {
+    	border: none;
+    	border-radius: 5px;
+    }
+    
+</style>
     
 <article class="w-50">
 	<div class="row">
@@ -93,17 +90,6 @@
 			<input class= "form-btn" style="width: 150px;" type="button" value="회원정보 수정">
 		</a>
 	</div>
-	
-	<div class="row-empty"></div> 
-	
-
-	<h5><a href="#">비밀번호 변경</a></h5>
-	<h5><a href="#">개인정보 변경</a></h5>
-	<h5><a href="#">로그아웃</a></h5>
-	<h5><a href="../member/delete.jsp">회원탈퇴</a></h5>
-
-</div>
-
 
 </article>
 
