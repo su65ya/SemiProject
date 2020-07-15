@@ -114,6 +114,8 @@
 		}
     </script>
 <%
+
+	int reservation_no = Integer.parseInt(request.getParameter("reservation_no"));
 	PensionDao pdao = new PensionDao();
 	RoomDao rdao = new RoomDao();
 	int pension_no = Integer.parseInt(request.getParameter("pension_no"));
@@ -124,14 +126,14 @@
 	PensionImageDao pidao = new PensionImageDao();
 	List<PensionImageDto> fileList = pidao.getList(pension_no);
 	
-	Calendar cal = Calendar.getInstance();
-	SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd");
 
 	
 	PenImgViewDto viewDto = new PenImgViewDto();
 	
 	MemberDto mdto = (MemberDto)session.getAttribute("userinfo");
 
+	Calendar cal = Calendar.getInstance();
+	SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd");
 %>
 
     <div class="swiper-container">
@@ -156,10 +158,11 @@
 -->
     </div>
     
-    <form action="save_reservation_info.do" method="post">
+    <form action="reservation_step2.do" method="post">
     <article class="w-80">
     <div class="row left">
         <h2 style="height: 15px;" class="left"><%=pdto.getPension_name() %></h2>
+        <input type = "hidden" name = "reservation_no" value = "<%=reservation_no%>">
     </div>
     <div class="row left">
         <h6  class="left" style="height: 15px; margin: 0;">[<%=pdto.getPension_post() %>] <%=pdto.getPension_basic_addr() %> <%=pdto.getPension_detail_addr() %></h6>
@@ -179,7 +182,7 @@
     <div class="row-empty"></div>
     <div class="row-empty"></div>
     <div> 
-    	<h4  class="left">"먼저 아래 달력에서 예약할 객실을 선택하고 오른쪽에서 인원을 입력 후 예약하기를 눌러주세요."</h4>
+    	<h4  class="left">"먼저 아래 달력에서 예약할 객실을 선택하고 하단의 옵션에서 인원을 입력 후 예약하기를 눌러주세요."</h4>
     </div>
     <div class="center">
         <table class="table table-border center">
@@ -194,77 +197,29 @@
 	                    <%=date111 %>
 	                    </th>
                     <%}%>
-                    <th>옵션</th>
                 </tr>
             </thead>
             <tbody>
                 <%for(RoomDto rdto : list){%>
                 <%cal = Calendar.getInstance(); %>
 		                <tr>
-		                    <td style="width: 90px; padding: 0;"><img src="https://placehold.it/90x90"></td>
+		                    <td style="width: 90px; padding: 0;"><img src="https://placehold.it/100x120"></td>
 		                    <%for(int j = 0;j<14;j++){ %>
 		                    <% 
 		                    if(j > 0) cal.add(Calendar.DATE, 1); %>
 		                    <td>
 		                    	<div style="height: 70px; text-align: center; padding-top: 1.5rem;"><%=DateChecker.calculatePriceWithFormat(cal, rdto)%>
 		                    	<input type="hidden" name="res_info">
-		                    	<input type="hidden" id="re_info" value="<%=pension_no %>/<%=mdto.getMember_no() %>/<%=mdto.getMember_id() %>/<%=rdto.getRoom_no() %>/<%=rdto.getRoom_name() %>/<%=DateChecker.year(cal) %>/<%=DateChecker.month(cal) %>/<%=DateChecker.day(cal)%>/<%=DateChecker.calculatePrice(cal, rdto)%>">
+		                    	<input type="hidden" id="re_info" value="<%=rdto.getRoom_no() %>/<%=DateChecker.year(cal) %>/<%=DateChecker.month(cal) %>/<%=DateChecker.day(cal)%>/<%=DateChecker.calculatePrice(cal, rdto)%>">
 		                    	
 		                    	</div>
 		                    	 <div>
 		                    	<input type="checkbox" onchange="reservation(this);">
 		            		</div>
+		                  
 		                    </td>
 			               <%} %>
-		                    <td><input type="button" value = "옵션 선택하기" onclick = "option_modal();">
 		                    
-		                    <div class = "modal-wrap">
-						        <div class="modal">
-						            <h2>옵션 선택</h2>
-						            <div class="row-empty"></div>
-							        <div class="row">
-							        	<div>
-							        	<label>숯불추가</label>
-							        	<input type = "checkbox" onchange = "change_check();" id="fire">
-							        	<input type = "hidden" name = "fire">
-							        	</div>
-							        	<div class="row-empty"></div>
-							        	<div>
-							        	<div>
-							        		<label style = "color: red; font-size: 2px;">기본 인원 <%=rdto.getStandard_people() %>명/최대인원 <%=rdto.getMax_people() %>명입니다</label>
-							        	</div>
-							        	<div class="row-empty"></div>
-							        	<label>성인 추가</label>
-							        	<select  name ="adult" >
-							        		<option value = 0>선택</option>
-							        		<option value = 1>1명</option>
-							        		<option value = 2>2명</option>
-							        		<option value = 3>3명</option>
-							        		<option value = 4>4명</option>
-							        	</select>
-							        	</div>
-							        	<div class="row-emptyy"></div>
-							        	<div class="row-empty"></div>
-							        	<label>아동 추가</label>
-							        	<select name = "chilren">
-							        		<option value = 0>선택</option>
-							        		<option value = 1>1명</option>
-							        		<option value = 2>2명</option>
-							        		<option value = 3>3명</option>
-							        		<option value = 4>4명</option>
-							        	</select>
-							        	<div class="row-empty"></div>
-							        	<div class="row-empty"></div>
-							        	<div class="row">
-							        	<input type="hidden" name = "pension_no" value="<%=pension_no %>">
-							        	<input type="hidden" name = "res_room_no" value="<%=rdto.getRoom_no() %>">
-							        	<input type="hidden" name = "res_room_name" value="<%=rdto.getRoom_name() %>">
-							        		<button type = "button" onclick = "option_modal_hidden();" value = "확인" >확인</button>
-							        	</div>
-							        </div>
-						        </div>
-						    </div>
-		                    </td>
 		              </tr>
                 <%}%>
             </tbody>

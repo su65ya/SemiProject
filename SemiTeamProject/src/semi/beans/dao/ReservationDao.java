@@ -33,13 +33,15 @@ private static DataSource src;
 	}
 	
 	// 시퀀스 생성 메소드
-	public void getSequence() throws Exception {
+	public int getSequence() throws Exception {
 		Connection con = getConnection();
 		String sql ="select res_seq.nextval from dual";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.execute();
-		
-		con.close();		
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		int seq = rs.getInt(1);
+		con.close();
+		return seq;
 	}
 	
 	// 예약 리스트 메소드
