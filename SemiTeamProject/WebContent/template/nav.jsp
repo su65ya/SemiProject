@@ -18,33 +18,57 @@
 <meta charset="UTF-8">
 <title>index</title>
 <link rel="stylesheet" type="text/css" href="<%= root %>/css/base.css">
-<link rel="stylesheet" href="./css/swiper.min.css">
+<link rel="stylesheet" href="<%= root %>/css/swiper.min.css">
 
 	 <style>
-    .swiper-container {
-        width: 600px;
-        height: 300px;
-    }
+    	.swiper-container {
+            width: 100%;
+            min-height: 500px;
+            max-height: 500px;
+        }
+        
     </style>
+    <script src="<%= root %>/js/swiper.min.js"></script>
+    <script>
+        
+        // 창의 로딩이 완료되었을 때 실행할 코드를 예약
+        window.onload = function() {
+            // swiper 관련 코드를 이곳에 작성
+            // var mySwiper = new Swiper(선택자(대상), 옵션);
+            var mySwiper = new Swiper ('.swiper-container', {
+                // Optional parameters
+                direction: 'horizontal',
+                loop: true,
+
+                // If we need pagination
+                pagination: {
+                    el: '.swiper-pagination',
+                },                
+     
+                grabCursor:true,
+
+            });
+        };
+    </script>
     
 </head>
 <body>
 	<main>
-		<nav>
+		<nav class="nav">
 		<%if(!isLogin){//비로그인 상태 %>
-			<ul class="menuu">
+			<ul class="menuu menuu-f menuu-fixed">
 				<li><a href="<%= root %>/index.jsp">사이트명</a></li>
 				<li><a href="<%= root %>/member/login.jsp">로그인</a></li>
 				<li><a href="<%= root %>/admin/admin_login.jsp">관리자로그인</a></li>
 				<li><a href="<%= root %>/member/join.jsp">회원가입</a></li>
-				<li><a href="<%= root %>/seller/pension_list.jsp">펜션관리(판매자 로그인)</a></li>
-				<li><a href="<%= root%>/admin/admin_login.jsp">업소관리(관리자 로그인)</a></li>
-				<li><a href="<%=root %>/seller/code_no.jsp">입점신청(판매자 회원가입)</a></li>
+				<li><a href="<%= root %>/seller/seller_login.jsp">펜션관리(판매자 로그인)</a></li>
+				<li><a href="<%= root %>/admin/admin_login.jsp">업소관리(관리자 로그인)</a></li>
+				<li><a href="<%= root %>/seller/code_no.jsp">입점신청(판매자 회원가입)</a></li>
 				<li><a href="#">펜션 찾기</a></li>
 			</ul>
 		<%}else{%>
 			<%if(adto!=null){//관리자면 %>
-			<ul class="menuu">
+			<ul class="menuu menuu-f menuu-fixed">
 				<li><a href="<%= root %>/index.jsp">사이트명(홈으로 가게 하는 사이트명)</a></li>
 
 				<li><a href="<%= root %>/member/login.jsp">로그인</a></li>
@@ -65,14 +89,14 @@
 
 			</ul>
 			<%}else if(sdto !=null){//판매자면 %>
-			<ul class="menuu">
+			<ul class="menuu menuu-f menuu-fixed">
 				<li><a href="<%= root %>/index.jsp">사이트명(홈으로 가게 하는 사이트명)</a></li>
-				<li><a href="<%= root %>/seller/info.jsp">내 정보</a></li>
+				<li><a href="<%= root %>/seller/seller_info.jsp">내 정보</a></li>
 				<li><a href="<%= root %>/seller/seller_logout.do">로그아웃</a></li>
 				<li><a href="<%= root %>/seller/pension_list.jsp">펜션관리</a></li>
 			</ul>
 			<%}else if(mdto !=null){//사용자면 %>
-			<ul class="menuu">
+			<ul class="menuu menuu-f menuu-fixed">
 				<li><a href="<%= root %>/index.jsp">사이트명(홈으로 가게 하는 사이트명)</a></li>
 				<li><a href="<%= root %>/member/info.jsp">내 정보</a></li>
 				<li><a href="<%= root %>/member/member_logout.do">로그아웃</a></li>
@@ -91,3 +115,5 @@
 		<section>
 			<div class="row-empty"></div>
 			<div class="row-empty"></div>
+            <div class="row-empty"></div>
+            <div class="row-empty"></div>

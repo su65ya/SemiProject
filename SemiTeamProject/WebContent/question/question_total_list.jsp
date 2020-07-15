@@ -54,7 +54,7 @@
 	
 	int count;
 	if (isSearch) {
-		count = qdao.getSearch(type, keyword);
+		count = qdao.getCount(type, keyword);
 	}
 	else{
 		count = qdao.getCount();

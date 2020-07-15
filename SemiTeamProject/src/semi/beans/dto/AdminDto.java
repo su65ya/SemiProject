@@ -74,5 +74,10 @@ public class AdminDto {
 	public void setAdmin_birth(String admin_birth) {
 		this.admin_birth = admin_birth;
 	}
+	
+	// 생일 날짜
+	public String getAdmin_day() {
+		return admin_birth.substring(0, 10);
+	}
 
 }

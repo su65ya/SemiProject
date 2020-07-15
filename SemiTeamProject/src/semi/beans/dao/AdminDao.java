@@ -28,7 +28,28 @@ public class AdminDao {
 	public Connection getConnection() throws Exception {
 		return src.getConnection();
 	}
-	//단일조회
+	
+	// 아이디 조회
+	public AdminDto getNo(int admin_no) throws Exception{
+		Connection con = getConnection();
+			
+		String sql = "SELECT * FROM admin WHERE admin_no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, admin_no);
+		ResultSet rs = ps.executeQuery();
+		AdminDto adto;
+		if(rs.next()) {
+			adto = new AdminDto(rs);
+		}else {
+			adto = null;
+		}
+			
+		con.close();
+			
+		return adto;
+	}
+	
+	// 아이디 조회
 	public AdminDto get(String admin_id) throws Exception{
 		Connection con = getConnection();
 		
