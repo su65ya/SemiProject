@@ -7,14 +7,12 @@
 			
 			<article>
 				<div class="row center">
-					<img src="https://placehold.it/1280x1000">
+					<img src="https://placehold.it/1280x800">
 				</div>
 			</article>
 
-			
 <jsp:include page="/template/Search.jsp"></jsp:include>			
 
 <jsp:include page="/template/grid.jsp"></jsp:include>		
-
 			
 <jsp:include page="/template/footer.jsp"></jsp:include>
