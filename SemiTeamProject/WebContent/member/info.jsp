@@ -84,17 +84,28 @@
 		</table>
 
 	</div>
-	<div class="row right">
-		<a href="member_delete.do">
-			<input class= "form-btn form-inline" type="button" value="회원 탈퇴">
+	<div class="row" style="float: right;">
+		<a href="check.jsp?go=delete.do">
+			<input class= "form-btn" style="width: 150px;" type="button" value="회원 탈퇴">
 		</a>
-		<a href="change_info.jsp">
-			<input class= "form-btn form-inline" type="button" value="회원정보 수정">
+	<div class="row" style="float: right;">
+		<a href="check.jsp?go=change_info.jsp">
+			<input class= "form-btn" style="width: 150px;" type="button" value="회원정보 수정">
 		</a>
 	</div>
 	
 	<div class="row-empty"></div> 
 	
+
+	<h5><a href="#">비밀번호 변경</a></h5>
+	<h5><a href="#">개인정보 변경</a></h5>
+	<h5><a href="#">로그아웃</a></h5>
+	<h5><a href="../member/delete.jsp">회원탈퇴</a></h5>
+
+</div>
+
+
 </article>
+
 
 <jsp:include page="/template/footer.jsp"></jsp:include>

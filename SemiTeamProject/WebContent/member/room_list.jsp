@@ -1,3 +1,5 @@
+<%@page import="semi.beans.dto.PenImgViewDto"%>
+<%@page import="java.text.DateFormat"%>
 <%@page import="java.util.GregorianCalendar"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -13,12 +15,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<style>
 
-<%
- 
-	
-%>
 
+</style>
 <jsp:include page="/template/nav.jsp"></jsp:include>
  <link rel="stylesheet" href="../css/swiper.min.css">
     <style>
@@ -26,7 +26,6 @@
         width: 600px;
         height: 300px;
     }
-        
         dl>dt, dl>dd{
             font-size: 12px;
             font-weight: 800;
@@ -73,15 +72,22 @@
         }
     </script>
 <%
-   PensionDao pdao = new PensionDao();
-   RoomDao rdao = new RoomDao();
-   
-   List<RoomDto> list = rdao.getList();
-   int pension_no = Integer.parseInt(request.getParameter("pension_no"));
-   PensionInfoDto pdto = pdao.get(pension_no);
-   
-   PensionImageDao pidao = new PensionImageDao();
-   List<PensionImageDto> fileList = pidao.getList(pension_no);
+	PensionDao pdao = new PensionDao();
+	RoomDao rdao = new RoomDao();
+	int pension_no = Integer.parseInt(request.getParameter("pension_no"));
+	
+	List<RoomDto> list = rdao.getList(pension_no);
+	PensionInfoDto pdto = pdao.get(pension_no);
+	
+	PensionImageDao pidao = new PensionImageDao();
+	List<PensionImageDto> fileList = pidao.getList(pension_no);
+	
+	Calendar cal = Calendar.getInstance();
+	SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd");
+
+	
+	PenImgViewDto viewDto = new PenImgViewDto();
+	
 %>
 
     <div class="swiper-container">
@@ -97,7 +103,8 @@
             </div>
         </div>
         <!-- 페이지 위치 표시 영역(선택) -->
-        <div class="swiper-pagination"></div> 
+        <div class="swiper-pagination"></div>
+ 
 <!--
          이전/다음 버튼 (선택) 
         <div class="swiper-button-prev"></div>
@@ -106,20 +113,20 @@
     </div>
     <article class="w-80">
     <div class="row left">
-        <h2 style="height: 15px;" class="left">용추 별천지 펜션</h2>
+        <h2 style="height: 15px;" class="left"><%=pdto.getPension_name() %></h2>
     </div>
     <div class="row left">
-        <h6  class="left" style="height: 15px; margin: 0;">경기 가평군 가평읍 용추로 508-36 (지번 : 경기 가평군 가평읍 승안리 631-4)</h6>
-    </div><hr style="border: 1px solid gray;">
+        <h6  class="left" style="height: 15px; margin: 0;">[<%=pdto.getPension_post() %>] <%=pdto.getPension_basic_addr() %> <%=pdto.getPension_detail_addr() %></h6>
+    </div><hr style="width:100%; border: 1px solid gray;">
 
     <div class="row left">
        <dl>
            <dt>예약문의</dt>
-           <dd>0254645456</dd>
+           <dd><%=pdto.getPension_phone() %></dd>
            <dt>입/퇴실안내</dt>
            <dd>이용/시설 안내 참조</dd>
            <dt>판매가</dt>
-           <dd>최소가격~최대가격</dd>
+           <dd><%=rdao.minPrice(pension_no) %>~<%=rdao.maxPrice(pension_no) %></dd>
        </dl>
         
     </div>
@@ -128,149 +135,36 @@
         <table class="table table-border center">
             <thead>
                 <tr>
-                    <th>객실</th>
-                   
+                    <th style="width: 90px;">객실</th>
+                	<%for(int i = 0;i<14;i++){
+                    	cal.add(cal.DATE,+i);
+                    	String date111 = dateFormat.format(cal.getTime());
+                    	cal = Calendar.getInstance();%>
                     <th>
-                   
-                    </th> 
-
-                     
-                    <%-- <th><%= cal.get() %></th> --%>
-<!--                     <th>7/15</th> -->
-<!--                     <th>7/16</th> -->
-<!--                     <th>7/17</th> -->
-<!--                     <th>7/18</th> -->
-<!--                     <th>7/19</th> -->
-<!--                     <th>7/20</th> -->
-<!--                     <th>7/21</th> -->
-<!--                     <th>7/22</th> -->
-<!--                     <th>7/23</th> -->
-<!--                     <th>7/24</th> -->
-<!--                     <th>7/25</th> -->
-<!--                     <th>7/26</th> -->
-<!--                     <th>7/27</th> -->
+                    <%=date111 %>
+                    </th>
+                    <%}%>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td rowspan="2">객실사진</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
+                <%for(RoomDto rdto : list){%>
+		                <tr>
+		                    <td rowspan="2" style="width: 90px; padding: 0;"><img src="https://placehold.it/90x90"></td>
+		                    <%for(int j = 0;j<14;j++){ %>
+		                    	<td style="height: 60px;"><%=rdto.getOff_weekday() %></td>
+		                    <%} %>
+		                </tr>
+               		 <tr>
+                	<%for(int i = 0;i<14;i++){%>
+<!--                 		<td></td> -->
+<%--                 		<%if(예약된 객실이 아니면){ %> --%>
+                    		<td style="height: 30px;"><input type="checkbox" ></td>
+<%--                     	<%}else{예약된 객실이면 %> --%>
+<!--                     		<td style="height: 2px;"><h6 >예약 완료</h6></td> -->
+<%--                     	<%} %> --%>
+                    <%} %>
                 </tr>
-                <tr>
-                    <td><input type="checkbox" ></td>
-                    <td><input type="checkbox" ></td>
-                    <td><input type="checkbox" ></td>
-                    <td><input type="checkbox" ></td>
-                    <td><input type="checkbox" ></td>
-                    <td><input type="checkbox" ></td>
-                    <td><input type="checkbox" ></td>
-                    <td><input type="checkbox" ></td>
-                    <td><input type="checkbox" ></td>
-                    <td><input type="checkbox" ></td>
-                    <td><input type="checkbox" ></td>
-                    <td><input type="checkbox" ></td>
-                    <td><input type="checkbox" ></td>
-                    <td><input type="checkbox" ></td>
-                       
-                </tr>
-                <tr>
-                    <td>객실사진</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                </tr>
-                <tr>
-                    <td>객실사진</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                </tr>
-                <tr>
-                    <td>객실사진</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                </tr>
-                <tr>
-                    <td>객실사진</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                </tr>
-                <tr>
-                    <td>객실사진</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                    <td>100,000</td>
-                </tr>
+                <%}%>
             </tbody>
         </table>
         

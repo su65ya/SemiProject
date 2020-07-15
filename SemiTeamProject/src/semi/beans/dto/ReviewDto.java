@@ -2,6 +2,9 @@ package semi.beans.dto;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ReviewDto {
 	
@@ -105,6 +108,30 @@ public class ReviewDto {
 	public void setReview_date(String review_date) {
 		this.review_date = review_date;
 	}
+	
+	// 시간
+		public  String getReview_time() {
+			return review_date.substring(11, 16);
+		}
+			
+		// 날짜
+		public String getReview_day() {
+			return review_date.substring(0, 10);
+		}
+
+		public String getReview_auto() {
+			Date d = new Date();
+			Format f = new SimpleDateFormat("yyyy-MM-dd");
+			String today = f.format(d);
+			
+			if (getReview_day().equals(today)) {
+				return getReview_time();
+			}
+			else {
+				return getReview_day();
+			}
+						
+		}
 
 	
 	
