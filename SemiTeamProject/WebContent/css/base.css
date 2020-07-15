@@ -1,4 +1,4 @@
-@charset "UTF-8";
+	@charset "UTF-8";
 
 		/*
 		공용 스타일 파일(css 파일)
@@ -384,13 +384,15 @@
         }
         .form-btn{
         	background-color:#ea1f62;
+        	border: none;
             color: white;
             cursor: pointer;
         }
+        /* 
         .form-btn:hover{
             background-color: cadetblue;
         }
-        
+         */
 	
 	/*
 	입력창 확장 스타일
@@ -502,20 +504,114 @@
             width:1280px;
             margin:auto;
         }
-        .menuu {
-        	width : 100%;
-        	height: 54px;
-        	background-color: #ea1f62;
-        	padding: 0;
-        	margin: 0;
+        
+		.menuu, .menuu ul {
+		    height: 55px;
+		    background-color: #ea1f62;
+		    padding: 0;
+		    margin: 0;
+		    list-style: none;
+		}
+		
+		.menuu > li{
+		    display: inline-block;
+		}
+		
+		.menuu li {
+		    position: relative;
+		    padding: 0.85rem;
+		    text-align: center;
+		    cursor: pointer;
+		    margin-top: 3px;
+		}
+		
+		.menuu a{
+		    text-decoration: none;
+		    color:white;
+		}
+		 
+		 /* 
+		 	2020.07.16 menu-fixed 추가
+		  */
+		.menuu-fixed {
+		    position: fixed;
+		    top: 0;
+		    left: auto;
+		    right: auto;
+		    width: 1280px;
+		    z-index: 1000;
+		}
+
+		/* 
+			2020.07.14 index -> float, menu, swiper 스타일
+		 */
+        .pen-float:after {
+            content: "";
+            display: block;
+            clear: both;            
         }
-        .menuu > li{
-        	list-style: none;
-        	display: inline-block;
-        	padding: 0.5rem;
+        
+        .pension1 {
+            float: right;
+            margin-left: 10px;
         }
-        .menuu a{
-			text-decoration: none;
-			color:white;
+        
+        .pension2 {
+            margin-bottom: 10px;
         }
+        
+        .pension4 {
+            margin-bottom: 10px;
+        }
+        
+        .pension5 {
+            margin-bottom: 10px;
+        }
+        
+        .pen-left {
+            float: left;
+            margin-right: 10px;
+        }
+
+        .pen-middle {
+            float: left;
+        }
+        
+        .hei {
+            display: inline-block;
+            width: 100%;
+            height: 750px;
+            margin: none;
+        }
+        
+        .menuu-f:after {
+            content: "";
+            display: block;
+            clear: both;            
+        }
+
+        .menuu-f > li:nth-child(1) ~ li{
+            float: right;
+        }
+        
+        .swiper-container {
+            width: 100%;
+            min-height: 500px;
+            max-height: 500px;
+        }
+        
+        .swiper-container .swiper-slide,
+        .swiper-container .swiper-slide > a > img {
+            width: 100%;
+            min-height: 500px;
+            max-height: 500px;
+            height: 500px;
+        }
+
+        .form-btn {
+	    	border: none;
+	    	border-radius: 5px;
+    	}
+        
+        
         

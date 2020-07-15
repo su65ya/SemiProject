@@ -95,21 +95,22 @@ public class SellerDao {
 	}
 	
 	//판매자 정보변경
-	
-	public void changeInfo(SellerDto mdto) throws Exception{
+	public void changeInfo(SellerDto sdto) throws Exception{
 		Connection con = getConnection();
 		
-		String sql = "UPDATE seller SET"
-				+"seller_id=?, seller_name=?, seller_birth=?,seller_email=?, seller_basic_addr=?, seller_detail_addr=?, cmpany_no=? "
-				+"WHERE member_id";
+		String sql = "UPDATE seller SET "
+				+"seller_name = ?, seller_email = ?, seller_birth = ?, seller_post = ?, seller_basic_addr = ?, seller_detail_addr = ?, seller_phone = ? "
+				+"WHERE seller_no = ?";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, mdto.getSeller_name());
-		ps.setString(2, mdto.getSeller_email());
-		ps.setString(3, mdto.getSeller_phone());
-		ps.setString(4, mdto.getSeller_basic_addr());
-		ps.setString(5, mdto.getSeller_detail_addr());
-		ps.setString(6, mdto.getCompany_no());
+		ps.setString(1, sdto.getSeller_name());
+		ps.setString(2, sdto.getSeller_email());
+		ps.setString(3, sdto.getSeller_birth());
+		ps.setString(4, sdto.getSeller_post());
+		ps.setString(5, sdto.getSeller_basic_addr());
+		ps.setString(6, sdto.getSeller_detail_addr());
+		ps.setString(7, sdto.getSeller_phone());
+		ps.setInt(8, sdto.getSeller_no());
 		
 		ps.execute();
 		

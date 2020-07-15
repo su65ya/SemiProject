@@ -64,6 +64,11 @@ public class SellerDto {
 	public String getSeller_birth() {
 		return seller_birth;
 	}
+	
+	// 생일 날짜
+	public String getSeller_day() {
+		return seller_birth.substring(0, 10);
+	}
 
 	public void setSeller_birth(String seller_birth) {
 		this.seller_birth = seller_birth;
@@ -86,7 +91,13 @@ public class SellerDto {
 	}
 
 	public String getSeller_post() {
+		if (seller_post == null) return "";
 		return seller_post;
+	}
+	
+	public String getRead_post() {
+		if (seller_post == null) return "";
+		return "[" + seller_post +"]";
 	}
 
 	public void setSeller_post(String seller_post) {
@@ -94,6 +105,7 @@ public class SellerDto {
 	}
 
 	public String getSeller_basic_addr() {
+		if (seller_basic_addr == null) return "";
 		return seller_basic_addr;
 	}
 
@@ -102,6 +114,7 @@ public class SellerDto {
 	}
 
 	public String getSeller_detail_addr() {
+		if (seller_detail_addr == null) return "";
 		return seller_detail_addr;
 	}
 
@@ -111,6 +124,11 @@ public class SellerDto {
 
 	public String getSeller_join() {
 		return seller_join;
+	}
+	
+	// 가입일 날짜
+	public String getJoin_day() {
+		return seller_join.substring(0, 16);
 	}
 
 	public void setSeller_join(String seller_join) {

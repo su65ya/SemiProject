@@ -86,7 +86,13 @@ public class MemberDto {
 	}
 
 	public String getMember_post() {
+		if (member_post == null) return "";
 		return member_post;
+	}
+	
+	public String getRead_post() {
+		if (member_post == null) return ""; 
+		return "[" + member_post +"]";
 	}
 
 	public void setMember_post(String member_post) {
@@ -94,6 +100,7 @@ public class MemberDto {
 	}
 
 	public String getMember_basic_addr() {
+		if (member_basic_addr == null) return "";
 		return member_basic_addr;
 	}
 
@@ -102,6 +109,7 @@ public class MemberDto {
 	}
 
 	public String getMember_detail_addr() {
+		if (member_detail_addr == null) return "";
 		return member_detail_addr;
 	}
 
@@ -131,6 +139,15 @@ public class MemberDto {
 
 	public void setMember_join(String member_join) {
 		this.member_join = member_join;
+	}
+	
+	// 생일 날짜
+	public String getMember_day() {
+		return member_birth.substring(0, 10);
+	}
+	// 가입일 날짜
+	public String getJoin_day() {
+		return member_join.substring(0, 16);
 	}
 	
 }
