@@ -94,6 +94,10 @@
 
 </style>
 
+<% if (request.getParameter("que_pension_no") != null) { %>
+	<input type='hidden' name='que_pension_no' value='<%= request.getParameter("que_pension_no") %>'>
+<%} %>
+
 
 <article class = "w-70">
 	
@@ -118,9 +122,6 @@
 	</div>
 	 --%>
 	<table class="table table-sideopen table-hover">
-		<h3><%=  blockFinish %></h3>
-		<h3><%=  count %></h3>
-	
 		<thead>
 			<tr>
 				<th>번호</th>
@@ -150,12 +151,14 @@
 						<%} %>
 					</font>
 					<% if (sdto != null) { %>
-						<a href="question_content.jsp?que_pension_no=<%= qvdto.getQue_pension_no() %>&que_no=<%= qvdto.getQue_no() %>">
+						<a href="question_content.jsp?que_pension_no=<%= que_pension_no %>&que_no=<%= qvdto.getQue_no() %>">
+							<%= qvdto.getQue_title() %>
+						</a>
 					<%} else if (mdto != null) { %>
-						<a href="question_member_content.jsp?que_pension_no=<%= qvdto.getQue_pension_no() %>&que_no=<%= qvdto.getQue_no() %>">
+						<a href="question_member_content.jsp?que_pension_no=<%= que_pension_no %>&que_no=<%= qvdto.getQue_no() %>">
+							<%= qvdto.getQue_title() %>
+						</a>
 					<%} %>
-						<%= qvdto.getQue_title() %>
-					</a>
 				</td>
 				<td>
 					<% if (qvdto.getQue_writer() != 0) {%>

@@ -15,39 +15,30 @@
 	<form action="seller_change_password.do" method ="post">
 	<table class="table table-sideopen">
 		<tbody>
-			<tr>
-				<th>현재 비밀번호</th>
-				<td class="left">
-					<input class="intext" type="password" placeholder="현재 비밀번호"required>
-				</td>
-			</tr>
-			<tr>
 				<th>새 비밀번호</th>
 					<td class="left">
-						<input class="intext" type="password" placeholder="새 비밀번호" required>
+						<input class="form-input" type="password" placeholder="새 비밀번호" required>
 					</td>
 				</tr>
 				<tr>
 					<th>새 비밀번호 확인</th>
 					<td class="left">
-						<input class="intext" type="password" placeholder="새 비밀번호 확인" required>
+						<input class="form-input" type="password" name='seller_pw' placeholder="비밀번호 재입력" required>
 					</td>
 				</tr>
 		</tbody>
 	
 	</table>
-	<div style="float: right;">
-		<a href="info.jsp">
-		<input class="form-btn" style="width:120px;" type="submit" value="qusrud">
+	
+	<div class='row-empty'></div>
+	
+	<div class="row right">
+		<input class="form-btn form-inline" type="submit" value="변경">
+		<a href="seller_info.jsp">
+			<input class="form-btn form-inline" type="button" value="취소">
 		</a>
 	</div>
 	</form>
-	<div style = "float: right;">
-		<a href="info.jsp>
-		<input class="form=btn" style="width" 120px;" type="" value="취소">
-		</a>
-	</div>
-	
 </article>
 
-<jsp : include page= "/template/footer.jsp"></jsp:include>
+<jsp:include page= "/template/footer.jsp"></jsp:include>

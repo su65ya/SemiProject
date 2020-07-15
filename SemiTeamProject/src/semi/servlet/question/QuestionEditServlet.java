@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import semi.beans.dao.QuestionDao;
+import semi.beans.dto.MemberDto;
 import semi.beans.dto.QuestionDto;
+import semi.beans.dto.SellerDto;
 
 @WebServlet(urlPatterns ="/question/question_edit.do")
 public class QuestionEditServlet extends HttpServlet{
@@ -17,6 +19,9 @@ public class QuestionEditServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			// 입력
+			MemberDto mdto = (MemberDto) req.getSession().getAttribute("userinfo");
+			
+			int que_pension_no = Integer.parseInt(req.getParameter("que_pension_no"));
 			QuestionDto qdto = new QuestionDto();
 			
 			qdto.setQue_head(req.getParameter("que_head"));
@@ -29,7 +34,12 @@ public class QuestionEditServlet extends HttpServlet{
 			qdao.edit(qdto);
 			
 			// 출력
-			resp.sendRedirect("question_content.jsp?que_no="+ qdto.getQue_no());
+			if (mdto != null) {
+				resp.sendRedirect("question_member_content.jsp?que_pension_no="+ que_pension_no +"&que_no=" + qdto.getQue_no());
+			}
+			else {
+				resp.sendRedirect("question_content.jsp?que_pension_no="+ que_pension_no +"&que_no=" + qdto.getQue_no());
+			}
 			
 			
 			

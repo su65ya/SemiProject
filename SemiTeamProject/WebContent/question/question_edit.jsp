@@ -6,6 +6,7 @@
 
 <%
 	int que_no = Integer.parseInt(request.getParameter("que_no"));
+	int que_pension_no = Integer.parseInt(request.getParameter("que_pension_no"));
 	
 	QuestionDao qdao = new QuestionDao();
 	QuestionViewDto qvdto = qdao.get(que_no);
@@ -104,7 +105,7 @@
 		<div class="row-empty"></div>
 
 		<div class="row">
-			<h2>문의 작성</h2>
+			<h2>문의 수정</h2>
 		</div>
 		
 		<div class="row-empty"></div>		

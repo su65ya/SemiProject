@@ -1,22 +1,42 @@
+<%@page import="semi.beans.dto.SellerDto"%>
+<%@page import="semi.beans.dto.AdminDto"%>
+<%@page import="semi.beans.dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="/template/nav.jsp"></jsp:include>
 <%
 	String go = request.getParameter("go");
 %>
-<div align="center">
-	<h2>비밀번호 확인</h2>
+
+<jsp:include page="/template/nav.jsp"></jsp:include>
+
+
+<article class =  "w-35"'>
+	<div class = "row-empty"></div>
+	<div class = "row-empty"></div>
+
+	<div class = "row">
+		<h3>비밀번호 확인</h3>
+	</div>
 	
 	<form action="check.do" method="post">
-
+	<div class = "row center">
 		<input type="hidden" name="go" value="<%=go %>">
-		<input type="password" name="member_pw" required>
-		<input type="submit" value="확인">
-	
+		<input class= "form-input form-inline" type="password" name = "member_pw" placeholder="비밀번호 입력하세요" required>
+
+	</div>	
+		<%if(request.getParameter("error") != null){ %>
+			<h6><font color="red">비밀번호가 일치하지 않습니다</font></h6>
+			<%} %>
+		<div class = "row center">
+		<div class = "row-empty"></div>
+			<input class="form-btn form-inline" type="submit" value="확인">
+		</div>
 	</form>
 	
-	<%if(request.getParameter("error") != null) {%>
-		<h6>비밀번호가 일치하지 않습니다</h6>
-	<%} %>
-</div>
+	<div class="row-empty"></div>
+	<div class="row-empty"></div>
+	<div class="row-empty"></div>
+	<div class="row-empty"></div>	
+
+
 <jsp:include page="/template/footer.jsp"></jsp:include>

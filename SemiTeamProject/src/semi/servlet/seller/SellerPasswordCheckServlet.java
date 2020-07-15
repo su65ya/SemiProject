@@ -31,7 +31,6 @@ public class SellerPasswordCheckServlet extends HttpServlet {
 			sdto.setSeller_id(seller_id);//khseller
 			sdto.setSeller_pw(seller_pw);//khseller
 			SellerDto result = sdao.login(sdto);//성공?실패?
-			System.out.println(seller_id);
 
 			if (result == null) {// 로그인 실패
 				resp.sendRedirect("password_check.jsp?error&go="+go);

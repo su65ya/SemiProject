@@ -36,6 +36,24 @@ public class SellerDao {
 	}
 	
 	// 단일 조회 메소드
+	public SellerDto get(int seller_no) throws Exception {
+		Connection con = getConnection();
+		
+		String sql = "select * from seller where seller_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, seller_no);
+		ResultSet rs = ps.executeQuery();
+		
+		SellerDto seller = null;
+		if (rs.next()) {
+			seller = new SellerDto(rs);
+		}
+		
+		con.close();
+		return seller;
+	}
+	
+	// 단일 조회 메소드
 	public SellerDto get(String seller_id) throws Exception {
 		Connection con = getConnection();
 		
@@ -123,6 +141,19 @@ public class SellerDao {
 	
 		con.close();
 	}
+	
+	public void pwChange(int seller_no, String seller_pw) throws Exception {
+		Connection con = getConnection();
+		
+		String sql = "update seller set seller_pw = ? where seller_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, seller_pw);
+		ps.setInt(2, seller_no);
+		ps.execute();
+		
+		con.close();
+	}
+	
 	
 	// 판매자 탈퇴
 	public void delete(String seller_id) throws Exception {
