@@ -52,7 +52,7 @@ public class ReviewWriteServlet extends HttpServlet{
 			
 			revdto.setReview_writer(mdto.getMember_no());
 		
-			revdto.setReview_pension_no(Integer.parseInt(map.get("pension_no").get(0).getString()));
+			revdto.setReview_pension_no(Integer.parseInt(map.get("review_pension_no").get(0).getString()));
 		
 			revdto.setReview_title(map.get("review_title").get(0).getString());
 			revdto.setReview_content(map.get("review_content").get(0).getString());
