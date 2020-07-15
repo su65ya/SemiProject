@@ -104,8 +104,6 @@ public class MemberDao {
 		Date original_birth = original_format.parse(birth);
 		String birthConvert = new_format.format(original_birth);
 		
-		System.out.println();
-
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, birthConvert);
 		ps.setString(2, mdto.getMember_mail());
@@ -118,7 +116,6 @@ public class MemberDao {
 				
 		con.close();
 	}
-
 
 	//아이디 찾기 메소드
 	public String findId(MemberDto mdto) throws Exception{
@@ -162,6 +159,24 @@ public class MemberDao {
 	}
 	
 	// 단일조회 메소드
+	public MemberDto getNo(int member_no) throws Exception {
+		Connection con = getConnection();
+		
+		String sql = "SELECT * FROM member WHERE member_no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, member_no);
+		ResultSet rs = ps.executeQuery();
+		
+		MemberDto mdto = null;
+		if(rs.next()) {
+			mdto = new MemberDto(rs);
+		}
+		
+		con.close();
+		return mdto;
+	}
+	
+	// 아이디 조회 메소드
 	public MemberDto get(String member_id) throws Exception {
 		Connection con = getConnection();
 		
@@ -172,20 +187,8 @@ public class MemberDao {
 		
 		MemberDto mdto;
 		if(rs.next()) {
-			mdto = new MemberDto();
+			mdto = new MemberDto(rs);
 
-			mdto.setMember_no(rs.getInt("member_no"));
-			mdto.setMember_id(rs.getString("member_id"));
-			mdto.setMember_pw(rs.getString("member_pw"));
-			mdto.setMember_name(rs.getString("member_name"));
-			mdto.setMember_birth(rs.getString("member_birth"));
-			mdto.setMember_mail(rs.getString("member_mail"));
-			mdto.setMember_post(rs.getString("member_post"));
-			mdto.setMember_basic_addr(rs.getString("member_basic_addr"));
-			mdto.setMember_detail_addr(rs.getString("member_detail_addr"));
-			mdto.setMember_phone(rs.getString("member_phone"));
-			mdto.setMember_rate(rs.getString("member_rate"));
-			mdto.setMember_join(rs.getString("member_join"));	
 		}
 		else {
 			mdto = null;
@@ -199,7 +202,7 @@ public class MemberDao {
 	public List<MemberDto> search(String member_id) throws Exception{
 		Connection con = getConnection();
 		
-		String sql = "SELECT * FROM member WHERE instr(member_id, ?) > 0 ORDER BY member_id ASC";
+		String sql = "SELECT * FROM member WHERE instr(member_id, ?) > 0 ORDER BY member_id DESC";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, member_id);
 		ResultSet rs = ps.executeQuery();
@@ -217,7 +220,7 @@ public class MemberDao {
 	public List<MemberDto> search(String type, String keyword) throws Exception {
 		Connection con = getConnection();
 		
-		String sql = "SELECT * FROM member WHERE instr(#1, ?) > 0 ORDER BY #1 ASC";
+		String sql = "SELECT * FROM member WHERE instr(#1, ?) > 0 ORDER BY #1 DESC";
 		sql = sql.replace("#1", type);
 		
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -233,11 +236,11 @@ public class MemberDao {
 		return list;
 	}
 	
-	//(관리자) 회원 검색 기능 (모든 회원 보기)
+	//(관리자) 회원 리스트 기능 (모든 회원 보기)
 		public List<MemberDto> search() throws Exception {
 			Connection con = getConnection();
 			
-			String sql = "SELECT * FROM member ORDER BY member_no ASC";
+			String sql = "SELECT * FROM member ORDER BY member_no DESC";
 			
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();

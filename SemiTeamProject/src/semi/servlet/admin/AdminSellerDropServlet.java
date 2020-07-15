@@ -1,4 +1,4 @@
-package semi.servlet.seller.room;
+package semi.servlet.admin;
 
 import java.io.IOException;
 
@@ -8,24 +8,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import semi.beans.dao.RoomDao;
+import semi.beans.dao.SellerDao;
 
-@WebServlet(urlPatterns = "/seller/room_delete.do")
-public class RoomDeleteServlet extends HttpServlet{
+@WebServlet(urlPatterns = "/admin/sellerDrop.do")
+public class AdminSellerDropServlet extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		try {
-			int room_no = Integer.parseInt(req.getParameter("room_no"));
-			int pension_no = Integer.parseInt(req.getParameter("pension_no"));
+			String seller_id = req.getParameter("seller_id");
 			
-			RoomDao rdao = new RoomDao();
-			rdao.delete(room_no);
-			resp.sendRedirect("room_list.jsp?pension_no=" + pension_no);
+			SellerDao sdao = new SellerDao();
+			sdao.delete(seller_id);
 			
-		}catch(Exception e) {
+			resp.sendRedirect("admin_seller_list.jsp");
+		}
+		catch(Exception e) {
 			e.printStackTrace();
 			resp.sendError(500);
 		}
 	}
-
 }

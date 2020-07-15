@@ -54,12 +54,12 @@
 
 	QuestionDao qdao = new QuestionDao();
 	
-	int count;
+	int count;	// 목록 개수 or 검색 개수
 	if (isSearch) {
-		count = qdao.getSearch(type, keyword);
+		count = qdao.getCount(que_pension_no, type, keyword);
 	}
 	else{
-		count = qdao.getCount();
+		count = qdao.getCount(que_pension_no);
 	}
 	
 	int pageCount = (count + page_size - 1) / page_size;
@@ -118,6 +118,9 @@
 	</div>
 	 --%>
 	<table class="table table-sideopen table-hover">
+		<h3><%=  blockFinish %></h3>
+		<h3><%=  count %></h3>
+	
 		<thead>
 			<tr>
 				<th>번호</th>
@@ -146,8 +149,11 @@
 							[<%= qvdto.getQue_head() %>]
 						<%} %>
 					</font>
-					
-					<a href="question_content.jsp?que_pension_no=<%= qvdto.getQue_pension_no() %>&que_no=<%= qvdto.getQue_no() %>">
+					<% if (sdto != null) { %>
+						<a href="question_content.jsp?que_pension_no=<%= qvdto.getQue_pension_no() %>&que_no=<%= qvdto.getQue_no() %>">
+					<%} else if (mdto != null) { %>
+						<a href="question_member_content.jsp?que_pension_no=<%= qvdto.getQue_pension_no() %>&que_no=<%= qvdto.getQue_no() %>">
+					<%} %>
 						<%= qvdto.getQue_title() %>
 					</a>
 				</td>
@@ -193,7 +199,7 @@
 		<%} %>
 		
 		<!-- 다음 -->
-		<% if (blockFinish < pageCount) { %>
+		<% if (pageCount >blockFinish) { %>
 			<%if (!isSearch) { %>
 				<a href="question_list.jsp?que_pension_no=<%= que_pension_no %>&page=<%= blockFinish + 1 %>">다음</a>
 			<%} else { %>
