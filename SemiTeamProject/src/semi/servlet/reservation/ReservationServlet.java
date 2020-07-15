@@ -18,6 +18,7 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws S
 		ReservationDao rdao = new ReservationDao();
 		ReservationDto rdto = new ReservationDto();
 		String res_info[] = req.getParameterValues("res_info");
+		int res_write = Integer.parseInt(req.getParameter("res_write"));
 		for(int i=0;i<res_info.length;i++) {
 			String res[] = res_info[i].split("/");
 			int seq = rdao.getSequence();
@@ -29,12 +30,13 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws S
 				rdto.setRes_price(Integer.parseInt(res[2]));
 			}
 			rdto.setRes_paytpye(req.getParameter("res_payment"));
-			rdto.setRes_wirte(Integer.parseInt(req.getParameter("res_write")));
+			rdto.setRes_wirte(res_write);
 			rdto.setRes_name(req.getParameter("res_name"));
 			
 			rdao.reservation(rdto);
-			System.out.println("예약완료"+i);
+//			System.out.println("예약완료"+i);
 		}
+		resp.sendRedirect("reservation_list.jsp?res_write="+res_write);
 	} catch (Exception e) {
 		e.printStackTrace();
 		resp.sendError(500);

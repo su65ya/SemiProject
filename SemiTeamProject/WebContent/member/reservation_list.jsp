@@ -1,3 +1,4 @@
+<%@page import="semi.util.DateChecker"%>
 <%@page import="semi.beans.dto.ReservationDto"%>
 <%@page import="java.util.List"%>
 <%@page import="semi.beans.dao.ReservationDao"%>
@@ -10,7 +11,7 @@
     	
     	ReservationDao rvdao = new ReservationDao();
     	List<ReservationDto> list = rvdao.getList(res_write);
-    
+    	
     %>
     
     
@@ -50,7 +51,7 @@
 		<tbody>
 			<% for (ReservationDto rvdto : list) { %>
 				<tr>
-					<td><%= rvdto.getRes_date() %></td>
+					<td><%= rvdto.getRes_date_day() %></td>
 					<td class="left">
 						<a href="reservation_detail.jsp?res_no=<%= rvdto.getRes_no() %>">
 							<%= rvdto.getRes_room_no() %>
@@ -58,8 +59,9 @@
 					</td>
 					<td><%= rvdto.getRes_name() %></td>
 					<td>성인2명</td>
-					<td class="in-out"><%= rvdto.getRes_in() %> ~ <%= rvdto.getRes_out() %></td>
-					<td><%= rvdto.getRes_price() %> 원</td>
+					<td class="in-out"><%= rvdto.getRes_date_day()%></td>
+					<td><%=DateChecker.cal(rvdto.getRes_price()) %> 원</td>
+					
 				</tr>
 			<%} %>
 <!-- 
