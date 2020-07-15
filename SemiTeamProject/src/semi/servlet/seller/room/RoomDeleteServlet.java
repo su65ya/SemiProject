@@ -16,11 +16,11 @@ public class RoomDeleteServlet extends HttpServlet{
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			int room_no = Integer.parseInt(req.getParameter("room_no"));
-			
+			int pension_no = Integer.parseInt(req.getParameter("pension_no"));
 			
 			RoomDao rdao = new RoomDao();
 			rdao.delete(room_no);
-			resp.sendRedirect("room_list.jsp");
+			resp.sendRedirect("room_list.jsp?pension_no=" + pension_no);
 			
 		}catch(Exception e) {
 			e.printStackTrace();

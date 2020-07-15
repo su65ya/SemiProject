@@ -3,67 +3,102 @@
     pageEncoding="UTF-8"%>
     
  <%
-    SellerDto mdto = (SellerDto) session.getAttribute("userinfo");
+    SellerDto sdto = (SellerDto) session.getAttribute("sellerinfo");
  %>
  
 <jsp:include page="/template/nav.jsp"></jsp:include>
 
-<div align="center">
-	<h2>회원정보</h2>
+<style>
 
-	<table border="1" width="400">
-		<tbody>
-			<tr>
-				<th>아이디</th>
-				<th><%=mdto.getSeller_id() %></th>
-			</tr>
-			<tr>
-				<th>비밀번호</th>
-				<th><%=mdto.getSeller_pw() %>h>
-			</tr>
-			<tr>
-				<th>이름</th>
-				<th><%=mdto.getSeller_name() %></th>
-			</tr>
-			<tr>
-				<th>생년월일</th>
-				<th><%=mdto.getSeller_birth()%></th>
-			</tr>
-			<tr>
-				<th>이메일</th>
-				<th><%=mdto.getSeller_email() %></th>
-			</tr>
-			<tr>
-				<th>주소</th>
-				<th>
-					[<%=mdto.getSeller_post() %>]
-					<%=mdto.getSeller_basic_addr() %>
-					<%=mdto.getSeller_detail_addr() %>
-					상세주소
-				</th>
-			</tr>
-			<tr>
-				<th>전화번호</th>
-				<th><%=mdto.getSeller_phone() %></th>
-			</tr>
-			<tr>
-				<th>사업자번호</th>
-				<th><%=mdto.getCompany_no() %></th>
-			</tr>
-			<tr>
-				<th>가입일</th>
-				<th><%=mdto.getSeller_join() %></th>
-			</tr>
-		</tbody>
-	
-	</table>
-	
-	<h5><a href="#">비밀번호 변경</a></h5>
-	<h5><a href="#">개인정보 변경</a></h5>
-	<h5><a href="#">로그아웃</a></h5>
-	<h5><a href="seller/password_check.jsp">회원탈퇴</a></h5>
+	a {
+    	text-decoration: none;
+    }
 
-</div>
+    
+    .form-btn {
+    	border: none;
+    	border-radius: 5px;
+    }
+    
+</style>
+
+<article class="w-50">
+
+	<div class="row">
+		<h2>판매자정보</h2>
+	</div>
+		
+		<div class="row-empty"></div>
+	
+		<table class='table table-sideopen'>
+			<tbody>
+				<tr>
+					<th width="30%">아이디</th>
+					<td class='left'><%= sdto.getSeller_id() %></td>
+				</tr>
+				<tr>
+					<th>이름</th>
+					<td class='left'><%=sdto.getSeller_name() %></td>
+				</tr>
+				<tr>
+					<th>생년월일</th>
+					<td class='left'><%=sdto.getSeller_day()%></td>
+				</tr>
+				<tr>
+					<th>이메일</th>
+					<td class='left'><%=sdto.getSeller_email() %></td>
+				</tr>
+				<tr>
+					<th rowspan="3">주소</th>
+					<td class='left'>
+						<%= sdto.getSeller_post() %>
+					</td>
+				</tr>
+				<tr>
+					<td class='left'>
+						<%= sdto.getSeller_basic_addr() %>
+					</td>
+				</tr>
+				<tr>
+					<td class='left'>
+						<%= sdto.getSeller_detail_addr() %>
+					</td>
+				</tr>
+				<tr>
+					<th>전화번호</th>
+					<td class='left'><%=sdto.getSeller_phone() %></td>
+				</tr>
+				<tr>
+					<th>사업자번호</th>
+					<td class='left'><%=sdto.getCompany_no() %></td>
+				</tr>
+				<tr>
+					<th>가입일</th>
+					<td class='left'><%=sdto.getJoin_day() %></td>
+				</tr>
+			</tbody>
+		
+		</table>
+		
+		<div class='row-empty'></div>
+		
+		<div class='right'>
+			<a href="#">
+				<input class="form-btn form-inline" type="button" value="비밀번호 변경">
+			</a>
+			<a href="change_info.jsp">
+				<input class="form-btn form-inline" type="button" value="정보변경">
+			</a>
+			<a href="seller_logout.do">
+				<input class="form-btn form-inline" type="button" value="로그아웃">
+			</a>
+			<a href="#">
+				<input class="form-btn form-inline" type="button" value="회원탈퇴">
+			</a>
+		</div>
+			
+</article>
+
 
 
 <jsp:include page="/template/footer.jsp"></jsp:include>

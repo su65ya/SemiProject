@@ -225,6 +225,7 @@
 				<h4>객실 사진 등록</h4>
 				<div class="row-empty"></div>
 				<input type="file" name="room_image" multiple accept=".jpg,.png,.gif" onchange="preview();">
+				<div class="row-empty"></div>
 				<div class="preview-wrap"></div>
 			</div>
             <div class="row-empty"></div>

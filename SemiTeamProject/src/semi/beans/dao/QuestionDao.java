@@ -235,13 +235,47 @@ public class QuestionDao {
 	}
 	
 	// 검색 게시글 개수
-	public int getSearch(String type, String keyword) throws Exception {
+	public int getCount(String type, String keyword) throws Exception {
 		Connection con = getConnection();
 		
 		String sql ="select count(*) from question where instr(#1, ?) > 0";
 		sql = sql.replace("#1", type);
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, keyword);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		
+		int count = rs.getInt(1);
+		
+		con.close();
+		return count;
+	}
+	
+	// 펜션 문의 게시글 개수
+	public int getCount(int que_pension_no) throws Exception {
+		Connection con = getConnection();
+		
+		String sql ="select count(*) from que_list where que_pension_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, que_pension_no);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		
+		int count = rs.getInt(1);
+		
+		con.close();
+		return count;
+	}
+	
+	// 펜션 문의 검색 게시글 개수
+	public int getCount(int que_pension_no, String type, String keyword) throws Exception {
+		Connection con = getConnection();
+		
+		String sql ="select count(*) from que_list where que_pension_no = ? and instr(#1, ?) > 0";
+		sql = sql.replace("#1", type);
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, que_pension_no);
+		ps.setString(2, keyword);
 		ResultSet rs = ps.executeQuery();
 		rs.next();
 		
