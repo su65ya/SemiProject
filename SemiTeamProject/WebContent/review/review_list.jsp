@@ -74,6 +74,17 @@
 %>
 
 <jsp:include page="/template/nav.jsp"></jsp:include>
+<style>
+	a {
+		text-decoration: none;
+		display: block;
+	}
+	
+ 	textarea {
+		resize: none;
+	}
+	   
+</style>
 
 <article class = "w-70">
 	<div class = "row-empty"></div>
@@ -98,11 +109,15 @@
 			<tr>
 				<td><%=revdto.getReview_no()%></td>
 				
-				<td class="left"><%=revdto.getReview_title() %></td>
+				<td class="left">
+					<a href="review_detail.jsp?review_pension_no=<%= revdto.getReview_pension_no() %>&review_no=<%= revdto.getReview_no()%>">
+						<%=revdto.getReview_title() %>
+					</a>
+				</td>
 				
 				<td>
 					<% if (revdto.getReview_writer() != 0) {%>
-						<%= revdto.getReview_writer() %>
+						<%= mdto.getMember_id() %>
 					<%} else {%>
 						<font color="gray">XXX</font>
 					<%} %>

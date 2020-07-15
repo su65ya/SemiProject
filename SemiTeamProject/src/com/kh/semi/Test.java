@@ -4,7 +4,6 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ParseException;
 
 public class Test {
 	public static void main(String[] args) {
