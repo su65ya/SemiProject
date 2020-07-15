@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import semi.beans.dao.QuestionDao;
 
-@WebServlet (urlPatterns ="/question/question_delete.do")
+@WebServlet (urlPatterns ="/review/review_delete.do")
 public class ReviewDeleteServlet extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

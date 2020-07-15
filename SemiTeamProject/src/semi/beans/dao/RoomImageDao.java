@@ -10,7 +10,6 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import com.sun.org.apache.regexp.internal.recompile;
 
 import oracle.jdbc.proxy.annotation.Pre;
 import semi.beans.dto.PensionImageDto;
