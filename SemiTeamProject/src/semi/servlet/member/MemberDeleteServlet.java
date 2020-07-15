@@ -27,7 +27,7 @@ public class MemberDeleteServlet extends HttpServlet {
 
 			req.getSession().removeAttribute("userinfo");
 
-			resp.sendRedirect("http://localhost:8080/SemiTeamProject/index.jsp");
+			resp.sendRedirect(req.getContextPath());
 
 		} catch (Exception e) {
 			e.printStackTrace();

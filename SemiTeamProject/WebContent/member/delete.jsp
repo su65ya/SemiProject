@@ -35,9 +35,9 @@ label {
 			
 			<div calss="row">회원 탈퇴 시 고객님에 관련된 회원정보는 모두 영구 삭제되면 복구할 수 없습니다.</div> <br>
 			
-			
+	
 			<div class="row">
-				<input class="form-btn" type="submit" value="회원탈퇴">
+				<input class="form-btn" type="submit" value="회원탈퇴" >
 			</div>
 			
 	</article>

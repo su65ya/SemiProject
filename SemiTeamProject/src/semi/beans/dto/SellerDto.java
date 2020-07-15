@@ -2,6 +2,9 @@ package semi.beans.dto;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class SellerDto {
 
@@ -64,6 +67,18 @@ public class SellerDto {
 	public String getSeller_birth() {
 		return seller_birth;
 	}
+	
+	// 생일 날짜
+	public String getSeller_day() {
+		return seller_birth.substring(0, 10);
+	}
+
+	public String getSeller_birthdayFormat() throws ParseException {
+		SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date d = s.parse(seller_birth);
+		SimpleDateFormat f = new SimpleDateFormat("y년 M월 d일");
+		return f.format(d);
+	}
 
 	public void setSeller_birth(String seller_birth) {
 		this.seller_birth = seller_birth;
@@ -86,7 +101,13 @@ public class SellerDto {
 	}
 
 	public String getSeller_post() {
+		if (seller_post == null) return "";
 		return seller_post;
+	}
+	
+	public String getRead_post() {
+		if (seller_post == null) return "";
+		return "[" + seller_post +"]";
 	}
 
 	public void setSeller_post(String seller_post) {
@@ -94,6 +115,7 @@ public class SellerDto {
 	}
 
 	public String getSeller_basic_addr() {
+		if (seller_basic_addr == null) return "";
 		return seller_basic_addr;
 	}
 
@@ -102,6 +124,7 @@ public class SellerDto {
 	}
 
 	public String getSeller_detail_addr() {
+		if (seller_detail_addr == null) return "";
 		return seller_detail_addr;
 	}
 
@@ -111,6 +134,11 @@ public class SellerDto {
 
 	public String getSeller_join() {
 		return seller_join;
+	}
+	
+	// 가입일 날짜
+	public String getJoin_day() {
+		return seller_join.substring(0, 16);
 	}
 
 	public void setSeller_join(String seller_join) {

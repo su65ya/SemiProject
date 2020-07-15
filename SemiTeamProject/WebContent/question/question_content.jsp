@@ -38,8 +38,7 @@
 		    }
 	    }
     	
-	    boolean isUser = user.getMember_no() == qvdto.getQue_writer();
-    	
+	    
     %>
 <jsp:include page="/template/nav.jsp"></jsp:include>
 
@@ -117,30 +116,25 @@
 	<div class="row-empty"></div>
 
 	<div class="row right">
-		<% if (sdto == null && isUser) { %>
-			<a href="question_edit.jsp?que_no=<%= que_no %>">
-				<input class="form-btn form-inline" type="button" value="문의수정">
-			</a>
-		<%} %>
-		<% if(isUser) { %>
+	
 			<a href="question_delete.do?que_pension_no=<%= que_pension_no %>&que_no=<%= que_no %>">
 				<input class="form-btn form-inline" type="button" value="삭제">
 			</a>
-		<%} %>
+		
 		<a href="question_write.jsp">
 			<input class="form-btn form-inline" type="button" value="글쓰기">
 		</a>
-		<% if (sdto != null) {%>	
-			<% if (qvdto.getQue_reply() != null) { %>
-				<a href="question_reply.jsp?que_pension_no=<%= que_pension_no %>&que_no=<%= que_no %>">
-					<input class="form-btn form-inline" type="button" value="답변수정">
-				</a>
-			<%} else {%>
-				<a href="question_reply.jsp?que_pension_no=<%= que_pension_no %>&que_no=<%= que_no %>">
-					<input class="form-btn form-inline" type="button" value="답변">
-				</a>
-				<%} %>
+		
+		<% if (qvdto.getQue_reply() != null) { %>
+			<a href="question_reply.jsp?que_pension_no=<%= que_pension_no %>&que_no=<%= que_no %>">
+				<input class="form-btn form-inline" type="button" value="답변수정">
+			</a>
+		<%} else {%>
+			<a href="question_reply.jsp?que_pension_no=<%= que_pension_no %>&que_no=<%= que_no %>">
+				<input class="form-btn form-inline" type="button" value="답변">
+			</a>
 		<%} %>
+		
 		<a href="question_list.jsp?que_pension_no=<%= que_pension_no %>">
 			<input class="form-btn form-inline" type="button" value="목록">
 		</a>

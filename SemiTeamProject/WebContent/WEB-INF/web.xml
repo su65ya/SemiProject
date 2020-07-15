@@ -9,7 +9,7 @@
   
   	<!-- 세션 자동만료 시간 설정 -->
   	<session-config>
-  		<session-timeout>30<!-- 분단위 --></session-timeout>
+  		<session-timeout>60<!-- 분단위 --></session-timeout>
   	</session-config>
   	
   	<!-- EncodingFilter 등록 -->
@@ -36,15 +36,28 @@
   	 
 	<!-- 예약자 테스트 필터 -->
 	 
-	<filter>
+ 	<filter>
   		<filter-name>membertestLoginFilter</filter-name>
   		<filter-class>semi.filter.MemberTestLoginFilter</filter-class>
   	</filter>
   	<filter-mapping>
   		<filter-name>membertestLoginFilter</filter-name>
   		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+ 
+ 	<!-- 관리자 계정 필터 -->
+ 	<!-- 
+ 	<filter>
+  		<filter-name>admintestLoginFilter</filter-name>
+  		<filter-class>semi.filter.AdminFilter</filter-class>
+  	</filter>
+  	<filter-mapping>
+  		<filter-name>admintestLoginFilter</filter-name>
+  		<url-pattern>/*</url-pattern>
   	</filter-mapping>
-  	 
+   	 -->
+    
 
 </web-app>
 

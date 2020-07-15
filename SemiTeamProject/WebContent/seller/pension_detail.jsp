@@ -20,6 +20,7 @@
 	List<PensionImageDto> fileList = pidao.getList(pension_no);
     %>
 <jsp:include page="/template/nav.jsp"></jsp:include>
+
 <article class="w-50">
  		<div class="row">
  			<h2>펜션 상세정보</h2>
@@ -71,7 +72,7 @@
  		<div class="row-empty"></div>
  		<div class="row center a">
  			<a href = "<%=request.getContextPath() %>/seller/password_check.jsp?go=<%=request.getContextPath() %>/seller/pension_edit.jsp?pension_no=<%=pension_no%>">수정하기</a>&nbsp;&nbsp;
- 			<a href = "room_regist.jsp">객실 등록</a>&nbsp;&nbsp;
+ 			<a href = "room_regist.jsp?pension_no=<%= pension_no %>">객실 등록</a>&nbsp;&nbsp;
  			<a href = "<%=request.getContextPath() %>/seller/password_check.jsp?go=pension_delete.do?pension_no=<%=pension_no%>">펜션 삭제</a>&nbsp;&nbsp;
  			<a href = "pension_list.jsp">목록보기</a>&nbsp;&nbsp;
  			<a href = "<%= request.getContextPath() %>/question/question_list.jsp?que_pension_no=<%= pension_no %>">문의내역</a>

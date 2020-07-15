@@ -3,17 +3,11 @@ package semi.beans.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import com.sun.org.apache.regexp.internal.recompile;
-
-import oracle.jdbc.proxy.annotation.Pre;
-import semi.beans.dto.PensionImageDto;
 import semi.beans.dto.RoomImageDto;
 
 public class RoomImageDao {
@@ -55,14 +49,14 @@ public class RoomImageDao {
 	public RoomImageDto get(int room_image_no) throws Exception {
 		Connection con = getConnection();
 		
-		String sql = "SELECT room_image WHERE room_image_no=?";
+		String sql = "SELECT * FROM room_image WHERE room_image_no=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		
 		ps.setInt(1, room_image_no);
 		ResultSet rs = ps.executeQuery();
 		RoomImageDto ridto;
 		if(rs.next()) {
-			ridto=new RoomImageDto(rs);
+			ridto = new RoomImageDto(rs);
 		}else {
 			ridto=null;
 		}
