@@ -45,9 +45,9 @@
 
 <jsp:include page="/template/nav.jsp"></jsp:include>
 
-<article class="w-50">
+<article class="w-40">
 	<div class="row ">
-		<h2>[<%=sdto.getSeller_name()%> (사업자번호 : <%=sdto.getCompany_no()%>)]님의 회원정보</h2>
+		<h2>[<%=sdto.getSeller_name()%> (사업자번호 : <%=sdto.getCompany_no()%>)]님의<br> 회원정보</h2>
 	</div>
 	<div class="row">
 		<table class="table table-sideopen table-hover">
@@ -100,7 +100,7 @@
 	</div>
 	<div class="row" style="float: left;">
 		<a href="admin_seller_list.jsp">
-			<input class= "form-btn2" type="button" value="◀ 판매자 리스트">
+			<input class= "form-btn2" type="button" value="◀ 판매자 리스트 ">
 		</a>
 	</div>
 	<div class="row" style="float: right;">
