@@ -63,7 +63,7 @@
   				</tr>
   				<tr>
     				<td class="row right">
-					<a href = "password_check.jsp?go=room_delete.do?room_no=<%=rdto.getRoom_no()%>">
+					<a href = "password_check.jsp?go=room_delete.do?room_no=<%=rdto.getRoom_no()%>&pension_no=<%= pension_no %>">
 					<input class = "form-btn form-inline" type="button" value = "객실삭제">
 					</a>
 					</td>
