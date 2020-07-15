@@ -70,4 +70,11 @@ public class DateChecker {
 		int year = c.get(Calendar.YEAR);
 		return year;
 	}
+	
+	public static String cal(int totalPrice) {
+		Format f = new DecimalFormat("#,###");
+		int calPrice = totalPrice;
+		return f.format(calPrice);
+		
+	}
 }

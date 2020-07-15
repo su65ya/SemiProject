@@ -11,6 +11,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import oracle.jdbc.proxy.annotation.Pre;
 import oracle.net.nt.ConnStrategy;
 import semi.beans.dto.ReservationStep1Dto;
 import semi.beans.dto.ReservationStep2Dto;
@@ -60,6 +61,27 @@ public class ReservationFlowDao {
 		return seq;
 	}
 
+	// step1의 예약번호를 통해 펜션 번호를 얻어오는 메소드
+	public ReservationStep1Dto getStep1Info(int reservation_no) throws Exception {
+		Connection con = getConnection();
+		String sql = "SELECT * FROM RESERVATION_STEP1 WHERE reservation_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, reservation_no);
+		ResultSet rs = ps.executeQuery();
+		ReservationStep1Dto step1;
+		if(rs.next()) {
+			step1 = new ReservationStep1Dto();
+			step1.setReservation_no(reservation_no);
+			step1.setMember_no(rs.getInt("member_no"));
+			step1.setPension_no(rs.getInt("pension_no"));
+			step1.setReservation_date(rs.getString("reservation_date"));
+		}else {
+			step1 = null;
+		}
+		con.close();
+		return step1;
+	}
+
 	// step2 등록 메소드
 	public void save(ReservationStep2Dto step2dto) throws Exception {
 		Connection con = getConnection();
@@ -75,7 +97,7 @@ public class ReservationFlowDao {
 
 	}
 
-	// step2의 정보 출력 메소드
+	// step2의 정보 출력 메소드--예약정보
 	public List<ReservationStep2Dto> getList(int reservation_no) throws Exception {
 		Connection con = getConnection();
 		String sql = "SELECT * FROM reservation_step2 WHERE reservation_no=?";
@@ -96,9 +118,9 @@ public class ReservationFlowDao {
 		con.close();
 		return list;
 	}
-	
-	//step3 등록 메소드
-	public void save(ReservationStep3Dto step3dto) throws Exception{
+
+	// step3 등록 메소드
+	public void save(ReservationStep3Dto step3dto) throws Exception {
 		Connection con = getConnection();
 		String sql = "INSERT INTO reservation_step3 VALUES(step3_seq.nextval,?,?,?,?)";
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -108,5 +130,27 @@ public class ReservationFlowDao {
 		ps.setInt(4, step3dto.getStep2_no());
 		ps.execute();
 		con.close();
+	}
+
+	// step3의 정보를 뽑아오는 메소드(step_no를 받아서)--option정보
+	public ReservationStep3Dto optionList(int step2_no) throws Exception {
+		Connection con = getConnection();
+		String sql = "SELECT * FROM reservation_step3 WHERE step2_no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, step2_no);
+		ResultSet rs = ps.executeQuery();
+		ReservationStep3Dto step3;
+		if (rs.next()) {
+			step3 = new ReservationStep3Dto();
+			step3.setStep2_no(step2_no);
+			step3.setStep3_no(rs.getInt("step3_no"));
+			step3.setAdult(rs.getString("adult"));
+			step3.setBbq(rs.getString("bbq"));
+			step3.setChildren(rs.getString("children"));
+		} else {
+			step3 = null;
+		}
+		con.close();
+		return step3;
 	}
 }

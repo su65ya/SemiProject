@@ -1,3 +1,7 @@
+<%@page import="semi.util.DateChecker"%>
+<%@page import="semi.beans.dto.PensionOptionDto"%>
+<%@page import="semi.beans.dto.ReservationStep1Dto"%>
+<%@page import="semi.beans.dto.ReservationStep3Dto"%>
 <%@page import="semi.beans.dao.ReservationFlowDao"%>
 <%@page import="semi.beans.dto.ReservationStep2Dto"%>
 <%@page import="semi.beans.dto.RoomDto"%>
@@ -17,7 +21,18 @@
 	ReservationStep2Dto step2dto = new ReservationStep2Dto();
 	ReservationFlowDao flowdao = new ReservationFlowDao();
 	int reservation_no = Integer.parseInt(request.getParameter("reservation_no"));
+	ReservationStep1Dto step1dto = flowdao.getStep1Info(reservation_no);
 	List<ReservationStep2Dto> list = flowdao.getList(reservation_no);
+	PensionOptionDao pen_option_dao = new PensionOptionDao();
+	
+	//펜션 옵션의 가격 리스트
+	List<PensionOptionDto> pen_option_list = pen_option_dao.getList(step1dto.getPension_no());
+		int adultPrice = pen_option_dao.getPrice(step1dto.getPension_no(), "성인");
+		int childPrice = pen_option_dao.getPrice(step1dto.getPension_no(), "아동");
+		int bbqPrice = pen_option_dao.getPrice(step1dto.getPension_no(), "숯불");
+
+	int totalPrice=0;
+	
 %>
 <jsp:include page="/template/nav.jsp"></jsp:include>
     <style>
@@ -55,60 +70,33 @@
 				</tr>
 			</thead>
 			<tbody>
+				
 				<%for(ReservationStep2Dto rdto : list){ //날짜별 예약 현황%>
-				<%
-					System.out.println(rdto);
-
-					String date = rdto.getRes_date();//예약정보에서 예약일자를 date에 저장
-					ridto = ridao.get(date);//rdto라는 이름으로 예약된 날짜의 예약옵션정보를 저장한다
-					RoomDto roomdto = roomdao.get(rdto.getRes_room_no());
-					int pension_no = roomdto.getRoom_pension_no();
-						int total_adlut_price;
-						if(ridto.getAdult()==null){
-							total_adlut_price = 0;
-							System.out.println("성인 가격"+ total_adlut_price);
-						}else{
-							int adult = Integer.parseInt(ridto.getAdult());
-							int adult_price = podao.getPrice(pension_no, "성인");
-							total_adlut_price = adult_price * adult;
-							System.out.println("성인 가격"+ total_adlut_price);
-						}
-					
-					int fire_price;
-						if(ridto.getBbq()==null){
-							fire_price = 0;
-							System.out.println("숯불 가격"+fire_price);
-						}else{
-							fire_price = podao.getPrice(pension_no, "숯불");
-							System.out.println("숯불 가격"+fire_price);
-						}
-					int total_children_price;
-						if(ridto.getChildren()==null){
-							total_children_price = 0;
-							System.out.println("아동 가격"+total_children_price);
-						}else{
-							int children = Integer.parseInt(ridto.getChildren());
-							int children_price = podao.getPrice(pension_no, "아동");
-							total_children_price = children_price*children;
-							System.out.println("아동 가격"+total_children_price);
-						}
-					int extraPrice = total_children_price+fire_price+total_adlut_price;
-					System.out.println("총가격" +extraPrice);
+				<% RoomDto roomdto = roomdao.get(rdto.getRoom_no());%>
+				<tr>
+					<%
+					ReservationStep3Dto step3dto =  flowdao.optionList(rdto.getStep2_no());
+					int adult = Integer.parseInt(step3dto.getAdult());
+					int children = Integer.parseInt(step3dto.getChildren());
+					int bbq =  Integer.parseInt(step3dto.getBbq());
+					int extraPrice = (adult*adultPrice)+(children*childPrice)+(bbqPrice*bbq);
 					%>
-<!-- 				<tr> -->
-<%-- 					<td class="left"><%=rdto.getRes_room_name() %></td> --%>
-<%-- 					<td style="color: #ea1f62"><%=rdto.getRes_date() %></td> --%>
-<%-- 					<td>성인 <%=roomdto.getStandard_people()%>명</td> --%>
-<%-- 					<td><%=rdto.getRes_room_price() %>원</td> --%>
-<%-- 					<%int room_price = Integer.parseInt(rdto.getRes_room_price()); %> --%>
-<%-- 					<td><%=extraPrice %>원</td> --%>
-<%-- 					<td><%=extraPrice+room_price%>원</td> --%>
-<!-- 				</tr> -->
-				<%//} %>
+					<td class="left"><%=roomdto.getRoom_name() %></td>
+					<td style="color: #ea1f62"><%=rdto.getReservation_date_day() %></td>
+					<td>총 <%=roomdto.getStandard_people()+adult+children%>명</td>
+					<td><%=DateChecker.cal(rdto.getReservation_price()) %>원</td>
+					<td><%=DateChecker.cal(extraPrice) %>원</td>
+					<%int plusPrice = extraPrice+rdto.getReservation_price();%>
+					<td><%=DateChecker.cal(plusPrice)%>원
+					<%totalPrice = totalPrice + (extraPrice+rdto.getReservation_price()); %>
+					<input type = "hidden" name = "res_info" value="<%=rdto.getRoom_no() %>/<%=rdto.getReservation_date_day() %>/<%=totalPrice %>">
+					</td>
+				</tr>
+				<%} %>
 			</tbody>
 		</table>
 		<div class="row right">
-		    <h3>총 결제 금액 : <span style="color :#ea1f62">3,300,000</span>원</h3>
+		    <h3>총 결제 금액 : <span style="color :#ea1f62"><%=DateChecker.cal(totalPrice) %></span>원</h3>
 		</div>
 		<div class="row-empty"></div>
 		<div class="row-empty"></div>
@@ -144,7 +132,7 @@
 			</div>
 			<div class="row-empty"></div>
 			<div class="row right">
-				<h3>3,300,000원</h3>
+				<h3><span style="color :#ea1f62"><%=DateChecker.cal(totalPrice) %></span>원</h3>
 			</div>
 			<div class="row-empty"></div>
 			<div class="row-empty"></div>
@@ -162,7 +150,8 @@
 			<div class="row-empty"></div>
 						<div class="row">
 				<span>예약자명</span>
-				<input  class="form-input" type="text" name="res_write" placeholder="예약자이름" required>
+				<input  class="form-input" type="text" name="res_name" placeholder="예약자이름" required>
+				<input type = "hidden" name="res_write" value ="<%=step1dto.getMember_no() %>" >
 				<div class="row-emptyy"></div>
 				<span style="color: firebrick;">예약자 실명을 입력해주세요 예약확인시 혼동이 될 수 있습니다.</span>
 				<div class="row-emptyy"></div>
@@ -183,8 +172,7 @@
 			</div>
 			<div class="row">
 				<span>결제수단</span>
-				<select required>
-				<option>신용카드</option>
+				<select required name="res_payment">
 				<option>카카오페이</option>
 				<option>네이버페이</option>
 				<option>계좌이체</option>
