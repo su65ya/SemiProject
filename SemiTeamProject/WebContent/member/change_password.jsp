@@ -131,6 +131,7 @@
     }
         
     function checkForm() {
+
         if (checkPw1() && checkPw2() &&checkPw3()) {
             return true;
         }
