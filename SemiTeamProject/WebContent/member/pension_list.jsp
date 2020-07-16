@@ -10,8 +10,8 @@
 <%@page import="java.util.List"%>
 <%
 	MemberDto mdto = (MemberDto)session.getAttribute("userinfo");
-// 	int member_no = mdto.getMember_no();
-	int member_no = 3;
+	int member_no = mdto.getMember_no();
+// 	int member_no = 3;
 	PensionDao pdao = new PensionDao();
 	PenImgViewDto viewDto = new PenImgViewDto();
 	PensionOptionDao podao = new PensionOptionDao();
