@@ -22,7 +22,7 @@
 				<tr>
 					<th>현재 비밀번호</th>
 					<td class="left">
-						<input class="intext" type="password" placeholder="현재 비밀번호" required>
+						<input class="intext" type="password" name='nowPassword' placeholder="현재 비밀번호" required>
 					</td>
 				</tr>
 				<tr>
@@ -34,12 +34,19 @@
 				<tr>
 					<th>새 비밀번호 확인</th>
 					<td class="left">
-						<input class="intext" type="password" placeholder="새 비밀번호 확인" required>
+						<input class="intext" type="password" name='member_pw' placeholder="새 비밀번호 확인" required>
 					</td>
 				</tr>
 			</tbody>
 		</table>
-
+		
+	<div class="row-empty"></div>
+	<div class="row center">
+           	<% if (request.getParameter("error") != null) {	%>
+			<!-- 오류 메시지는 페이지에 error라는 파라미터가 있을 경우에만 -->
+			<font color="#ff0000" size="2px">입력하신 비밀번호 정보가 맞지 않습니다</font>
+			<%} %>
+     </div>
 
 
 	</div>

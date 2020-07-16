@@ -534,7 +534,7 @@
 		 	2020.07.16 menu-fixed 추가
 		  */
 		.menuu-fixed {
-		    position: fixed;
+		    position: absolute;
 		    top: 0;
 		    left: auto;
 		    right: auto;
