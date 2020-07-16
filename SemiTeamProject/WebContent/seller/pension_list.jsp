@@ -20,7 +20,7 @@
 	String keyword = request.getParameter("keyword");
 	boolean isSearch = keyword != null;
 	
-	int pageSize = 1;
+	int pageSize = 5;
 	String pageStr = request.getParameter("page");
 	
 	int pageNo;
@@ -30,7 +30,7 @@
 			throw new Exception();
 		}
 	}catch(Exception e){
-		pageNo = 5;
+		pageNo = 1;
 	}
 	int finish = pageNo * pageSize;
 	int start = finish - (pageSize-1); 

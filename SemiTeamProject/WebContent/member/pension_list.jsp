@@ -16,11 +16,42 @@
 	PenImgViewDto viewDto = new PenImgViewDto();
 	PensionOptionDao podao = new PensionOptionDao();
 	String location = request.getParameter("location");
+	
+	boolean isSearch = location != null;
+	int pageSize = 5;
+	String pageStr = request.getParameter("page");
+	
+	int pageNo;
+	try{
+		pageNo = Integer.parseInt(pageStr);
+		if(pageNo <= 0){
+			throw new Exception();
+		}
+	}catch(Exception e){
+		pageNo = 1;
+	}
+	int finish = pageNo * pageSize;
+	int start = finish - (pageSize-1); 
+	int blockSize = 10;
+	int startBlock = (pageNo-1)/blockSize*blockSize+1;
+	int finishBlock = startBlock + (blockSize-1);
+
+	int count;
+	if(isSearch){//검색이면
+		count = pdao.getCount(location);
+	}else{//목록이면
+		count = pdao.getCount();
+	}
+	int pageCount = (count+pageSize-1)/pageSize;
+	//만약 finishBlock 이 pageCount보다 크다면 수정해야 한다
+	if(finishBlock>pageCount){
+		finishBlock = pageCount;
+	}
 	List<PensionDto> list;
 	if(location !=null){
-		list = pdao.getList(location);
+		list = pdao.getList(location,start,finish);
 	}else{
-		list = pdao.getList();
+		list = pdao.getList(start,finish);
 	}
 %>
 
@@ -34,6 +65,7 @@
 	<div class="row-empty"></div>
 	<!-- 펜션 목록 -->
 	<div class="row list ">
+	<form>
 		<table class="table table-sideopen left" style=border-collapse:inherit;>
 			<tbody>
 				<%for (PensionDto pdto : list) {%>
@@ -105,6 +137,42 @@
 			</tbody>
 		</table>
 		</form>
+		<div class="row center pagination">
+	<%if(startBlock>1){ %>
+		<%if(!isSearch){ %>
+			<a href = "pension_list.jsp?page=<%=startBlock-1%>">&lt;</a>
+		<%}else{ %>
+			<a href = "pension_list.jsp?page=<%=startBlock-1%>&location=<%=location%>">
+			&lt;</a>
+		<%} %>
+		
+	<%} %>
+	<%for(int i = startBlock;i<=finishBlock;i++){ %>
+		<%
+		//현재 페이지에 해당하는 블록은 class="on"을 출력하면 디자인 효과를 볼 수 있다
+			String prop;
+			if(i == pageNo){//현재페이지 번호면
+				prop = "class='on'";
+				}else{//아니면
+					prop="";
+				}
+		%>
+					
+		<%if(!isSearch){ %>
+			<a href = "pension_list.jsp?page=<%=i%>"<%=prop%>><%=i%></a>
+		<%}else{ %>
+			<a href = "pension_list.jsp?page=<%=i %>&keyword=<%=location %>"<%=prop%>><%=i %></a>
+	<%} %>
+	<%} %>
+	<%if(pageCount>finishBlock){ %>
+		<%if(!isSearch){ %>
+			<a href = "pension_list.jsp?page=<%=finishBlock+1%>">&gt;</a>
+		<%}else{ %>
+			<a href = "pension_list.jsp?page=<%=startBlock-1%>&location=<%=location%>">
+			&gt;</a>
+		<%} %>
+		<%} %>
+	</div>
 		</div>
 </article>
 <jsp:include page="/template/footer.jsp"></jsp:include>
