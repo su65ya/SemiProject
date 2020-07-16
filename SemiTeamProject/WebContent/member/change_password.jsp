@@ -82,9 +82,11 @@
             if(document.querySelector("input[name=pw0]").value==
               document.querySelector("input[name=pw1]").value) {
                 pw1Tag.classList.add("correct");
+                return true;
             }
             else {
                 pw1Tag.classList.add("incorrect");
+                return false;
             }
     }
     //2. 새 비밀번호가 형식에 맞는지 검사
@@ -100,9 +102,11 @@
         
             if (isValid) {
                 pw2Tag.classList.add("correct");
+                return true;
             }
             else {
                 pw2Tag.classList.add("incorrect");
+                return false;
              }
     }
     //3. 새비밀번호 확인이 새 비밀번호와 같은지 검사
@@ -117,18 +121,22 @@
             if(document.querySelector("input[name=member_pw]").value==
                document.querySelector("input[name=pw3]").value) {            
                 pw3Tag.classList.add("correct");
+                return true;
             }
             else {
                 pw3Tag.classList.add("incorrect");
+                return false;
             }
         }
     }
         
     function checkForm() {
-        var pw2IsValid = checkPw2();
-        if (!pw2IsValid) { //새비밀번호가 틀렸다면
-            processPw2(pw2IsValid);
+        if (checkPw1() && checkPw2() &&checkPw3()) {
+            return true;
         }
+        else {
+            return false;
+         }
     }
     
 </script>
@@ -139,7 +147,7 @@
 		<h2 >비밀번호 변경</h2>
 	</div>
 	
-	<form action="change_password.do" method="post" onsubmit="">
+	<form action="change_password.do" method="post" onsubmit="return checkForm();">
 	<div class="row">
 		<table class="table table-sideopen">
 			<tbody>
@@ -147,7 +155,7 @@
 					<th style="width:150px;">현재 비밀번호</th>	
 					<td class="left">
 					    <div>
-					    <input class="intext" name="pw0" type="hidden" value="<%=user.getMember_pw()%>">
+					    <input class="intext" name="pw0" type="hidden" value="<%=mdto.getMember_pw()%>">
 						<input class="intext" name="pw1" id="pw" type="password" onblur="checkPw1();" placeholder="현재 비밀번호">
 						<span class="correct-message">현재 비밀번호와 일치합니다</span>
 						<span class="incorrect-message">비밀번호가 맞는지 확인하세요</span>
