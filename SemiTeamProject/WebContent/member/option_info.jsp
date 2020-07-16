@@ -19,27 +19,65 @@
 	}
 </style>
 <script>
-	function bbq_check() {
-		var checkTag = document.querySelector("#bbq");
-		var hidden = document.querySelector("input[name=bbq]");
+	function bbq_check(tag) {
+		var parentTag = tag.parentNode;
+		var hidden = parentTag.children[1];
 		
-		if(checkTag.checked){
+		console.log(parentTag);
+		console.log(hidden);
+		
+		if(tag.checked){
 			hidden.value = "1";
 		}else{
 			hidden.value = "0";
 		}
 	}
 	
-	function check() {
-		var adult = document.querySelectorAll("#a").value;
-		var children = document.querySelectorAll("#c").value;
+	function check_adult(tag) {
+		var parentTd = tag.parentNode;
+		var parentTr = parentTd.parentNode;
 		
-		var extra = document.querySelector(".extra").textContent;
+		var extraTag = parentTr.children[3];//추가인원(td)
+		var extra = extraTag.textContent;
+		var adult = tag.value;//tag(input)
 		
+		var childTd = parentTr.children[6];//td
+		var child = childTd.children[0].value;//tag(input)
+		var childTag = childTd.children[0];
 		
-		if((adult+children) > extra){
+		var isAdd = extra<(adult+child);
+		if(!isAdd){
+			alert("추가 가능 인원에 맞춰서 추가해주세요");
+			tag.value = "0";//어른 태그의 값
+			childTd.value = "0";
+		}
+		console.log("추가인원"+extra);
+		console.log("어른 인원"+adult);
+		console.log("아동 인원"+child);
+		console.log(isAdd);
+		
+	}
+	function check_children(tag){
+		var parentTd = tag.parentNode;//이 태그의 부모 td
+		var parentTr = parentTd.parentNode;//td의 부모 tr
+		
+		var extraTag = parentTr.children[3];//추가인원(td)
+		var extra = extraTag.textContent;
+		var adultTd = parentTr.children[5];//td
+		var adult = adultTd.children[0].value;//tag(input)
+		var adultTag = adultTd.children[0];
+		
+		var child = tag.value;//tag(input)
+		var isAdd = extra<(adult+child);
+		if(isAdd){
 			alert("추가 가능 인원에 맞춰서 추가해주세요");
 		}
+	
+		console.log("추가인원"+extra);
+		console.log("어른 인원"+adult);
+		console.log("아동 인원"+child);
+		console.log(isAdd);
+		
 	}
 </script>
 <%
@@ -92,10 +130,10 @@
 					
 					<td><%=standard %></td>
 					<td class="extra"><%=extra %></td>
-					<td><input type = "checkbox" id = "bbq" onchange="bbq_check();">
+					<td><input type = "checkbox" id = "bbq" onchange="bbq_check(this);">
 					<input type = "hidden" name = "bbq" value = "0"></td>
 					<td>
-						<select name = "adult" id="a" onchange="check();">
+						<select name = "adult"  onchange="check_adult(this);">
 							<option value = "0">선택</option>
 							<option value = "1">1명</option>
 							<option value = "2">2명</option>
@@ -103,7 +141,7 @@
 						</select>
 					</td>
 					<td>
-						<select name = "children" id="c" onchange="check();">
+						<select name = "children"  onchange="check_children(this);">
 							<option value = "0">선택</option>
 							<option value = "1">1명</option>
 							<option value = "2">2명</option>

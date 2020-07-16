@@ -1,3 +1,6 @@
+<%@page import="semi.beans.dao.ReviewFileDao"%>
+<%@page import="semi.beans.dto.ReviewFileDto"%>
+<%@page import="semi.beans.dto.ReviewDto"%>
 <%@page import="semi.beans.dao.ReviewDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -6,6 +9,9 @@
 	int review_no = Integer.parseInt(request.getParameter("review_no"));
 	int review_pension_no=Integer.parseInt(request.getParameter("review_pension_no"));
 	ReviewDao revdao = new ReviewDao();
+	ReviewDto revdto = revdao.get(review_no);
+	ReviewFileDto rfdto = new ReviewFileDto();
+	ReviewFileDao rfdao = new ReviewFileDao();
 %>
 
 <script>
@@ -48,11 +54,12 @@ function preview(){
     	label{
     		font-size:13;
     	}
+    	
     </style>
 
 <jsp:include page="/template/nav.jsp"></jsp:include>
 
-<form action="review_write.do" method="post" enctype="multipart/form-data">
+<form action="review_edit.do" method="post" enctype="multipart/form-data">
 <% if (request.getParameter("review_no") != null) { %>
 		<input type="hidden" name="review_no"
 			value="<%=request.getParameter("review_no")%>">
@@ -66,17 +73,17 @@ function preview(){
 		<div class="row-empty"></div>
 
 		<div class="row">
-			<h2>리뷰 작성</h2>
+			<h2>리뷰 수정</h2>
 		</div>
 		
 		<div class="row">
 			<label><span>*</span>리뷰 제목</label>
-			<input class="form-input" type="text" name="review_title">
+			<input class="form-input" type="text" name="review_title" value="<%=revdto.getReview_title() %>">
 		</div>
 		
 		<div class="row">
 			<label><span>*</span>리뷰 내용</label><br>
-			<textarea name="review_content" rows="10px" cols="80px"></textarea>
+			<textarea name="review_content" rows="10px" cols="80px"><%=revdto.getReview_content() %></textarea>
 		</div>
 		<div class="row-empty"></div>
 		<hr>
@@ -86,6 +93,12 @@ function preview(){
 			<input type="file" name="review_file" multiple accept=".jpg, .png, .gif" onchange="preview();">
 			<div class="row-empty"></div>
 			<div class="preview-wrap"></div>
+			<%rfdto = rfdao.getImgView(review_no); 
+				if(rfdto != null){%>
+				<img src="filedownload.do?review_file_no=<%=rfdto.getReview_file_no() %>" width="200" height="200">
+				<%}else{ %>
+				<img src="https://placehold.it/250x250">
+			<%} %>
 		</div> 
 		<div class="row-empty"></div>
         <div class="row-empty"></div>		

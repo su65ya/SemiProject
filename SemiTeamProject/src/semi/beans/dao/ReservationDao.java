@@ -33,7 +33,6 @@ public class ReservationDao {
 //		return src.getConnection();
 		Class.forName("oracle.jdbc.OracleDriver");
 		return DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "c##semi", "c##semi");
-		
 	}
 
 	// 시퀀스 생성 메소드
@@ -113,7 +112,6 @@ public class ReservationDao {
 		ps.setInt(2, room_no);
 		ResultSet rs = ps.executeQuery();
 		boolean isReservation = rs.next();
-		
 		return isReservation;
 	}
 }

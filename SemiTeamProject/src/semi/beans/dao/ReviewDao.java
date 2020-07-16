@@ -148,11 +148,11 @@ public class ReviewDao {
 			ps.setInt(1, review_no);
 			ResultSet rs = ps.executeQuery();
 			
-			ReviewDto qvdto = rs.next() ? new ReviewDto(rs) : null;
+			ReviewDto revdto = rs.next() ? new ReviewDto(rs) : null;
 			
 			
 			con.close();
-			return qvdto;
+			return revdto;
 		}
 		
 		// 조회수 메소드
