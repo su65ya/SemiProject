@@ -134,16 +134,12 @@
     	var option_priceTag = document.querySelector(".option_price1");
     	
     	var hidden = document.querySelector(".option_price1 + input[type=hidden]");
-    	var isInput;
     	if(option_priceTag.value){
-    		isInput = true;
     		hidden.value=option_nameTag.textContent+"-"+option_priceTag.value+"-0";
     	}else{
-    		isInput = false;
     		hidden.value="";
     	}
     	
-    	return isInput;
     }
     
     function setOption2(){
