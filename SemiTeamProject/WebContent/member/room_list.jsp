@@ -1,3 +1,6 @@
+<%@page import="semi.beans.dao.ReservationDao"%>
+<%@page import="semi.beans.dto.MemberDto"%>
+<%@page import="semi.util.DateChecker"%>
 <%@page import="semi.beans.dto.PenImgViewDto"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="java.util.GregorianCalendar"%>
@@ -70,24 +73,70 @@
                 });
             
         }
+        
+        /*
+        	알아야 할 명령
+        	.parentNode : 상위 태그 객체
+        	.previousSibling : 
+        */
+        function reservation(tag) {//tag는 변화된 태그 객체(this)
+        	var td = tag.parentNode;
+        	var friendTd = td.previousElementSibling;
+        	var re_infoTag = friendTd.children[0];
+
+        	if(tag.checked){
+        		var re_info = friendTd.children[1];
+        		re_infoTag.value = re_info.value;
+        	}else{
+        		re_infoTag.value = "";
+        	}
+        	}
+        
+        function option_modal(){
+        	var tag = document.querySelector(".modal-wrap");
+        	tag.classList.remove("on");
+        	tag.classList.add("on");
+        }
+        function option_modal_hidden(){
+        	var tag = document.querySelector(".modal-wrap");
+        	tag.classList.remove("on");
+        }
+        
+        function change_check() {
+			var tag = document.querySelector("#fire");
+			var hidden = document.querySelector("input[name=fire]");
+			
+			if(tag.checked){
+				hidden.value = "1";
+			}else{
+				hidden.value = "0";
+			}
+			
+		}
     </script>
 <%
+
+	int reservation_no = Integer.parseInt(request.getParameter("reservation_no"));
 	PensionDao pdao = new PensionDao();
 	RoomDao rdao = new RoomDao();
 	int pension_no = Integer.parseInt(request.getParameter("pension_no"));
 	
-	List<RoomDto> list = rdao.getList(pension_no);
+	List<RoomDto> list = rdao.getList(pension_no); 
 	PensionInfoDto pdto = pdao.get(pension_no);
 	
 	PensionImageDao pidao = new PensionImageDao();
 	List<PensionImageDto> fileList = pidao.getList(pension_no);
 	
-	Calendar cal = Calendar.getInstance();
-	SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd");
 
 	
 	PenImgViewDto viewDto = new PenImgViewDto();
 	
+	MemberDto mdto = (MemberDto)session.getAttribute("userinfo");
+
+	Calendar cal = Calendar.getInstance();
+	SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd");
+	SimpleDateFormat yearWithformat = new SimpleDateFormat("yyyy/MM/dd");
+	ReservationDao rvdao = new ReservationDao();
 %>
 
     <div class="swiper-container">
@@ -111,9 +160,12 @@
         <div class="swiper-button-next"></div>
 -->
     </div>
+    
+    <form action="reservation_step2.do" method="post">
     <article class="w-80">
     <div class="row left">
         <h2 style="height: 15px;" class="left"><%=pdto.getPension_name() %></h2>
+        <input type = "hidden" name = "reservation_no" value = "<%=reservation_no%>">
     </div>
     <div class="row left">
         <h6  class="left" style="height: 15px; margin: 0;">[<%=pdto.getPension_post() %>] <%=pdto.getPension_basic_addr() %> <%=pdto.getPension_detail_addr() %></h6>
@@ -130,7 +182,11 @@
        </dl>
         
     </div>
-    
+    <div class="row-empty"></div>
+    <div class="row-empty"></div>
+    <div> 
+    	<h4  class="left">"먼저 아래 달력에서 예약할 객실을 선택하고 하단의 옵션에서 인원을 입력 후 예약하기를 눌러주세요."</h4>
+    </div>
     <div class="center">
         <table class="table table-border center">
             <thead>
@@ -140,34 +196,50 @@
                     	cal.add(cal.DATE,+i);
                     	String date111 = dateFormat.format(cal.getTime());
                     	cal = Calendar.getInstance();%>
-                    <th>
-                    <%=date111 %>
-                    </th>
+	                    <th>
+	                    <%=date111 %>
+	                    </th>
                     <%}%>
                 </tr>
             </thead>
             <tbody>
                 <%for(RoomDto rdto : list){%>
+                <%cal = Calendar.getInstance(); %>
 		                <tr>
-		                    <td rowspan="2" style="width: 90px; padding: 0;"><img src="https://placehold.it/90x90"></td>
+		                    <td style="width: 90px; padding: 0;"><img src="https://placehold.it/100x120"></td>
 		                    <%for(int j = 0;j<14;j++){ %>
-		                    	<td style="height: 60px;"><%=rdto.getOff_weekday() %></td>
-		                    <%} %>
-		                </tr>
-               		 <tr>
-                	<%for(int i = 0;i<14;i++){%>
-<!--                 		<td></td> -->
-<%--                 		<%if(예약된 객실이 아니면){ %> --%>
-                    		<td style="height: 30px;"><input type="checkbox" ></td>
-<%--                     	<%}else{예약된 객실이면 %> --%>
-<!--                     		<td style="height: 2px;"><h6 >예약 완료</h6></td> -->
-<%--                     	<%} %> --%>
-                    <%} %>
-                </tr>
+		                    <% 
+		                    
+		                    if(j > 0) cal.add(Calendar.DATE, 1);
+		                    String date = yearWithformat.format(cal.getTime());
+		                    %>
+		                    <td>
+			                    	<div style="height: 70px; text-align: center; padding-top: 1.5rem;"><%=DateChecker.calculatePriceWithFormat(cal, rdto)%>
+			                    	<input type="hidden" name="res_info">
+			                    	<input type="hidden" id="re_info" value="<%=rdto.getRoom_no() %>/<%=DateChecker.year(cal) %>/<%=DateChecker.month(cal) %>/<%=DateChecker.day(cal)%>/<%=DateChecker.calculatePrice(cal, rdto)%>">
+			                    	
+			                    	</div>
+		                    	<%if(rvdao.isReservation(rdto.getRoom_no(), date)){ %>
+		                    		<div><h5>예약완료</h5></div>
+		                    	<%}else{ %>
+			                    	 <div>
+			                    	<input type="checkbox" onchange="reservation(this);">
+			            			</div>
+		                  		<%} %>
+		                    </td>
+			               <%} %>
+		                    
+		              </tr>
                 <%}%>
             </tbody>
         </table>
-        
+        <div class="row-empty"></div>
+        <div class="row-empty"></div>
+        <div class="row-empty"></div>
+        <div class="row">
+        	<input type = "submit" value = "선택완료">
+        </div>
     </div>
     </article>
+    </form>
 <jsp:include page="/template/footer.jsp"></jsp:include>

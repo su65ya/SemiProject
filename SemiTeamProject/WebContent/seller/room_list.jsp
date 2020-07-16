@@ -19,6 +19,9 @@
     background-color: #ffe6ee;
   }
   
+  a {
+  	text-decoration: none;
+  }
 
 </style>
 <jsp:include page="/template/nav.jsp"></jsp:include>
@@ -82,15 +85,25 @@
   				</tr>
   				<tr>
     				<td class="row right" colspan="7" >
-					<a href = "password_check.jsp?go=room_delete.do?room_no=<%=rdto.getRoom_no()%>">
-					<input class = "form-btn form-inline" type="button" value = "객실삭제">
-					</a>
+						<a href = "password_check.jsp?go=room_delete.do?room_no=<%=rdto.getRoom_no()%>">
+							<input class = "form-btn form-inline" type="button" value = "객실삭제">
+						</a>
 					</td>
   				</tr>
   				<%} %>
 			</tbody>
 		</table>
+		
 		<!-- 객실 등록버튼 -->
+		<div class='row-empty'></div>
+		<div class='row right'>
+			<a href = "pension_list.jsp">
+				<input class = "form-btn form-inline" type="button" value = "펜션목록">
+			</a>	
+			<a href = "room_regist.jsp?pension_no=<%= pension_no %>">
+				<input class = "form-btn form-inline" type="button" value = "객실등록">
+			</a>
+		</div>
 		
 	</div>
 	<!-- 네비게이터 -->

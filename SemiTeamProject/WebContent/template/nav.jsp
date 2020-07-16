@@ -69,6 +69,7 @@
 				<a href="#">펜션 찾기</a>
 			</ul>
 		<%}else{%>
+
 			<%if(adto!=null){//관리자면 %>
 			<ul class="menuu menuu-f menuu-fixed container blue circleBehind">
 				<li><a href="<%= root %>/index.jsp">사이트명(홈으로 가게 하는 사이트명)</a></li>

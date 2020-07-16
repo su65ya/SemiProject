@@ -1,3 +1,4 @@
+<%@page import="semi.beans.dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="semi.beans.dto.PensionOptionDto"%>
@@ -8,12 +9,13 @@
 <%@page import="semi.beans.dto.PensionDto"%>
 <%@page import="java.util.List"%>
 <%
-	//내가 보유하고 있는 펜션 목록을 출력
+	MemberDto mdto = (MemberDto)session.getAttribute("userinfo");
+	int member_no = mdto.getMember_no();
 	PensionDao pdao = new PensionDao();
 	PenImgViewDto viewDto = new PenImgViewDto();
 	PensionOptionDao podao = new PensionOptionDao();
 	String location = request.getParameter("location");
-	List<PensionDto> list;;
+	List<PensionDto> list;
 	if(location !=null){
 		list = pdao.getList(location);
 	}else{
@@ -46,10 +48,10 @@
 					<%}%>
 					<td height="10px" style=""><h2 class="left" style="height: 10px;"><%=pdto.getPension_name()%></h2></td>
 					<td rowspan="3">
-						<a href="room_list.jsp?pension_no=<%=pdto.getPension_no()%>"><button class='form-btn form-inline'>객실보기</button></a>
-						<a href="#"><button class='form-btn form-inline'>예약하기</button></a>
+						<a href="room_list.jsp?pension_no=<%=pdto.getPension_no()%>"><button type ="button" class='form-btn form-inline'>객실보기</button></a>
+							<a href="reservation_step1.do?pension_no=<%=pdto.getPension_no()%>&member_no=<%=member_no%>"><button class='form-btn form-inline'>예약하기</button></a>
 						<a href="<%= request.getContextPath() %>/review/review_list.jsp?review_pension_no=<%= pdto.getPension_no()%>"><button class='form-btn form-inline'>리뷰보기</button></a>
-						<a href='<%= request.getContextPath() %>/question/question_list.jsp?que_pension_no=<%= pdto.getPension_no()%>'><button class='form-btn form-inline'>문의하기</button></a>
+						<a href='<%= request.getContextPath() %>/question/question_list.jsp?que_pension_no=<%= pdto.getPension_no()%>'><button type ="button" class='form-btn form-inline'>문의하기</button></a>
 					</td>
 				</tr>
 				<tr>
@@ -100,6 +102,7 @@
 				<%}%>
 			</tbody>
 		</table>
+		</form>
 		</div>
 </article>
 <jsp:include page="/template/footer.jsp"></jsp:include>

@@ -9,6 +9,8 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import semi.beans.dto.ReviewFileDto;
+import semi.beans.dto.RoomImageDto;
+import semi.beans.dto.RoomImgViewDto;
 
 public class ReviewFileDao {
 	private static DataSource src;
@@ -56,6 +58,45 @@ public class ReviewFileDao {
 		ps.setLong(4, rfdto.getReview_file_size());
 		ps.setString(5, rfdto.getReview_file_type());
 		
+	}
+	public ReviewFileDto getImgView(int review_origin) throws Exception{
+		Connection con = getConnection();
+		
+		String sql = "SELECT * FROM review_file WHERE review_origin=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, review_origin);
+		ResultSet rs = ps.executeQuery();
+		
+		ReviewFileDto rfdto;
+		if(rs.next()) {
+			rfdto = new ReviewFileDto(rs);
+		}else {
+			rfdto = null;
+		}
+		con.close();
+		return rfdto;
+		
+		
+	}
+
+	
+	public ReviewFileDto get(int review_file_no) throws Exception{
+		Connection con = getConnection();
+		
+		String sql = "SELECT * FROM review_file WHERE review_file_no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setInt(1, review_file_no);
+		ResultSet rs = ps.executeQuery();
+		ReviewFileDto rfdto;
+		if(rs.next()) {
+			rfdto = new ReviewFileDto(rs);
+		}else {
+			rfdto=null;
+		}
+		con.close();
+		return rfdto;
+
 	}
 
 

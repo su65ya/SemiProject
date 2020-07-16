@@ -16,6 +16,7 @@ public class QuestionDeleteServlet extends HttpServlet{
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			
+			
 			int que_no = Integer.parseInt(req.getParameter("que_no"));
 			int que_pension_no = Integer.parseInt(req.getParameter("que_pension_no"));
 			QuestionDao qdao = new QuestionDao();

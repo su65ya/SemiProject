@@ -126,7 +126,7 @@
 			</div>
 			<div class="row-emptyy"></div>
 			<div class="row">
-				<input class="form-input" type="text" name="pension_basic_addr" <%=pdto.getPension_basic_addr() %> required>
+				<input class="form-input" type="text" name="pension_basic_addr" value='<%= pdto.getPension_basic_addr() %>' required>
 			</div>
 			<div class="row-emptyy"></div>
 			<div class="row">

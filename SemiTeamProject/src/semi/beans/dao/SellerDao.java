@@ -36,6 +36,24 @@ public class SellerDao {
 	}
 	
 	// 단일 조회 메소드
+	public SellerDto get(int seller_no) throws Exception {
+		Connection con = getConnection();
+		
+		String sql = "select * from seller where seller_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, seller_no);
+		ResultSet rs = ps.executeQuery();
+		
+		SellerDto seller = null;
+		if (rs.next()) {
+			seller = new SellerDto(rs);
+		}
+		
+		con.close();
+		return seller;
+	}
+	
+	// 단일 조회 메소드
 	public SellerDto get(String seller_id) throws Exception {
 		Connection con = getConnection();
 		
@@ -111,7 +129,7 @@ public class SellerDao {
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, sdto.getSeller_name());
 		ps.setString(2, sdto.getSeller_email());
-		ps.setString(3, sdto.getSeller_birth());
+		ps.setString(3, sdto.getSeller_birthday());
 		ps.setString(4, sdto.getSeller_post());
 		ps.setString(5, sdto.getSeller_basic_addr());
 		ps.setString(6, sdto.getSeller_detail_addr());
@@ -123,6 +141,20 @@ public class SellerDao {
 	
 		con.close();
 	}
+	
+	// pw 변경
+	public void pwChange(int seller_no, String seller_pw) throws Exception {
+		Connection con = getConnection();
+		
+		String sql = "update seller set seller_pw = ? where seller_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, seller_pw);
+		ps.setInt(2, seller_no);
+		ps.execute();
+		
+		con.close();
+	}
+	
 	
 	// 판매자 탈퇴
 	public void delete(String seller_id) throws Exception {
@@ -185,18 +217,18 @@ public class SellerDao {
 							+ "seller_basic_addr=?, seller_detail_addr=?, seller_phone=?, company_no=? "
 							+ "WHERE seller_id=?";
 		
-		String birth = sdto.getSeller_birth();
-
-		SimpleDateFormat original_format = new SimpleDateFormat("yyyy년 M월 d일");	
-		SimpleDateFormat new_format = new SimpleDateFormat("yyyy-MM-dd");
-		
-		Date original_birth = original_format.parse(birth);
-		String birthConvert = new_format.format(original_birth);
+//		String birth = sdto.getSeller_birth();
+//
+//		SimpleDateFormat original_format = new SimpleDateFormat("yyyy년 M월 d일");	
+//		SimpleDateFormat new_format = new SimpleDateFormat("yyyy-MM-dd");
+//		
+//		Date original_birth = original_format.parse(birth);
+//		String birthConvert = new_format.format(original_birth);
 		
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, sdto.getSeller_pw());
 		ps.setString(2, sdto.getSeller_name());
-		ps.setString(3, birthConvert);
+		ps.setString(3, sdto.getSeller_birthday());
 		ps.setString(4, sdto.getSeller_email());
 		ps.setString(5, sdto.getSeller_post());
 		ps.setString(6, sdto.getSeller_basic_addr());
@@ -209,18 +241,6 @@ public class SellerDao {
 		con.close();
 	}
 	
-	//판매자 탈퇴
-		public void exit(String seller_id,String seller_pw ) throws Exception{
-		Connection con = getConnection();
-		
-		String sql = "DELETE seller WHERE seller_id = ?";
-		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, seller_id);
-		ps.execute();
-		
-		con.close();
-		
-	}
 
 }
 
