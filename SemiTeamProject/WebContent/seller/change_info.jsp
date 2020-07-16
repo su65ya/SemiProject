@@ -94,7 +94,7 @@
 				<tr>
 					<th>생일</th>
 					<td class='left'>
-						<input class='form-input form-inline' type='date' name='seller_birth' value='<%= seller.getSeller_day() %>'>
+						<input class='form-input form-inline' type='date' name='seller_birth' value='<%= seller.getSeller_birthday() %>'>
 					</td>
 				</tr>
 				<tr>

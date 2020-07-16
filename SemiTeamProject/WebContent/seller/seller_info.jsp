@@ -57,7 +57,7 @@
 				</tr>
 				<tr>
 					<th>생년월일</th>
-					<td class='left'><%= seller.getSeller_day()%></td>
+					<td class='left'><%=sdto.getSeller_birth()%></td>
 				</tr>
 				<tr>
 					<th>이메일</th>

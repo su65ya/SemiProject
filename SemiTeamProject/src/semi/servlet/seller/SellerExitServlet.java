@@ -18,11 +18,11 @@ public class SellerExitServlet extends HttpServlet{
 		try {
 			
 			SellerDto mdto = (SellerDto) req.getSession().getAttribute("sellerinfo");
-			int seller_no = mdto.getSeller_no();
+			String seller_id = mdto.getSeller_id();
 			
 		
 			SellerDao sdao = new SellerDao();
-			sdao.delete(seller_no);
+			sdao.delete(seller_id);
 			
 			req.getSession().removeAttribute("sellerinfo");
 

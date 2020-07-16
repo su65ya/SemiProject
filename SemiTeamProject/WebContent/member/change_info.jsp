@@ -19,21 +19,40 @@
 		width: 100%;
 		padding-left: 0.5rem;
 	}
-	.form-input, .form-btn2{
-            padding: 0.3rem;
+	    .form-input,.form-btn2,.form-btn3{
+            width: 100%;
+            padding: 0.5rem;
             outline: none;/*선택시 자동 부여되는 테두리 제거*/
-            border: 1px solid black;
+            border: none;
+    		border-radius: 5px;
+        }
+        .form-input:focus{
+            border-color: #b2bec3;
         }
         .form-btn2{
-        	background-color:lightgray;
-            color: black;
+        	background-color:#636e72;
+        	width : 150px;
+            color: white;
             cursor: pointer;
-        }  
+        }
+        .form-btn3{
+        	background-color:#ff7675;
+        	width : 150px;
+            color: white;
+            cursor: pointer;
+        }
+        .form-btn2:hover,.form-btn3:hover {
+        	background-color:#b2bec3;
+        }
+        .font_color_a {
+        	color : #636e72;
+        	font-style: normal;
+        	font-size: 14px;
+        }
 </style>
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-//우편번호 찾기 및 주소 입력 자바스크립트
     function findAddress() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -70,7 +89,7 @@
                     //document.getElementById("sample6_extraAddress").value = extraAddr;
                 
                 } else {
-                   // document.getElementById("sample6_extraAddress").value = '';
+                    //document.getElementById("sample6_extraAddress").value = '';
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
@@ -78,18 +97,18 @@
                 document.querySelector("input[name=member_basic_addr]").value = addr;
                 // 커서를 상세주소 필드로 이동한다.
                 document.querySelector("input[name=member_detail_addr]").focus();
+
             }
         }).open();
     }
 </script>
 
-<article class="w-35">
-	<div class="row">
-		<h2>회원정보 수정</h2>
+<article class="w-30">
+	<div align="center">
+	<h2>회원 정보 수정</h2>
 	</div>
 	
 	<form action="change_info.do" method="post">
-	
 	<div class="row">
 		<table class="table table-sideopen">
 			<tbody>
@@ -97,47 +116,47 @@
 					<th>아이디</th>
 					<td class="left">
 						<%=user.getMember_id() %>
-					</td>
 				</tr>
 				<tr>
 					<th>이름</th>
 					<td class="left">
-						<input class="form-input" type="text" name="member_name" value="<%=user.getMember_name() %>" required>
+						<input class="intext" type="text" name="member_name" value="<%=user.getMember_name() %>" required>
 					</td>
 				</tr>
 				<tr>
 					<th>생년월일</th>
 					<td class="left">
-						<input class="form-input" type="date" name="member_birth" value="<%=user.getMember_day() %>" required>
+						<input class="intext" type="date" name="member_birth" value="<%=user.getMember_birthday()%>" required>
 					</td>
 				</tr>
 				<tr>
 					<th>이메일</th>
 					<td class="left">
-						<input class="form-input" type="text" name="member_mail" value="<%=user.getMember_mail()%>" required>
+						<input class="intext" type="text" name="member_mail" value="<%=user.getMember_mail()%>" required>
 					</td>
 				</tr>
+				
 				<tr>
-					<th rowspan="3">주소</th>
+					<th rowspan="3" >주소</th>
 					<td class="left">
-						<input class="form-input form-inline" type="text" name="member_post" size="6" maxlength="6" value="<%=user.getRead_post()%>" placeholder="우편번호">
-						<input class="form-btn form-inline" type="button"  value="우편번호 찾기" onclick="findAddress();">	
-					</td>
-				</tr>
-				<tr>
-					<td class="left">
-						<input class="form-input" type="text" name="member_basic_addr" value="<%=user.getMember_basic_addr()%>" placeholder="기본주소">
+						<input class="" type="text" name="member_post" size="6" maxlength="6" value="<%=user.getMember_post()%>" placeholder="우편번호">
+						<input class="form-btn2" style="width:100px;" onclick="findAddress();"  type="button"  value="우편번호 찾기">	
 					</td>
 				</tr>
 				<tr>
 					<td class="left">
-						<input class="form-input" type="text" name="member_detail_addr" value="<%=user.getMember_detail_addr()%>" placeholder="상세주소">
+						<input class="intext" type="text" name="member_basic_addr" value="<%=user.getMember_basic_addr()%>" placeholder="기본주소"  maxlength="6">
+					</td>
+				</tr>
+				<tr>
+					<td class="left">
+						<input class="intext" type="text" name="member_detail_addr" value="<%=user.getMember_detail_addr()%>" placeholder="상세주소">
 					</td>
 				</tr>
 				<tr>
 					<th>전화번호</th>
 					<td class="left">
-						<input class="form-input" type="text" name="member_phone" value="<%=user.getMember_phone() %>" required>
+						<input class="intext" type="text" name="member_phone" value="<%=user.getMember_phone() %>" required>
 					</td>
 				</tr>
 			</tbody>
@@ -147,7 +166,7 @@
 	<div class="row-empty"></div> 
 		
 	<div style="float: right;">
-		<input class="form-btn " style="width: 120px;" type="submit" value="수정">
+		<input class="form-btn3" type="submit" value="수정">
 	</div>
 	
 	</form>

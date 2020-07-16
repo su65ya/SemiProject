@@ -76,6 +76,10 @@ public class MemberDto {
 		return member_birth;
 	}
 	
+	public String getMember_birthday() {
+		return member_birth.substring(0, 10);
+	}
+	
 	public String getMember_birthdayFormat() throws ParseException{
 		SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date d = s.parse(member_birth);

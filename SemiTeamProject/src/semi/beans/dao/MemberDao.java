@@ -264,18 +264,18 @@ public class MemberDao {
 								+ "member_basic_addr=?, member_detail_addr=?, member_phone=?, member_rate=? "
 								+ "WHERE member_id=?";
 			
-			String birth = mdto.getMember_birth();
-
-			SimpleDateFormat original_format = new SimpleDateFormat("yyyy년 M월 d일");	
-			SimpleDateFormat new_format = new SimpleDateFormat("yyyy-MM-dd");
-
-			Date original_birth = original_format.parse(birth);
-			String birthConvert = new_format.format(original_birth);
+//			String birth = mdto.getMember_birth();
+//
+//			SimpleDateFormat original_format = new SimpleDateFormat("yyyy년 M월 d일");	
+//			SimpleDateFormat new_format = new SimpleDateFormat("yyyy-MM-dd");
+//
+//			Date original_birth = original_format.parse(birth);
+//			String birthConvert = new_format.format(original_birth);
 			
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, mdto.getMember_pw());
 			ps.setString(2, mdto.getMember_name());
-			ps.setString(3, birthConvert);
+			ps.setString(3, mdto.getMember_birthday());
 			ps.setString(4, mdto.getMember_mail());
 			ps.setString(5, mdto.getMember_post());
 			ps.setString(6, mdto.getMember_basic_addr());
