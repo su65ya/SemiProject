@@ -67,8 +67,38 @@ public class PensionDao {
 
 		return seq;
 	}
+	
+	// 전체 펜션 리스트 메소드
+	public List<PensionDto> getTotalList() throws Exception {
+		Connection con = getConnection();
 
-	// 펜션 리스트 메소드
+		String sql = "SELECT * FROM pension ORDER BY pension_no desc";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+
+		List<PensionDto> list = new ArrayList<>();
+		while (rs.next()) {
+			PensionDto pdto = new PensionDto();
+			pdto.setPension_no(rs.getInt("pension_no"));
+			pdto.setPension_seller_no(rs.getInt("pension_seller_no"));
+			pdto.setPension_name(rs.getString("pension_name"));
+			pdto.setPension_post(rs.getString("pension_post"));
+			pdto.setPension_basic_addr(rs.getString("pension_basic_addr"));
+			pdto.setPension_detail_addr(rs.getString("pension_detail_addr"));
+			pdto.setPension_phone(rs.getString("pension_phone"));
+			pdto.setPension_regist_date(rs.getString("pension_regist_date"));
+			pdto.setPension_intro(rs.getString("pension_intro"));
+
+			list.add(pdto);
+		}
+
+		con.close();
+		return list;
+
+	}
+
+	// 판매자 별 펜션 리스트 메소드
 	public List<PensionDto> getList(int pension_seller_no) throws Exception {
 		Connection con = getConnection();
 
@@ -76,6 +106,36 @@ public class PensionDao {
 
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, pension_seller_no);
+		ResultSet rs = ps.executeQuery();
+
+		List<PensionDto> list = new ArrayList<>();
+		while (rs.next()) {
+			PensionDto pdto = new PensionDto();
+			pdto.setPension_no(rs.getInt("pension_no"));
+			pdto.setPension_seller_no(rs.getInt("pension_seller_no"));
+			pdto.setPension_name(rs.getString("pension_name"));
+			pdto.setPension_post(rs.getString("pension_post"));
+			pdto.setPension_basic_addr(rs.getString("pension_basic_addr"));
+			pdto.setPension_detail_addr(rs.getString("pension_detail_addr"));
+			pdto.setPension_phone(rs.getString("pension_phone"));
+			pdto.setPension_regist_date(rs.getString("pension_regist_date"));
+			pdto.setPension_intro(rs.getString("pension_intro"));
+
+			list.add(pdto);
+		}
+
+		con.close();
+		return list;
+
+	}
+	
+	// 펜션 리스트 메소드
+	public List<PensionDto> getList() throws Exception {
+		Connection con = getConnection();
+
+		String sql = "SELECT * FROM pension ORDER BY pension_no ASC";
+
+		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 
 		List<PensionDto> list = new ArrayList<>();
@@ -207,4 +267,21 @@ public class PensionDao {
 		ps.execute();
 		con.close();
 	}
+
+	//펜션 검색 메소드
+	public List<PensionDto> getList(String location) throws Exception{
+		Connection con = getConnection();
+		String sql = "SELECT * FROM pension WHERE instr(pension_basic_addr,? ) > 0 ORDER BY pension_no DESC";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, location);
+		ResultSet rs = ps.executeQuery();
+		List<PensionDto> list = new ArrayList<PensionDto>();
+		while(rs.next()) {
+			PensionDto pdto = new PensionDto(rs);
+			list.add(pdto);
+		}
+		con.close();
+		return list;
+	}
 }
+	

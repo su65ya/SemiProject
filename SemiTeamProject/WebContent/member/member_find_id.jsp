@@ -1,18 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<style>
-	
 
-	.find, a {
-		text-align: center;
-		text-decoration: none;
-		color: black;
-	}
-</style>
-
-
+<link rel="stylesheet" type="../css/button_01.css">
+<link rel="stylesheet" type="../css/table_ex.css">
 <jsp:include page = "/template/nav.jsp"></jsp:include>
-
+<html>
 <div aign = "center">
 
 <form action="member/find_id.do"method="post">
@@ -25,22 +17,22 @@
 
 
 
-	<table border="1">
+	<table class = "type02">
 		<tbody>
 			<tr>
-				<th>이름</th>
+				<th scope="row">이름</th>
 				<td>
-					<input type="text" name ="member_name"required>
+					<input type="text" style="width:50px;" name ="member_name"required>
 				</td>
 			</tr>
 			<tr>
-				<th>전화번호</th>
+				<th scope="row">전화번호</th>
 				<td>
 					<input type="text" name ="member_phone"required>
 				</td>
 			</tr>
 			<tr>
-				<th>생년월일</th>
+				<th scope="row">생년월일</th>
 				<td>
 					<input type="text" name = "member_birth"required>
 				</td>
@@ -49,7 +41,7 @@
 		<tfoot>
 			<tr>
 				<td align ="center" colspan="2">
-					<input type="submit"value="찾기">
+					<button type="submit"value="찾기">찾기</button>
 				</td>
 			</tr>
 		</tfoot>
@@ -64,7 +56,7 @@
 
 
 </div>
-
+</html>
 
 <jsp:include page= "/template/footer.jsp"></jsp:include>
 

@@ -102,7 +102,7 @@
 			</div>
 			<div class="row">
 				<label><span>*</span>핸드폰번호</label>
-				<input class="form-input" type="number" name="member_phone" placeholder="번호입력">
+				<input class="form-input" type="text" name="member_phone" placeholder="번호입력">
 			</div>
 			<div class = "row-empty"></div>
 			<div class="row">

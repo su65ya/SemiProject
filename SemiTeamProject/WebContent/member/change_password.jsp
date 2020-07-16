@@ -8,7 +8,7 @@
 		padding-left: 0.5rem;
 	}
 </style>
-
+ 
 <article class="w-30">
 	<div class="row">
 		<h2>비밀번호 변경</h2>
@@ -39,6 +39,8 @@
 				</tr>
 			</tbody>
 		</table>
+
+
 
 	</div>
 	
