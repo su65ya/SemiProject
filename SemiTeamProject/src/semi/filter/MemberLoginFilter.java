@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import semi.beans.dto.MemberDto;
 
-public class LoginFilter implements Filter{
+public class MemberLoginFilter implements Filter{
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
