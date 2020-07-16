@@ -90,7 +90,7 @@
         	}else{
         		re_infoTag.value = "";
         	}
-        	}
+        }
         
         function option_modal(){
         	var tag = document.querySelector(".modal-wrap");
@@ -139,16 +139,18 @@
 	ReservationDao rvdao = new ReservationDao();
 %>
 
-    <div class="swiper-container">
+    <div class="swiper-container center">
         <div class="swiper-wrapper">
+                <%for(PensionImageDto pmdto : fileList){ %>
             <div class="swiper-slide">
-                <img src ="https://placeimg.com/1280/500/animal">
+ 						<img src="download.do?pen_image_no=<%=pmdto.getPen_image_no()%>" width="1100" height="500">
+            </div>
+ 				<%} %>
+            <div class="swiper-slide">
+                <img src ="https://placeimg.com/1100/500/people">
             </div>
             <div class="swiper-slide">
-                <img src ="https://placeimg.com/1280/500/people">
-            </div>
-            <div class="swiper-slide">
-                <img src = "https://placeimg.com/1280/500/animal">
+                <img src = "https://placeimg.com/1100/500/animal">
             </div>
         </div>
         <!-- 페이지 위치 표시 영역(선택) -->

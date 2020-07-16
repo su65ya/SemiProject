@@ -134,16 +134,12 @@
     	var option_priceTag = document.querySelector(".option_price1");
     	
     	var hidden = document.querySelector(".option_price1 + input[type=hidden]");
-    	var isInput;
     	if(option_priceTag.value){
-    		isInput = true;
     		hidden.value=option_nameTag.textContent+"-"+option_priceTag.value+"-0";
     	}else{
-    		isInput = false;
-    		hidden.value="0";
+    		hidden.value="";
     	}
     	
-    	return isInput;
     }
     
     function setOption2(){
@@ -155,7 +151,7 @@
     	if(option_priceTag.value){
     		hidden.value=option_nameTag.textContent+"-"+option_priceTag.value+"-0";
     	}else{
-    		hidden.value="0";
+    		hidden.value="";
     	}
     }
     function setOption3(){
@@ -167,7 +163,7 @@
     	if(option_priceTag.value){
     		hidden.value=option_nameTag.textContent+"-"+option_priceTag.value+"-0";
     	}else{
-    		hidden.value="0";
+    		hidden.value="";
     	}
     }
     function setOption4(){
@@ -179,7 +175,7 @@
     	if(option_priceTag.value){
     		hidden.value=option_nameTag.textContent+"-"+option_priceTag.value+"-0";
     	}else{
-    		hidden.value="0";
+    		hidden.value="";
     	}
     }
     
@@ -282,12 +278,12 @@
 				<input class="form-input option_price1 form-inline" type="number" placeholder="가격 ex)10000" onblur="setOption1();">
 				
 				<!-- 실제 전송될 데이터 -->
-				<input type="hidden" class = "fire" name="option" value="0">
+				<input type="hidden" class = "fire" name="option" value="">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<label class="select option_name2">성인</label>&nbsp;&nbsp;&nbsp;
 				<input class="form-input option_price2 form-inline" type="number" placeholder="가격 ex)10000" onblur="setOption2();">
 				
-				<input type="hidden" class="adult" name="option" value="0">
+				<input type="hidden" class="adult" name="option" value="">
 			</div>
 			<div class="row-emptyy"></div>
 			<div class="row">
@@ -296,12 +292,12 @@
 				<input class="form-input option_price3 form-inline" type="number" placeholder="가격 ex)10000" onblur="setOption3();">
 				
 				<!-- 실제 전송될 데이터 -->
-				<input type="hidden" name="option" value="0">
+				<input type="hidden" name="option" value="">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<label class="select option_name4">반려견</label>&nbsp;
 				<input class="form-input option_price4 form-inline" type="number" placeholder="가격 ex)10000 (선택)" onblur="setOption4();">
 				
-				<input type="hidden" name="option" value="0">
+				<input type="hidden" name="option" value="">
 			</div>
 			<div class="row-emptyy"></div><hr>
 			<div class="row-emptyy"></div>
