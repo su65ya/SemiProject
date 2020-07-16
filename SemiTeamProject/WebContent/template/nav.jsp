@@ -17,8 +17,10 @@
 <head>
 <meta charset="UTF-8">
 <title>index</title>
+<link rel="stylesheet" type="text/css" href="<%= root %>/css/menubar.css">
 <link rel="stylesheet" type="text/css" href="<%= root %>/css/base.css">
 <link rel="stylesheet" href="<%= root %>/css/swiper.min.css">
+
 
 	 <style>
     	.swiper-container {
@@ -56,40 +58,42 @@
 	<main>
 		<nav class="nav">
 		<%if(!isLogin){//비로그인 상태 %>
-			<ul class="menuu menuu-f menuu-fixed">
-				<li><a href="<%= root %>/index.jsp">사이트명</a></li>
-				<li><a href="<%= root %>/member/login.jsp">로그인</a></li>
-				<li><a href="<%= root %>/admin/admin_login.jsp">관리자로그인</a></li>
-				<li><a href="<%= root %>/member/join.jsp">회원가입</a></li>
-				<li><a href="<%= root %>/seller/seller_login.jsp">펜션관리(판매자 로그인)</a></li>
-				<li><a href="<%= root %>/admin/admin_login.jsp">업소관리(관리자 로그인)</a></li>
-				<li><a href="<%= root %>/seller/code_no.jsp">입점신청(판매자 회원가입)</a></li>
-				<li><a href="#">펜션 찾기</a></li>
+					<ul class="menuu menuu-f menuu-fixed container blue circleBehind">
+				<li><a  href="<%= root %>/index.jsp">사이트명</a></li>
+				<a href="<%= root %>/member/login.jsp">로그인</a>
+				<a href="<%= root %>/admin/admin_login.jsp">관리자로그인</a>
+				<a href="<%= root %>/member/join.jsp">회원가입</a>
+				<a href="<%= root %>/seller/seller_login.jsp">펜션관리(판매자 로그인)</a>
+				<a href="<%= root %>/admin/admin_login.jsp">업소관리(관리자 로그인)</a>
+				<a href="<%= root %>/seller/code_no.jsp">입점신청(판매자 회원가입)</a>
+				<a href="#">펜션 찾기</a>
 			</ul>
 		<%}else{%>
+
 			<%if(adto!=null){//관리자면 %>
-			<ul class="menuu menuu-f menuu-fixed">
+			<ul class="menuu menuu-f menuu-fixed container blue circleBehind">
 				<li><a href="<%= root %>/index.jsp">사이트명(홈으로 가게 하는 사이트명)</a></li>
-				<li><a href="<%= root %>/admin/admin_logout.do">로그아웃</a></li>
-				<li><a href="<%= root %>/admin/admin_seller_list.jsp">판매자 회원 관리</a></li>
-				<li><a href="<%= root %>/admin/admin_member_list.jsp">사용자 회원관리</a></li>
-				<li><a href="<%= root %>/admin/admin_count.jsp">통계보기</a></li>
+				<a href="<%= root %>/admin/info.jsp">내 정보</a>
+				<a href="<%= root %>/admin/admin_logout.do">로그아웃</a>
+				<a href="<%= root %>/admin/admin_seller_list.jsp">판매자 회원 관리</a>
+				<a href="<%= root %>/admin/admin_member_list.jsp">사용자 회원관리</a>
+				<a href="<%= root %>/admin/admin_count.jsp">통계보기</a>
 
 			</ul>
 			<%}else if(sdto !=null){//판매자면 %>
-			<ul class="menuu menuu-f menuu-fixed">
+			<ul class="menuu menuu-f menuu-fixed container blue circleBehind">
 				<li><a href="<%= root %>/index.jsp">사이트명(홈으로 가게 하는 사이트명)</a></li>
-				<li><a href="<%= root %>/seller/seller_info.jsp">내 정보</a></li>
-				<li><a href="<%= root %>/seller/seller_logout.do">로그아웃</a></li>
-				<li><a href="<%= root %>/seller/pension_list.jsp">펜션관리</a></li>
+				<a href="<%= root %>/seller/seller_info.jsp">내 정보</a>
+				<a href="<%= root %>/seller/seller_logout.do">로그아웃</a>
+				<a href="<%= root %>/seller/pension_list.jsp">펜션관리</a>
 			</ul>
 			<%}else if(mdto !=null){//사용자면 %>
-			<ul class="menuu menuu-f menuu-fixed">
+			<ul class="menuu menuu-f menuu-fixed container blue circleBehind">
 				<li><a href="<%= root %>/index.jsp">사이트명(홈으로 가게 하는 사이트명)</a></li>
-				<li><a href="<%= root %>/member/info.jsp">내 정보</a></li>
-				<li><a href="<%= root %>/member/member_logout.do">로그아웃</a></li>
-				<li><a href="<%= root %>/member/pension_list.jsp">펜션 찾기</a></li>
-				<li><a href="<%= root %>/member/reservation_list.jsp?res_write=<%= mdto.getMember_no() %>">내 예약 보기</a></li>
+                <a href="<%= root %>/member/info.jsp">내 정보</a>
+               <a href="<%= root %>/member/member_logout.do">로그아웃</a>
+                <a href="<%= root %>/member/pension_list.jsp" >펜션 찾기</a>
+                <a href="<%= root %>/member/reservation_list.jsp?res_write=<%= mdto.getMember_no() %>">내 예약 보기</a> 
 			</ul>
 			<%} %>
 		<%} %>
