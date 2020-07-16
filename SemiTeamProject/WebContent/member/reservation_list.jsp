@@ -56,7 +56,7 @@
 							<%= rvdto.getRes_room_no() %>
 						</a>
 					</td>
-					<td><%= rvdto.getRes_name() %></td>[]
+					<td><%= rvdto.getRes_name() %></td>
 					<td>성인2명</td>
 					<td class="in-out"><%= rvdto.getRes_in() %> ~ <%= rvdto.getRes_out() %></td>
 					<td><%= rvdto.getRes_price() %> 원</td>

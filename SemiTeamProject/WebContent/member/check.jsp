@@ -5,6 +5,7 @@
     pageEncoding="UTF-8"%>
 <%
 	String go = request.getParameter("go");
+	
 %>
 
 <jsp:include page="/template/nav.jsp"></jsp:include>

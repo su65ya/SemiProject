@@ -123,7 +123,8 @@
 				<input class="form-btn form-inline" type="button" value="문의수정">
 			</a>
 			
-			<a href="<%= request.getContextPath() %>/member/check.jsp?go=<%= request.getContextPath() %>/question/question_delete.do?que_pension_no=<%= que_pension_no %>&que_no=<%= que_no %>">
+			<%-- <a href="<%= request.getContextPath() %>/member/check.jsp?go=<%= request.getContextPath() %>/question/question_delete.do?que_pension_no=<%= que_pension_no %>&que_no=<%= que_no %>"> --%>
+			<a href="question_delete.do?que_pension_no=<%= que_pension_no %>&que_no=<%= que_no %>">
 				<input class="form-btn form-inline" type="button" value="삭제">
 			</a>
 		<%} %>	
