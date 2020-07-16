@@ -19,6 +19,8 @@
 	PensionImageDao pidao = new PensionImageDao();
 	List<PensionImageDto> imageList = pidao.getList(pension_no);
 	
+	
+	
 	int fire_price = podao.getPrice(pension_no, "숯불");
 	int adult_price = podao.getPrice(pension_no, "성인");
 	int child_price = podao.getPrice(pension_no, "아동");
@@ -104,9 +106,90 @@
             }
         }).open();
     }
+    
+    function setOption1(){
+    	var option_nameTag = document.querySelector(".option_name1");
+    	var option_priceTag = document.querySelector(".option_price1");
+    	
+    	var hidden = document.querySelector(".option_price1 + input[type=hidden]");
+    	if(option_priceTag.value){
+    		hidden.value=option_nameTag.textContent+"-"+option_priceTag.value+"-0";
+    	}else{
+    		hidden.value="";
+    	}
+    	
+    }
+    
+    function setOption2(){
+    	var option_nameTag = document.querySelector(".option_name2");
+    	var option_priceTag = document.querySelector(".option_price2");
+    	
+    	var hidden = document.querySelector(".option_price2 + input[type=hidden]");
+    	
+    	if(option_priceTag.value){
+    		hidden.value=option_nameTag.textContent+"-"+option_priceTag.value+"-0";
+    	}else{
+    		hidden.value="";
+    	}
+    }
+    function setOption3(){
+    	var option_nameTag = document.querySelector(".option_name3");
+    	var option_priceTag = document.querySelector(".option_price3");
+    	
+    	var hidden = document.querySelector(".option_price3 + input[type=hidden]");
+    	
+    	if(option_priceTag.value){
+    		hidden.value=option_nameTag.textContent+"-"+option_priceTag.value+"-0";
+    	}else{
+    		hidden.value="";
+    	}
+    }
+    function setOption4(){
+    	var option_nameTag = document.querySelector(".option_name4");
+    	var option_priceTag = document.querySelector(".option_price4");
+    	
+    	var hidden = document.querySelector(".option_price4 + input[type=hidden]");
+    	
+    	if(option_priceTag.value){
+    		hidden.value=option_nameTag.textContent+"-"+option_priceTag.value+"-0";
+    	}else{
+    		hidden.value="";
+    	}
+    }
+    //등록 사진 미리보기
+    function preview(){
+        var fileTag = document.querySelector("input[name=pension_image]");
+        
+        var divTag = document.querySelector(".preview-wrap");
+        
+        if(fileTag.files.length > 0){
+            //선택된 파일들을 다 읽어와서 이미지 생성 후 추가
+            //미리보기 전부 삭제
+            divTag.innerHTML = "";
+            
+            for(var i=0; i < fileTag.files.length; i++){
+                var reader = new FileReader();
+                reader.onload = function(data){
+                    //img 생성 후 data.target.result 설정하여 추가
+                    var imgTag = document.createElement("img");
+                    imgTag.setAttribute("src", data.target.result);
+                    imgTag.setAttribute("width", "120");
+                    imgTag.setAttribute("height", "120");
+                    divTag.appendChild(imgTag);
+                };
+                reader.readAsDataURL(fileTag.files[i]);
+            }
+            
+        }
+        else{
+            //미리보기 전부 삭제
+            divTag.innerHTML = "";
+        }
+    }
+    
 </script>
 	<article class="w-40">
-		<form action="pension_edit.do" method="post">
+		<form action="pension_edit.do" method="post" enctype="multipart/form-data">
 		<!-- 수정이 가능하도록 PK를 숨김 첨부한다 -->
 		<input type="hidden" name="pension_no" value="<%=pension_no%>">
 			<div class="row-empty"></div>
@@ -153,69 +236,54 @@
 			<div class="row">
 			<!-- 숯불  -->
 				<label class="select option_name1">숯불</label>&nbsp;&nbsp;
-				<input class="form-input option_price1 form-inline" type="number" <%if(fire_price!=-1){ %>value="<%=fire_price %>" <%}else{ %>placeholder="가격 ex)10000" <%} %>onblur="setOption1();">
+				<input class="form-input option_price1 form-inline" type="number" value="<%=fire_price %>" onchange="setOption1();">
 				<input type="hidden" name="option" value="">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<!-- 성인  -->
 				<label class="select option_name2">성인</label>&nbsp;&nbsp;&nbsp;
-				<input class="form-input option_price2 form-inline" type="number" <%if(adult_price!=-1){ %>value =<%=adult_price %> <%}else{ %>placeholder="가격 ex)10000" <%} %>onblur="setOption2();">
+				<input class="form-input option_price2 form-inline" type="number" value =<%=adult_price %> onchange="setOption2();">
 				<input type="hidden" name="option" value="">
 			</div>
 			<div class="row-emptyy"></div>
 			<div class="row">
 			<!-- 아동  -->
 				<label class="select option_name3">아동</label>&nbsp;&nbsp;
-				<input class="form-input option_price3 form-inline" type="number" <%if(child_price!=-1){ %> value="<%=child_price %>"  <%}else{ %>placeholder="가격 ex)10000" <%} %> onblur="setOption3();">
+				<input class="form-input option_price3 form-inline" type="number" value="<%=child_price %>" onchange="setOption3();">
 				<input type="hidden" name="option" value="">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<!-- 반려견 -->
 				<label class="select option_name4">반려견</label>&nbsp;
-				<input class="form-input option_price4 form-inline" type="number" <%if(dog_price!=-1){ %> value="<%=dog_price %>" <%}else{ %> placeholder="가격 ex)10000" <%} %> onblur="setOption4();">
+				<input class="form-input option_price4 form-inline" type="number" value="<%=dog_price %>" onchange="setOption4();">
 				<input type="hidden" name="option" value="">
 			</div>
 			<div class="row-emptyy"></div><hr>
 			<div class="row-emptyy"></div>
-			<div class="row center">
-				<label>펜션 시설</label>
-			</div>
-			<div class="row-empty"></div>
+		
 			<div class="row-empty"></div>
 			<div class="row-empty"></div>
 			<div class="row">
-                <input class="select-item form-inline ck swim" type="checkbox" name="option" id="swim" onchange="plusswim();">
-        		<label for="swim">수영장</label>
-        		<input class="select-item form-inline ck" type="checkbox" name="option" id="foot" onchange="plusfoot();">
-        		<label for="foot">족구장</label>
-        		<input class="select-item form-inline ck" type="checkbox" name="option" id="sing" onchange="plussing();">
-        		<label for="sing">노래방</label>
-        		<input class="select-item form-inline ck" type="checkbox" name="option" id="tak"  onchange="plustak();">
-        		<label for="tak">탁구장</label>
-        		<input class="select-item form-inline ck" type="checkbox" name="option" id="public_bbq" value="" onchange="plusPublic();">
-        		<label for="public_bbq">공용 바베큐장</label>
-        		<input class="select-item form-inline ck" type="checkbox" name="option" id="private_bbq" value="" onchange="plusPrivate();">
-        		<label for="private_bbq">개별 바베큐</label>
+			<%for(PensionImageDto pmdto : imageList){ %>
+ 				<img src="download.do?pen_image_no=<%=pmdto.getPen_image_no()%>" width="90" height="90">
+ 			<%} %>
 			</div>
-			<div class="row-empty"></div>
-			<div class="row-empty"></div>
-			<div class="row-empty"></div><hr>
-			<div class="row-empty"></div>
+			<div class="row-empty"> 
 			<div class="row">
-				<label>펜션 사진 등록</label><br>
+				<label>펜션 사진 수정</label><br>
 				<div class="row-empty"></div>
-				<input type="file" name="pension_image" multiple accept=".jpg,.png,.gif">
+				<input type="file" name="pension_image" multiple accept=".jpg,.png,.gif" onchange="preview();">
 			</div>
 			<div class="row-empty"></div>
+			<div class="row-empty"></div>
+			<div class="row-empty"></div>
 			<div class="row">
-			<%for(PensionImageDto pidto : imageList){ %>
-				<img src="D:/upload/pension/pen_image_no=<%=pidto.getPen_image_no()%>" width="50" height="50">
-			<%} %>
-			</div>
+			<div class="row">
 			<div class="row right">
 			
 				<input class= "form-btn form-inline center" type="submit" value="수정하기">
 				<a href="pension_list.jsp">
 					<input class="form-btn form-inline center" type="button" value="목록보기">
 				</a>
+			</div>
 			</div>
 			<div class="row"></div>
 		</form>
