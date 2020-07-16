@@ -11,28 +11,29 @@ import javax.servlet.http.HttpServletResponse;
 import semi.beans.dao.MemberDao;
 import semi.beans.dto.MemberDto;
 
-@WebServlet(urlPatterns = "/member/find_id.do")
-public class MemberFindIdServlet extends HttpServlet{
+@WebServlet(urlPatterns = "/member/find_pw.do")
+public class MemberFindPwServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try{
 			
 			
 			MemberDto mdto = new MemberDto();
+			mdto.setMember_id(req.getParameter("member_id"));
 			mdto.setMember_name(req.getParameter("member_name"));
 			mdto.setMember_phone(req.getParameter("member_phone"));
 			mdto.setMember_birth(req.getParameter("member_birth"));
 			
 			
 			MemberDao mdao = new MemberDao();
-			String member_id = mdao.findId(mdto);
+			String member_pw = mdao.findPw(mdto);
 			
-			if(member_id != null) {
-				req.getSession().setAttribute("member_id", member_id);
-				resp.sendRedirect("find_id_result.jsp");
+			if(member_pw != null) {
+				req.getSession().setAttribute("member_pw", member_pw);
+				resp.sendRedirect("find_pw_result.jsp");
 			}
 			else {
-				resp.sendRedirect("find_id.jsp?error");
+				resp.sendRedirect("member_find_pw.jsp?error");
 			}
 			
 			

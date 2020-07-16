@@ -130,20 +130,37 @@ public class MemberDao {
 		ps.setString(3, mdto.getMember_birth());
 		ResultSet rs = ps.executeQuery();
 		
-//		String member_id = 추출한 아이디 or null;
-		String member_id;
+		String member_id = null;
 		if(rs.next()) {
 			member_id = rs.getString("member_id");
-		}
-		else {
-			member_id = null;
 		}
 		
 		con.close();
 		return member_id;
 	}
 	
-	
+	// pw 조회 메소드 
+	public String findPw(MemberDto mdto) throws Exception {
+		Connection con = getConnection();
+		
+		String sql = "select member_pw from member where member_id = ? and member_name = ? and member_phone = ? and member_birth = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, mdto.getMember_id());
+		ps.setString(2, mdto.getMember_name());
+		ps.setString(3, mdto.getMember_phone());
+		ps.setString(4, mdto.getMember_birth());
+		ResultSet rs = ps.executeQuery();
+		
+		String member_pw = null;
+		if(rs.next()) {
+			member_pw = rs.getString("member_pw");
+		}
+		
+		
+		con.close();
+		return member_pw;
+		
+	}
 
 
 	// 맴버 탈퇴 메소드

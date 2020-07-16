@@ -57,7 +57,7 @@ label {
         </div>
 		<div class = "row find">
 			<a href = "member_find_id.jsp">id 찾기</a> / 
-			<a href = "seller_find_pw.jsp">pw 찾기</a>
+			<a href = "member_find_pw.jsp">pw 찾기</a>
 		</div>            
 
 		<div class="row-empty"></div>
