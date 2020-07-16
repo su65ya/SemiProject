@@ -16,8 +16,8 @@ import semi.beans.dto.ReservationDto;
 
 public class ReservationDao {
 
-//	private static DataSource src;
-//
+	private static DataSource src;
+
 //	static {
 //		try {
 //			Context ctx = new InitialContext();

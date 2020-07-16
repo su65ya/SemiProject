@@ -1,3 +1,5 @@
+<%@page import="semi.beans.dao.PensionDao"%>
+<%@page import="semi.beans.dto.PensionInfoDto"%>
 <%@page import="semi.beans.dto.QuestionViewDto"%>
 <%@page import="semi.beans.dto.SellerDto"%>
 <%@page import="semi.beans.dto.MemberDto"%>
@@ -74,7 +76,9 @@
 	else {
 		list = qdao.getList(que_pension_no, start, finish);
 	}
-
+	
+	PensionDao pdao = new PensionDao();
+	PensionInfoDto pdto = pdao.get(que_pension_no);
 
 %>
 
@@ -94,13 +98,17 @@
 
 </style>
 
+<% if (request.getParameter("que_pension_no") != null) { %>
+	<input type='hidden' name='que_pension_no' value='<%= request.getParameter("que_pension_no") %>'>
+<%} %>
+
 
 <article class = "w-70">
 	
 	<div class="row-empty"></div>
 	
 	<div class="row">
-		<h1>펜션 문의</h1>
+		<h1><%= pdto.getPension_name() %>펜션 문의</h1>
 	</div>
 	
 	<div class="row-empty"></div>
@@ -118,9 +126,6 @@
 	</div>
 	 --%>
 	<table class="table table-sideopen table-hover">
-		<h3><%=  blockFinish %></h3>
-		<h3><%=  count %></h3>
-	
 		<thead>
 			<tr>
 				<th>번호</th>
@@ -150,12 +155,14 @@
 						<%} %>
 					</font>
 					<% if (sdto != null) { %>
-						<a href="question_content.jsp?que_pension_no=<%= qvdto.getQue_pension_no() %>&que_no=<%= qvdto.getQue_no() %>">
+						<a href="question_content.jsp?que_pension_no=<%= que_pension_no %>&que_no=<%= qvdto.getQue_no() %>">
+							<%= qvdto.getQue_title() %>
+						</a>
 					<%} else if (mdto != null) { %>
-						<a href="question_member_content.jsp?que_pension_no=<%= qvdto.getQue_pension_no() %>&que_no=<%= qvdto.getQue_no() %>">
+						<a href="question_member_content.jsp?que_pension_no=<%= que_pension_no %>&que_no=<%= qvdto.getQue_no() %>">
+							<%= qvdto.getQue_title() %>
+						</a>
 					<%} %>
-						<%= qvdto.getQue_title() %>
-					</a>
 				</td>
 				<td>
 					<% if (qvdto.getQue_writer() != 0) {%>

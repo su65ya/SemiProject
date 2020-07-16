@@ -15,7 +15,7 @@
 	PenImgViewDto viewDto = new PenImgViewDto();
 	PensionOptionDao podao = new PensionOptionDao();
 	String location = request.getParameter("location");
-	List<PensionDto> list;;
+	List<PensionDto> list;
 	if(location !=null){
 		list = pdao.getList(location);
 	}else{

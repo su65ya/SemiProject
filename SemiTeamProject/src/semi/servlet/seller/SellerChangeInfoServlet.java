@@ -33,8 +33,8 @@ public class SellerChangeInfoServlet extends HttpServlet{
 			seller.setSeller_phone(req.getParameter("seller_phone"));
 			
 			
-			SellerDao mdao = new SellerDao();
-			mdao.changeInfo(seller);
+			SellerDao sdao = new SellerDao();
+			sdao.changeInfo(seller);
 			
 			
 			resp.sendRedirect("seller_info.jsp");

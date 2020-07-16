@@ -14,8 +14,8 @@
 					 password="c##semi"
 					 
 					 maxTotal="20"
-					 maxIdle="10"
-					 maxWait="0"></Resource>
-					 
+					 maxIdle="5"
+					 maxWait="3000">
+	</Resource>
 	
 </Context>

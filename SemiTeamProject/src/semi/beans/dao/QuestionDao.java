@@ -157,6 +157,22 @@ public class QuestionDao {
 	}
 	
 	
+	public QuestionViewDto getPenname(int que_pension_no) throws Exception {
+		Connection con = getConnection();
+		
+		String sql = "select * from que_list where que_pension_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, que_pension_no);
+		ResultSet rs = ps.executeQuery();
+		
+		QuestionViewDto qvdto = rs.next() ? new QuestionViewDto(rs) : null;
+		
+		
+		con.close();
+		return qvdto;
+	}
+	
+	
 	// 문의 등록 메소드
 	public void write(QuestionDto qdto) throws Exception {
 		Connection con = getConnection();

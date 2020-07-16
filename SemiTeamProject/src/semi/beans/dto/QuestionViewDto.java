@@ -163,6 +163,11 @@ public class QuestionViewDto {
 		return que_date.substring(0, 10);
 	}
 
+	// 날짜, 시간
+	public String getQue_day_hour() {
+		return que_date.substring(0, 16);
+	}
+	
 	public String getQue_auto() {
 		Date d = new Date();
 		Format f = new SimpleDateFormat("yyyy-MM-dd");

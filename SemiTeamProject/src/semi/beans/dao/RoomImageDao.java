@@ -8,6 +8,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+
 import semi.beans.dto.RoomImageDto;
 
 public class RoomImageDao {
