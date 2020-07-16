@@ -95,9 +95,21 @@ public class ReservationDao {
 		ps.setString(6, redto.getRes_out());
 		ps.setString(7, redto.getRes_paytpye());
 		ps.setInt(8, redto.getRes_price());
-		
+
 		ps.execute();
 		con.close();
 	}
 
+	// 예약여부 확인 메소드
+	public boolean isReservation(int room_no, String date) throws Exception {
+		Connection con = getConnection();
+		String sql = "SELECT * FROM reservation WHERE res_in=? AND RES_ROOM_NO =?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, date);
+		ps.setInt(2, room_no);
+		ResultSet rs = ps.executeQuery();
+		boolean isReservation = rs.next();
+		
+		return isReservation;
+	}
 }

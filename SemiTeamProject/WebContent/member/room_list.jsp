@@ -1,3 +1,4 @@
+<%@page import="semi.beans.dao.ReservationDao"%>
 <%@page import="semi.beans.dto.MemberDto"%>
 <%@page import="semi.util.DateChecker"%>
 <%@page import="semi.beans.dto.PenImgViewDto"%>
@@ -134,6 +135,8 @@
 
 	Calendar cal = Calendar.getInstance();
 	SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd");
+	SimpleDateFormat yearWithformat = new SimpleDateFormat("yyyy/MM/dd");
+	ReservationDao rvdao = new ReservationDao();
 %>
 
     <div class="swiper-container">
@@ -206,17 +209,23 @@
 		                    <td style="width: 90px; padding: 0;"><img src="https://placehold.it/100x120"></td>
 		                    <%for(int j = 0;j<14;j++){ %>
 		                    <% 
-		                    if(j > 0) cal.add(Calendar.DATE, 1); %>
+		                    
+		                    if(j > 0) cal.add(Calendar.DATE, 1);
+		                    String date = yearWithformat.format(cal.getTime());
+		                    %>
 		                    <td>
-		                    	<div style="height: 70px; text-align: center; padding-top: 1.5rem;"><%=DateChecker.calculatePriceWithFormat(cal, rdto)%>
-		                    	<input type="hidden" name="res_info">
-		                    	<input type="hidden" id="re_info" value="<%=rdto.getRoom_no() %>/<%=DateChecker.year(cal) %>/<%=DateChecker.month(cal) %>/<%=DateChecker.day(cal)%>/<%=DateChecker.calculatePrice(cal, rdto)%>">
-		                    	
-		                    	</div>
-		                    	 <div>
-		                    	<input type="checkbox" onchange="reservation(this);">
-		            		</div>
-		                  
+			                    	<div style="height: 70px; text-align: center; padding-top: 1.5rem;"><%=DateChecker.calculatePriceWithFormat(cal, rdto)%>
+			                    	<input type="hidden" name="res_info">
+			                    	<input type="hidden" id="re_info" value="<%=rdto.getRoom_no() %>/<%=DateChecker.year(cal) %>/<%=DateChecker.month(cal) %>/<%=DateChecker.day(cal)%>/<%=DateChecker.calculatePrice(cal, rdto)%>">
+			                    	
+			                    	</div>
+		                    	<%if(rvdao.isReservation(rdto.getRoom_no(), date)){ %>
+		                    		<div><h5>예약완료</h5></div>
+		                    	<%}else{ %>
+			                    	 <div>
+			                    	<input type="checkbox" onchange="reservation(this);">
+			            			</div>
+		                  		<%} %>
 		                    </td>
 			               <%} %>
 		                    
