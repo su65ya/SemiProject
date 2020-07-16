@@ -1,3 +1,5 @@
+<%@page import="semi.beans.dao.PensionDao"%>
+<%@page import="semi.beans.dto.PensionInfoDto"%>
 <%@page import="semi.beans.dto.QuestionViewDto"%>
 <%@page import="semi.beans.dto.SellerDto"%>
 <%@page import="semi.beans.dto.MemberDto"%>
@@ -74,7 +76,9 @@
 	else {
 		list = qdao.getList(que_pension_no, start, finish);
 	}
-
+	
+	PensionDao pdao = new PensionDao();
+	PensionInfoDto pdto = pdao.get(que_pension_no);
 
 %>
 
@@ -104,7 +108,7 @@
 	<div class="row-empty"></div>
 	
 	<div class="row">
-		<h1>펜션 문의</h1>
+		<h1><%= pdto.getPension_name() %>펜션 문의</h1>
 	</div>
 	
 	<div class="row-empty"></div>

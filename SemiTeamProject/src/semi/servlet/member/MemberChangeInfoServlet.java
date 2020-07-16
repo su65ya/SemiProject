@@ -24,6 +24,7 @@ public class MemberChangeInfoServlet extends HttpServlet{
 			MemberDto user = new MemberDto();
 			user.setMember_id(member_id);
 			// 생년월일, 이메일, 주소, 전화번호
+			user.setMember_name(req.getParameter("member_name"));
 			user.setMember_birth(req.getParameter("member_birth"));
 			user.setMember_mail(req.getParameter("member_mail"));
 			user.setMember_post(req.getParameter("member_post"));

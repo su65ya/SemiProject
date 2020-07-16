@@ -21,14 +21,17 @@ public class SellerChangePasswordServlet extends HttpServlet {
 			
 			int seller_no = sdto.getSeller_no();
 			String seller_pw = req.getParameter("seller_pw");
+			String nowPassword = req.getParameter("nowPassword"); 
 			
 			// 처리
-			SellerDao sdao = new SellerDao();
-			sdao.pwChange(seller_no, seller_pw);
-			
-			
-			// 출력
-			resp.sendRedirect("change_pw_result.jsp");
+			if(!sdto.getSeller_pw().equals(nowPassword)) {
+				resp.sendRedirect("change_password.jsp?error");
+			}
+			else {
+				SellerDao sdao = new SellerDao();
+				sdao.pwChange(seller_no, seller_pw);
+				resp.sendRedirect("change_pw_result.jsp");
+			}
 			
 		}
 		catch (Exception e) {

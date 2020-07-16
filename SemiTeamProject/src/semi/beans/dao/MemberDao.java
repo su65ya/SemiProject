@@ -93,25 +93,26 @@ public class MemberDao {
 		Connection con = getConnection();
 		
 		String sql = "UPDATE member SET "
-				+ "member_birth=?, member_mail=?, member_post=?, member_basic_addr=?, member_detail_addr=?, member_phone=?"
+				+ "member_name = ?, member_birth = ?, member_mail = ?, member_post = ?, member_basic_addr = ?, member_detail_addr = ?, member_phone = ?"
 				+ "WHERE member_id=?";
 		
-		String birth = mdto.getMember_birth();
-
-		SimpleDateFormat original_format = new SimpleDateFormat("yyyy년 M월 d일");	
-		SimpleDateFormat new_format = new SimpleDateFormat("yyyy-MM-dd");
-
-		Date original_birth = original_format.parse(birth);
-		String birthConvert = new_format.format(original_birth);
+//		String birth = mdto.getMember_birth();
+//
+//		SimpleDateFormat original_format = new SimpleDateFormat("yyyy년 M월 d일");	
+//		SimpleDateFormat new_format = new SimpleDateFormat("yyyy-MM-dd");
+//
+//		Date original_birth = original_format.parse(birth);
+//		String birthConvert = new_format.format(original_birth);
 		
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, birthConvert);
-		ps.setString(2, mdto.getMember_mail());
-		ps.setString(3, mdto.getMember_post());
-		ps.setString(4, mdto.getMember_basic_addr());
-		ps.setString(5, mdto.getMember_detail_addr());	
-		ps.setString(6, mdto.getMember_phone());
-		ps.setString(7, mdto.getMember_id());
+		ps.setString(1, mdto.getMember_name());
+		ps.setString(2, mdto.getMember_birth());
+		ps.setString(3, mdto.getMember_mail());
+		ps.setString(4, mdto.getMember_post());
+		ps.setString(5, mdto.getMember_basic_addr());
+		ps.setString(6, mdto.getMember_detail_addr());	
+		ps.setString(7, mdto.getMember_phone());
+		ps.setString(8, mdto.getMember_id());
 		ps.execute();
 				
 		con.close();
@@ -287,6 +288,7 @@ public class MemberDao {
 			con.close();
 		}
 	
+		
 	
 }
 

@@ -142,6 +142,7 @@ public class SellerDao {
 		con.close();
 	}
 	
+	// pw 변경
 	public void pwChange(int seller_no, String seller_pw) throws Exception {
 		Connection con = getConnection();
 		
@@ -156,12 +157,12 @@ public class SellerDao {
 	
 	
 	// 판매자 탈퇴
-	public void delete(String seller_id) throws Exception {
+	public void delete(int seller_no) throws Exception {
 		Connection con = getConnection();
 		
-		String sql = "DELETE seller WHERE seller_id=?";
+		String sql = "DELETE seller WHERE seller_no=?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, seller_id);
+		ps.setInt(1, seller_no);
 		ps.execute();
 		
 		con.close();
@@ -240,18 +241,6 @@ public class SellerDao {
 		con.close();
 	}
 	
-	//판매자 탈퇴
-		public void exit(String seller_id,String seller_pw ) throws Exception{
-		Connection con = getConnection();
-		
-		String sql = "DELETE seller WHERE seller_id = ?";
-		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, seller_id);
-		ps.execute();
-		
-		con.close();
-		
-	}
 
 }
 

@@ -17,19 +17,18 @@ public class SellerExitServlet extends HttpServlet{
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			
-			SellerDto mdto = (SellerDto) req.getSession().getAttribute("userinfo");
-			String seller_id = mdto.getSeller_id();
-			String seller_pw = mdto.getSeller_pw();
+			SellerDto mdto = (SellerDto) req.getSession().getAttribute("sellerinfo");
+			int seller_no = mdto.getSeller_no();
 			
 		
-			SellerDao mdao = new SellerDao();
-			mdao.exit(seller_id, seller_pw);
+			SellerDao sdao = new SellerDao();
+			sdao.delete(seller_no);
 			
-			req.getSession().removeAttribute("userinfo");
+			req.getSession().removeAttribute("sellerinfo");
 
 			
 			
-			resp.sendRedirect("goodbye.jsp");
+			resp.sendRedirect("seller_delete.jsp");
 		}
 		catch(Exception e) {
 			e.printStackTrace();

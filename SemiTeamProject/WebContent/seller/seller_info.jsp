@@ -29,7 +29,7 @@
     
 </style>
 
-<article class="w-50">
+<article class="w-45">
 
 	<div class="row">
 		<h2>판매자정보</h2>
@@ -42,6 +42,14 @@
 				<tr>
 					<th width="30%">아이디</th>
 					<td class='left'><%= seller.getSeller_id() %></td>
+				</tr>
+				<tr>
+					<th>비밀번호</th>
+					<td class="left">
+						<a href="change_password.jsp">
+						<input class="form-btn form-inline" type="button"  value="비밀번호 변경">
+						</a>
+					</td>
 				</tr>
 				<tr>
 					<th>이름</th>
@@ -90,16 +98,13 @@
 		<div class='row-empty'></div>
 		
 		<div class='right'>
-			<a href="<%=request.getContextPath() %>/seller/check.jsp?go=<%= request.getContextPath() %>/seller/change_password.jsp">
-				<input class="form-btn form-inline" type="button" value="비밀번호 변경">
-			</a>
 			<a href="change_info.jsp">
 				<input class="form-btn form-inline" type="button" value="정보변경">
 			</a>
 			<a href="seller_logout.do">
 				<input class="form-btn form-inline" type="button" value="로그아웃">
 			</a>
-			<a href="#">
+			<a href="<%= request.getContextPath() %>/seller/password_check.jsp?go=<%= request.getContextPath() %>/seller/exit.do">
 				<input class="form-btn form-inline" type="button" value="회원탈퇴">
 			</a>
 		</div>

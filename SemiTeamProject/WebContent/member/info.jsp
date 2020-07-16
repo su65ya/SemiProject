@@ -55,7 +55,7 @@
 				</tr>
 				<tr>
 					<th>생년월일</th>
-					<td class="left"><%=user.getMember_day() %></td>
+					<td class="left"><%=user.getMember_birthdayFormat() %></td>
 				</tr>
 				<tr>
 					<th>이메일</th>
@@ -108,7 +108,6 @@
 	<div class="row-empty"></div>  
 	
 
-	<h5><a href="#">로그아웃</a></h5>
 
 
 

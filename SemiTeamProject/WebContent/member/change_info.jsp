@@ -74,10 +74,10 @@
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.querySelector("input[name=seller_post]").value = data.zonecode;
-                document.querySelector("input[name=seller_basic_addr]").value = addr;
+                document.querySelector("input[name=member_post]").value = data.zonecode;
+                document.querySelector("input[name=member_basic_addr]").value = addr;
                 // 커서를 상세주소 필드로 이동한다.
-                document.querySelector("input[name=seller_detail_addr]").focus();
+                document.querySelector("input[name=member_detail_addr]").focus();
             }
         }).open();
     }
@@ -96,7 +96,7 @@
 				<tr>
 					<th>아이디</th>
 					<td class="left">
-						<input class="form-input" type="text" value="<%=user.getMember_id() %>" readonly>
+						<%=user.getMember_id() %>
 					</td>
 				</tr>
 				<tr>
@@ -121,7 +121,7 @@
 					<th rowspan="3">주소</th>
 					<td class="left">
 						<input class="form-input form-inline" type="text" name="member_post" size="6" maxlength="6" value="<%=user.getRead_post()%>" placeholder="우편번호">
-						<input class="form-btn form-inline" type="button"  value="찾기">	
+						<input class="form-btn form-inline" type="button"  value="우편번호 찾기" onclick="findAddress();">	
 					</td>
 				</tr>
 				<tr>
