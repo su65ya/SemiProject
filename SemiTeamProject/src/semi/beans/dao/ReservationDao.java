@@ -1,6 +1,7 @@
 package semi.beans.dao;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -17,19 +18,22 @@ public class ReservationDao {
 
 	private static DataSource src;
 
-	static {
-		try {
-			Context ctx = new InitialContext();
-			Context env = (Context) ctx.lookup("java:/comp/env");
-			src = (DataSource) env.lookup("jdbc/oracle");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
+//	static {
+//		try {
+//			Context ctx = new InitialContext();
+//			Context env = (Context) ctx.lookup("java:/comp/env");
+//			src = (DataSource) env.lookup("jdbc/oracle");
+//		} catch (NamingException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	// 연결 메소드
 	public Connection getConnection() throws Exception {
-		return src.getConnection();
+//		return src.getConnection();
+		Class.forName("oracle.jdbc.OracleDriver");
+		return DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "c##semi", "c##semi");
+		
 	}
 
 	// 시퀀스 생성 메소드

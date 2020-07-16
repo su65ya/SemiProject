@@ -78,7 +78,9 @@
 					<td class="left font_color_a"><%=user.getMember_mail() %></td>
 				</tr>
 				<tr>
-					<th rowspan="3">주소</th>
+					<th rowspan="4">주소</th>
+				</tr>
+				<tr>
 					<td class="left font_color_a">[<%=user.getMember_post() %>]</td>
 				</tr>
 				<tr>

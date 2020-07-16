@@ -17,8 +17,8 @@ public class SellerExitServlet extends HttpServlet{
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			
-			SellerDto mdto = (SellerDto) req.getSession().getAttribute("sellerinfo");
-			String seller_id = mdto.getSeller_id();
+			SellerDto sdto = (SellerDto) req.getSession().getAttribute("sellerinfo");
+			String seller_id = sdto.getSeller_id();
 			
 		
 			SellerDao sdao = new SellerDao();
