@@ -96,7 +96,8 @@
                 document.querySelector("input[name=member_post]").value = data.zonecode;
                 document.querySelector("input[name=member_basic_addr]").value = addr;
                 // 커서를 상세주소 필드로 이동한다.
-                document.querySelector("input[name=member_detail.addr]").focus();
+                document.querySelector("input[name=member_detail_addr]").focus();
+
             }
         }).open();
     }
@@ -114,9 +115,7 @@
 				<tr>
 					<th>아이디</th>
 					<td class="left">
-						<%=mdto.getMember_id() %>
-						<input type="hidden" name="member_id" value="<%=user.getMember_id() %>">
-					</td>
+						<%=user.getMember_id() %>
 				</tr>
 				<tr>
 					<th>이름</th>

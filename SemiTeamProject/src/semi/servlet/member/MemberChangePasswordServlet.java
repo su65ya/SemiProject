@@ -30,6 +30,7 @@ public class MemberChangePasswordServlet extends HttpServlet{
 			mdao.changePassword(user);
 			
 			resp.sendRedirect("change_password_result.jsp");
+
 		}
 		
 		catch(Exception e) {

@@ -92,7 +92,7 @@
 				</tr>
 				<tr>
 					<th>가입일</th>
-					<td class="left font_color_a"><%=sdto.getSeller_join()%></td>
+					<td class="left font_color_a"><%=sdto.getJoin_day()%></td>
 				</tr>
 			</tbody>		
 		</table>

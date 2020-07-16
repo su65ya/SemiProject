@@ -33,6 +33,8 @@ public class PensionEditServlet extends HttpServlet {
 			pdao.edit(pdto);
 			
 		//출력
+			
+			resp.sendRedirect("pension_detail.jsp?pension_no=" + pdto.getPension_no());
 
 		} catch (Exception e) {
 			e.printStackTrace();

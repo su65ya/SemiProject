@@ -78,7 +78,9 @@
 					<td class="left font_color_a"><%=user.getMember_mail() %></td>
 				</tr>
 				<tr>
-					<th rowspan="3">주소</th>
+					<th rowspan="4">주소</th>
+				</tr>
+				<tr>
 					<td class="left font_color_a">[<%=user.getMember_post() %>]</td>
 				</tr>
 				<tr>
@@ -103,15 +105,20 @@
 		</table>
 
 	</div>
-	<div class="row" style="float: right;">
+	
+	<div class="row right">
 		<a href="check.jsp?go=delete.do">
 			<input class= "form-btn3" type="button" value="회원 탈퇴">
 		</a>
-	<div class="row" style="float: right;">
 		<a href="check.jsp?go=change_info.jsp">
 			<input class= "form-btn2" type="button" value="회원정보 수정">
 		</a>
 	</div>
+	
+	<div class="row-empty"></div>
+	<div class="row-empty"></div> 
+	<div class="row-empty"></div>  
+	
 
 </article>
 

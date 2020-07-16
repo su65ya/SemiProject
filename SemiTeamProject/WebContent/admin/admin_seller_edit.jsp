@@ -135,7 +135,7 @@
 				<tr>
 					<th>메일</th>
 					<td class="left">
-						<input class="intext"  type="text name="seller_email" value="<%=sdto.getSeller_email()%>">
+						<input class="intext"  type="text" name="seller_email" value="<%=sdto.getSeller_email()%>">
 					</td>
 				</tr>
 				<tr>

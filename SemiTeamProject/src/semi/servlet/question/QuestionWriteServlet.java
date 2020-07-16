@@ -39,7 +39,12 @@ public class QuestionWriteServlet extends HttpServlet{
 			
 			
 			// 출력
-			 resp.sendRedirect("question_content.jsp?que_pension_no="+ qdto.getQue_pension_no() +"&que_no=" + que_no);
+			if (mdto != null) {
+				resp.sendRedirect("question_member_content.jsp?que_pension_no="+ qdto.getQue_pension_no() +"&que_no=" + que_no);
+			}
+			else {
+				resp.sendRedirect("question_content.jsp?que_pension_no="+ qdto.getQue_pension_no() +"&que_no=" + que_no);
+			}
 			
 			
 			

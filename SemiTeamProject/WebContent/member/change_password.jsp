@@ -1,7 +1,15 @@
+<%@page import="semi.beans.dao.MemberDao"%>
+<%@page import="semi.beans.dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:include page="/template/nav.jsp"></jsp:include>
-
+ <%
+    MemberDto mdto = (MemberDto) session.getAttribute("userinfo");
+ 	
+ 	String member_pw = mdto.getMember_pw();
+ 	MemberDao mdao = new MemberDao();
+ 	MemberDto user = mdao.get(member_pw);
+ %>
 <style>
 	.intext {
 		width: 100%;
@@ -67,16 +75,26 @@
 <script>
     //1. 입력한 비밀번호가 현재 비밀번호와 같은지 검사
     function checkPw1() {
+        var pw1Tag = document.querySelector("input[name=pw1]");
+            pw1Tag.classList.remove("correct");
+            pw1Tag.classList.remove("incorrect");
         
+            if(document.querySelector("input[name=pw0]").value==
+              document.querySelector("input[name=pw1]").value) {
+                pw1Tag.classList.add("correct");
+            }
+            else {
+                pw1Tag.classList.add("incorrect");
+            }
     }
     //2. 새 비밀번호가 형식에 맞는지 검사
     function checkPw2() {
         var regex = /[a-z0-9]{8,20}/g;
-        var pw2 = document.querySelector("input[name=pw2]").value;
+        var pw2 = document.querySelector("input[name=member_pw]").value;
         
         var isValid = regex.test(pw2);
         
-        var pw2Tag = document.querySelector("input[name=pw2]");
+        var pw2Tag = document.querySelector("input[name=member_pw]");
         pw2Tag.classList.remove("correct");
         pw2Tag.classList.remove("incorrect");
         
@@ -93,10 +111,10 @@
             pw3Tag.classList.remove("correct");
             pw3Tag.classList.remove("incorrect");
         
-        if(document.querySelector("input[name=pw2]").value!=''&&
+        if(document.querySelector("input[name=member_pw]").value!=''&&
           document.querySelector("input[name=pw3]").value!='') {
             
-            if(document.querySelector("input[name=pw2]").value==
+            if(document.querySelector("input[name=member_pw]").value==
                document.querySelector("input[name=pw3]").value) {            
                 pw3Tag.classList.add("correct");
             }
@@ -121,7 +139,7 @@
 		<h2 >비밀번호 변경</h2>
 	</div>
 	
-	<form action="change_password.do" method="post" onsubmit="return checkForm();">
+	<form action="change_password.do" method="post" onsubmit="">
 	<div class="row">
 		<table class="table table-sideopen">
 			<tbody>
@@ -129,7 +147,8 @@
 					<th style="width:150px;">현재 비밀번호</th>	
 					<td class="left">
 					    <div>
-						<input class="intext" name="pw1" id="pw" type="password" onblur="" placeholder="현재 비밀번호">
+					    <input class="intext" name="pw0" type="hidden" value="<%=user.getMember_pw()%>">
+						<input class="intext" name="pw1" id="pw" type="password" onblur="checkPw1();" placeholder="현재 비밀번호">
 						<span class="correct-message">현재 비밀번호와 일치합니다</span>
 						<span class="incorrect-message">비밀번호가 맞는지 확인하세요</span>
 						</div>
@@ -141,7 +160,7 @@
 					
 					<td class="left">
 					    <div>
-						<input class="intext" name="pw2" id="pwCheck" type="password" onblur="checkPw2();" placeholder="새 비밀번호">
+						<input class="intext" name="member_pw" id="pwCheck" type="password" onblur="checkPw2();" placeholder="새 비밀번호">
 						<span class="correct-message">형식에 맞는 비밀번호입니다</span>
 						<span class="incorrect-message">영문 소문자와 숫자 8~20자로 구성하세요</span>
 				        </div>
@@ -160,7 +179,6 @@
 			</tbody>
 		</table>
 
-	</div>
 	
 	<div class="row-empty"></div> 
 		
