@@ -114,7 +114,8 @@
 				<tr>
 					<th>아이디</th>
 					<td class="left">
-						<input class="intext" type="text" value="<%=user.getMember_id() %>" readonly>
+						<%=mdto.getMember_id() %>
+						<input type="hidden" name="member_id" value="<%=user.getMember_id() %>">
 					</td>
 				</tr>
 				<tr>

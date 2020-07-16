@@ -185,18 +185,18 @@ public class SellerDao {
 							+ "seller_basic_addr=?, seller_detail_addr=?, seller_phone=?, company_no=? "
 							+ "WHERE seller_id=?";
 		
-		String birth = sdto.getSeller_birth();
-
-		SimpleDateFormat original_format = new SimpleDateFormat("yyyy년 M월 d일");	
-		SimpleDateFormat new_format = new SimpleDateFormat("yyyy-MM-dd");
-		
-		Date original_birth = original_format.parse(birth);
-		String birthConvert = new_format.format(original_birth);
+//		String birth = sdto.getSeller_birth();
+//
+//		SimpleDateFormat original_format = new SimpleDateFormat("yyyy년 M월 d일");	
+//		SimpleDateFormat new_format = new SimpleDateFormat("yyyy-MM-dd");
+//		
+//		Date original_birth = original_format.parse(birth);
+//		String birthConvert = new_format.format(original_birth);
 		
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, sdto.getSeller_pw());
 		ps.setString(2, sdto.getSeller_name());
-		ps.setString(3, birthConvert);
+		ps.setString(3, sdto.getSeller_birthday());
 		ps.setString(4, sdto.getSeller_email());
 		ps.setString(5, sdto.getSeller_post());
 		ps.setString(6, sdto.getSeller_basic_addr());
