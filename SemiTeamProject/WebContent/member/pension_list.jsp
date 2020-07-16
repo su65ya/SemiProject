@@ -15,7 +15,7 @@
 	PenImgViewDto viewDto = new PenImgViewDto();
 	PensionOptionDao podao = new PensionOptionDao();
 	String location = request.getParameter("location");
-	List<PensionDto> list;;
+	List<PensionDto> list;
 	if(location !=null){
 		list = pdao.getList(location);
 	}else{
@@ -52,6 +52,7 @@
 							<a href="reservation_step1.do?pension_no=<%=pdto.getPension_no()%>&member_no=<%=member_no%>"><button class='form-btn form-inline'>예약하기</button></a>
 						<a href="<%= request.getContextPath() %>/review/review_list.jsp?review_pension_no=<%= pdto.getPension_no()%>"><button class='form-btn form-inline'>리뷰보기</button></a>
 						<a href='<%= request.getContextPath() %>/question/question_list.jsp?que_pension_no=<%= pdto.getPension_no()%>'><button type ="button" class='form-btn form-inline'>문의하기</button></a>
+						
 					</td>
 				</tr>
 				<tr>

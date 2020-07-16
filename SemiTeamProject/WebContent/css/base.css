@@ -534,7 +534,7 @@
 		 	2020.07.16 menu-fixed 추가
 		  */
 		.menuu-fixed {
-		    position: fixed;
+		    position: absolute;
 		    top: 0;
 		    left: auto;
 		    right: auto;
@@ -560,7 +560,7 @@
             margin-bottom: 10px;
         }
         
-        .pension4 {
+        .pension4 {	
             margin-bottom: 10px;
         }
         
@@ -613,5 +613,7 @@
 	    	border-radius: 5px;
     	}
         
-        
+        a {
+        	text-decoration: none;
+        }
         

@@ -53,7 +53,14 @@
 	}
 	   
 </style>
-    
+
+<% if (request.getParameter("que_no") != null) { %>
+	<input type='hidden' name='que_no' value='<%= request.getParameter("que_no") %>'>
+<%} %>
+
+<% if (request.getParameter("que_pension_no") != null) { %>
+	<input type='hidden' name='que_pension_no' value='<%= request.getParameter("que_pension_no") %>'>
+<%} %>
 
 <article class="w-50">
 	<div class="row">
@@ -90,7 +97,7 @@
 	</div>
 	
 	<div class="row">
-		<%= qvdto.getQue_date() %> / 
+		<%= qvdto.getQue_day_hour() %> / 
 		<%= qvdto.getQue_view() %>
 	</div>
 	
@@ -117,7 +124,8 @@
 
 	<div class="row right">
 	
-			<a href="question_delete.do?que_pension_no=<%= que_pension_no %>&que_no=<%= que_no %>">
+			<%-- <a href="<%= request.getContextPath() %>/seller/password_check.jsp?go=<%= request.getContextPath() %>/question/question_delete.do?que_pension_no=<%= que_pension_no %>&que_no=<%= que_no %>"> --%>
+			<a href="question/question_delete.do?que_pension_no=<%= que_pension_no %>&que_no=<%= que_no %>">
 				<input class="form-btn form-inline" type="button" value="삭제">
 			</a>
 		
@@ -134,7 +142,6 @@
 				<input class="form-btn form-inline" type="button" value="답변">
 			</a>
 		<%} %>
-		
 		<a href="question_list.jsp?que_pension_no=<%= que_pension_no %>">
 			<input class="form-btn form-inline" type="button" value="목록">
 		</a>

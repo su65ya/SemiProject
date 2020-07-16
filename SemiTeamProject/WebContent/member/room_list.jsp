@@ -26,8 +26,8 @@
  <link rel="stylesheet" href="../css/swiper.min.css">
     <style>
     .swiper-container {
-        width: 600px;
-        height: 300px;
+        width: 100%	;
+        height: 500px;
     }
         dl>dt, dl>dd{
             font-size: 12px;
@@ -90,7 +90,7 @@
         	}else{
         		re_infoTag.value = "";
         	}
-        	}
+        }
         
         function option_modal(){
         	var tag = document.querySelector(".modal-wrap");
@@ -139,16 +139,18 @@
 	ReservationDao rvdao = new ReservationDao();
 %>
 
-    <div class="swiper-container">
+    <div class="swiper-container center">
         <div class="swiper-wrapper">
+                <%for(PensionImageDto pmdto : fileList){ %>
             <div class="swiper-slide">
-                <img src ="https://placeimg.com/600/300/animal">
+ 						<img src="download.do?pen_image_no=<%=pmdto.getPen_image_no()%>" width="1100" height="500">
+            </div>
+ 				<%} %>
+            <div class="swiper-slide">
+                <img src ="https://placeimg.com/1100/500/people">
             </div>
             <div class="swiper-slide">
-                <img src ="https://placeimg.com/600/300/people">
-            </div>
-            <div class="swiper-slide">
-                <img src = "https://placeimg.com/600/300/tech">
+                <img src = "https://placeimg.com/1100/500/animal">
             </div>
         </div>
         <!-- 페이지 위치 표시 영역(선택) -->
@@ -220,10 +222,10 @@
 			                    	
 			                    	</div>
 		                    	<%if(rvdao.isReservation(rdto.getRoom_no(), date)){ %>
-		                    		<div><h5>예약완료</h5></div>
+		                    		<div><h5 style="font-size: 4px; color:red;">예약완료</h5></div>
 		                    	<%}else{ %>
 			                    	 <div>
-			                    	<input type="checkbox" onchange="reservation(this);">
+			                    		<input type="checkbox" onchange="reservation(this);">
 			            			</div>
 		                  		<%} %>
 		                    </td>
