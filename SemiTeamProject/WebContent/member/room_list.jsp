@@ -26,8 +26,8 @@
  <link rel="stylesheet" href="../css/swiper.min.css">
     <style>
     .swiper-container {
-        width: 600px;
-        height: 300px;
+        width: 100%	;
+        height: 500px;
     }
         dl>dt, dl>dd{
             font-size: 12px;
@@ -142,13 +142,13 @@
     <div class="swiper-container">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
-                <img src ="https://placeimg.com/600/300/animal">
+                <img src ="https://placeimg.com/1280/500/animal">
             </div>
             <div class="swiper-slide">
-                <img src ="https://placeimg.com/600/300/people">
+                <img src ="https://placeimg.com/1280/500/people">
             </div>
             <div class="swiper-slide">
-                <img src = "https://placeimg.com/600/300/tech">
+                <img src = "https://placeimg.com/1280/500/animal">
             </div>
         </div>
         <!-- 페이지 위치 표시 영역(선택) -->
@@ -220,10 +220,10 @@
 			                    	
 			                    	</div>
 		                    	<%if(rvdao.isReservation(rdto.getRoom_no(), date)){ %>
-		                    		<div><h5>예약완료</h5></div>
+		                    		<div><h5 style="font-size: 4px; color:red;">예약완료</h5></div>
 		                    	<%}else{ %>
 			                    	 <div>
-			                    	<input type="checkbox" onchange="reservation(this);">
+			                    		<input type="checkbox" onchange="reservation(this);">
 			            			</div>
 		                  		<%} %>
 		                    </td>
