@@ -17,7 +17,7 @@
 	PenImgViewDto viewDto = new PenImgViewDto();
 %>
 <!-- 펜션 목록 리스트 -->
-<article class="w-60">
+<article class="w-70">
 	<div class="row">
 		<!-- 제목 -->
 		<h2>펜션 목록</h2>
