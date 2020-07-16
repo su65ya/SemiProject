@@ -18,6 +18,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import semi.beans.dao.ReviewDao;
 import semi.beans.dao.ReviewFileDao;
 import semi.beans.dto.MemberDto;
+import semi.beans.dto.PensionDto;
 import semi.beans.dto.ReviewDto;
 import semi.beans.dto.ReviewFileDto;
 
@@ -27,6 +28,8 @@ public class ReviewWriteServlet extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
+			
+			// 첨부파일
 			String charset="UTF-8";
 			int limit = 10*10*1024;
 			File baseDir = new File("D:/upload/review_file");
@@ -41,24 +44,24 @@ public class ReviewWriteServlet extends HttpServlet{
 			Map<String,List<FileItem>>map = utility.parseParameterMap(req);
 
 					
-			
+			// 입력
 			ReviewDto revdto = new ReviewDto();
 			ReviewDao revdao = new ReviewDao();
 			
-			int review_no = revdao.getSequence();
 			MemberDto mdto = (MemberDto) req.getSession().getAttribute("userinfo");
 			
-			int review_pension_no=Integer.parseInt(map.get("review_pension_no").get(0).getString());
-			
-			revdto.setReview_writer(mdto.getMember_no());
-		
 			revdto.setReview_pension_no(Integer.parseInt(map.get("review_pension_no").get(0).getString()));
-		
+			revdto.setReview_writer(mdto.getMember_no());
 			revdto.setReview_title(map.get("review_title").get(0).getString());
 			revdto.setReview_content(map.get("review_content").get(0).getString());
-			System.out.println(map);
+			
+			// 처리
+			int review_no = revdao.getSequence(); // 리뷰 번호
+			revdto.setReview_no(review_no);
+			
 			revdao.write(revdto);
 			
+			System.out.println(map);
 			List<FileItem> fileList = map.get("review_file");
 			ReviewFileDao rfdao= new ReviewFileDao();
 			for(FileItem item : fileList) {
@@ -76,7 +79,7 @@ public class ReviewWriteServlet extends HttpServlet{
 					item.write(target);
 				}
 			}
-			resp.sendRedirect("review_detail.jsp?review_pension_no="+review_pension_no);
+			resp.sendRedirect("review_detail.jsp?review_pension_no="+ revdto.getReview_pension_no() +"&review_no="+ review_no);
 		} catch (Exception e) {
 			e.printStackTrace();
 			resp.sendError(500);

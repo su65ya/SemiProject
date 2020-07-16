@@ -22,6 +22,7 @@ public class ReservationDto {
 		this.setRes_in(rs.getString("res_in"));
 		this.setRes_out(rs.getString("res_out"));
 		this.setRes_paytpye(rs.getString("res_paytype"));
+		this.setRes_price(rs.getInt("res_price"));
 		
 	}
 
@@ -84,6 +85,15 @@ public class ReservationDto {
 	public final void setRes_date(String res_date) {
 		this.res_date = res_date;
 	}
+	// yyyy-MM-dd방식
+	public String getRes_date_day() {
+		return res_date.substring(0, 10);
+	}
+
+	// 00:00:00방식
+	public String getRes_date_time() {
+		return res_date.substring(11, 16);
+	}
 
 
 	public final String getRes_in() {
@@ -94,7 +104,15 @@ public class ReservationDto {
 	public final void setRes_in(String res_in) {
 		this.res_in = res_in;
 	}
+	// yyyy-MM-dd방식
+	public String getRes_in_day() {
+		return res_in.substring(0, 10);
+	}
 
+		// 00:00:00방식
+	public String getRes_in_time() {
+		return res_in.substring(11, 16);
+	}
 
 	public final String getRes_out() {
 		return res_out;
