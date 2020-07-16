@@ -111,7 +111,7 @@ public class SellerDao {
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, sdto.getSeller_name());
 		ps.setString(2, sdto.getSeller_email());
-		ps.setString(3, sdto.getSeller_birth());
+		ps.setString(3, sdto.getSeller_birthday());
 		ps.setString(4, sdto.getSeller_post());
 		ps.setString(5, sdto.getSeller_basic_addr());
 		ps.setString(6, sdto.getSeller_detail_addr());
