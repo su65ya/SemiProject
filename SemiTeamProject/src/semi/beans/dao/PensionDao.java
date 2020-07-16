@@ -284,6 +284,6 @@ public class PensionDao {
 		return list;
 	}
 	
-	public List<PensionDto> getList(String )
+//	public List<PensionDto> getList(String )
 }
 	
