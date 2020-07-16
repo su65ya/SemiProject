@@ -30,7 +30,7 @@
 			throw new Exception();
 		}
 	}catch(Exception e){
-		pageNo = 1;
+		pageNo = 5;
 	}
 	int finish = pageNo * pageSize;
 	int start = finish - (pageSize-1); 
@@ -77,19 +77,17 @@
 <article class="w-75">
 	<div class="row">
 		<!-- 제목 -->
-		<h5>PageStr = <%=pageStr %>,pageNo = <%=pageNo %></h5>
-		<h5>finish = <%=finish %>,start = <%=start %></h5>
 		<h2>펜션 목록</h2>
 	</div>
 	<div class="row right">
 	<form action="pension_list.jsp?keyword=<%=keyword %>" method="get">
 		<input type="text" placeholder="펜션 검색" name = "keyword" style="width: 124px; height: 34px; padding: 1rem;">
 		<input class = "form-btn form-inline" type="button" value = "검색">
-		<a href="pension_regist.jsp">
-			<input class = "form-btn form-inline" type="button" value = "펜션 등록">
-		</a>
 		<a href="pension_list.jsp">
 			<input class = "form-btn form-inline" type="button" value = "전체목록">
+		</a>
+		<a href="pension_regist.jsp">
+			<input class = "form-btn form-inline" type="button" value = "펜션 등록">
 		</a>
 	</form>
 	</div>
