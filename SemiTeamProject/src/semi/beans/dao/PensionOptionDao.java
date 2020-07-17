@@ -79,12 +79,22 @@ public class PensionOptionDao {
 		ps.setInt(1, pension_no);
 		ps.setString(2, key);
 		ResultSet rs = ps.executeQuery();
-		int price = -1;
+		int price = 0;
 		if(rs.next()) {
 			price = rs.getInt("option_price");
 		}
 		con.close();
 		return price;
 	}
-
+	
+	public void update(int option_price,int pension_no,String option_name)throws Exception{
+		Connection con = getConnection();
+		String sql = "UPDATE pension_option SET option_price = ? WHERE pension_key=? AND option_name=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, option_price);
+		ps.setInt(2, pension_no);
+		ps.setString(3, option_name);
+		ps.execute();
+		con.close();
+	}
 }

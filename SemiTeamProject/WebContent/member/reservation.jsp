@@ -80,6 +80,9 @@
 					int children = Integer.parseInt(step3dto.getChildren());
 					int bbq =  Integer.parseInt(step3dto.getBbq());
 					int extraPrice = (adult*adultPrice)+(children*childPrice)+(bbqPrice*bbq);
+					if(extraPrice<0){
+						extraPrice = 0;
+					}
 					%>
 					<td class="left"><%=roomdto.getRoom_name() %></td>
 					<td style="color: #ea1f62"><%=rdto.getReservation_date_day() %></td>
@@ -89,7 +92,7 @@
 					<%int plusPrice = extraPrice+rdto.getReservation_price();%>
 					<td><%=DateChecker.cal(plusPrice)%>원
 					<%totalPrice = totalPrice + (extraPrice+rdto.getReservation_price()); %>
-					<input type = "hidden" name = "res_info" value="<%=rdto.getRoom_no() %>/<%=rdto.getReservation_date_day() %>/<%=totalPrice %>">
+					<input type = "hidden" name = "res_info" value="<%=rdto.getRoom_no() %>/<%=rdto.getReservation_date_day() %>/<%=rdto.getReservation_price() %>">
 					</td>
 				</tr>
 				<%} %>

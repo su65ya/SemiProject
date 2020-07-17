@@ -21,23 +21,16 @@ public class MemberChangePasswordServlet extends HttpServlet{
 			String member_id = mdto.getMember_id();
 			
 			String member_pw = req.getParameter("member_pw");
-			String nowPassword = req.getParameter("nowPassword");
 			
 			MemberDto user = new MemberDto();
 			user.setMember_id(member_id);
 			user.setMember_pw(member_pw);
 			
+			MemberDao mdao = new MemberDao();
+			mdao.changePassword(user);
 			
-			if (!mdto.getMember_pw().equals(nowPassword)) {
-				resp.sendRedirect("change_password.jsp?error");
-			}
-			else {
-				MemberDao mdao = new MemberDao();
-				mdao.changePassword(user);
-				resp.sendRedirect("change_password_result.jsp");
-			}
-			
-			
+			resp.sendRedirect("change_password_result.jsp");
+
 		}
 		
 		catch(Exception e) {
