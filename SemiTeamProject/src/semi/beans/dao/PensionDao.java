@@ -221,25 +221,6 @@ public class PensionDao {
 		con.close();
 	}
 
-	// 펜션 단일조회 메소드
-//	public PensionDto get(int pension_no) throws Exception {
-//		Connection con = getConnection();
-//		
-//		String sql = "select * from pension where pension_no = ?";
-//		PreparedStatement ps = con.prepareStatement(sql);
-//		ps.setInt(1, pension_no);
-//		ResultSet rs = ps.executeQuery();
-//		
-//		PensionDto pdto;
-//		if (rs.next()) {
-//			pdto = new PensionDto(rs);
-//		}else {
-//			pdto=null;
-//		}
-//		
-//		con.close();
-//		return pdto;
-//	}
 
 	//펜션 정보 메소드
 	public PensionInfoDto get(int pension_no) throws Exception {
@@ -340,4 +321,6 @@ public class PensionDao {
 			
 			return count;
 		}
+		
+		
 }

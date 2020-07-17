@@ -45,15 +45,18 @@
         }
 
         .search-form .search-submit {
-            font-size: 20px;
+            font-size: 15px;
             width: 70px;
             font-weight : bold;
-            background-color: deepskyblue;
-            color: white
+            background-color: #795548;
+            color: white;
+            border: none;
         }
 
         .search-form .search-img {
             height: auto;
+            margin-left:10px;
+            margin-right:10px;
             max-width: 40px;
             max-height: 40px;
             float: left;
@@ -62,10 +65,10 @@
     </style>
 
     <!-- moment js : datepicker를 사용하기 위한 필수 의존성 파일 -->
-    <script src="../js/moment.min.js"></script>
+    <script src="./js/moment.min.js"></script>
     <!-- date-range-picker -->
-    <link rel="stylesheet" type="text/css" href="../css/lightpick.css">
-    <script src="../js/lightpick.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/lightpick.css">
+    <script src="./js/lightpick.js"></script>
 
     <script>
         window.onload = function() {
@@ -111,6 +114,8 @@
     <form class="search-form" action="pension_list.jsp" method="post">
         <div class="search">
            <h1 class="serch-h1">실시간빈방검색</h1>
+           <div class="row-empty"></div>
+           <div class="row-emptyy"></div>
             <!-- 지역 선택용 입력창 -->
             <div class="search-list">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSSllcrcrPmFT9dWzsp2ARc3qUfbwIavLyezQ&usqp=CAU" alt="지역" class="search-img" >
@@ -129,7 +134,7 @@
             <!-- 날짜 선택용 입력창 -->
             <div class="search-date">
                 <img src="https://i.pinimg.com/474x/6d/c9/e4/6dc9e44096a62281c71f27a23e1c42cb.jpg" alt="날짜" class="search-img">
-                <input type="text" class="picker-start" placeholder="">
+                <input type="text" class="picker-start" placeholder="">&nbsp;
                 <input type="text" class="picker-end">
             </div>
 
@@ -148,7 +153,7 @@
                     <option value="h">8명</option>
                     <option value="i">9명</option>
                     <option value="j">10명</option>
-                </select>
+                </select>&nbsp;
                     <input class = "search-submit" type="button" value="검색">
             </div>
 

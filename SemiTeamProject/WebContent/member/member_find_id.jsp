@@ -75,7 +75,7 @@
 
 
 		<div class='row center'>
-			<input class='form-btn2' type="submit" value="찾기">
+			<input class='form-btn3' type="submit" value="찾기">
 		</div>
 
 	</form>

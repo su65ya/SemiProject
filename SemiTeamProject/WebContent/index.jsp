@@ -7,9 +7,6 @@
 <jsp:include page="/template/nav.jsp"></jsp:include>
 			
 	<style>
-		.main{
-			margin-top: 120px;
-		}		
 	</style>
 		<article class="main">
 
