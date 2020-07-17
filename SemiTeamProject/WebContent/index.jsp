@@ -6,11 +6,12 @@
 
 <jsp:include page="/template/nav.jsp"></jsp:include>
 			
-<%-- <jsp:include page="/template/search.jsp"></jsp:include>			 --%>
-<script>
-
-</script>
-		<article>
+	<style>
+		.main{
+			margin-top: 120px;
+		}		
+	</style>
+		<article class="main">
 
 
                 <!-- 이미지 슬라이더 영역 -->

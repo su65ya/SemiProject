@@ -169,10 +169,5 @@
 <!-- 			</ul> -->
 		</nav>
 		<section>
-			<div class="row-empty"></div>
-			<div class="row-empty"></div>
-            <div class="row-empty"></div>
-            <div class="row-empty"></div>
-            <div class="row-empty"></div>
-            <div class="row-empty"></div>
+
                   
