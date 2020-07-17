@@ -40,7 +40,7 @@
 
 	List<PensionDto> list;//로그인 된 판매자 가진 펜션 목록 출력
 	if(isSearch){
-		list = pdao.search(keyword,start,finish);
+		list = pdao.search(pension_seller_no,keyword,start,finish);
 	}else{
 		list = pdao.getList(pension_seller_no,start,finish);
 	}

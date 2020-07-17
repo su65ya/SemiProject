@@ -69,7 +69,7 @@ public class PensionDao {
 	}
 
 
-	// 판매자 별 펜션 리스트 메소드
+	// (판매자)판매자 별 펜션 리스트 메소드
 	public List<PensionDto> getList(int pension_seller_no,int start,int finish) throws Exception {
 		Connection con = getConnection();
 
@@ -103,6 +103,28 @@ public class PensionDao {
 		return list;
 
 	}
+	
+	//펜션 검색 메소드
+		public List<PensionDto> search(int pension_seller_no,String keyword,int start ,int finish) throws Exception {
+			Connection con = getConnection();
+			String sql = "SELECT * FROM (SELECT rownum rn,T.*FROM (SELECT * FROM pension WHERE pension_seller_no =? AND instr(pension_name,? ) > 0 ORDER BY PENSION_REGIST_DATE DESC)T)WHERE rn BETWEEN ? AND ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, pension_seller_no);
+			ps.setString(2, keyword);
+			ps.setInt(3, start);
+			ps.setInt(4, finish);
+			
+			ResultSet rs = ps.executeQuery();
+			List<PensionDto> list = new ArrayList<PensionDto>();
+			while (rs.next()) {
+				PensionDto mdto = new PensionDto(rs);
+				list.add(mdto);
+				
+			}
+			con.close();
+			return list;
+
+		}
 
 	// 펜션 리스트 메소드(등록일 최신순)
 	public List<PensionDto> getList(int start,int finish) throws Exception {

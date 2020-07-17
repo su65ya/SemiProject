@@ -65,7 +65,6 @@
 	<div class="row-empty"></div>
 	<!-- 펜션 목록 -->
 	<div class="row list ">
-	<form>
 		<table class="table table-sideopen left" style=border-collapse:inherit;>
 			<tbody>
 				<%for (PensionDto pdto : list) {%>
@@ -136,7 +135,6 @@
 				<%}%>
 			</tbody>
 		</table>
-		</form>
 		
 		<div class="row center pagination">
 		<div class="row-empty"></div>
