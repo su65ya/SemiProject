@@ -153,4 +153,14 @@ public class ReservationFlowDao {
 		con.close();
 		return step3;
 	}
+	
+	//step1의 일정 시간이 지나면 지워지는 메소드
+	public void reservationAutoDeleter() throws Exception{
+		Connection con = getConnection();
+		String sql = "DELETE reservation_step1 WHERE reservation_date < sysdate-1/24*0.5";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.execute();
+		con.close();
+		
+	}
 }
