@@ -82,25 +82,6 @@ public class ReviewFileDao {
 		return rfdto;
 	}
 		
-//		public ReviewFileDto getChangeImg(int review_origin)throws Exception{
-//			Connection con = getConnection();
-//			
-//			String sql = "UPDATE set review_file WHERE review_origin=?";
-//			PreparedStatement ps = con.prepareStatement(sql);
-//			ps.setInt(1, review_origin);
-//			ResultSet rs = ps.executeQuery();
-//			
-//			ReviewFileDto rfdto;
-//			if(rs.next()) {
-//				rfdto = new ReviewFileDto(rs);
-//			}else {
-//				rfdto = null;
-//			}
-//			con.close();
-//			return rfdto;
-//			
-//		}
-
 	//리뷰 파일 가져오기
 	public ReviewFileDto get(int review_file_no) throws Exception{
 		Connection con = getConnection();

@@ -12,6 +12,7 @@
 
 	MemberDto mdto = (MemberDto) session.getAttribute("userinfo");
 	SellerDto sdto = (SellerDto) session.getAttribute("sellerinfo");
+	ReviewDao revdao = new ReviewDao();
 	
 	int review_pension_no = Integer.parseInt(request.getParameter("review_pension_no"));
 	
@@ -47,7 +48,6 @@
 	int blockFinish = blockStart +block_size - 1;
 	
 
-	ReviewDao revdao = new ReviewDao();
 	
 	int count;
 	if (isSearch) {
@@ -69,8 +69,6 @@
 	else {
 		list = revdao.getList(review_pension_no, start, finish);
 	}
-
-
 %>
 
 <jsp:include page="/template/nav.jsp"></jsp:include>
@@ -116,8 +114,10 @@
 				</td>
 				
 				<td>
-					<% if (revdto.getReview_writer() != 0) {%>
-						<%= mdto.getMember_id() %>
+					<%
+						String member_id = revdao.getId(revdto.getReview_no());
+					if (member_id != null) {%>
+						<%=member_id %>
 					<%} else {%>
 						<font color="gray">XXX</font>
 					<%} %>

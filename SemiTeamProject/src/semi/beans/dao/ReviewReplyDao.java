@@ -31,19 +31,6 @@ public class ReviewReplyDao {
 		return src.getConnection();
 	}
 
-	//등록
-		public void replywrite(ReviewReplyDto rrdto) throws Exception{
-			Connection con = getConnection();
-			
-			String sql = "INSERT INTO review_reply VALUES(review_reply_seq.nextval, ?, ?, ?, sysdate)";
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, rrdto.getReply_writer());
-			ps.setInt(2, rrdto.getReply_origin());
-			ps.setString(3, rrdto.getReply_content());
-			ps.execute();
-			
-			con.close();
-		}
 		
 		public List<ReviewReplyDto> getList(int reply_origin) throws Exception{
 			Connection con = getConnection();
@@ -81,6 +68,26 @@ public class ReviewReplyDao {
 		return rrdto;
 		
 	}
+	
+	public String getId(int reply_no) throws Exception {
+		Connection con = getConnection();
+		
+		String sql = "SELECT member_id from (SELECT * FROM MEMBER m INNER JOIN review_reply r ON m.member_no = r.reply_writer)WHERE reply_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, reply_no);
+		ResultSet rs = ps.executeQuery();
+		
+		String memberId;
+		if(rs.next()) {
+			memberId = rs.getString("member_id");
+		}else {
+			memberId = null;
+		}
+		
+		con.close();
+		return memberId;
+	}
+	
 
 	public void delete(int reply_no) throws Exception{
 		Connection con = getConnection();
@@ -94,17 +101,30 @@ public class ReviewReplyDao {
 		
 	}
 
-	public void replyedit(ReviewReplyDto rrdto) throws Exception{
+	//등록
+	public void replywrite(ReviewReplyDto rrdto) throws Exception{
 		Connection con = getConnection();
 		
-		String sql = "update review_reply set reply_content = ? where reply_no = ?";
+		String sql = "INSERT INTO review_reply VALUES(review_reply_seq.nextval, ?, ?, ?, sysdate)";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, rrdto.getReply_content());
-		ps.setInt(2, rrdto.getReply_no());
+		ps.setInt(1, rrdto.getReply_writer());
+		ps.setInt(2, rrdto.getReply_origin());
+		ps.setString(3, rrdto.getReply_content());
 		ps.execute();
 		
-		con.close();		
+		con.close();
 	}
-	
+//	public void replyedit(ReviewReplyDto rrdto) throws Exception{
+//		Connection con = getConnection();
+//		
+//		String sql = "update review_reply set reply_content = ? where reply_no = ?";
+//		PreparedStatement ps = con.prepareStatement(sql);
+//		ps.setString(1, rrdto.getReply_content());
+//		ps.setInt(2, rrdto.getReply_no());
+//		ps.execute();
+//		
+//		con.close();		
+//	}
+//	
 	
 }

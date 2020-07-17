@@ -1,3 +1,5 @@
+<%@page import="java.util.HashSet"%>
+<%@page import="java.util.Set"%>
 <%@page import="semi.beans.dao.ReviewReplyDao"%>
 <%@page import="java.util.List"%>
 <%@page import="semi.beans.dto.AdminDto"%>
@@ -22,25 +24,42 @@
    	ReviewDao revdao = new ReviewDao();
    	revdto = revdao.get(review_no);
    	ReviewFileDao rfdao = new ReviewFileDao();
-   	
+   	String memberId = revdao.getId(review_no);
    	
    	
 	boolean isAdmin = (adto != null);
 	
 	// - 내글 : 게시글(bdto)의 작성자와 로그인 된 사용자(user)의 아이디가 같아야 함
-	boolean isMine = mdto.getMember_no()==(revdto.getReview_writer());
 	List<ReviewReplyDto> replyList = rrdao.getList(review_no);
 	
 	List<ReviewFileDto> fileList = rfdao.getList(review_no);
+	 //////////////////////////////////////////////////////////////////////////////////
+    
+    Set<Integer> memory  = (Set<Integer>) session.getAttribute("memory");
+
+    if (memory ==null) {
+		memory = new HashSet<>();    	
+    }
+    
+    boolean isCount = memory.add(review_no);
+    
+    session.setAttribute("memory", memory);   
 	
-   %> 
+    
+    if (mdto != null) {
+	    if (isCount) {
+	    	revdao.viewCount(review_no, mdto.getMember_no());
+	    }
+    }
+	
+    
+%> 
 <jsp:include page="/template/nav.jsp"></jsp:include>
 
 <style>
 	a {
 		text-decoration: none;
 	}
-
 </style>
 
 <article class="w-50">
@@ -51,18 +70,19 @@
 	<div class="row">
 	
 		<font size="5">
-			
 			<%= revdto.getReview_title() %>
 		</font>
 	</div>
 	
 	<div class="row">
 		<font size="5">
-			<% if (revdto.getReview_writer() != 0) {%>
-				<%= revdto.getReview_writer() %>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
-			<%} else {%>
+		<%
+			String member_id = revdao.getId(revdto.getReview_no());
+			if (member_id != null) {%>
+				<%=member_id %>
+			<%} else {%>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
 		<font color="gray">XXX</font>
-					<%} %>
+			<%} %>
 		</font>
 	</div>
 	
@@ -87,16 +107,19 @@
 	<div class="row" style="min-height: 300px">
 		<%= revdto.getReview_content() %>
 	</div>
-	
-	<div class="row-empty">
-		<hr>
-	</div>
-	
+	<hr>
 	<!-- 댓글 목록 영역 -->
-			<div class="row row-center">
+	<%if(!replyList.isEmpty()){ %>
+			<div class="row-center">
 				<%for(ReviewReplyDto rrdto : replyList){ %>
-						<div class="row">
-							<%=mdto.getMember_id()%>
+					<div style="width:85%;"> 
+					<% 
+					String memberid = rrdao.getId(rrdto.getReply_no());
+					if (memberid!=null) {%>
+						<%=memberid %>					                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+					<%} else {%>
+						<font color="red">탈퇴한 사용자</font>
+						<%} %>
 							<!-- 게시글 작성자인 경우 추가로 표시 -->
 									<%
 // 										boolean isWriter = 게시글작성자 존재 && 댓글작성자 존재 && 두 작성자 일치;
@@ -108,39 +131,45 @@
 										<font color="red">(작성자)</font>
 									<%} %>
 						</div>
-						<div class="row"><%=rrdto.getReply_content()%></div>
+						<div class="row">
+							<%= rrdto.getReply_content() %>
+						</div>
 						<div class="row"><%=rrdto.getReply_date()%></div>
-							<!-- 
-								수정 삭제 버튼은 "내 댓글" 이거나 "관리자" 인 경우만 표시
-							 -->
+					
+						<div class="row right">
 							<%
 // 								boolean isMyReply = 내 아이디가 작성자와 같은 경우;
 								boolean isMyReply = mdto.getMember_no()==(rrdto.getReply_writer());
 								if(isAdmin || isMyReply){
 							%>
-						<div class="row right">
-						<a href="reply_edit.do?reply_no=<%=rrdto.getReply_no()%>&reply_origin=<%=review_no %>">
-							<input class="form-btn form-inline" type="button" value="수정">
-						</a>
-						<a href="reply_delete.do?reply_no=<%=rrdto.getReply_no()%>&reply_origin=<%=review_no%>">
+							
+<!-- 						<form action="reply_edit.do" method="post"> -->
+<%-- 							<textarea class="onon" name="reply_content" rows="4" cols="92"<%=rrdto.getReply_content() %>></textarea> --%>
+<!-- 							<input class="form-btn form-inline" type="submit" value="수정"> -->
+<!-- 						</form> -->
+						<a href="reply_delete.do?&reply_no=<%=rrdto.getReply_no()%>&reply_origin=<%=rrdto.getReply_origin()%>&review_pension_no=<%=review_pension_no %>">
 							<input class="form-btn form-inline" type="button" value="삭제">
 						</a>
-					</div>
 						<%} %>
-					<%} %>
-			</div>
-			
+						</div>
+							<hr>						
+				<%} %>
+				</div>
+				
+			<%} %>
+					
+
 			<!-- 댓글 작성 영역 -->
-	
-				<div align="right" >
-					<form action="reply_insert.do" method="post">
+				<form action="reply_insert.do" method="post">
+					<div class="row">
 						<input type="hidden" name="reply_origin" value="<%=review_no%>">
 						<input type="hidden" name="review_pension_no" value="<%= review_pension_no %>">
-						<textarea name="reply_content" rows="4" cols="92" placeholder="댓글 작성"></textarea>
-							<input class="form-btn form-inline" type="submit" value="댓글등록">	
-						<br>
-					</form>
-				</div>
+						<textarea class="form-input" name="reply_content" rows="4" cols="80" placeholder="댓글 작성"></textarea>
+					</div>
+					<div class="row right">
+						<input class="form-btn form-inline" type="submit" value="등록">
+					</div>
+				</form>
 		
 
 	<div class="row-empty"></div>

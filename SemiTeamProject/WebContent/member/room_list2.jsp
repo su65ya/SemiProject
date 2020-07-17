@@ -1,3 +1,4 @@
+<%@page import="semi.beans.dto.MemberDto"%>
 <%@page import="semi.beans.dto.RoomImgViewDto"%>
 <%@page import="semi.beans.dto.RoomImageDto"%>
 <%@page import="semi.beans.dto.PensionInfoDto"%>
@@ -22,9 +23,6 @@
   a {
   	text-decoration: none;
   }
-  th{
-  	font-size: 22px;
-  }
 
 </style>
 <jsp:include page="/template/nav.jsp"></jsp:include>
@@ -32,11 +30,12 @@
 	PensionDao pdao = new PensionDao();
 	RoomDao rdao = new RoomDao();
 	int pension_no = Integer.parseInt(request.getParameter("pension_no"));
-	
+	MemberDto mdto = (MemberDto)session.getAttribute("userinfo");
+	int member_no = mdto.getMember_no();
 	List<RoomDto> list = rdao.getList(pension_no);
 	PensionInfoDto pdto = pdao.get(pension_no);
 	RoomImgViewDto rivdto = new RoomImgViewDto();
-	
+
 %>
 
 <!-- 객실 목록 리스트 -->
@@ -50,7 +49,6 @@
 			<thead>
 				<tr>
 					<th colspan="7">
-<%-- 					<input type="hidden" name="pension_no" value="<%=(request.getParameter("pension_no"))%>"> --%>
 					<%=pdto.getPension_name()%>
 					</th>
 				</tr>
@@ -58,7 +56,7 @@
 			<tbody>
 			<%for(RoomDto rdto : list){ %>
 				<tr>
-					<%rivdto = rdao.getImgView(rdto.getRoom_no());
+					<%rivdto = rdao.getImgView(rdto.getRoom_no()); 
 					if(rivdto != null){%>
   					<td rowspan="8"  style="background-color:white"><img src="roomdownload.do?room_image_no=<%=rivdto.getRoom_image_no() %>" width="250" height="250"></td>
    					<%}else{ %>
@@ -88,8 +86,8 @@
   				</tr>
   				<tr>
     				<td class="row right" colspan="7" >
-						<a href = "password_check.jsp?go=room_delete.do?room_no=<%=rdto.getRoom_no()%>">
-							<input class = "form-btn form-inline" type="button" value = "객실삭제">
+						<a href = "reservation_step1.do?pension_no=<%=pension_no%>&member_no=<%=member_no%>">
+							<input class = "form-btn form-inline" type="button" value = "예약하기">
 						</a>
 					</td>
   				</tr>
@@ -103,9 +101,6 @@
 			<a href = "pension_list.jsp">
 				<input class = "form-btn form-inline" type="button" value = "펜션목록">
 			</a>	
-			<a href = "room_regist.jsp?pension_no=<%= pension_no %>">
-				<input class = "form-btn form-inline" type="button" value = "객실등록">
-			</a>
 		</div>
 		
 	</div>

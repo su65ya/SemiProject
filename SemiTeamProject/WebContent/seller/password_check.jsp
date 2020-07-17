@@ -10,7 +10,7 @@
 <jsp:include page="/template/nav.jsp"></jsp:include>
 
 
-<article class =  "w-35"'>
+<article class =  "w-35">
 	<div class = "row-empty"></div>
 	<div class = "row-empty"></div>
 

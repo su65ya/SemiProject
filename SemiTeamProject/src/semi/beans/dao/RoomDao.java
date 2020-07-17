@@ -147,12 +147,12 @@ public class RoomDao {
 		return price;
 	}
 	
-	public RoomImgViewDto getImgView(int room_pension_no) throws Exception{
+	public RoomImgViewDto getImgView(int room_no) throws Exception{
 		Connection con = getConnection();
 		
-		String sql = "SELECT * FROM room_img WHERE room_pension_no=?";
+		String sql = "SELECT * FROM room_img WHERE room_no=?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, room_pension_no);
+		ps.setInt(1, room_no);
 		ResultSet rs = ps.executeQuery();
 		
 		RoomImgViewDto rivdto;
