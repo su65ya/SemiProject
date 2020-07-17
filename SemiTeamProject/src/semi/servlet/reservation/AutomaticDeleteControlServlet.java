@@ -26,6 +26,7 @@ public class AutomaticDeleteControlServlet extends HttpServlet{
 			@Override
 			public void run() {
 				try {
+					System.out.println("일한다");
 					rfdao.reservationAutoDeleter();
 				}
 				catch(Exception e) {
