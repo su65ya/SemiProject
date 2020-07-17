@@ -105,9 +105,8 @@
         };
 
     </script>
-</head>
 
-<body>
+
     <form class="search-form" action="pension_list.jsp" method="post">
         <div class="search">
            <h1 class="serch-h1">실시간빈방검색</h1>
@@ -158,3 +157,5 @@
 
         </div>
     </form>
+      <div class="row-empty"></div>
+      <div class="row-empty"></div>
