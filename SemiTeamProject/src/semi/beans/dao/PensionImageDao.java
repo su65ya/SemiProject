@@ -10,6 +10,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.sun.org.apache.xpath.internal.operations.Gt;
+
 import semi.beans.dto.PensionImageDto;
 
 public class PensionImageDao {
@@ -61,6 +63,17 @@ public class PensionImageDao {
 		
 		ps.execute();
 		con.close();
+	}
+	
+	//펜션 이미지 삭제 메소드
+	public void delete(int pen_image_no)throws Exception{
+		Connection con = getConnection();
+		String sql = "DELETE pension_image WHERE pen_image_no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, pen_image_no);
+		ps.execute();
+		con.close();
+		
 	}
 	
 	
