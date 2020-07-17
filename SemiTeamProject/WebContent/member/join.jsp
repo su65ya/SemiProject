@@ -8,6 +8,62 @@
     	label{
     		font-size:13;
     	}
+    	
+		label {
+			font-size: 15;
+		}
+		
+		#id_check+label {
+			color: black;
+		}
+		
+		#id_check:checked+label {
+			color: silver;
+		}
+	
+		.find, a {
+			text-align: center;
+			text-decoration: none;
+			color: black;
+		}
+		
+		.form-input,.form-btn2,.form-btn3{
+	    	width: 100%;
+	        padding: 0.5rem;
+	        outline: none;/*선택시 자동 부여되는 테두리 제거*/
+	        border: none;
+	    	border-radius: 5px;
+	    }
+	    .form-input:focus{
+	    	border-color: #b2bec3;
+	    }
+	    .form-btn2{
+	        background-color:#636e72;
+	        width : 150px;
+	        color: white;
+	    	cursor: pointer;
+	    }
+	    .form-btn3{
+	        background-color:#ff7675;
+	        width : 150px;
+	        color: white;
+	        cursor: pointer;
+	    }
+	    .form-btn2:hover,.form-btn3:hover {
+	        background-color:#b2bec3;
+	    }
+	    .font_color_a {
+	        color : #636e72;
+	        font-style: normal;
+	    	font-size: 14px;
+	    }
+	    
+	    .intext {
+			width: 100%;
+			padding-left: 0.5rem;
+			padding: 0.5rem;
+		}
+
     </style>
 <jsp:include page="/template/nav.jsp"></jsp:include>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -67,46 +123,102 @@
 			<div class="row">
 				<h2>회원가입</h2>
 			</div>
-			<div class="row">
-				<label><span>*</span>아이디</label>
-				<input class="form-input" type="text" name="member_id" placeholder="아이디는 8~20자 이내로 입력하세요" required autocomplete="none">
-			</div>
-			<div class="row">
-				<label><span>*</span>비밀번호</label>
-				<input class="form-input" type="password" name="member_pw" placeholder="비밀번호는 8~20자 이내로 입력하세요" required autocomplete="none">
-			</div>
-			<div class="row">
-				<label><span>*</span>이름</label>
-				<input class="form-input" type = "text" name = "member_name" placeholder="이름" required autocomplete="none">
-			</div>
-			<div class="row">
-				<label><span>*</span>생년월일</label>
-				<input class="form-input" type = "date" name="member_birth" required autocomplete="none">
-			</div>
-			<div class="row">
-				<label><span>*</span>이메일</label>
-				<input class="form-input" type = "text" name="member_mail" placeholder="이메일" required>
-			</div>
-			<div class="row">
-				<label>주소</label><br>
-				<input class="form-input form-inline" type="text" name="member_post" placeholder="우편번호 입력" size="6" maxlength="6" autocomplete="none">
-				<input onclick = "findAddress();" type = "button" value="우편번호 찾기">
-			</div>
-			<!-- 기본주소 -->
-			<div class="row">
-				<input class="form-input" type="text" name="member_basic_addr" placeholder="기본주소 입력" size="50" autocomplete="none">
-			</div>
-			<!-- 상세주소 -->
-			<div class="row">
-				<input class="form-input" type="text" name="member_detail_addr" placeholder="상세주소 입력" size="50" autocomplete="none">
-			</div>
+			
+			<table class='table'>
+				<tbody>
+					<tr>
+						<th width='20%'>
+							<label><span>*</span>아이디</label>
+						</th>
+						<td class='left'>
+							<div class="row">
+								<input class="intext " type="text" name="member_id" placeholder="아이디는 8~20자 이내로 입력하세요" autocomplete="none" style='width:200px;'>
+								<input class='form-btn3' type="submit" value='중복검사' style='width: 80px; padding-top: 0.5rem;'>
+								<span>sadsd</span>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th>
+							<label><span>*</span>비밀번호</label>
+						</th>
+						<td>
+							<div class='row'>
+								<input class="intext " type="password" name="member_pw" placeholder="비밀번호는 8~20자 이내로 입력하세요" required autocomplete="none">
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th>
+							<label><span>*</span>이름</label>
+						</th>
+						<td>
+							<div class="row">
+								<input class="intext" type = "text" name = "member_name" placeholder="이름" required autocomplete="none">
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th>
+							<label><span>*</span>생년월일</label>
+						</th>
+						<td>
+							<div class="row">
+								<input class="intext" type = "date" name="member_birth" required autocomplete="none">
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th>
+							<label><span>*</span>이메일</label>
+						</th>
+						<td>
+							<div class="row">
+								<input class="intext" type = "text" name="member_mail" placeholder="이메일" required>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th>
+							<label>주소</label>
+						</th>
+						<td>
+							<div class="row">
+								<input class="intext form-inline" type="text" name="member_post" placeholder="우편번호" size="6" maxlength="6" autocomplete="none">
+								<input class='form-btn2' onclick = "findAddress();" type = "button" value="우편번호 찾기" style='width: 120px; padding-top: 0.5rem;'>
+							</div>
+						</td>
+						<td>
+							<!-- 상세주소 -->
+							<div class="row">
+								<input class="intext" type="text" name="member_detail_addr" placeholder="상세주소 입력" size="50" autocomplete="none">
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<!-- 기본주소 -->
+							<div class="row">
+								<input class="intext" type="text" name="member_basic_addr" placeholder="기본주소 입력" size="50" autocomplete="none">
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+						
+						</td>
+					</tr>
+					
+				</tbody>
+			</table>
+			
 			<div class="row">
 				<label><span>*</span>핸드폰번호</label>
-				<input class="form-input" type="text" name="member_phone" placeholder="번호입력">
+				<input class="intext" type="text" name="member_phone" placeholder="번호입력">
 			</div>
 			<div class = "row-empty"></div>
-			<div class="row">
-				<input class= "form-btn" type="submit" value="가입하기">
+			<div class="row center">
+				<input class= "form-btn3 " type="submit" value="가입하기">
 			</div>
 		</form>
 		</article>

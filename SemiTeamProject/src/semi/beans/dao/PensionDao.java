@@ -282,8 +282,7 @@ public class PensionDao {
 		}
 		con.close();
 		return list;
-	}
 	
-	public List<PensionDto> getList(String )
+	}
 }
 	

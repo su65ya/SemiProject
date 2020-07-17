@@ -29,10 +29,10 @@ public class MemberFindIdServlet extends HttpServlet{
 			
 			if(member_id != null) {
 				req.getSession().setAttribute("member_id", member_id);
-				resp.sendRedirect("find_id_result.jsp");
+				resp.sendRedirect("member_find_id_result.jsp");
 			}
 			else {
-				resp.sendRedirect("find_id.jsp?error");
+				resp.sendRedirect("member_find_id.jsp?error");
 			}
 			
 			
