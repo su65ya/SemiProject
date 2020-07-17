@@ -14,7 +14,7 @@
                     <div class="swiper-wrapper">
                         <!-- 배치되는 이미지 또는 화면 -->
                         <div class="swiper-slide">
-                            <a href="#">
+                            <a href="<%=request.getContextPath() %>/member/pension_list.jsp">
                                 <img src="https://placehold.it/550x300">
                             </a>
                         </div>
