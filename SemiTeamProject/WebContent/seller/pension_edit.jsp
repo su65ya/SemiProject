@@ -221,7 +221,7 @@
 			</div>
 			<div class="row">
 				<label><span>*</span>펜션 소개글</label>
-				<textarea rows="15" cols="77" name="pension_intro" required><%=pdto.getPension_intro() %></textarea>
+				<textarea rows="15" cols="77" name="pension_intro" style="width: 512px;"required><%=pdto.getPension_intro() %></textarea>
 			</div>
 			<div class="row-empty"></div>
 			<div class="row-empty"></div>
@@ -262,20 +262,23 @@
 			<div class="row-empty"></div>
 			<div class="row-empty"></div>
 			<div class="row">
-			<%for(PensionImageDto pmdto : imageList){ %>
- 				<img src="download.do?pen_image_no=<%=pmdto.getPen_image_no()%>" width="90" height="90">
- 			<%} %>
-			</div>
-			<div class="row-empty"> 
 			<div class="row">
 				<label>펜션 사진 수정</label><br>
-				<div class="row-empty"></div>
-				<input type="file" name="pension_image" multiple accept=".jpg,.png,.gif" onchange="preview();">
 			</div>
+			<%for(PensionImageDto pmdto : imageList){ %>
+			<ul>
+						<li style="text-align: left;">
+						<%=pmdto.getPen_image_name()%>
+						<a href="pension_image_delete.do?pen_image_no=<%=pmdto.getPen_image_no()%>&pension_no=<%=pension_no%>">삭제하기</a>
+						</li>
+					</ul>
+ 			<%} %>
+			</div>
+				<input type="file" name="pension_image" multiple accept=".jpg,.png,.gif" onchange="preview();">
 			<div class="row-empty"></div>
 			<div class="row-empty"></div>
 			<div class="row-empty"></div>
-			<div class="row">
+			<div class="row-empty"></div>
 			<div class="row">
 			<div class="row right">
 			
