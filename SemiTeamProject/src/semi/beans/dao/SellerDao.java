@@ -241,6 +241,49 @@ public class SellerDao {
 		con.close();
 	}
 	
+	// 판매자 아이디 조회 메소드
+	public String findId(SellerDto sdto) throws Exception {
+		Connection con = getConnection();
+		
+		String sql = "select seller_id from seller where seller_name = ? and seller_phone = ? and seller_birth = ? and company_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, sdto.getSeller_name());
+		ps.setString(2, sdto.getSeller_phone());
+		ps.setString(3, sdto.getSeller_birth());
+		ps.setString(4, sdto.getCompany_no());
+		ResultSet rs = ps.executeQuery();
+		
+		String seller_id = null;
+		if(rs.next()) {
+			seller_id = rs.getString("seller_id");
+		}
+		
+		con.close();
+		return seller_id;
+	}
+	
+	// 판매자 pw 조회 메소드
+	public String  findPw(SellerDto sdto) throws Exception {
+		Connection con = getConnection();
+		
+		String sql = "select seller_pw from seller where seller_id = ? and seller_name = ? and seller_phone = ? and seller_birth = ? and company_no = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, sdto.getSeller_id());
+		ps.setString(2, sdto.getSeller_name());
+		ps.setString(3, sdto.getSeller_phone());
+		ps.setString(4, sdto.getSeller_birth());
+		ps.setString(5, sdto.getCompany_no());
+		ResultSet rs = ps.executeQuery();
+		
+		String seller_pw = null;
+		if (rs.next()) {
+			seller_pw = rs.getString("seller_pw");
+		}
+		con.close();
+		return seller_pw;
+		
+	}
+	
 
 }
 

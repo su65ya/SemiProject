@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import semi.beans.dao.AdminDao;
 import semi.beans.dto.AdminDto;
 
-public class AdminFilter implements Filter{
+public class AdminTestLoginFilter implements Filter{
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
