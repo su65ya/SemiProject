@@ -195,11 +195,11 @@
     <div class="float-box">
 	    <div class="row left float-right" style=" width: 40%;">
 	        <div class="row left">
-        <h2 style="height: 15px; font-weight: bolder;" class="left"><%=pdto.getPension_name() %></h2>
+        <h1 style="height: 15px; font-weight: bolder;" class="left"><%=pdto.getPension_name() %></h1>
         <input type = "hidden" name = "reservation_no" value = "<%=reservation_no%>">
 	    </div>
 	    <div class="row left">
-	        <h6  class="left" style="height: 15px; margin: 0;">[<%=pdto.getPension_post() %>] <%=pdto.getPension_basic_addr() %> <%=pdto.getPension_detail_addr() %></h6>
+	        <h5 class="left" style="height: 15px; margin: 0;">[<%=pdto.getPension_post() %>] <%=pdto.getPension_basic_addr() %> <%=pdto.getPension_detail_addr() %></h5>
 	    </div>
 	       <dl>
 	           <dt>예약문의</dt>
@@ -220,7 +220,7 @@
     <div class="row-empty"></div>
     <div class="row-empty"></div>
     <div> 
-    	<h4  class="left">"먼저 아래 달력에서 예약할 객실을 선택하고 하단의 옵션에서 인원을 입력 후 예약하기를 눌러주세요."</h4>
+    	<h4  class="left">"먼저 아래 달력에서 예약할 객실을 선택하고 예약하기를 눌러주세요."</h4>
     </div>
     <div class="center">
         <table class="table table-border center">
