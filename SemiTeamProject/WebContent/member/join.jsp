@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <style>
+   
     	span{
     		color:red;
     		font-size:16;
@@ -63,9 +64,33 @@
 			padding-left: 0.5rem;
 			padding: 0.5rem;
 		}
-
-    </style>
+		.table tr td .info {
+			display: block;
+			font-size: 13px;
+			margin: 0.3rem;
+		}
+		
+		.correct-message, .incorrect-message {
+            display: none;
+            !important;
+        }
+         
+        .intext.correct ~ .correct-message {
+            display: block;
+            font-size: 13px;
+            margin: 0.3rem;
+        }
+        
+        .intext.incorrect ~ .incorrect-message {
+            display: block;
+            font-size: 13px;
+            margin: 0.3rem;
+        }
+        
+         
+</style>
 <jsp:include page="/template/nav.jsp"></jsp:include>
+<script src="../js/join.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 //우편번호 찾기 및 주소 입력 자바스크립트
@@ -116,10 +141,13 @@
             }
         }).open();
     }
+    
+    
+
 </script>
 	<div class="row">
 		<article class="w-40">
-		<form action="join.do" method="post">
+		<form action="join.do" method="post" onsubmit="return memberJoin();">
 			<div class="row">
 				<h2>회원가입</h2>
 			</div>
@@ -131,10 +159,11 @@
 							<label><span>*</span>아이디</label>
 						</th>
 						<td class='left'>
-							<div class="row">
-								<input class="intext " type="text" name="member_id" placeholder="아이디는 8~20자 이내로 입력하세요" autocomplete="none" style='width:200px;' ><input class='form-btn3' type="submit" value='중복검사' style='width: 80px; padding-top: 0.5rem;'>
-								<span>sadsd</span>
-							</div>
+							<div>
+								<input class="intext " type="text" name="member_id" autocomplete="none" style='width: 250px;' onblur="idCheck();">
+								<span class='incorrect-message'>아이디는 영문 소문자, 숫자 포함 8~20자 이내로 입력하세요</span>
+								<span class='correct-message' style='color: #0984e3;'>사용가능한 아이디입니다</span>
+							</div>	
 						</td>
 					</tr>
 					<tr>
@@ -142,18 +171,20 @@
 							<label><span>*</span>비밀번호</label>
 						</th>
 						<td>
-							<div class='row'>
-								<input class="intext " type="password" name="member_pw" placeholder="비밀번호는 8~20자 이내로 입력하세요" required autocomplete="none">
+							<div class='row left'>
+								<input class="intext " type="password" name="member_pw" autocomplete="none" style='width: 250px;' onblur="pwCheck()">
+								<span class='incorrect-message'>비밀번호는 영문 대,소문자, 숫자, 특수 문자 포함 8~20자 이내로 입력하세요</span>
 							</div>
 						</td>
 					</tr>
 					<tr>
 						<th>
-							<label><span>*</span>이름</label>
+							<label><span>*</span>이름(실명)</label>
 						</th>
 						<td>
-							<div class="row">
-								<input class="intext" type = "text" name = "member_name" placeholder="이름" required autocomplete="none">
+							<div class="row left">
+								<input class="intext" type = "text" name = "member_name" autocomplete="none" style='width: 250px;' onblur='nameCheck();'>
+								<span class='incorrect-message'>이름을 입력해주세요</span>
 							</div>
 						</td>
 					</tr>
@@ -162,8 +193,9 @@
 							<label><span>*</span>생년월일</label>
 						</th>
 						<td>
-							<div class="row">
-								<input class="intext" type = "date" name="member_birth" required autocomplete="none">
+							<div class="row left">
+								<input class="intext" type = "date" name="member_birth" autocomplete="none" onblur="birthCheck();" style="width: auto">
+								<span class='incorrect-message'>생년월일을 입력해주세요</span>
 							</div>
 						</td>
 					</tr>
@@ -172,56 +204,62 @@
 							<label><span>*</span>이메일</label>
 						</th>
 						<td>
-							<div class="row">
-								<input class="intext" type = "text" name="member_mail" placeholder="이메일" required>
+							<div class="row left">
+								<input class="intext" type = "text" name="member_mail" style='width: 250px;' onblur="mailCheck();">
+								<span class='incorrect-message'>이메일 입력해주세요</span>
 							</div>
 						</td>
 					</tr>
 					<tr>
-						<th>
+						<th rowspan="3">
 							<label>주소</label>
 						</th>
 						<td>
-							<div class="row">
-								<input class="intext form-inline" type="text" name="member_post" placeholder="우편번호" size="6" maxlength="6" autocomplete="none">
-								<input class='form-btn2' onclick = "findAddress();" type = "button" value="우편번호 찾기" style='width: 120px; padding-top: 0.5rem;'>
-							</div>
-						</td>
-						<td>
-							<!-- 상세주소 -->
-							<div class="row">
-								<input class="intext" type="text" name="member_detail_addr" placeholder="상세주소 입력" size="50" autocomplete="none">
+							<div class="row left">
+								<input class="intext form-inline" type="text" name="member_post" placeholder="우편번호" size="6" maxlength="6" autocomplete="none" style='width: auto'>
+								<input class='form-btn2' onclick = "findAddress();" type = "button" value="우편번호 찾기" style='width: 110px; padding-top: 0.5rem;'>
 							</div>
 						</td>
 					</tr>
+					
 					<tr>
 						<td>
 							<!-- 기본주소 -->
-							<div class="row">
+							<div class="row left">
 								<input class="intext" type="text" name="member_basic_addr" placeholder="기본주소 입력" size="50" autocomplete="none">
 							</div>
 						</td>
 					</tr>
 					<tr>
 						<td>
-						
+							<!-- 상세주소 -->
+							<div class="row left">
+								<input class="intext" type="text" name="member_detail_addr" placeholder="상세주소 입력" size="50" autocomplete="none">
+							</div>
 						</td>
 					</tr>
-					
+					<tr>
+					    <th>
+				            <label><span>*</span>핸드폰번호</label>
+					    </th>
+					    <td>
+					        <div class="row left">
+				                <input class="intext" type="text" name="member_phone" placeholder="'-' 제외하고 입력" onblur="phoneCheck();" style='width: 250px;' maxlength="11">
+                                <span class='incorrect-message'>핸드폰 번호를 입력해주요</span>
+                            </div>
+					        
+					    </td>
+					</tr>
 				</tbody>
 			</table>
 			
-			<div class="row">
-				<label><span>*</span>핸드폰번호</label>
-				<input class="intext" type="text" name="member_phone" placeholder="번호입력">
-			</div>
 			<div class = "row-empty"></div>
 			<div class="row center">
-				<input class= "form-btn3 " type="submit" value="가입하기">
+				<input class= "form-btn3" style='font-size: 20px; width: 200px;' type="submit" value="가입하기">
 			</div>
-		</form>
+			
+        </form>
 		
-		</article>
-		
-	</div>
+        </article>
+</div>
 <jsp:include page="/template/footer.jsp"></jsp:include>
