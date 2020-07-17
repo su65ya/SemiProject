@@ -161,12 +161,10 @@
 						<span class="correct-message">현재 비밀번호와 일치합니다</span>
 						<span class="incorrect-message">비밀번호가 맞는지 확인하세요</span>
 						</div>
-					</td>
-					
+					</td>				
 				</tr>
 				<tr>
 					<th>새 비밀번호</th>
-					
 					<td class="left">
 					    <div>
 						<input class="intext" name="member_pw" id="pwCheck" type="password" onblur="checkPw2();" placeholder="새 비밀번호">
@@ -187,7 +185,7 @@
 				</tr>
 			</tbody>
 		</table>
-
+	</div>
 	
 	<div class="row-empty"></div> 
 		
@@ -195,6 +193,7 @@
 		<input class="form-btn3" style="width: 120px;" type="submit" value="변경">
 	</div>
 	</form>
+	
 	<div style="float: right;">
 		<a href="info.jsp">
 		<input class="form-btn2" style="width: 120px;" type="button" value="취소">

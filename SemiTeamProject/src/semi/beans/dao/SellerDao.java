@@ -143,13 +143,13 @@ public class SellerDao {
 	}
 	
 	// pw 변경
-	public void pwChange(int seller_no, String seller_pw) throws Exception {
+	public void pwChange(SellerDto sdto) throws Exception {
 		Connection con = getConnection();
 		
 		String sql = "update seller set seller_pw = ? where seller_no = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, seller_pw);
-		ps.setInt(2, seller_no);
+		ps.setString(1, sdto.getSeller_pw());
+		ps.setInt(2, sdto.getSeller_no());
 		ps.execute();
 		
 		con.close();

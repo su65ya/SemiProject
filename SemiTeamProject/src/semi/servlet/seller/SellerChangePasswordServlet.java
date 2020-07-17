@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import semi.beans.dao.MemberDao;
 import semi.beans.dao.SellerDao;
+import semi.beans.dto.MemberDto;
 import semi.beans.dto.SellerDto;
 
 @WebServlet (urlPatterns = "/seller/seller_change_password.do")
@@ -17,21 +19,20 @@ public class SellerChangePasswordServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			// 입력
-			SellerDto sdto = (SellerDto) req.getSession().getAttribute("sellerinfo");
-			
+			SellerDto sdto = (SellerDto) req.getSession().getAttribute("sellerinfo");	
 			int seller_no = sdto.getSeller_no();
-			String seller_pw = req.getParameter("seller_pw");
-			String nowPassword = req.getParameter("nowPassword"); 
 			
+			String seller_pw = req.getParameter("seller_pw");
+
 			// 처리
-			if(!sdto.getSeller_pw().equals(nowPassword)) {
-				resp.sendRedirect("change_password.jsp?error");
-			}
-			else {
-				SellerDao sdao = new SellerDao();
-				sdao.pwChange(seller_no, seller_pw);
-				resp.sendRedirect("change_pw_result.jsp");
-			}
+			SellerDto sellerUser = new SellerDto();
+			sellerUser.setSeller_no(seller_no);
+			sellerUser.setSeller_pw(seller_pw);
+			
+			SellerDao sdao = new SellerDao();
+			sdao.pwChange(sellerUser);
+	
+			resp.sendRedirect("change_pw_result.jsp");
 			
 		}
 		catch (Exception e) {
