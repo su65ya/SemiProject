@@ -108,10 +108,10 @@
 		/* 확장 스타일 2번 : .table-stripe 로 줄무늬 부여 */
 		.table.table-stripe > tbody > tr:nth-child(2n) {
 		    /* RGB Hex String */
-		    background-color: #fb97c1;
+		    background-color: #00bcd4;
 		}
 		.table.table-stripe > thead > tr {
-		    background-color: #ea1f62;;
+		    background-color: #2196f3;;
 		}
 		
 		/* 확장 스타일 3번 : .table-sideopen 으로 옆트임 테이블 구현 */
@@ -383,7 +383,7 @@
             border-color: cadetblue;
         }
         .form-btn{
-        	background-color:#ea1f62;
+        	background-color:#2196f3;
         	border: none;
             color: white;
             cursor: pointer;
@@ -507,7 +507,7 @@
         
 		.menuu, .menuu ul {
 		    height: 55px;
-		    background-color: #ea1f62;
+		    background-color: #2196f3;
 		    padding: 0;
 		    margin: 0;
 		    list-style: none;
