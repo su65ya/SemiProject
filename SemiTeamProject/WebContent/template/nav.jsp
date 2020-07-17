@@ -17,6 +17,7 @@
 <head>
 <meta charset="UTF-8">
 <title>index</title>
+
 <link rel="stylesheet" type="text/css" href="<%= root %>/css/menubar.css">
 <link rel="stylesheet" type="text/css" href="<%= root %>/css/base.css">
 <link rel="stylesheet" href="<%= root %>/css/swiper.min.css">
