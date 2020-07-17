@@ -92,7 +92,7 @@
 					<%int plusPrice = extraPrice+rdto.getReservation_price();%>
 					<td><%=DateChecker.cal(plusPrice)%>원
 					<%totalPrice = totalPrice + (extraPrice+rdto.getReservation_price()); %>
-					<input type = "hidden" name = "res_info" value="<%=rdto.getRoom_no() %>/<%=rdto.getReservation_date_day() %>/<%=rdto.getReservation_price() %>">
+					<input type = "hidden" name = "res_info" value="<%=rdto.getRoom_no() %>/<%=rdto.getReservation_date_day() %>/<%=plusPrice %>">
 					</td>
 				</tr>
 				<%} %>

@@ -10,6 +10,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.sun.org.apache.xpath.internal.operations.Gt;
+
 import semi.beans.dto.PensionImageDto;
 
 public class PensionImageDao {
@@ -63,6 +65,17 @@ public class PensionImageDao {
 		con.close();
 	}
 	
+	//펜션 이미지 삭제 메소드
+	public void delete(int pen_image_no)throws Exception{
+		Connection con = getConnection();
+		String sql = "DELETE pension_image WHERE pen_image_no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, pen_image_no);
+		ps.execute();
+		con.close();
+		
+	}
+	
 	
 	// 펜션별 사진 뽑기
 		public PensionImageDto get(int pen_image_no) throws Exception {
@@ -107,4 +120,24 @@ public class PensionImageDao {
 			con.close();
 			return list;
 		}
+		
+		// 모든 이미지 파일 조회
+			public List<PensionImageDto> getList() throws Exception {
+				Connection con = getConnection();
+				String sql = "SELECT * FROM pension_image ORDER BY pen_image_no ASC";
+				PreparedStatement ps = con.prepareStatement(sql);
+				ResultSet rs = ps.executeQuery();
+				List<PensionImageDto> list = new ArrayList<>();
+				while(rs.next()) {
+					PensionImageDto pidto = new PensionImageDto();
+					pidto.setPen_image_no(rs.getInt("pen_image_no"));
+					pidto.setPen_image_pen_no(rs.getInt("pen_img_pen_no"));
+					pidto.setPen_image_name(rs.getString("pen_image_name"));
+					pidto.setPen_image_size(rs.getLong("pen_image_size"));
+					pidto.setPen_image_type(rs.getString("pen_image_type"));
+					list.add(pidto);
+				}
+				con.close();
+				return list;
+			}
 }

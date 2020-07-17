@@ -37,6 +37,9 @@ public class DateChecker {
 	public static boolean isOnWeekend(Calendar c) {
 		return isOnSeason(c) && isWeekend(c);
 	}
+//	public static String date(Calendar c) {
+//		return c.get(Calendar.);
+//	}
 	public static int calculatePrice(Calendar c, RoomDto rdto) {
 //		System.out.println(new SimpleDateFormast("yyyy-MM-dd").format(c.getTime()));
 		if(isOnWeekday(c)) {//성수기 평일

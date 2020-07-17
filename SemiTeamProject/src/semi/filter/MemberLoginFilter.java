@@ -10,7 +10,9 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import semi.beans.dto.AdminDto;
 import semi.beans.dto.MemberDto;
+import semi.beans.dto.SellerDto;
 
 public class MemberLoginFilter implements Filter{
 	@Override
@@ -23,13 +25,15 @@ public class MemberLoginFilter implements Filter{
 		
 		MemberDto mdto = (MemberDto) req.getSession().getAttribute("userinfo");
 		
-		boolean isLogin = mdto != null;
+		boolean isUser = mdto != null;
 		
-		if (isLogin) {	// 로그인
+		
+		if (isUser) {	// 로그인
 			chain.doFilter(request, response);
 		}
 		else {	// 로그아웃
 			resp.sendRedirect(req.getContextPath()+"/member/login.jsp");
 		}
+		
 	}
 }

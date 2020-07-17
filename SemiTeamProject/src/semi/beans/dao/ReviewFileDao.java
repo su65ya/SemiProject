@@ -3,6 +3,8 @@ package semi.beans.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -58,6 +60,9 @@ public class ReviewFileDao {
 		ps.setLong(4, rfdto.getReview_file_size());
 		ps.setString(5, rfdto.getReview_file_type());
 		
+		ps.execute();
+		con.close();
+		
 	}
 	public ReviewFileDto getImgView(int review_origin) throws Exception{
 		Connection con = getConnection();
@@ -75,11 +80,28 @@ public class ReviewFileDao {
 		}
 		con.close();
 		return rfdto;
-		
-		
 	}
+		
+//		public ReviewFileDto getChangeImg(int review_origin)throws Exception{
+//			Connection con = getConnection();
+//			
+//			String sql = "UPDATE set review_file WHERE review_origin=?";
+//			PreparedStatement ps = con.prepareStatement(sql);
+//			ps.setInt(1, review_origin);
+//			ResultSet rs = ps.executeQuery();
+//			
+//			ReviewFileDto rfdto;
+//			if(rs.next()) {
+//				rfdto = new ReviewFileDto(rs);
+//			}else {
+//				rfdto = null;
+//			}
+//			con.close();
+//			return rfdto;
+//			
+//		}
 
-	
+	//리뷰 파일 가져오기
 	public ReviewFileDto get(int review_file_no) throws Exception{
 		Connection con = getConnection();
 		
@@ -97,6 +119,24 @@ public class ReviewFileDao {
 		con.close();
 		return rfdto;
 
+	}
+
+	public List<ReviewFileDto> getList(int review_origin)throws Exception{
+		Connection con = getConnection();
+		
+		String sql = "SELECT * FROM review_file WHERE review_origin=? ORDER BY review_file_no DESC";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, review_origin);
+		ResultSet rs = ps.executeQuery();
+		
+		List<ReviewFileDto> list = new ArrayList<>();
+		while(rs.next()) {
+			ReviewFileDto rfdto = new ReviewFileDto(rs);
+			list.add(rfdto);
+		}
+		con.close();
+		return list;
+	
 	}
 
 

@@ -18,11 +18,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<style>
-
-
-</style>
 <jsp:include page="/template/nav.jsp"></jsp:include>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
  <link rel="stylesheet" href="../css/swiper.min.css">
     <style>
     .swiper-container {
@@ -38,82 +35,111 @@
              width: 150px;
             float: left;
         }
+        #map{
+            width:400px;
+            height:200px;
+        }
+        
     </style>
     
     <script src="../js/swiper.min.js"></script>
-    <script>
-        //창의 로딩이 완료되었을 때 실행할 코드를 예약
-        window.onload=function(){
-                //swiper 관련 코드를 이곳에 작성
-                //var mySwiper = new Swiper(선택지,옵션);
-                var mySwiper = new Swiper ('.swiper-container', {
-                // swiper에 적용할 옵션들
-                direction: 'horizontal',//표식방식(수직:vertical,수평:horizontal)
-                loop: true,//순환 모드 여부 (마지막과 처음이 이어지는 것)
-                //자동재생 옵션그룹
-                autoplay:{
-                    delay:1000 //자동재생 (1초)
-                },
-                
-                // 페이지 네비게이터 옵션그룹
-                pagination: {
-                    el: '.swiper-pagination',//적용 대상의 선택자
-                    type:'bullets',//네비게이터 모양(custom,progressbar,fraction,bullets(기본값))
-                },
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=48c8a7138671a611cf1a659c1b4ac73b&libraries=services"></script>
+	<script>
+		window.addEventListener("load", function(){			
+			var goAddr = document.querySelector("#goAddr").value;
+			
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		    mapOption = {
+		        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+		        level: 3 // 지도의 확대 레벨
+		    };  
 
-                navigation: {
-                    nextEl: '.swiper-button-next',//이전버튼
-                    prevEl: '.swiper-button-prev'//다음버튼
-                },
-                    
-                grabCursor:true,
-                
-                effect :'slide',//기본값
+			// 지도를 생성합니다    
+			var map = new kakao.maps.Map(mapContainer, mapOption); 
+			
+			// 주소-좌표 변환 객체를 생성합니다
+			var geocoder = new kakao.maps.services.Geocoder();
+			
+			// 주소로 좌표를 검색합니다
+			geocoder.addressSearch(goAddr, function(result, status) {
 
-                });
+			    // 정상적으로 검색이 완료됐으면 
+			     if (status === kakao.maps.services.Status.OK) {
+
+			        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+			        // 결과값으로 받은 위치를 마커로 표시합니다
+			        var marker = new kakao.maps.Marker({
+			            map: map,
+			            position: coords
+			        });
+
+			        // 인포윈도우로 장소에 대한 설명을 표시합니다
+			        var infowindow = new kakao.maps.InfoWindow({
+			            content: '<div style="width:150px;text-align:center;padding:6px 0;">펜션위치</div>'
+			        });
+			        infowindow.open(map, marker);
+
+			        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+			        map.setCenter(coords);
+			    } 
+			}); 
+		});
+		window.addEventListener("load", function(){	
+// 			 swiper 관련 코드를 이곳에 작성
+            //var mySwiper = new Swiper(선택지,옵션);
+            var mySwiper = new Swiper ('.swiper-container', {
+            // swiper에 적용할 옵션들
+            direction: 'horizontal',//표식방식(수직:vertical,수평:horizontal)
+            loop: true,//순환 모드 여부 (마지막과 처음이 이어지는 것)
+            //자동재생 옵션그룹
+            autoplay:{
+                delay:1000 //자동재생 (1초)
+            },
             
-        }
-        
-        /*
-        	알아야 할 명령
-        	.parentNode : 상위 태그 객체
-        	.previousSibling : 
-        */
-        function reservation(tag) {//tag는 변화된 태그 객체(this)
-        	var td = tag.parentNode;
-        	var friendTd = td.previousElementSibling;
-        	var re_infoTag = friendTd.children[0];
+            // 페이지 네비게이터 옵션그룹
+            pagination: {
+                el: '.swiper-pagination',//적용 대상의 선택자
+                type:'bullets',//네비게이터 모양(custom,progressbar,fraction,bullets(기본값))
+            },
 
-        	if(tag.checked){
-        		var re_info = friendTd.children[1];
-        		re_infoTag.value = re_info.value;
-        	}else{
-        		re_infoTag.value = "";
-        	}
-        }
+            navigation: {
+                nextEl: '.swiper-button-next',//이전버튼
+                prevEl: '.swiper-button-prev'//다음버튼
+            },
+                
+            grabCursor:true,
+            
+            effect :'slide',//기본값
+
+            });
+		});
         
-        function option_modal(){
-        	var tag = document.querySelector(".modal-wrap");
-        	tag.classList.remove("on");
-        	tag.classList.add("on");
-        }
-        function option_modal_hidden(){
-        	var tag = document.querySelector(".modal-wrap");
-        	tag.classList.remove("on");
-        }
-        
-        function change_check() {
-			var tag = document.querySelector("#fire");
-			var hidden = document.querySelector("input[name=fire]");
-			
-			if(tag.checked){
-				hidden.value = "1";
-			}else{
-				hidden.value = "0";
-			}
-			
-		}
-    </script>
+    
+    
+
+
+
+//     /*
+//     	알아야 할 명령
+//     	.parentNode : 상위 태그 객체
+//     	.previousSibling : 
+//     */
+    function reservation(tag) {//tag는 변화된 태그 객체(this)
+    	var td = tag.parentNode;
+    	var friendTd = td.previousElementSibling;
+    	var re_infoTag = friendTd.children[0];
+
+    	if(tag.checked){
+    		var re_info = friendTd.children[1];
+    		re_infoTag.value = re_info.value;
+    	}else{
+    		re_infoTag.value = "";
+    	}
+    }
+		
+		
+		</script>
 <%
 
 	int reservation_no = Integer.parseInt(request.getParameter("reservation_no"));
@@ -123,11 +149,9 @@
 	
 	List<RoomDto> list = rdao.getList(pension_no); 
 	PensionInfoDto pdto = pdao.get(pension_no);
-	
+	String addr = pdto.getPension_basic_addr();
 	PensionImageDao pidao = new PensionImageDao();
 	List<PensionImageDto> fileList = pidao.getList(pension_no);
-	
-
 	
 	PenImgViewDto viewDto = new PenImgViewDto();
 	
@@ -138,7 +162,7 @@
 	SimpleDateFormat yearWithformat = new SimpleDateFormat("yyyy/MM/dd");
 	ReservationDao rvdao = new ReservationDao();
 %>
-
+	<input type="hidden" value="<%=addr%>" id="goAddr">
     <div class="swiper-container center">
         <div class="swiper-wrapper">
                 <%for(PensionImageDto pmdto : fileList){ %>
@@ -162,32 +186,41 @@
         <div class="swiper-button-next"></div>
 -->
     </div>
-    
+    <div class="row-empty"></div>
+    <div class="row-empty"></div>
+    <div class="row-empty"></div>
     <form action="reservation_step2.do" method="post">
     <article class="w-80">
-    <div class="row left">
-        <h2 style="height: 15px;" class="left"><%=pdto.getPension_name() %></h2>
-        <input type = "hidden" name = "reservation_no" value = "<%=reservation_no%>">
-    </div>
-    <div class="row left">
-        <h6  class="left" style="height: 15px; margin: 0;">[<%=pdto.getPension_post() %>] <%=pdto.getPension_basic_addr() %> <%=pdto.getPension_detail_addr() %></h6>
-    </div><hr style="width:100%; border: 1px solid gray;">
 
-    <div class="row left">
-       <dl>
-           <dt>예약문의</dt>
-           <dd><%=pdto.getPension_phone() %></dd>
-           <dt>입/퇴실안내</dt>
-           <dd>이용/시설 안내 참조</dd>
-           <dt>판매가</dt>
-           <dd><%=rdao.minPrice(pension_no) %>~<%=rdao.maxPrice(pension_no) %></dd>
-       </dl>
-        
+    <div class="float-box">
+	    <div class="row left float-right" style=" width: 40%;">
+	        <div class="row left">
+        <h1 style="height: 15px; font-weight: bolder;" class="left"><%=pdto.getPension_name() %></h1>
+        <input type = "hidden" name = "reservation_no" value = "<%=reservation_no%>">
+	    </div>
+	    <div class="row left">
+	        <h5 class="left" style="height: 15px; margin: 0;">[<%=pdto.getPension_post() %>] <%=pdto.getPension_basic_addr() %> <%=pdto.getPension_detail_addr() %></h5>
+	    </div>
+	       <dl>
+	           <dt>예약문의</dt>
+	           <dd><%=pdto.getPension_phone() %></dd>
+	           <dt>입/퇴실안내</dt>
+	           <dd>이용/시설 안내 참조</dd>
+	           <dt>판매가</dt>
+	           <dd><%=rdao.minPrice(pension_no) %>~<%=rdao.maxPrice(pension_no) %></dd>
+	           <dt>펜션 소개글</dt><br>
+	           <dd><%=pdto.getPension_intro() %></dd>
+	       </dl>
+	        
+	    </div> 
+		<div>
+	    	 <div id="map" style="width:55%; height:450px;"></div>
+	    </div>
     </div>
     <div class="row-empty"></div>
     <div class="row-empty"></div>
     <div> 
-    	<h4  class="left">"먼저 아래 달력에서 예약할 객실을 선택하고 하단의 옵션에서 인원을 입력 후 예약하기를 눌러주세요."</h4>
+    	<h4  class="left">"먼저 아래 달력에서 예약할 객실을 선택하고 예약하기를 눌러주세요."</h4>
     </div>
     <div class="center">
         <table class="table table-border center">

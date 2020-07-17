@@ -23,24 +23,34 @@
   	</filter-mapping>
   	
   	<!-- 판매자 테스트 필터 -->
-<!--    	<filter>
+  	<!-- 
+   	<filter>
   		<filter-name>sellertestLoginFilter</filter-name>
   		<filter-class>semi.filter.SellerTestLoginFilter</filter-class>
   	</filter>
   	<filter-mapping>
   		<filter-name>sellertestLoginFilter</filter-name>
   		<url-pattern>/*</url-pattern>
-  	</filter-mapping> -->
+  	</filter-mapping>
+  	 -->
   	
-  	 
-
-
+  	<!-- 사용자 테스트 필터 -->
+  	<!-- 
+   	<filter>
+  		<filter-name>membertestLoginFilter</filter-name>
+  		<filter-class>semi.filter.MemberTestLoginFilter</filter-class>
+  	</filter>
+  	<filter-mapping>
+  		<filter-name>membertestLoginFilter</filter-name>
+  		<url-pattern>/*</url-pattern>
+  	</filter-mapping>
+	 -->
  
  	<!-- 관리자 계정 필터 -->
  	<!-- 
  	<filter>
   		<filter-name>admintestLoginFilter</filter-name>
-  		<filter-class>semi.filter.AdminFilter</filter-class>
+  		<filter-class>semi.filter.AdminTestLoginFilter</filter-class>
   	</filter>
   	<filter-mapping>
   		<filter-name>admintestLoginFilter</filter-name>
@@ -48,6 +58,105 @@
   	</filter-mapping>
    	 -->
     
+    <!-- 예약자 로그인 필터 -->
+    <!-- 
+    <filter>
+    	<filter-name>memberLoginFilter</filter-name>
+    	<filter-class> semi.filter.MemberLoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+    	<filter-name>memberLoginFilter</filter-name>
+    	<url-pattern>/member/change_info.jsp</url-pattern>
+    	<url-pattern>/member/change_password_result.jsp</url-pattern>
+    	<url-pattern>/member/change_password.jsp</url-pattern>
+    	<url-pattern>/member/check.jsp</url-pattern>
+    	<url-pattern>/member/delete.jsp</url-pattern>
+    	<url-pattern>/member/info.jsp</url-pattern>
+    	<url-pattern>/member/change_info.do</url-pattern>
+    	<url-pattern>/member/change_password.do</url-pattern>
+    	<url-pattern>/member/member_delete.do</url-pattern>
+    	<url-pattern>/member/member_logout.do</url-pattern>
+    	<url-pattern>/member/check.do</url-pattern>
+    	<url-pattern>/member/reservation_detail.jsp</url-pattern>
+    	<url-pattern>/member/reservation_list.jsp</url-pattern>
+    	<url-pattern>/member/reservation.jsp</url-pattern>
+    	<url-pattern>/member/option_info.jsp</url-pattern>
+    	<url-pattern>/member/reservation.do</url-pattern>
+    	<url-pattern>/review/write.jsp</url-pattern>
+    	<url-pattern>/review/review_edit.jsp</url-pattern>
+    	<url-pattern>/question/question_edit.jsp</url-pattern>
+    	<url-pattern>/question/question_write.jsp</url-pattern>
+    	<url-pattern>/question/question_write.do</url-pattern>
+    	<url-pattern>/question/question_edit.do</url-pattern>
+    	<url-pattern>/question/question_delete.do</url-pattern>
+    	<url-pattern>/review/review_delete.do</url-pattern>
+    	<url-pattern>/review/review_edit.do</url-pattern>
+    	<url-pattern>/review/review_write.do</url-pattern>
+    	<url-pattern>/review/review_reply_del.do</url-pattern>
+    	<url-pattern>/review/review_reply_writer.do</url-pattern>
+    </filter-mapping>
+	 -->
+
+	<!-- 판매자 로그인 필터 -->
+	<!-- 
+    <filter>
+    	<filter-name>sellerLoginFilter</filter-name>
+    	<filter-class> semi.filter.SellerLoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+    	<filter-name>sellerLoginFilter</filter-name>
+    	<url-pattern>/seller/change_info.jsp</url-pattern>
+    	<url-pattern>/seller/change_password.jsp</url-pattern>
+    	<url-pattern>/seller/change_pw_result.jsp</url-pattern>
+    	<url-pattern>/seller/password_check.jsp</url-pattern>
+    	<url-pattern>/seller/pension_regists.jsp</url-pattern>
+    	<url-pattern>/seller/pension_detail.jsp</url-pattern>
+    	<url-pattern>/seller/pension_edit.jsp</url-pattern>
+    	<url-pattern>/seller/room_regist.jsp</url-pattern>
+    	<url-pattern>/seller/room_result.jsp/</url-pattern>
+    	<url-pattern>/seller/seller_delete.jsp</url-pattern>
+    	<url-pattern>/seller/seller_info.jsp</url-pattern>
+   		<url-pattern>/seller/change_info.do</url-pattern>
+   		<url-pattern>/seller/seller_change_password.do</url-pattern>
+   		<url-pattern>/seller/password_check.do</url-pattern>
+   		<url-pattern>/seller/seller_logout.do</url-pattern>
+   		<url-pattern>/seller/exit.do</url-pattern>
+   		<url-pattern>/seller/room_regist.do</url-pattern>
+   		<url-pattern>/seller/room_delete.do</url-pattern>
+   		<url-pattern>/seller/room_delete.do</url-pattern>
+    	<url-pattern>/question/question_content.jsp</url-pattern>
+   		<url-pattern>/question/question_reply.jsp</url-pattern>    	
+    	<url-pattern>/question/question_reply.do</url-pattern>
+    	<url-pattern>/seller/pension_regist.do</url-pattern>
+    	<url-pattern>/seller/pension_edit.do</url-pattern>
+    	<url-pattern>/seller/pension_delete.do</url-pattern>
+    </filter-mapping>
+     -->
+    
+    <!-- 관리자 로그인 필터 -->
+    <!-- 
+    <filter>
+    	<filter-name>adminLoginFilter</filter-name>
+    	<filter-class>semi.filter.AdminLoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+    	<filter-name>adminLoginFilter</filter-name>
+    	<url-pattern>/admin/admin_check.jsp</url-pattern>
+    	<url-pattern>/admin/admin_count.jsp</url-pattern>
+    	<url-pattern>/admin/admin_member_detail.jsp</url-pattern>
+    	<url-pattern>/admin/admin_member_edit.jsp</url-pattern>
+    	<url-pattern>/admin/admin_member_list.jsp</url-pattern>
+    	<url-pattern>/admin/admin_seller_detail.jsp</url-pattern>
+    	<url-pattern>/admin/admin_seller_edit.jsp</url-pattern>
+    	<url-pattern>/admin/admin_seller_list.jsp</url-pattern>
+    	<url-pattern>/admin/admin_seller_edit.do</url-pattern>
+    	<url-pattern>/admin/sellerDrop.do</url-pattern>
+    	<url-pattern>/admin/admin_member_edit.do</url-pattern>
+    	<url-pattern>/admin/memberDrop.do</url-pattern>
+    	<url-pattern>/admin/admin_logout.do</url-pattern>
+    	<url-pattern>/admin/admin_check.do</url-pattern>
+    </filter-mapping>
+     -->
 
 </web-app>
 

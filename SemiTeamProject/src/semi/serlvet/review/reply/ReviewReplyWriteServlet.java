@@ -12,7 +12,7 @@ import semi.beans.dao.ReviewReplyDao;
 import semi.beans.dto.MemberDto;
 import semi.beans.dto.ReviewReplyDto;
 
-@WebServlet (urlPatterns = "/review/review_reply_writer.do")
+@WebServlet (urlPatterns = "/review/reply_insert.do")
 public class ReviewReplyWriteServlet extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -21,8 +21,9 @@ public class ReviewReplyWriteServlet extends HttpServlet{
 			MemberDto mdto = (MemberDto) req.getSession().getAttribute("userinfo");			
 			ReviewReplyDto rrdto = new ReviewReplyDto();
 			
+			int review_pension_no = Integer.parseInt(req.getParameter("review_pension_no"));
 			rrdto.setReply_origin(Integer.parseInt(req.getParameter("reply_origin")));
-			rrdto.setReply_no(Integer.parseInt(req.getParameter("reply_no")));
+//			rrdto.setReply_no(Integer.parseInt(req.getParameter("reply_no")));
 			rrdto.setReply_writer(mdto.getMember_no());
 			rrdto.setReply_content(req.getParameter("reply_content"));
 			
@@ -32,7 +33,7 @@ public class ReviewReplyWriteServlet extends HttpServlet{
 			
 			
 			// 출력
-			resp.sendRedirect("review_content.jsp?reply_origin="+ rrdto.getReply_origin() +"&reply_no="+rrdto.getReply_no());
+			resp.sendRedirect("review_detail.jsp?review_pension_no=" + review_pension_no + "&review_no="+ rrdto.getReply_origin());
 			
 			
 		} catch (Exception e) {
