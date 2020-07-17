@@ -537,9 +537,9 @@
 		.menuu-fixed {
 		    position: absolute;
 		    top: 0;
-		    left: auto;
-		    right: auto;
-		    width: 1280px;
+		    left: 0;
+		    right: 0;
+		    width: 100%;
 		    z-index: 1000;
 		}
 
