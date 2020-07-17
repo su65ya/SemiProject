@@ -8,6 +8,7 @@
 
         .search-form{
             text-align: center;
+            margin-bottom: 50px;
         }
         .search-form .search {
             display: inline-block;
@@ -157,5 +158,3 @@
 
         </div>
     </form>
-      <div class="row-empty"></div>
-      <div class="row-empty"></div>
