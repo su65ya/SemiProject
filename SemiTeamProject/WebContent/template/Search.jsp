@@ -1,11 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>날짜 선택기(Date Picker)</title>
 
     <style>
         * {
@@ -67,10 +61,10 @@
     </style>
 
     <!-- moment js : datepicker를 사용하기 위한 필수 의존성 파일 -->
-    <script src="./js/moment.min.js"></script>
+    <script src="../js/moment.min.js"></script>
     <!-- date-range-picker -->
-    <link rel="stylesheet" type="text/css" href="./css/lightpick.css">
-    <script src="./js/lightpick.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/lightpick.css">
+    <script src="../js/lightpick.js"></script>
 
     <script>
         window.onload = function() {
@@ -165,8 +159,3 @@
 
         </div>
     </form>
-
-</body>
-
-</html>
-

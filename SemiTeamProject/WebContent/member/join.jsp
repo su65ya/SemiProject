@@ -10,6 +10,8 @@
     	}
     </style>
 <jsp:include page="/template/nav.jsp"></jsp:include>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/button_01.css">
+<%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/button_02.css"> --%>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 //우편번호 찾기 및 주소 입력 자바스크립트
@@ -61,7 +63,7 @@
         }).open();
     }
 </script>
-	<div class="row">
+	<div class="row left">
 		<article class="w-40">
 		<form action="join.do" method="post">
 			<div class="row">
@@ -71,35 +73,43 @@
 				<label><span>*</span>아이디</label>
 				<input class="form-input" type="text" name="member_id" placeholder="아이디는 8~20자 이내로 입력하세요" required autocomplete="none">
 			</div>
+			<div class = "row-emptyy"></div>
 			<div class="row">
 				<label><span>*</span>비밀번호</label>
 				<input class="form-input" type="password" name="member_pw" placeholder="비밀번호는 8~20자 이내로 입력하세요" required autocomplete="none">
 			</div>
+			<div class = "row-emptyy"></div>
 			<div class="row">
 				<label><span>*</span>이름</label>
 				<input class="form-input" type = "text" name = "member_name" placeholder="이름" required autocomplete="none">
 			</div>
+			<div class = "row-emptyy"></div>
 			<div class="row">
 				<label><span>*</span>생년월일</label>
 				<input class="form-input" type = "date" name="member_birth" required autocomplete="none">
 			</div>
+			<div class = "row-emptyy"></div>
 			<div class="row">
 				<label><span>*</span>이메일</label>
 				<input class="form-input" type = "text" name="member_mail" placeholder="이메일" required>
 			</div>
+			<div class = "row-emptyy"></div>
 			<div class="row">
 				<label>주소</label><br>
 				<input class="form-input form-inline" type="text" name="member_post" placeholder="우편번호 입력" size="6" maxlength="6" autocomplete="none">
 				<input onclick = "findAddress();" type = "button" value="우편번호 찾기">
 			</div>
 			<!-- 기본주소 -->
+			<div class = "row-emptyy"></div>
 			<div class="row">
 				<input class="form-input" type="text" name="member_basic_addr" placeholder="기본주소 입력" size="50" autocomplete="none">
 			</div>
 			<!-- 상세주소 -->
+			<div class = "row-emptyy"></div>
 			<div class="row">
 				<input class="form-input" type="text" name="member_detail_addr" placeholder="상세주소 입력" size="50" autocomplete="none">
 			</div>
+			<div class = "row-emptyy"></div>
 			<div class="row">
 				<label><span>*</span>핸드폰번호</label>
 				<input class="form-input" type="text" name="member_phone" placeholder="번호입력">
