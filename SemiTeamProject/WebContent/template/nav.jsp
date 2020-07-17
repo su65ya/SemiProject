@@ -58,7 +58,7 @@
 	<main>
 		<nav class="nav">
 		<%if(!isLogin){//비로그인 상태 %>
-					<ul class="menuu menuu-f menuu-fixed container blue circleBehind">
+					<ul class="menuu menuu-f menuu-fixed container blue borderYtoX">
 				<li><a  href="<%= root %>/index.jsp">사이트명</a></li>
 				<a href="<%= root %>/member/login.jsp">로그인</a>
 				<a href="<%= root %>/admin/admin_login.jsp">관리자로그인</a>
@@ -71,7 +71,7 @@
 		<%}else{%>
 
 			<%if(adto!=null){//관리자면 %>
-			<ul class="menuu menuu-f menuu-fixed container blue circleBehind">
+			<ul class="menuu menuu-f menuu-fixed container blue borderYtoX">
 				<li><a href="<%= root %>/index.jsp">사이트명(홈으로 가게 하는 사이트명)</a></li>
 				<a href="<%= root %>/admin/info.jsp">내 정보</a>
 				<a href="<%= root %>/admin/admin_logout.do">로그아웃</a>
@@ -81,14 +81,14 @@
 
 			</ul>
 			<%}else if(sdto !=null){//판매자면 %>
-			<ul class="menuu menuu-f menuu-fixed container blue circleBehind">
+			<ul class="menuu menuu-f menuu-fixed container blue borderYtoX">
 				<li><a href="<%= root %>/index.jsp">사이트명(홈으로 가게 하는 사이트명)</a></li>
 				<a href="<%= root %>/seller/seller_info.jsp">내 정보</a>
 				<a href="<%= root %>/seller/seller_logout.do">로그아웃</a>
 				<a href="<%= root %>/seller/pension_list.jsp">펜션관리</a>
 			</ul>
 			<%}else if(mdto !=null){//사용자면 %>
-			<ul class="menuu menuu-f menuu-fixed container blue circleBehind">
+			<ul class="menuu menuu-f menuu-fixed container blue borderYtoX">
 				<li><a href="<%= root %>/index.jsp">사이트명(홈으로 가게 하는 사이트명)</a></li>
                 <a href="<%= root %>/member/info.jsp">내 정보</a>
                <a href="<%= root %>/member/member_logout.do">로그아웃</a>

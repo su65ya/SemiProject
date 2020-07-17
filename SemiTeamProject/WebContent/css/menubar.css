@@ -15,7 +15,7 @@ ul.container {
 ul.container a {
   color: #fff;
   text-decoration: none;
-  font: 20px Raleway;
+  font: 15px Raleway;
   margin: 0px 10px;
   padding: 10px 10px;
   position: relative;
@@ -179,7 +179,7 @@ div.topLeftBorders a:hover:after {
 ul.circleBehind a:before,
 ul.circleBehind a:after {
   position: absolute;
-  top: 22px;
+  top: 18px;
   left: 50%;
   width: 41px;
   height: 41px;
@@ -237,8 +237,8 @@ div.brackets a:hover:after {
 }
 
 /* Border from Y to X  */
-div.borderYtoX a:before,
-div.borderYtoX a:after {
+ul.borderYtoX a:before,
+ul.borderYtoX a:after {
   position: absolute;
   opacity: 0.5;
   height: 100%;
@@ -248,18 +248,18 @@ div.borderYtoX a:after {
   transition: all 0.3s;
 }
 
-div.borderYtoX a:before {
+ul.borderYtoX a:before {
   left: 0px;
   top: 0px;
 }
 
-div.borderYtoX a:after {
+ul.borderYtoX a:after {
   right: 0px;
   bottom: 0px;
 }
 
-div.borderYtoX a:hover:before,
-div.borderYtoX a:hover:after {
+ul.borderYtoX a:hover:before,
+ul.borderYtoX a:hover:after {
   opacity: 1;
   height: 2px;
   width: 100%;
