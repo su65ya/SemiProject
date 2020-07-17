@@ -8,9 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import semi.beans.dao.MemberDao;
 import semi.beans.dao.SellerDao;
-import semi.beans.dto.MemberDto;
 import semi.beans.dto.SellerDto;
 
 @WebServlet (urlPatterns = "/seller/seller_change_password.do")

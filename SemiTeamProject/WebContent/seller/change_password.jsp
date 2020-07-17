@@ -8,7 +8,7 @@
  	
  	String seller_pw = sdto.getSeller_pw();
  	SellerDao sdao = new SellerDao();
- 	SellerDto user = sdao.get(seller_pw);
+ 	SellerDto sellerUser = sdao.get(seller_pw);
  %>
 
 <style>
@@ -155,7 +155,7 @@
 					<th style="width:150px;">현재 비밀번호</th>	
 					<td class="left">
 						<div>
-					    <input class="intext" name="pw0" type="hidden" value="<%=user.getSeller_pw()%>">
+					    <input class="intext" name="pw0" type="hidden" value="<%=sdto.getSeller_pw()%>">
 						<input class="intext" name="pw1" id="pw" type="password" onblur="checkPw1();" placeholder="현재 비밀번호">
 						<span class="correct-message">현재 비밀번호와 일치합니다</span>
 						<span class="incorrect-message">비밀번호가 맞는지 확인하세요</span>
