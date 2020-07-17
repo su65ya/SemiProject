@@ -132,8 +132,7 @@
 						</th>
 						<td class='left'>
 							<div class="row">
-								<input class="intext " type="text" name="member_id" placeholder="아이디는 8~20자 이내로 입력하세요" autocomplete="none" style='width:200px;'>
-								<input class='form-btn3' type="submit" value='중복검사' style='width: 80px; padding-top: 0.5rem;'>
+								<input class="intext " type="text" name="member_id" placeholder="아이디는 8~20자 이내로 입력하세요" autocomplete="none" style='width:200px;' ><input class='form-btn3' type="submit" value='중복검사' style='width: 80px; padding-top: 0.5rem;'>
 								<span>sadsd</span>
 							</div>
 						</td>
@@ -221,6 +220,8 @@
 				<input class= "form-btn3 " type="submit" value="가입하기">
 			</div>
 		</form>
+		
 		</article>
+		
 	</div>
 <jsp:include page="/template/footer.jsp"></jsp:include>

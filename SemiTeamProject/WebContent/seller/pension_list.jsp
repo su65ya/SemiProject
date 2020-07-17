@@ -10,21 +10,67 @@
 <jsp:include page = "/template/nav.jsp"></jsp:include>
 
 <%
-
 	//내가 보유하고 있는 펜션 목록을 출력
 	SellerDto sdto = (SellerDto) request.getSession().getAttribute("sellerinfo");//로그인 된 판매자 정보
 	int pension_seller_no = sdto.getSeller_no();//로그인 된 판매자의 번호
 	PensionDao pdao = new PensionDao();
-	List<PensionDto> list = pdao.getList(pension_seller_no);//로그인 된 판매자 가진 펜션 목록 출력
 	PenImgViewDto viewDto = new PenImgViewDto();
 	PensionOptionDao podao = new PensionOptionDao();
+	
+	String keyword = request.getParameter("keyword");
+	boolean isSearch = keyword != null;
+	
+	int pageSize = 5;
+	String pageStr = request.getParameter("page");
+	
+	int pageNo;
+	try{
+		pageNo = Integer.parseInt(pageStr);
+		if(pageNo <= 0){
+			throw new Exception();
+		}
+	}catch(Exception e){
+		pageNo = 1;
+	}
+	int finish = pageNo * pageSize;
+	int start = finish - (pageSize-1); 
+	int blockSize = 10;
+	int startBlock = (pageNo-1)/blockSize*blockSize+1;
+	int finishBlock = startBlock + (blockSize-1);
+
+	List<PensionDto> list;//로그인 된 판매자 가진 펜션 목록 출력
+	if(isSearch){
+		list = pdao.search(pension_seller_no,keyword,start,finish);
+	}else{
+		list = pdao.getList(pension_seller_no,start,finish);
+	}
+	
+	int count;
+	if(isSearch){//검색이면
+		count = pdao.getCount(keyword);
+	}else{//목록이면
+		count = pdao.getCount();
+	}
+	int pageCount = (count+pageSize-1)/pageSize;
+	//만약 finishBlock 이 pageCount보다 크다면 수정해야 한다
+	if(finishBlock>pageCount){
+		finishBlock = pageCount;
+	}
 
 %>
 
 <!-- 펜션 목록 리스트 -->
 <style>
-	a{
+
+	a {
 		text-decoration: none;
+		color : black;
+	}
+	a:visited {
+		color : gray;
+	}
+	a:hover{
+		font-weight: bold;
 	}
 </style>
 
@@ -34,11 +80,16 @@
 		<h2>펜션 목록</h2>
 	</div>
 	<div class="row right">
-		<input type="text" placeholder="펜션이름 검색" style="width: 124px; height: 34px; padding: 1rem;">
+	<form action="pension_list.jsp?keyword=<%=keyword %>" method="get">
+		<input type="text" placeholder="펜션 검색" name = "keyword" style="width: 124px; height: 34px; padding: 1rem;">
 		<input class = "form-btn form-inline" type="button" value = "검색">
+		<a href="pension_list.jsp">
+			<input class = "form-btn form-inline" type="button" value = "전체목록">
+		</a>
 		<a href="pension_regist.jsp">
 			<input class = "form-btn form-inline" type="button" value = "펜션 등록">
 		</a>
+	</form>
 	</div>
 	<!-- 펜션 목록 -->
 	<div class="row list">
@@ -98,6 +149,44 @@
 		<a href="pension_regist.jsp">
 			<input class = "form-btn form-inline" type="button" value = "펜션 등록">
 		</a>
+	</div>
+	<div class="row-empty"></div>
+	<div class="row-empty"></div>
+	<div class="row center pagination">
+	<%if(startBlock>1){ %>
+		<%if(!isSearch){ %>
+			<a href = "pension_list.jsp?page=<%=startBlock-1%>">&lt;</a>
+		<%}else{ %>
+			<a href = "pension_list.jsp?page=<%=startBlock-1%>&keyword=<%=keyword%>">
+			&lt;</a>
+		<%} %>
+		
+	<%} %>
+	<%for(int i = startBlock;i<=finishBlock;i++){ %>
+		<%
+		//현재 페이지에 해당하는 블록은 class="on"을 출력하면 디자인 효과를 볼 수 있다
+			String prop;
+			if(i == pageNo){//현재페이지 번호면
+				prop = "class='on'";
+				}else{//아니면
+					prop="";
+				}
+		%>
+					
+		<%if(!isSearch){ %>
+			<a href = "pension_list.jsp?page=<%=i%>"<%=prop%>><%=i%></a>
+		<%}else{ %>
+			<a href = "pension_list.jsp?page=<%=i %>&keyword=<%=keyword %>"<%=prop%>><%=i %></a>
+	<%} %>
+	<%} %>
+	<%if(pageCount>finishBlock){ %>
+		<%if(!isSearch){ %>
+			<a href = "pension_list.jsp?page=<%=finishBlock+1%>">&gt;</a>
+		<%}else{ %>
+			<a href = "pension_list.jsp?page=<%=startBlock-1%>&keyword=<%=keyword%>">
+			&gt;</a>
+		<%} %>
+		<%} %>
 	</div>
 	</div>
 </article>

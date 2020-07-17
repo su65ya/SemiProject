@@ -107,4 +107,24 @@ public class PensionImageDao {
 			con.close();
 			return list;
 		}
+		
+		// 모든 이미지 파일 조회
+			public List<PensionImageDto> getList() throws Exception {
+				Connection con = getConnection();
+				String sql = "SELECT * FROM pension_image ORDER BY pen_image_no ASC";
+				PreparedStatement ps = con.prepareStatement(sql);
+				ResultSet rs = ps.executeQuery();
+				List<PensionImageDto> list = new ArrayList<>();
+				while(rs.next()) {
+					PensionImageDto pidto = new PensionImageDto();
+					pidto.setPen_image_no(rs.getInt("pen_image_no"));
+					pidto.setPen_image_pen_no(rs.getInt("pen_img_pen_no"));
+					pidto.setPen_image_name(rs.getString("pen_image_name"));
+					pidto.setPen_image_size(rs.getLong("pen_image_size"));
+					pidto.setPen_image_type(rs.getString("pen_image_type"));
+					list.add(pidto);
+				}
+				con.close();
+				return list;
+			}
 }
