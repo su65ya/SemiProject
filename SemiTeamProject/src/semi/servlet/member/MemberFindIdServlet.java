@@ -17,7 +17,6 @@ public class MemberFindIdServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try{
 			
-			req.setCharacterEncoding("UFT-8");
 			
 			MemberDto mdto = new MemberDto();
 			mdto.setMember_name(req.getParameter("member_name"));
@@ -29,10 +28,11 @@ public class MemberFindIdServlet extends HttpServlet{
 			String member_id = mdao.findId(mdto);
 			
 			if(member_id != null) {
-				resp.sendRedirect("find_id_result.jsp");
+				req.getSession().setAttribute("member_id", member_id);
+				resp.sendRedirect("member_find_id_result.jsp");
 			}
 			else {
-				resp.sendRedirect("find_id.jsp?error");
+				resp.sendRedirect("member_find_id.jsp?error");
 			}
 			
 			

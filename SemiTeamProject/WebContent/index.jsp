@@ -1,3 +1,6 @@
+<%@page import="semi.beans.dto.PensionImageDto"%>
+<%@page import="java.util.List"%>
+<%@page import="semi.beans.dao.PensionImageDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -21,12 +24,13 @@
                         
                         <div class="swiper-slide">
                             <a href="#">
-                                <img src="https://placehold.it/550x300">
+                                 <img src="https://placehold.it/550x300">
                             </a>
                         </div>
                         <div class="swiper-slide">
                             <a href="#">
-                                <img src="https://placehold.it/550x300">
+                                 <img src="https://placehold.it/550x300">
+     
                             </a>
                         </div>
 
@@ -42,6 +46,8 @@
 
 
             </article>
+		    <jsp:include page="/template/Search.jsp"></jsp:include>			
+
 		    
 			<article class='hei'>
 			    
@@ -96,11 +102,6 @@
 			    </div>
 			    
 			</article>
-
-			
-<jsp:include page="/template/Search.jsp"></jsp:include>			
-
-<jsp:include page="/template/grid.jsp"></jsp:include>		
 
 			
 <jsp:include page="/template/footer.jsp"></jsp:include>

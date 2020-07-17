@@ -273,7 +273,7 @@ public class PensionDao {
 		return pidto;
 	}
 
-	// 펜션 정보 수정
+	// (사용자)펜션 정보 수정
 	public void edit(PensionDto pdto) throws Exception {
 		Connection con = getConnection();
 		String sql = "UPDATE pension SET pension_name=? , pension_post=?, pension_basic_addr=?,pension_detail_addr=?,pension_phone=?,pension_intro=? WHERE pension_no=?";
@@ -324,7 +324,7 @@ public class PensionDao {
 			
 			return count;
 		}
-	
+
 		//검색 펜션 수 조회 메소드
 		public int getCount(String keyword) throws Exception{
 			Connection con = getConnection();

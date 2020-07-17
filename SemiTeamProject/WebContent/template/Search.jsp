@@ -138,7 +138,6 @@
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS46t4HaVXE28g2KosQb0rGQIshseGS_fV_sA&usqp=CAU" alt="날짜" class="search-img">
                 <select onchange="person">
                     <option>인원</option>
-                    <span class="selected-txt" id="memberCount">인원 </span>
                     <option value="a">1명</option>
                     <option value="b">2명</option>
                     <option value="c">3명</option>
@@ -149,8 +148,8 @@
                     <option value="h">8명</option>
                     <option value="i">9명</option>
                     <option value="j">10명</option>
-                    <input class = "search-submit" type="submit" value="검색">
                 </select>
+                    <input class = "search-submit" type="button" value="검색">
             </div>
 
             <!-- 검색 버튼 -->

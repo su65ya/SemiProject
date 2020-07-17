@@ -9,7 +9,38 @@
 %>
 
 <jsp:include page="/template/nav.jsp"></jsp:include>
-
+<style>
+	    .form-input,.form-btn2,.form-btn3{
+            width: 100%;
+            padding: 0.5rem;
+            outline: none;/*선택시 자동 부여되는 테두리 제거*/
+            border: none;
+    		border-radius: 5px;
+        }
+        .form-input:focus{
+            border-color: #b2bec3;
+        }
+        .form-btn2{
+        	background-color:#636e72;
+        	width : 150px;
+            color: white;
+            cursor: pointer;
+        }
+        .form-btn3{
+        	background-color:#ff7675;
+        	width : 150px;
+            color: white;
+            cursor: pointer;
+        }
+        .form-btn2:hover,.form-btn3:hover {
+        	background-color:#b2bec3;
+        }
+        .font_color_a {
+        	color : #636e72;
+        	font-style: normal;
+        	font-size: 14px;
+        }
+</style>
 
 <article class =  "w-35"'>
 	<div class = "row-empty"></div>
@@ -30,7 +61,7 @@
 			<%} %>
 		<div class = "row center">
 		<div class = "row-empty"></div>
-			<input class="form-btn form-inline" type="submit" value="확인">
+			<input class="form-btn2" type="submit" value="확인">
 		</div>
 	</form>
 	
@@ -38,6 +69,8 @@
 	<div class="row-empty"></div>
 	<div class="row-empty"></div>
 	<div class="row-empty"></div>	
+
+</article>
 
 
 <jsp:include page="/template/footer.jsp"></jsp:include>

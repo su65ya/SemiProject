@@ -28,7 +28,7 @@ public class SellerLoginFilter implements Filter {
 		if(isSellerLogin) {
 			chain.doFilter(request, response);
 		}else {
-			resp.sendRedirect(req.getContextPath()+"/seller/");
+			resp.sendRedirect(req.getContextPath()+"/seller/seller_login.jsp");
 		}
 	}
 }
