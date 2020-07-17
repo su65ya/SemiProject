@@ -324,7 +324,7 @@ public class PensionDao {
 			
 			return count;
 		}
-	
+
 		//검색 펜션 수 조회 메소드
 		public int getCount(String keyword) throws Exception{
 			Connection con = getConnection();

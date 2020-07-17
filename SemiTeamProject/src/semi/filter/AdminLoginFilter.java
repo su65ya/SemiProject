@@ -7,28 +7,30 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import semi.beans.dto.SellerDto;
+import semi.beans.dto.AdminDto;
 
-//@WebFilter(urlPatterns = "/seller/*")
-public class SellerLoginFilter implements Filter {
+public class AdminLoginFilter implements Filter{
+	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-
+		
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
+		
+		AdminDto adto = (AdminDto) req.getSession().getAttribute("admininfo");
 
-		SellerDto sdto = (SellerDto) req.getSession().getAttribute("sellerinfo");
+		boolean isAdmin = adto != null;
 		
-		boolean isSellerLogin = sdto != null;
-		
-		if(isSellerLogin) {
+		if (isAdmin) {
 			chain.doFilter(request, response);
-		}else {
-			resp.sendRedirect(req.getContextPath()+"/seller/seller_login.jsp");
 		}
+		else {
+			resp.sendRedirect(req.getContextPath()+"/admin/admin_login.jsp");
+		}
+		
 	}
+
 }

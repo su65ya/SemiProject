@@ -2,23 +2,60 @@
 	pageEncoding="UTF-8"%>
 
 <style>
-label {
-	font-size: 15;
-}
-
-#id_check+label {
-	color: black;
-}
-
-#id_check:checked+label {
-	color: silver;
-}
+	label {
+		font-size: 15;
+	}
+	
+	#id_check+label {
+		color: black;
+	}
+	
+	#id_check:checked+label {
+		color: silver;
+	}
 
 	.find, a {
 		text-align: center;
 		text-decoration: none;
 		color: black;
 	}
+	
+	.form-input,.form-btn2,.form-btn3{
+    	width: 100%;
+        padding: 0.5rem;
+        outline: none;/*선택시 자동 부여되는 테두리 제거*/
+        border: none;
+    	border-radius: 5px;
+    }
+    .form-input:focus{
+    	border-color: #b2bec3;
+    }
+    .form-btn2{
+        background-color:#636e72;
+        width : 150px;
+        color: white;
+    	cursor: pointer;
+    }
+    .form-btn3{
+        background-color:#ff7675;
+        width : 150px;
+        color: white;
+        cursor: pointer;
+    }
+    .form-btn2:hover,.form-btn3:hover {
+        background-color:#b2bec3;
+    }
+    .font_color_a {
+        color : #636e72;
+        font-style: normal;
+    	font-size: 14px;
+    }
+    
+    .intext {
+		width: 100%;
+		padding-left: 0.5rem;
+	}
+    
 </style>
 
 <jsp:include page="/template/nav.jsp"></jsp:include>
@@ -26,18 +63,18 @@ label {
 
 <form action="member_login.do" method="post">
 
-	<article class="w-25">
+	<article class="w-20">
 
 		<div class="row">
 			<h2>회원 로그인</h2>
 		</div>
 
 		<div class="row">
-			<input class="form-input" type="text" name="member_id" placeholder="아이디" required>
+			<input class="intext" type="text" name="member_id" placeholder="아이디" required>
 		</div>
 
 		<div class="row">
-			<input class="form-input" type="password" name="member_pw"	placeholder="비밀번호" required>
+			<input class="intext" type="password" name="member_pw"	placeholder="비밀번호" required>
 		</div>
 
 		<div class="login-checkbox-wrap">
@@ -45,8 +82,8 @@ label {
 			<label for="idsave">ID 저장</label>
 		</div>
 		
-		<div class="row">
-			<input class="form-btn" type="submit" value="로그인">
+		<div class="row center">
+			<input class="form-btn2" type="submit" value="로그인">
 		</div>
 
 		<div class="row">
@@ -57,7 +94,7 @@ label {
         </div>
 		<div class = "row find">
 			<a href = "member_find_id.jsp">id 찾기</a> / 
-			<a href = "seller_find_pw.jsp">pw 찾기</a>
+			<a href = "member_find_pw.jsp">pw 찾기</a>
 		</div>            
 
 		<div class="row-empty"></div>
