@@ -7,7 +7,9 @@
 <jsp:include page="/template/nav.jsp"></jsp:include>
 			
 <%-- <jsp:include page="/template/search.jsp"></jsp:include>			 --%>
+<script>
 
+</script>
 		<article>
 
 
@@ -100,7 +102,7 @@
                     </div>
                     
 			    </div>
-			    
+			    	 
 			</article>
 
 			
