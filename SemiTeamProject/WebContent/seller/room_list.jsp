@@ -12,17 +12,16 @@
 <style>
 	th {
 	color:white;
-    background-color: 	#AB8364;
+    background-color: #ff5990;
     
   }
   tbody tr:nth-child(2n+1) {
-    background-color: 	#D9C3B2;
+    background-color: #ffe6ee;
   }
   
   a {
   	text-decoration: none;
   }
-
 </style>
 <jsp:include page="/template/nav.jsp"></jsp:include>
 <%
@@ -33,7 +32,6 @@
 	List<RoomDto> list = rdao.getList(pension_no);
 	PensionInfoDto pdto = pdao.get(pension_no);
 	RoomImgViewDto rivdto = new RoomImgViewDto();
-
 %>
 
 <!-- 객실 목록 리스트 -->
@@ -86,7 +84,7 @@
   				<tr>
     				<td class="row right" colspan="7" >
 						<a href = "password_check.jsp?go=room_delete.do?room_no=<%=rdto.getRoom_no()%>">
-							<input class = "form-btn2 form-inline" type="button" value = "객실삭제">
+							<input class = "form-btn3 form-inline" type="button" value = "객실삭제">
 						</a>
 					</td>
   				</tr>
@@ -98,10 +96,10 @@
 		<div class='row-empty'></div>
 		<div class='row right'>
 			<a href = "pension_list.jsp">
-				<input class = "form-btn3 form-inline" type="button" value = "펜션목록">
+				<input class = "form-btn2 form-inline" type="button" value = "펜션목록">
 			</a>	
 			<a href = "room_regist.jsp?pension_no=<%= pension_no %>">
-				<input class = "form-btn3 form-inline" type="button" value = "객실등록">
+				<input class = "form-btn2 form-inline" type="button" value = "객실등록">
 			</a>
 		</div>
 		
@@ -111,3 +109,4 @@
 	
 </article>
 <jsp:include page="/template/footer.jsp"></jsp:include>
+© 2020 GitHub, Inc.
