@@ -120,17 +120,12 @@
 					<%} %>
 					<td><%=pdto.getPension_name() %></td>
 					<td><%=pdto.getPension_regist_date_day() %></td>
-<<<<<<< HEAD
-					<td class="tdstyle"><a href="pension_detail.jsp?pension_no=<%=pdto.getPension_no()%>"><input class = "form-btn form-inline" type="button" value="상세보기"></a></td>
-					<td class="tdstyle"><a href = "<%=request.getContextPath() %>/seller/password_check.jsp?go=pension_delete.do?pension_no=<%=pdto.getPension_no()%>"><input class = "form-btn form-inline" type="button" value="펜션삭제"></a></td>
-					<td class="tdstyle"><a href="room_list.jsp?pension_no=<%=pdto.getPension_no()%>"><input class = "form-btn form-inline" type="button" value="객실목록"></a></td>
-					<td class="tdstyle"><a href="room_regist.jsp?pension_no=<%= pdto.getPension_no()%>"><input class = "form-btn form-inline" type="button" value="객실등록"></a></td>
-=======
+
 					<td class="tdstyle"><a href="pension_detail.jsp?pension_no=<%=pdto.getPension_no()%>"><input class = "form-btn2 form-inline" type="button" value="상세보기"></a></td>
 					<td class="tdstyle"><a href = "<%=request.getContextPath() %>/seller/password_check.jsp?go=pension_delete.do?pension_no=<%=pdto.getPension_no()%>"><input class = "form-btn3 form-inline" type="button" value="펜션삭제"></a></td>
 					<td class="tdstyle"><a href="room_list.jsp?pension_no=<%=pdto.getPension_no()%>"><input class = "form-btn2 form-inline" type="button" value="객실목록"></a></td>
 					<td class="tdstyle"><a href="room_regist.jsp?pension_no=<%= pdto.getPension_no()%>"><input class = "form-btn2 form-inline" type="button" value="객실등록"></a></td>
->>>>>>> refs/remotes/origin/master
+
 				</tr>
 				
 				<!-- 옵션에 따른 아이콘  표시 -->

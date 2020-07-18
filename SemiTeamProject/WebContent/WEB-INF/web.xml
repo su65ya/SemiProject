@@ -31,17 +31,11 @@
   	<filter-mapping>
   		<filter-name>sellertestLoginFilter</filter-name>
   		<url-pattern>/*</url-pattern>
-<<<<<<< HEAD
-  	</filter-mapping>
-
-<!--   	사용자 테스트 필터 -->
-=======
   	</filter-mapping>
   	 -->
   	
   	<!-- 사용자 테스트 필터 -->
-  	<!-- 
->>>>>>> refs/remotes/origin/master
+
    	<filter>
   		<filter-name>membertestLoginFilter</filter-name>
   		<filter-class>semi.filter.MemberTestLoginFilter</filter-class>
@@ -49,12 +43,8 @@
   	<filter-mapping>
   		<filter-name>membertestLoginFilter</filter-name>
   		<url-pattern>/*</url-pattern>
-<<<<<<< HEAD
   	</filter-mapping>
-=======
-  	</filter-mapping>
-	 -->
->>>>>>> refs/remotes/origin/master
+
  
  	<!-- 관리자 계정 필터 -->
  	<!-- 

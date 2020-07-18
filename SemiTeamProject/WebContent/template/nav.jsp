@@ -34,11 +34,6 @@
             font-family: Jalnan;
             src: url("<%= root %>/font/Jalnan.ttf");
         }
-<<<<<<< HEAD
-        ul>li>a{
-        	font-family: Jalnan.ttf;
-        	!important;
-=======
         ul>li>a {
         	font-family: Jalnan.ttf;
         	!important;
@@ -71,7 +66,7 @@
         }
         .siteName{
         	float: left;
->>>>>>> refs/remotes/origin/master
+
         }
         
     </style>
@@ -133,9 +128,14 @@
 		<%if(!isLogin){//비로그인 상태 %>
 					<ul class="menuu menuu-f menuu-fixed container brown highlightTextOut">
 <<<<<<< HEAD
+<<<<<<< HEAD
 				<li><a href="<%= root %>/index.jsp" >사이트명</a></li>
 				<li><a href="<%= root %>/member/login.jsp">로그인</a></li>
 				<li><a href="<%= root %>/admin/admin_login.jsp">관리자로그인</a></li>
+=======
+				<li class="siteName"><a href="<%= root %>/index.jsp">야!여기서놀자</a></li>
+				<li><a onclick="add_modal();">로그인</a></li>
+>>>>>>> refs/remotes/origin/master
 =======
 				<li class="siteName"><a href="<%= root %>/index.jsp">야!여기서놀자</a></li>
 				<li><a onclick="add_modal();">로그인</a></li>
@@ -149,7 +149,11 @@
 			<%if(adto!=null){//관리자면 %>
 			<ul class="menuu menuu-f menuu-fixed container brown highlightTextOut">
 <<<<<<< HEAD
+<<<<<<< HEAD
 				<li><a href="<%= root %>/index.jsp">사이트명(홈으로 가게 하는 사이트명)</a></li>
+=======
+				<li class="siteName"><a href="<%= root %>/index.jsp">야!여기서놀자</a></li>
+>>>>>>> refs/remotes/origin/master
 =======
 				<li class="siteName"><a href="<%= root %>/index.jsp">야!여기서놀자</a></li>
 >>>>>>> refs/remotes/origin/master
@@ -163,7 +167,11 @@
 			<%}else if(sdto !=null){//판매자면 %>
 			<ul class="menuu menuu-f menuu-fixed container brown highlightTextOut">
 <<<<<<< HEAD
+<<<<<<< HEAD
 				<li><a href="<%= root %>/index.jsp">사이트명(홈으로 가게 하는 사이트명)</a></li>
+=======
+				<li class="siteName"><a href="<%= root %>/index.jsp">야!여기서놀자</a></li>
+>>>>>>> refs/remotes/origin/master
 =======
 				<li class="siteName"><a href="<%= root %>/index.jsp">야!여기서놀자</a></li>
 >>>>>>> refs/remotes/origin/master
@@ -174,7 +182,11 @@
 			<%}else if(mdto !=null){//사용자면 %>
 			<ul class="menuu menuu-f menuu-fixed container brown highlightTextOut">
 <<<<<<< HEAD
+<<<<<<< HEAD
 				<li><a href="<%= root %>/index.jsp">사이트명(홈으로 가게 하는 사이트명)</a></li>
+=======
+				<li class="siteName"><a href="<%= root %>/index.jsp">야!여기서놀자</a></li>
+>>>>>>> refs/remotes/origin/master
 =======
 				<li class="siteName"><a href="<%= root %>/index.jsp">야!여기서놀자</a></li>
 >>>>>>> refs/remotes/origin/master

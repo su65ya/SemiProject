@@ -95,8 +95,13 @@
         </div>
 		<div class = "row find">
 <<<<<<< HEAD
+<<<<<<< HEAD
 			<a href = "member_find_id.jsp">id 찾기</a> / 
 			<a href = "member_find_pw.jsp">pw 찾기</a>
+=======
+			<a href = "member_find_id.jsp">ID 찾기</a>
+			<a href = "member_find_pw.jsp">PW 찾기</a>
+>>>>>>> refs/remotes/origin/master
 =======
 			<a href = "member_find_id.jsp">ID 찾기</a>
 			<a href = "member_find_pw.jsp">PW 찾기</a>
