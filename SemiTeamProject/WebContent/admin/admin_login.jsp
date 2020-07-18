@@ -11,12 +11,49 @@
         #id_check:checked + label {
             color:silver;
         }
+        	.find, a {
+		text-align: center;
+		text-decoration: none;
+		color: black;
+		font-size: 13px;
+		}
+		
+		.form-input,.form-btn2,.form-btn3{
+	    	width: 100%;
+	        padding: 0.5rem;
+	        outline: none;/*선택시 자동 부여되는 테두리 제거*/
+	        border: none;
+	    	border-radius: 5px;
+	    }
+	    .form-input:focus{
+	    	border-color: #b2bec3;
+	    }
+	    .form-btn2{
+	        background-color:#636e72;
+	        width : 150px;
+	        color: white;
+	    	cursor: pointer;
+	    }
+	    .form-btn3{
+	        background-color:#ff7675;
+	        width : 150px;
+	        color: white;
+	        cursor: pointer;
+	    }
+	    .form-btn2:hover,.form-btn3:hover {
+	        background-color:#b2bec3;
+	    }
+	    .font_color_a {
+	        color : #636e72;
+	        font-style: normal;
+	    	font-size: 14px;
+	    }
 	</style>
 <jsp:include page="/template/nav.jsp"></jsp:include>
 
 	<form action = "admin_login.do" method="post">
 		
-		<article class="w-25">
+		<article class="w-20">
 		
 			<div class="row">
 				<h2>관리자 로그인</h2>
@@ -29,9 +66,14 @@
 			<div class="row">
 				<input class="form-input" type="password" name="admin_pw" placeholder="비밀번호" required>
 			</div>
-		
+			
 			<div class="row">
-				<input class= "form-btn" type="submit" value="로그인">
+				<input type="checkbox" id = "id_check">
+				<label for="id_check">ID 저장</label>
+			</div>
+		
+			<div class="row center">
+				<input class= "form-btn2" type="submit" value="로그인">
 			</div>
 			
 			<div class="row left">
@@ -41,11 +83,6 @@
 				<%} %>
 			</div>
 			
-			
-			<div class="row">
-				<input type="checkbox" id = "id_check">
-				<label for="id_check">ID 저장</label>
-			</div>
 			
 		</article>
 		

@@ -8,17 +8,17 @@
 		</section>
 
 
-		<footer>
 				<h6>로그인 member : <%=session.getAttribute("userinfo") != null %></h6>
 				<h6>로그인 admin : <%=session.getAttribute("admininfo") != null %></h6>
 				<h6>로그인 seller : <%=session.getAttribute("sellerinfo") != null %></h6>
-			<div class="row">
-				<ul class="footer">
+		<footer class="footer">
+			<div>
+				<ul class="footMenu">
 					<li><a href="#">업소관리</a></li>
 					<li><a href="#">펜션관리</a></li>
 					<li><a href="#">입점신청</a></li>
 				</ul>
-				<address class="footer">
+				<address>
 					<span>고객행복센터 1004-1004 오전 9:30 - 오후 6:30, 점심시간: 오후 12:30 - 오후 1:30<br>
 						(주) 우리조짱캠퍼니<br>
 						주소 : 서울영등포구 선유동 2로 67 이레빌딩 19,20층<br>

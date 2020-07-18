@@ -18,6 +18,7 @@
 		text-align: center;
 		text-decoration: none;
 		color: black;
+		font-size: 13px;
 	}
 	
 	.form-input,.form-btn2,.form-btn3{
@@ -70,11 +71,11 @@
 		</div>
 
 		<div class="row">
-			<input class="intext" type="text" name="member_id" placeholder="아이디" required>
+			<input class="form-input" type="text" name="member_id" placeholder="아이디" required>
 		</div>
 
 		<div class="row">
-			<input class="intext" type="password" name="member_pw"	placeholder="비밀번호" required>
+			<input class="form-input" type="password" name="member_pw"	placeholder="비밀번호" required>
 		</div>
 
 		<div class="login-checkbox-wrap">
@@ -93,8 +94,8 @@
 			<%} %>
         </div>
 		<div class = "row find">
-			<a href = "member_find_id.jsp">id 찾기</a> / 
-			<a href = "member_find_pw.jsp">pw 찾기</a>
+			<a href = "member_find_id.jsp">ID 찾기</a>
+			<a href = "member_find_pw.jsp">PW 찾기</a>
 		</div>            
 
 		<div class="row-empty"></div>
