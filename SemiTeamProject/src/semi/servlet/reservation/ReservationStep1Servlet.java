@@ -20,7 +20,7 @@ protected void service(HttpServletRequest req, HttpServletResponse resp) throws 
 		int seq = step1dao.getSequence();
 		int pension_no = Integer.parseInt(req.getParameter("pension_no"));
 		MemberDto mdto = (MemberDto) req.getSession().getAttribute("userinfo");
-
+		
 		ReservationStep1Dto step1dto = new ReservationStep1Dto();
 		step1dto.setReservation_no(seq);
 		step1dto.setPension_no(pension_no);

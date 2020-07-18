@@ -11,6 +11,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import semi.beans.dto.LiveSearchDto;
 import semi.beans.dto.RoomDto;
 import semi.beans.dto.RoomImgViewDto;
 

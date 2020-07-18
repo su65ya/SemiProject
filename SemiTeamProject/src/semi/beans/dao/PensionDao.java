@@ -11,9 +11,11 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import oracle.jdbc.proxy.annotation.Pre;
+import semi.beans.dto.LiveSearchDto;
 import semi.beans.dto.PenImgViewDto;
 import semi.beans.dto.PensionDto;
 import semi.beans.dto.PensionInfoDto;
+import semi.beans.dto.RoomDto;
 import semi.beans.dto.SellerDto;
 
 public class PensionDao {
@@ -68,19 +70,17 @@ public class PensionDao {
 		return seq;
 	}
 
-
 	// (판매자)판매자 별 펜션 리스트 메소드
-	public List<PensionDto> getList(int pension_seller_no,int start,int finish) throws Exception {
+	public List<PensionDto> getList(int pension_seller_no, int start, int finish) throws Exception {
 		Connection con = getConnection();
 
-		String sql = 
-		"SELECT * FROM (SELECT rownum rn,T.*FROM (SELECT * FROM pension WHERE pension_seller_no =? ORDER BY PENSION_REGIST_DATE DESC)T)WHERE rn BETWEEN ? AND ?";
+		String sql = "SELECT * FROM (SELECT rownum rn,T.*FROM (SELECT * FROM pension WHERE pension_seller_no =? ORDER BY PENSION_REGIST_DATE DESC)T)WHERE rn BETWEEN ? AND ?";
 
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, pension_seller_no);
 		ps.setInt(2, start);
 		ps.setInt(3, finish);
-		
+
 		ResultSet rs = ps.executeQuery();
 
 		List<PensionDto> list = new ArrayList<>();
@@ -103,31 +103,31 @@ public class PensionDao {
 		return list;
 
 	}
-	
-	//펜션 검색 메소드
-		public List<PensionDto> search(int pension_seller_no,String keyword,int start ,int finish) throws Exception {
-			Connection con = getConnection();
-			String sql = "SELECT * FROM (SELECT rownum rn,T.*FROM (SELECT * FROM pension WHERE pension_seller_no =? AND instr(pension_name,? ) > 0 ORDER BY PENSION_REGIST_DATE DESC)T)WHERE rn BETWEEN ? AND ?";
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, pension_seller_no);
-			ps.setString(2, keyword);
-			ps.setInt(3, start);
-			ps.setInt(4, finish);
-			
-			ResultSet rs = ps.executeQuery();
-			List<PensionDto> list = new ArrayList<PensionDto>();
-			while (rs.next()) {
-				PensionDto mdto = new PensionDto(rs);
-				list.add(mdto);
-				
-			}
-			con.close();
-			return list;
+
+	// (판매자용) 펜션 검색 메소드
+	public List<PensionDto> search(int pension_seller_no, String keyword, int start, int finish) throws Exception {
+		Connection con = getConnection();
+		String sql = "SELECT * FROM (SELECT rownum rn,T.*FROM (SELECT * FROM pension WHERE pension_seller_no =? AND instr(pension_name,? ) > 0 ORDER BY PENSION_REGIST_DATE DESC)T)WHERE rn BETWEEN ? AND ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, pension_seller_no);
+		ps.setString(2, keyword);
+		ps.setInt(3, start);
+		ps.setInt(4, finish);
+
+		ResultSet rs = ps.executeQuery();
+		List<PensionDto> list = new ArrayList<PensionDto>();
+		while (rs.next()) {
+			PensionDto mdto = new PensionDto(rs);
+			list.add(mdto);
 
 		}
+		con.close();
+		return list;
+
+	}
 
 	// 펜션 리스트 메소드(등록일 최신순)
-	public List<PensionDto> getList(int start,int finish) throws Exception {
+	public List<PensionDto> getList(int start, int finish) throws Exception {
 		Connection con = getConnection();
 
 		String sql = "SELECT * FROM (SELECT rownum rn,T.*FROM (SELECT * FROM pension ORDER BY PENSION_REGIST_DATE DESC)T)WHERE rn BETWEEN ? AND ?";
@@ -135,9 +135,9 @@ public class PensionDao {
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, start);
 		ps.setInt(2, finish);
-		
+
 		ResultSet rs = ps.executeQuery();
-		
+
 		List<PensionDto> list = new ArrayList<>();
 		while (rs.next()) {
 			PensionDto pdto = new PensionDto();
@@ -158,28 +158,27 @@ public class PensionDao {
 		return list;
 
 	}
-	
-	//펜션 검색 메소드
-	public List<PensionDto> search(String keyword,int start ,int finish) throws Exception {
+
+	// 펜션 검색 메소드
+	public List<PensionDto> search(String keyword, int start, int finish) throws Exception {
 		Connection con = getConnection();
 		String sql = "SELECT * FROM (SELECT rownum rn,T.*FROM (SELECT * FROM pension WHERE instr(pension_name,? ) > 0 ORDER BY PENSION_REGIST_DATE DESC)T)WHERE rn BETWEEN ? AND ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, keyword);
 		ps.setInt(2, start);
 		ps.setInt(3, finish);
-		
+
 		ResultSet rs = ps.executeQuery();
 		List<PensionDto> list = new ArrayList<PensionDto>();
 		while (rs.next()) {
 			PensionDto mdto = new PensionDto(rs);
 			list.add(mdto);
-			
+
 		}
 		con.close();
 		return list;
 
 	}
-
 
 	// 펜션 이미지뷰 포함 목록 메소드
 	public PenImgViewDto getListWithImg(int pension_no) throws Exception {
@@ -221,13 +220,12 @@ public class PensionDao {
 		con.close();
 	}
 
-
-	//펜션 정보 메소드
+	// 펜션 정보 메소드
 	public PensionInfoDto get(int pension_no) throws Exception {
 		Connection con = getConnection();
 
 		String sql = "SELECT * FROM pension_info WHERE pension_no = ?";
-		
+
 		PreparedStatement ps = con.prepareStatement(sql);
 
 		ps.setInt(1, pension_no);
@@ -258,7 +256,7 @@ public class PensionDao {
 	public void edit(PensionDto pdto) throws Exception {
 		Connection con = getConnection();
 		String sql = "UPDATE pension SET pension_name=? , pension_post=?, pension_basic_addr=?,pension_detail_addr=?,pension_phone=?,pension_intro=? WHERE pension_no=?";
-		
+
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, pdto.getPension_name());
 		ps.setString(2, pdto.getPension_post());
@@ -272,8 +270,8 @@ public class PensionDao {
 		con.close();
 	}
 
-	//(사용자) 펜션 검색 메소드
-	public List<PensionDto> getList(String location,int start,int finish) throws Exception {
+	// (사용자) 펜션 검색 메소드(위치만)
+	public List<PensionDto> getList(String location, int start, int finish) throws Exception {
 		Connection con = getConnection();
 		String sql = "SELECT * FROM (SELECT rownum rn,T.*FROM (SELECT * FROM pension WHERE instr(pension_basic_addr,? ) > 0 ORDER BY pension_no DESC)T)WHERE rn BETWEEN ? AND ?";
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -290,37 +288,60 @@ public class PensionDao {
 		return list;
 	}
 
+	// (사용자)실시간 빈 방 검색
+	public List<LiveSearchDto> getLiveSearch(String location, String in, String out, int people,int start,int finish) throws Exception {
+		Connection con = getConnection();
+		String sql = "SELECT p.PENSION_NO , p.PENSION_NAME , p.PENSION_BASIC_ADDR, p.PENSION_PHONE , r.* FROM PENSION p "
+				+ "LEFT OUTER JOIN ROOM r ON p.PENSION_NO =r.ROOM_PENSION_NO "
+				+ "LEFT OUTER JOIN RESERVATION res ON r.ROOM_NO =res.RES_ROOM_NO AND res.RES_IN >=? AND res.RES_OUT < ? "
+				+ "WHERE instr(p.PENSION_BASIC_ADDR,?) > 0 AND res.RES_NO IS NULL AND r.ROOM_NO IS NOT NULL AND r.STANDARD_PEOPLE >= ? ";
 
-		//목록 펜션 수 조회 메소드
-		public int getCount() throws Exception{
-			Connection con = getConnection();
-			
-			String sql = "SELECT count(*) FROM pension";
-			PreparedStatement ps = con.prepareStatement(sql);
-			ResultSet rs = ps.executeQuery();
-			rs.next();//데이터 무조건 1개 나오므로 이동
-			int count = rs.getInt(1);//또는 rs.getInt("count(*)");
-			
-			con.close();
-			
-			return count;
-		}
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, location);
+		ps.setString(2, in);
+		ps.setString(3, out);
+		ps.setInt(4, people);
+		ps.setInt(5, start);
+		ps.setInt(6, finish);
 
-		//검색 펜션 수 조회 메소드
-		public int getCount(String keyword) throws Exception{
-			Connection con = getConnection();
-			
-			String sql = "SELECT count(*) FROM pension WHERE instr(pension_name,?)>0";
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, keyword);
-			ResultSet rs = ps.executeQuery();
-			rs.next();//데이터 무조건 1개 나오므로 이동
-			int count = rs.getInt(1);//또는 rs.getInt("count(*)");
-			
-			con.close();
-			
-			return count;
+		ResultSet rs = ps.executeQuery();
+		List<LiveSearchDto> list = new ArrayList<LiveSearchDto>();
+		while(rs.next()) {
+			LiveSearchDto search = new LiveSearchDto(rs);
+			list.add(search);
 		}
-		
-		
+		return list;
+	}
+
+	// 목록 펜션 수 조회 메소드
+	public int getCount() throws Exception {
+		Connection con = getConnection();
+
+		String sql = "SELECT count(*) FROM pension";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		rs.next();// 데이터 무조건 1개 나오므로 이동
+		int count = rs.getInt(1);// 또는 rs.getInt("count(*)");
+
+		con.close();
+
+		return count;
+	}
+
+	// 검색 펜션 수 조회 메소드
+	public int getCount(String keyword) throws Exception {
+		Connection con = getConnection();
+
+		String sql = "SELECT count(*) FROM pension WHERE instr(pension_name,?)>0";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, keyword);
+		ResultSet rs = ps.executeQuery();
+		rs.next();// 데이터 무조건 1개 나오므로 이동
+		int count = rs.getInt(1);// 또는 rs.getInt("count(*)");
+
+		con.close();
+
+		return count;
+	}
+
 }
