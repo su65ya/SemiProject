@@ -23,16 +23,15 @@
   	</filter-mapping>
   	
   	<!-- 판매자 테스트 필터 -->
-  	<!-- 
-   	<filter>
-  		<filter-name>sellertestLoginFilter</filter-name>
-  		<filter-class>semi.filter.SellerTestLoginFilter</filter-class>
-  	</filter>
-  	<filter-mapping>
-  		<filter-name>sellertestLoginFilter</filter-name>
-  		<url-pattern>/*</url-pattern>
-  	</filter-mapping>
-  	 -->
+  	
+<!--    	<filter> -->
+<!--    		<filter-name>sellertestLoginFilter</filter-name> -->
+<!--   		<filter-class>semi.filter.SellerTestLoginFilter</filter-class> -->
+<!--   	</filter> -->
+<!--   	<filter-mapping> -->
+<!--   		<filter-name>sellertestLoginFilter</filter-name> -->
+<!--   		<url-pattern>/*</url-pattern> -->
+<!--   	</filter-mapping> -->
   	
   	<!-- 사용자 테스트 필터 -->
   	<!-- 
@@ -87,7 +86,13 @@
     	<url-pattern>/member/reservation_detail.jsp</url-pattern>
     	<url-pattern>/member/reservation_list.jsp</url-pattern>
     	<url-pattern>/member/reservation.jsp</url-pattern>
+    	
+    	<url-pattern>/member/reservation_step1.do</url-pattern>
+    	<url-pattern>/member/reservation_step2.do</url-pattern>
+    	<url-pattern>/member/reservation_step3.do</url-pattern>
     	<url-pattern>/member/option_info.jsp</url-pattern>
+    	
+    	
     	<url-pattern>/member/reservation.do</url-pattern>
     	<url-pattern>/review/write.jsp</url-pattern>
     	<url-pattern>/review/review_edit.jsp</url-pattern>

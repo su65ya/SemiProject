@@ -6,10 +6,7 @@
     		color:red;
     		font-size:16;
     	}
-    	label{
-    		font-size:13;
-    	}
-    	
+
 		label {
 			font-size: 15;
 		}

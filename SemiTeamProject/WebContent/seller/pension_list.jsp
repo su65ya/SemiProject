@@ -76,6 +76,37 @@
 	.tdstyle{
 		width: 38px;
 	}
+			.form-input,.form-btn2,.form-btn3{
+	    	width: 50%;
+	        padding: 0.5rem;
+	        outline: none;/*선택시 자동 부여되는 테두리 제거*/
+	        border: none;
+	    	border-radius: 5px;
+	    }
+	    .form-input:focus{
+	    	border-color: #b2bec3;
+	    }
+	    .form-btn2{
+	        background-color:#636e72;
+	        width : 80px;
+	        color: white;
+	    	cursor: pointer;
+	    }
+	    .form-btn3{
+	        background-color:#ff7675;
+	        width : 80px;
+	        color: white;
+	        cursor: pointer;
+	    }
+	    .form-btn2:hover,.form-btn3:hover {
+	        background-color:#b2bec3;
+	    }
+	    .font_color_a {
+	        color : #636e72;
+	        font-style: normal;
+	    	font-size: 14px;
+	    }
+	
 	
 	
 </style>
@@ -83,18 +114,20 @@
 <article class="w-75">
 	<div class="row">
 		<!-- 제목 -->
-		<h2>펜션 목록</h2>
+		<h1>펜션 목록</h1>
 	</div>
-	<div class="row right">
+	<div class="row float-box" >
 	<form action="pension_list.jsp?keyword=<%=keyword %>" method="get">
-		<input type="text" placeholder="펜션 검색" name = "keyword" style="width: 124px; height: 34px; padding: 1rem;">
-		<input class = "form-btn form-inline" type="button" value = "검색">
 		<a href="pension_list.jsp">
-			<input class = "form-btn form-inline" type="button" value = "전체목록">
+			<input class = "form-btn2 form-inline" type="button" value = "전체목록">
 		</a>
 		<a href="pension_regist.jsp">
-			<input class = "form-btn form-inline" type="button" value = "펜션 등록">
+			<input class = "form-btn2 form-inline" type="button" value = "펜션 등록">
 		</a>
+		<div class="" style="display: inline-block; float: right">
+			<input type="text" placeholder="펜션 검색" name = "keyword" style="width: 124px; height: 34px; padding: 1rem;">
+			<input class = "form-btn3 form-inline" type="button" value = "검색">
+		</div>
 	</form>
 	</div>
 	<!-- 펜션 목록 -->
@@ -121,13 +154,12 @@
 					<td><%=pdto.getPension_name() %></td>
 					<td><%=pdto.getPension_regist_date_day() %></td>
 					<td class="tdstyle"><a href="pension_detail.jsp?pension_no=<%=pdto.getPension_no()%>"><input class = "form-btn2 form-inline" type="button" value="상세보기"></a></td>
-					<td class="tdstyle"><a href = "<%=request.getContextPath() %>/seller/password_check.jsp?go=pension_delete.do?pension_no=<%=pdto.getPension_no()%>"><input class = "form-btn3 form-inline" type="button" value="펜션삭제"></a></td>
 					<td class="tdstyle"><a href="room_list.jsp?pension_no=<%=pdto.getPension_no()%>"><input class = "form-btn2 form-inline" type="button" value="객실목록"></a></td>
-					<td class="tdstyle"><a href="room_regist.jsp?pension_no=<%= pdto.getPension_no()%>"><input class = "form-btn2 form-inline" type="button" value="객실등록"></a></td>
-				</tr>
+					<td class="tdstyle" colspan="2"><a href="room_regist.jsp?pension_no=<%= pdto.getPension_no()%>"><input class = "form-btn2 form-inline" type="button" value="객실등록"></a></td>
+					</tr>
 				
 				<!-- 옵션에 따른 아이콘  표시 -->
-				<tr><td colspan="6" height="50px"  class="left">
+				<tr><td colspan="5" height="50px"  class="left">
 					<%
 					List<PensionOptionDto> optionList = podao.getList(pdto.getPension_no());
 					for(PensionOptionDto podto : optionList){
@@ -145,7 +177,9 @@
 						<img alt ="반려견" src="<%=request.getContextPath()%>/image/dog.png" style="height: 30px; width: 40px; display: inline">&nbsp;&nbsp;
 						<%} %>
 					<%} %>
-				</td></tr>
+					</td>
+					<td class="tdstyle right"><a href = "<%=request.getContextPath() %>/seller/password_check.jsp?go=pension_delete.do?pension_no=<%=pdto.getPension_no()%>"><input class = "form-btn3 form-inline" type="button" value="펜션삭제"></a></td>
+				</tr>
 				<%} %>
 			</tbody>
 		</table>
@@ -153,7 +187,7 @@
 	<!-- 펜션 등록 버튼 -->
 	<div class="row right">
 		<a href="pension_regist.jsp">
-			<input class = "form-btn form-inline" type="button" value = "펜션 등록">
+			<input class = "form-btn2 form-inline" type="button" value = "펜션 등록">
 		</a>
 	</div>
 	<div class="row-empty"></div>

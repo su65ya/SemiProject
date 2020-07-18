@@ -5,9 +5,16 @@
 %>
 
 <jsp:include page="/template/nav.jsp"></jsp:include>
+<style>
+	.button{
+	padding: 0.5rem;
+		border-radius: 5px;
+		outline: none;
+		border:none;
+	}
+</style>
 
-
-<article class =  "w-35"'>
+<article class =  "w-40"'>
 	<div class = "row-empty"></div>
 	<div class = "row-empty"></div>
 
@@ -16,14 +23,14 @@
 	</div>
 	<form action="code_no.do" method="post">
 	<div class = "row center">
-		<input class= "form-input form-inline" type="password" name = "code" placeholder="인증번호를 입력해주세요" required>
+		<input style = "width:180px;" class= "form-input form-inline" type="password" name = "code" placeholder="인증번호를 입력해주세요" required>
 	</div>	
 	<%if(request.getParameter("error") != null){ %>
 		<h6><font color="red">인증된 번호가 존재하지 않습니다</font></h6>
 		<%} %>
 	<div class = "row center">
 	<div class = "row-empty"></div>
-		<input class="form-btn form-inline" type="submit" value="확인">
+		<input class="button form-btn3 form-inline" type="submit" value="확인">
 	</div>
 	</form>
 	<div class = "row">
