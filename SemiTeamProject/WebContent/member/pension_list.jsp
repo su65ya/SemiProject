@@ -56,6 +56,8 @@
 %>
 
 <jsp:include page="/template/nav.jsp"></jsp:include>
+
+
 <article class="w-90">
 <div class="row">
 	<jsp:include page="/template/Search.jsp"></jsp:include>

@@ -83,15 +83,16 @@
 %>
 
 
-<jsp:include page="/template/nav.jsp"></jsp:include>    
-
+<jsp:include page="/template/nav.jsp"></jsp:include>
+    
+<link rel="stylesheet" href="../css/question.css" type="text/css">
 <style>
 	a {
 		text-decoration: none;
 		color: black;
 	}
 	
-	 select {
+	 select{
     	height: 37px;
     	font-size: 15px;
     }
@@ -112,19 +113,6 @@
 	</div>
 	
 	<div class="row-empty"></div>
-	<%-- 
-	<div class="row right">
-		<% if (mdto != null) { %>	
-			<a href="<%= request.getContextPath() %>/member/search_pension_derail.jsp?pension_no=<%= pension_no %>">
-				<input class="form-btn form-inline" type="button" value="펜션정보">
-			</a>
-		<%} else {%>
-			<a href="<%= request.getContextPath() %>/seller/pension_detail.jsp?pension_no=<%= que_pension_no %>">
-				<input class="form-btn form-inline" type="button" value="펜션정보">
-			</a>
-		<%} %>
-	</div>
-	 --%>
 	<table class="table table-sideopen table-hover">
 		<thead>
 			<tr>
@@ -155,11 +143,11 @@
 						<%} %>
 					</font>
 					<% if (sdto != null) { %>
-						<a href="question_content.jsp?que_pension_no=<%= que_pension_no %>&que_no=<%= qvdto.getQue_no() %>">
+						<a href="question_content.jsp?que_no=<%= qvdto.getQue_no() %>">
 							<%= qvdto.getQue_title() %>
 						</a>
 					<%} else if (mdto != null) { %>
-						<a href="question_member_content.jsp?que_pension_no=<%= que_pension_no %>&que_no=<%= qvdto.getQue_no() %>">
+						<a href="question_member_content.jsp?que_no=<%= qvdto.getQue_no() %>">
 							<%= qvdto.getQue_title() %>
 						</a>
 					<%} %>
@@ -180,7 +168,7 @@
 
 	<div class="row right">
 		<a href="question_write.jsp?que_pension_no=<%= que_pension_no %>">
-			<input class="form-btn form-inline" type="button" value="글쓰기">
+			<input class="form-btn2" type="button" value="글쓰기">
 		</a>
 	</div>
 	
@@ -222,18 +210,18 @@
 	<div class="row center">
 		<form action="question_list.jsp?" method="get">
 			<input type="hidden" name="que_pension_no" value="<%= que_pension_no %>">
-			<select class="form-input form-inline" name="type">
+			<select class="intext" name="type" style="width: 100px;">
 				<option value="que_title">제목</option>
 				<option value="que_writer">작성자</option>
 			</select>
 			
 			<% if (keyword != null) { %>
-				<input class="form-input form-inline" type="text" name="keyword" value="<%= keyword %>">
+				<input class="intext" type="text" name="keyword" value="<%= keyword %>">
 			<%} else {%>
-				<input class="form-input form-inline" type="text" name="keyword">
+				<input class="intext" type="text" name="keyword">
 			<%} %>
 			
-			<input class="form-btn form-inline" type="submit" value="검색">
+			<input class="form-btn3" type="submit" value="검색">
 			
 		</form>
 	</div>	

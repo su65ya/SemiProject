@@ -1,95 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <style>
-   
-    	span{
-    		color:red;
-    		font-size:16;
-    	}
-    	label{
-    		font-size:13;
-    	}
-    	
-		label {
-			font-size: 15;
-		}
-		
-		#id_check+label {
-			color: black;
-		}
-		
-		#id_check:checked+label {
-			color: silver;
-		}
-	
-		.find, a {
-			text-align: center;
-			text-decoration: none;
-			color: black;
-		}
-		
-		.form-input,.form-btn2,.form-btn3{
-	    	width: 100%;
-	        padding: 0.5rem;
-	        outline: none;/*선택시 자동 부여되는 테두리 제거*/
-	        border: none;
-	    	border-radius: 5px;
-	    }
-	    .form-input:focus{
-	    	border-color: #b2bec3;
-	    }
-	    .form-btn2{
-	        background-color:#636e72;
-	        width : 150px;
-	        color: white;
-	    	cursor: pointer;
-	    }
-	    .form-btn3{
-	        background-color:#ff7675;
-	        width : 150px;
-	        color: white;
-	        cursor: pointer;
-	    }
-	    .form-btn2:hover,.form-btn3:hover {
-	        background-color:#b2bec3;
-	    }
-	    .font_color_a {
-	        color : #636e72;
-	        font-style: normal;
-	    	font-size: 14px;
-	    }
-	    
-	    .intext {
-			width: 100%;
-			padding-left: 0.5rem;
-			padding: 0.5rem;
-		}
-		.table tr td .info {
-			display: block;
-			font-size: 13px;
-			margin: 0.3rem;
-		}
-		
-		.correct-message, .incorrect-message {
-            display: none;
-            !important;
-        }
-         
-        .intext.correct ~ .correct-message {
-            display: block;
-            font-size: 13px;
-            margin: 0.3rem;
-        }
-        
-        .intext.incorrect ~ .incorrect-message {
-            display: block;
-            font-size: 13px;
-            margin: 0.3rem;
-        }
         
          
-</style>
 <jsp:include page="/template/nav.jsp"></jsp:include>
+
+<link rel="stylesheet" href="../css/join.css" type="text/css">
 <script src="../js/join.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -148,14 +63,17 @@
 	<div class="row">
 		<article class="w-40">
 		<form action="join.do" method="post" onsubmit="return memberJoin();">
+		
+		
 			<div class="row">
 				<h2>회원가입</h2>
 			</div>
 			
+			
 			<table class='table'>
 				<tbody>
 					<tr>
-						<th width='20%'>
+						<th width='30%'>
 							<label><span>*</span>아이디</label>
 						</th>
 						<td class='left'>
@@ -254,6 +172,7 @@
 			</table>
 			
 			<div class = "row-empty"></div>
+			
 			<div class="row center">
 				<input class= "form-btn3" style='font-size: 20px; width: 200px;' type="submit" value="가입하기">
 			</div>
@@ -262,4 +181,5 @@
 		
         </article>
 </div>
+
 <jsp:include page="/template/footer.jsp"></jsp:include>

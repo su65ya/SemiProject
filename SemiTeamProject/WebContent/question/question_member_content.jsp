@@ -10,7 +10,6 @@
     
     <%
     	int que_no = Integer.parseInt(request.getParameter("que_no"));
-    	int que_pension_no = Integer.parseInt(request.getParameter("que_pension_no"));
     	
     	SellerDto sdto = (SellerDto) session.getAttribute("sellerinfo");
     
@@ -40,13 +39,14 @@
 	    
     %>
 <jsp:include page="/template/nav.jsp"></jsp:include>
-
+<link rel="stylesheet" href="../css/question.css" type="text/css">
 
 <style>
-	a {
+	.find, a {
+		text-align: center;
 		text-decoration: none;
+		color: black;
 	}
-	
  	textarea {
 		resize: none;
 	}
@@ -79,6 +79,7 @@
 			</font>
 			<%= qvdto.getQue_title() %>
 		</font>
+		
 	</div>
 	
 	<div class="row">
@@ -89,6 +90,7 @@
 				<font color="gray">XXX</font>
 			<%} %>
 		</font>
+	
 	</div>
 	
 	<div class="row">
@@ -119,21 +121,20 @@
 	<div class="row right">
 
 		<% if (user.getMember_no() == qvdto.getQue_writer()) { %>
-			<a href="question_edit.jsp?que_pension_no=<%= que_pension_no %>&que_no=<%= que_no %>">
-				<input class="form-btn form-inline" type="button" value="문의수정">
+			<a href="<%= request.getContextPath() %>/member/check.jsp?go=<%= request.getContextPath() %>/question/question_edit.jsp?que_no=<%= que_no %>">
+				<input class="form-btn3 " type="button" value="문의수정">
 			</a>
 			
-			<%-- <a href="<%= request.getContextPath() %>/member/check.jsp?go=<%= request.getContextPath() %>/question/question_delete.do?que_pension_no=<%= que_pension_no %>&que_no=<%= que_no %>"> --%>
-			<a href="question_delete.do?que_pension_no=<%= que_pension_no %>&que_no=<%= que_no %>">
-				<input class="form-btn form-inline" type="button" value="삭제">
+			<a href="<%= request.getContextPath() %>/member/check.jsp?go=<%= request.getContextPath() %>/question/question_delete.do?que_no=<%= que_no %>">
+				<input class="form-btn3 " type="button" value="삭제">
 			</a>
 		<%} %>	
-		<a href="question_write.jsp?que_pension_no=<%= que_pension_no %>">
-			<input class="form-btn form-inline" type="button" value="글쓰기">
+		<a href="question_write.jsp?que_pension_no=<%= qvdto.getQue_pension_no() %>">
+			<input class="form-btn2 " type="button" value="글쓰기">
 		</a>
 				
-		<a href="question_list.jsp?que_pension_no=<%= que_pension_no %>">
-			<input class="form-btn form-inline" type="button" value="목록">
+		<a href="question_list.jsp?que_pension_no=<%= qvdto.getQue_pension_no() %>">
+			<input class="form-btn2" type="button" value="목록">
 		</a>
 	</div>
 	
