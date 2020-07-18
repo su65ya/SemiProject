@@ -12,18 +12,15 @@
 <style>
 	th {
 	color:white;
-    background-color: #8D5E2F;
+    background-color: 	#AB8364;
     
   }
   tbody tr:nth-child(2n+1) {
-    background-color: #D3A45F;
+    background-color: 	#D9C3B2;
   }
   
   a {
   	text-decoration: none;
-  }
-  th{
-  	font-size: 22px;
   }
 
 </style>
@@ -36,7 +33,7 @@
 	List<RoomDto> list = rdao.getList(pension_no);
 	PensionInfoDto pdto = pdao.get(pension_no);
 	RoomImgViewDto rivdto = new RoomImgViewDto();
-	
+
 %>
 
 <!-- 객실 목록 리스트 -->
@@ -58,7 +55,7 @@
 			<tbody>
 			<%for(RoomDto rdto : list){ %>
 				<tr>
-					<%rivdto = rdao.getImgView(rdto.getRoom_no());
+					<%rivdto = rdao.getImgView(rdto.getRoom_pension_no()); 
 					if(rivdto != null){%>
   					<td rowspan="8"  style="background-color:white"><img src="roomdownload.do?room_image_no=<%=rivdto.getRoom_image_no() %>" width="250" height="250"></td>
    					<%}else{ %>
@@ -89,7 +86,7 @@
   				<tr>
     				<td class="row right" colspan="7" >
 						<a href = "password_check.jsp?go=room_delete.do?room_no=<%=rdto.getRoom_no()%>">
-							<input class = "form-btn3 form-inline" type="button" value = "객실삭제">
+							<input class = "form-btn2 form-inline" type="button" value = "객실삭제">
 						</a>
 					</td>
   				</tr>
@@ -101,10 +98,10 @@
 		<div class='row-empty'></div>
 		<div class='row right'>
 			<a href = "pension_list.jsp">
-				<input class = "form-btn2 form-inline" type="button" value = "펜션목록">
+				<input class = "form-btn3 form-inline" type="button" value = "펜션목록">
 			</a>	
 			<a href = "room_regist.jsp?pension_no=<%= pension_no %>">
-				<input class = "form-btn2 form-inline" type="button" value = "객실등록">
+				<input class = "form-btn3 form-inline" type="button" value = "객실등록">
 			</a>
 		</div>
 		

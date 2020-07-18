@@ -8,6 +8,7 @@
 
         .search-form{
             text-align: center;
+            margin-bottom: 50px;
         }
         .search-form .search {
             display: inline-block;
@@ -105,9 +106,8 @@
         };
 
     </script>
-</head>
 
-<body>
+
     <form class="search-form" action="pension_list.jsp" method="post">
         <div class="search">
            <h1 class="serch-h1">실시간빈방검색</h1>

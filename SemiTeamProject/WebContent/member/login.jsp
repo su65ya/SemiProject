@@ -18,6 +18,7 @@
 		text-align: center;
 		text-decoration: none;
 		color: black;
+		font-size: 13px;
 	}
 	
 	.form-input,.form-btn2,.form-btn3{
@@ -93,8 +94,13 @@
 			<%} %>
         </div>
 		<div class = "row find">
+<<<<<<< HEAD
 			<a href = "member_find_id.jsp">id 찾기</a> / 
 			<a href = "member_find_pw.jsp">pw 찾기</a>
+=======
+			<a href = "member_find_id.jsp">ID 찾기</a>
+			<a href = "member_find_pw.jsp">PW 찾기</a>
+>>>>>>> refs/remotes/origin/master
 		</div>            
 
 		<div class="row-empty"></div>
