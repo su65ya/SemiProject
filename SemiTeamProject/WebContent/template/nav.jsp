@@ -42,7 +42,6 @@
         .modal-wrap{
         	display: none;
         }
-
         .modal-wrap.on{
         	z-index: 8000;
         	display: block;
@@ -66,7 +65,6 @@
         }
         .siteName{
         	float: left;
-
         }
         
     </style>
@@ -81,14 +79,12 @@
                 // Optional parameters
                 direction: 'horizontal',
                 loop: true,
-
                 // If we need pagination
                 pagination: {
                     el: '.swiper-pagination',
                 },                
      
                 grabCursor:true,
-
             });
         };
         function remove_modal() {
@@ -127,10 +123,8 @@
 		<nav class="nav">
 		<%if(!isLogin){//비로그인 상태 %>
 					<ul class="menuu menuu-f menuu-fixed container brown highlightTextOut">
-
 				<li class="siteName"><a href="<%= root %>/index.jsp">야!여기서놀자</a></li>
 				<li><a onclick="add_modal();">로그인</a></li>
->>>>>>> refs/remotes/origin/master
 				<li><a href="<%= root %>/member/join.jsp">회원가입</a></li>
 				<li><a href="<%= root %>/seller/code_no.jsp">입점신청</a></li>
 				<li><a href="#">펜션 찾기</a></li>
@@ -139,10 +133,25 @@
 
 			<%if(adto!=null){//관리자면 %>
 			<ul class="menuu menuu-f menuu-fixed container brown highlightTextOut">
-
+				<li class="siteName"><a href="<%= root %>/index.jsp">야!여기서놀자</a></li>
+				<li><a href="<%= root %>/admin/info.jsp">내 정보</a></li>
+				<li><a href="<%= root %>/admin/admin_logout.do">로그아웃</a></li>
+				<li><a href="<%= root %>/admin/admin_seller_list.jsp">판매자 회원 관리</a></li>
+				<li><a href="<%= root %>/admin/admin_member_list.jsp">사용자 회원관리</a></li>
+				<li><a href="<%= root %>/admin/admin_count.jsp">통계보기</a></li>
+			</ul>
+			<%}else if(sdto !=null){//판매자면 %>
+			<ul class="menuu menuu-f menuu-fixed container brown highlightTextOut">
+				<li class="siteName"><a href="<%= root %>/index.jsp">야!여기서놀자</a></li>
+				<li><a href="<%= root %>/seller/seller_info.jsp">내 정보</a></li>
+				<li><a href="<%= root %>/seller/seller_logout.do">로그아웃</a></li>
+				<li><a href="<%= root %>/seller/pension_list.jsp">펜션관리</a></li>
+			</ul>
+			<%}else if(mdto !=null){//사용자면 %>
+			<ul class="menuu menuu-f menuu-fixed container brown highlightTextOut">
 				<li class="siteName"><a href="<%= root %>/index.jsp">야!여기서놀자</a></li>
                 <li><a href="<%= root %>/member/info.jsp">내 정보</a></li>
-               	<li><a href="<%= root %>/member/member_logout.do">로그아웃</a></li>
+               <li><a href="<%= root %>/member/member_logout.do">로그아웃</a></li>
                 <li><a href="<%= root %>/member/pension_list.jsp" >펜션 찾기</a></li>
                 <li><a href="<%= root %>/member/reservation_list.jsp?res_write=<%= mdto.getMember_no() %>">내 예약 보기</a></li> 
 			</ul>
@@ -156,5 +165,3 @@
 <!-- 			</ul> -->
 		</nav>
 		<section>
-
-                  
