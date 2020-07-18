@@ -123,9 +123,10 @@
 							<!-- 게시글 작성자인 경우 추가로 표시 -->
 									<%
 // 										boolean isWriter = 게시글작성자 존재 && 댓글작성자 존재 && 두 작성자 일치;
-										boolean isWriter = revdto.getReview_writer() != 0;
-										isWriter = isWriter && rrdto.getReply_writer() != 0;
-										isWriter = isWriter && revdto.getReview_writer()==(rrdto.getReply_writer());
+										
+										boolean isWriter = member_id != null;
+										isWriter = isWriter && memberid != null;
+										isWriter = isWriter && member_id.equals(memberid);
 										if(isWriter){
 									%>
 										<font color="red">(작성자)</font>
@@ -148,7 +149,7 @@
 <!-- 							<input class="form-btn form-inline" type="submit" value="수정"> -->
 <!-- 						</form> -->
 						<a href="reply_delete.do?&reply_no=<%=rrdto.getReply_no()%>&reply_origin=<%=rrdto.getReply_origin()%>&review_pension_no=<%=review_pension_no %>">
-							<input class="form-btn form-inline" type="button" value="삭제">
+							<input class="form-btn3 form-inline" type="button" value="삭제">
 						</a>
 						<%} %>
 						</div>
@@ -164,7 +165,7 @@
 					<div class="row">
 						<input type="hidden" name="reply_origin" value="<%=review_no%>">
 						<input type="hidden" name="review_pension_no" value="<%= review_pension_no %>">
-						<textarea class="form-input" name="reply_content" rows="4" cols="80" placeholder="댓글 작성"></textarea>
+						<textarea class="form-input3" name="reply_content" rows="4" cols="80" placeholder="댓글 작성"></textarea>
 					</div>
 					<div class="row right">
 						<input class="form-btn form-inline" type="submit" value="등록">
@@ -176,14 +177,14 @@
 	<div class="row right">
 		<%if(revdto.getReview_writer()!=0){ %>
 		<a href="review_delete.do?review_pension_no<%=review_pension_no%>&review_no=<%=review_no%>">
-			<input class="form-btn form-inline" type="button" value="리뷰삭제">
+			<input class="form-btn2 form-inline" type="button" value="리뷰삭제">
 		</a>
 		<a href="review_edit.jsp?review_pension_no=<%=review_pension_no%>&review_no=<%=review_no%>">
-			<input class="form-btn form-inline" type="button" value="리뷰수정">
+			<input class="form-btn2 form-inline" type="button" value="리뷰수정">
 		</a>
 		<%} %>
 		<a href="review_list.jsp?review_pension_no=<%=review_pension_no%>">
-			<input class="form-btn form-inline" type="button" value="목록">
+			<input class="form-btn2 form-inline" type="button" value="목록">
 		</a>
 	</div>
 	</article>

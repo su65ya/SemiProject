@@ -89,7 +89,7 @@
   				<tr>
     				<td class="row right" colspan="7" >
 						<a href = "password_check.jsp?go=room_delete.do?room_no=<%=rdto.getRoom_no()%>">
-							<input class = "form-btn form-inline" type="button" value = "객실삭제">
+							<input class = "form-btn3 form-inline" type="button" value = "객실삭제">
 						</a>
 					</td>
   				</tr>
@@ -101,10 +101,10 @@
 		<div class='row-empty'></div>
 		<div class='row right'>
 			<a href = "pension_list.jsp">
-				<input class = "form-btn form-inline" type="button" value = "펜션목록">
+				<input class = "form-btn2 form-inline" type="button" value = "펜션목록">
 			</a>	
 			<a href = "room_regist.jsp?pension_no=<%= pension_no %>">
-				<input class = "form-btn form-inline" type="button" value = "객실등록">
+				<input class = "form-btn2 form-inline" type="button" value = "객실등록">
 			</a>
 		</div>
 		
