@@ -34,7 +34,7 @@
             font-family: Jalnan;
             src: url("<%= root %>/font/Jalnan.ttf");
         }
-        ul>li>a {
+        ul > li > a {
         	font-family: Jalnan.ttf;
         	!important;
         }
@@ -102,7 +102,7 @@
     
 </head>
 <body>
-	<main>
+	<main style="margin-top:">
 	 <div class = "modal-wrap">
         <div class="modal">
              <div class="row center" style="height: 55px;">
@@ -169,3 +169,6 @@
 <!-- 			</ul> -->
 		</nav>
 		<section>
+		<div style="height: 150px;"></div>
+
+                  
