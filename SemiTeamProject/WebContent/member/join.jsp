@@ -88,7 +88,6 @@
 </style>
 <jsp:include page="/template/nav.jsp"></jsp:include>
 <script src="../js/join.js"></script>
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 //우편번호 찾기 및 주소 입력 자바스크립트
     function findAddress() {
