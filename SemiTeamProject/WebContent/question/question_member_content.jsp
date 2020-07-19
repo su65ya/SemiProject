@@ -126,7 +126,7 @@
 			</a>
 			
 			<a href="<%= request.getContextPath() %>/member/check.jsp?go=<%= request.getContextPath() %>/question/question_delete.do?que_no=<%= que_no %>">
-				<input class="form-btn3 " type="button" value="삭제">
+				<input class="form-btn3 " type="button" value="문의삭제">
 			</a>
 		<%} %>	
 		<a href="question_write.jsp?que_pension_no=<%= qvdto.getQue_pension_no() %>">

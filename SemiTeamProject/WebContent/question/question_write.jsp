@@ -55,11 +55,11 @@
 		</div>
 		
 		<div class="row">
-			<textarea name="que_content" cols="100px" rows="20px"></textarea>
+			<textarea name="que_content" cols="102px" rows="20px"></textarea>
 		</div>
 		
 		<div class="row">
-			<input class="form-btn3" style='width: 100%' type="submit" value="등록">
+			<input class="form-btn3" style='width: 100%;' type="submit" value="등록">
 		</div>
 	
 	<div class="row-empty"></div>

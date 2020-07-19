@@ -124,11 +124,11 @@
 	<div class="row right">
 	
 		<a href="<%= request.getContextPath() %>/seller/password_check.jsp?go=<%= request.getContextPath() %>/question/question_delete.do?que_no=<%= que_no %>">
-			<input class="form-btn3" type="button" value="삭제">
+			<input class="form-btn3" type="button" value="문의삭제">
 		</a>
 		
 		<% if (qvdto.getQue_reply() != null) { %>
-			<a href="<%= request.getContextPath() %>/seller/password_check.jsp?go=question_reply.jsp?que_no=<%= que_no %>">
+			<a href="<%= request.getContextPath() %>/seller/password_check.jsp?go=<%= request.getContextPath() %>/question/question_reply.jsp?que_no=<%= que_no %>">
 				<input class="form-btn3" type="button" value="답변수정">
 			</a>
 		<%} else {%>

@@ -17,19 +17,40 @@
 
 <style>
 
-	a {
-    	text-decoration: none;
-    }
-
-    
-    .form-btn {
-    	border: none;
-    	border-radius: 5px;
-    }
+.form-input,.form-btn2,.form-btn3{
+            width: 100%;
+            padding: 0.5rem;
+            outline: none;/*선택시 자동 부여되는 테두리 제거*/
+            border: none;
+    		border-radius: 5px;
+        }
+        .form-input:focus{
+            border-color: #b2bec3;
+        }
+        .form-btn2{
+        	background-color:#636e72;
+        	width : 100px;
+            color: white;
+            cursor: pointer;
+        }
+        .form-btn3{
+        	background-color:#ff7675;
+        	width : 100px;
+            color: white;
+            cursor: pointer;
+        }
+        .form-btn2:hover,.form-btn3:hover {
+        	background-color:#b2bec3;
+        }
+        .font_color_a {
+        	color : #636e72;
+        	font-style: normal;
+        	font-size: 14px;
+        }
     
 </style>
 
-<article class="w-45">
+<article class="w-40">
 
 	<div class="row">
 		<h2>판매자정보</h2>
@@ -47,7 +68,7 @@
 					<th>비밀번호</th>
 					<td class="left">
 						<a href="change_password.jsp">
-						<input class="form-btn form-inline" type="button"  value="비밀번호 변경">
+						<input class="form-btn2" style="width:110px;" type="button"  value="비밀번호 변경">
 						</a>
 					</td>
 				</tr>
@@ -99,13 +120,13 @@
 		
 		<div class='right'>
 			<a href="change_info.jsp">
-				<input class="form-btn form-inline" type="button" value="정보변경">
+				<input class="form-btn2 form-inline" type="button" value="정보변경">
 			</a>
 			<a href="seller_logout.do">
-				<input class="form-btn form-inline" type="button" value="로그아웃">
+				<input class="form-btn3 form-inline" type="button" value="로그아웃">
 			</a>
 			<a href="<%= request.getContextPath() %>/seller/password_check.jsp?go=<%= request.getContextPath() %>/seller/exit.do">
-				<input class="form-btn form-inline" type="button" value="회원탈퇴">
+				<input class="form-btn3 form-inline" type="button" value="회원탈퇴">
 			</a>
 		</div>
 			
