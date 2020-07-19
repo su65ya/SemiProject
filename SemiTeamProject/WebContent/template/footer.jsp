@@ -8,9 +8,6 @@
 		</section>
 
 
-				<h6>로그인 member : <%=session.getAttribute("userinfo") != null %></h6>
-				<h6>로그인 admin : <%=session.getAttribute("admininfo") != null %></h6>
-				<h6>로그인 seller : <%=session.getAttribute("sellerinfo") != null %></h6>
 		<footer class="footer">
 			<div>
 				<ul class="footMenu">

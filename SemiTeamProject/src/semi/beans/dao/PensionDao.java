@@ -289,27 +289,25 @@ public class PensionDao {
 	}
 
 	// (사용자)실시간 빈 방 검색
-	public List<LiveSearchDto> getLiveSearch(String location, String in, String out, int people,int start,int finish) throws Exception {
+	public List<PensionDto> getLiveSearch( String in, String out, String location, int people, int start,int finish) throws Exception {
 		Connection con = getConnection();
-		String sql = "SELECT p.PENSION_NO , p.PENSION_NAME , p.PENSION_BASIC_ADDR, p.PENSION_PHONE , r.* FROM PENSION p "
-				+ "LEFT OUTER JOIN ROOM r ON p.PENSION_NO =r.ROOM_PENSION_NO "
-				+ "LEFT OUTER JOIN RESERVATION res ON r.ROOM_NO =res.RES_ROOM_NO AND res.RES_IN >=? AND res.RES_OUT < ? "
-				+ "WHERE instr(p.PENSION_BASIC_ADDR,?) > 0 AND res.RES_NO IS NULL AND r.ROOM_NO IS NOT NULL AND r.STANDARD_PEOPLE >= ? ";
+		String sql = "SELECT * FROM (SELECT rownum rn,T.*FROM (SELECT p.* FROM PENSION p LEFT OUTER JOIN ROOM r ON p.PENSION_NO =r.ROOM_PENSION_NO LEFT OUTER JOIN RESERVATION res ON r.ROOM_NO =res.RES_ROOM_NO AND res.RES_IN >=? AND res.RES_OUT < ? WHERE instr(p.PENSION_BASIC_ADDR,?) > 0 AND res.RES_NO IS NULL AND r.ROOM_NO IS NOT NULL AND r.STANDARD_PEOPLE >= ? )T)WHERE rn BETWEEN ? AND ?";
 
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, location);
-		ps.setString(2, in);
-		ps.setString(3, out);
+		ps.setString(1, in);
+		ps.setString(2, out);
+		ps.setString(3, location);
 		ps.setInt(4, people);
 		ps.setInt(5, start);
 		ps.setInt(6, finish);
 
 		ResultSet rs = ps.executeQuery();
-		List<LiveSearchDto> list = new ArrayList<LiveSearchDto>();
-		while(rs.next()) {
-			LiveSearchDto search = new LiveSearchDto(rs);
-			list.add(search);
+		List<PensionDto> list = new ArrayList<>();
+		while (rs.next()) {
+			PensionDto pdto = new PensionDto(rs);
+			list.add(pdto);
 		}
+		con.close();
 		return list;
 	}
 

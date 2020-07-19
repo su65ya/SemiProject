@@ -1,5 +1,4 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="semi.beans.dto.LiveSearchDto"%>
 <%@page import="semi.beans.dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -11,21 +10,27 @@
 <%@page import="semi.beans.dto.PensionDto"%>
 <%@page import="java.util.List"%>
 <%
-	MemberDto mdto = (MemberDto)session.getAttribute("userinfo");
 	
+	
+	MemberDto mdto = (MemberDto)session.getAttribute("userinfo");
+		
+	
+// 	int member_no = 3;
 	PensionDao pdao = new PensionDao();
 	PenImgViewDto viewDto = new PenImgViewDto();
 	PensionOptionDao podao = new PensionOptionDao();
-	
 	String location = request.getParameter("location");
-	String res_in = request.getParameter("in");
-	String res_out = request.getParameter("out");
-	String people_str = request.getParameter("people");
+	String res_in = request.getParameter("start_date");
+	String res_out = request.getParameter("finish_date");
+	String people_str = request.getParameter("person");
+	int people;
 	if(people_str == null){
-		people_str = "0";
+		people = 0;
+	}else{
+		people = Integer.parseInt(request.getParameter("person"));
 	}
-	int people = Integer.parseInt(people_str);
-	boolean isLiveSearch = location != null && res_in != null && res_out !=null && people != 0;
+
+	boolean isLiveSearch = location != null && res_in != null && res_out != null;
 	
 	boolean isSearch = location != null;
 	int pageSize = 5;
@@ -45,7 +50,6 @@
 	int blockSize = 10;
 	int startBlock = (pageNo-1)/blockSize*blockSize+1;
 	int finishBlock = startBlock + (blockSize-1);
-
 	int count;
 	if(isSearch){//검색이면
 		count = pdao.getCount(location);
@@ -58,14 +62,41 @@
 		finishBlock = pageCount;
 	}
 	
-	List<LiveSearchDto> list_lsd = new ArrayList<>();
-	List<PensionDto> list_psd = new ArrayList<>();
 	
-	List<LiveSearchDto> list_is = pdao.getLiveSearch(location, res_in, res_out, people, start, finish);
-	List<PensionDto> list_ps = pdao.getList(start, finish);
+	List<PensionDto> list = pdao.getList(start,finish);
+	if(isLiveSearch){
+		list = pdao.getLiveSearch(res_in, res_out,location, people, start, finish);
+		if(list.isEmpty()){
+		list = pdao.getList(start,finish);
+		}
+	}else{
+		list = pdao.getList(start,finish);
+	}
 %>
 
 <jsp:include page="/template/nav.jsp"></jsp:include>
+
+<style>
+		.form-input,.form-btn2,.form-btn3{
+	    	width: 50%;
+	        padding: 0.5rem;
+	        outline: none;/*선택시 자동 부여되는 테두리 제거*/
+	        border: none;
+	    	border-radius: 5px;
+	    }
+		.form-btn2{
+	        background-color:#636e72;
+	        width : 80px;
+	        color: white;
+	    	cursor: pointer;
+	    }
+	    .form-btn3{
+	        background-color:#ff7675;
+	        width : 80px;
+	        color: white;
+	        cursor: pointer;
+	    }
+</style>
 <article class="w-90">
 <div class="row">
 	<jsp:include page="/template/Search.jsp"></jsp:include>
@@ -75,144 +106,77 @@
 	<div class="row-empty"></div>
 	<!-- 펜션 목록 -->
 	<div class="row list ">
+	<div class="float-box" style="align-content: right !important; float: right;"><a href="pension_list.jsp"> <button class="form-btn2" style=" width: 150px; margin-bottom: 30px; background-color: #795548; color: white; height: 40px; outline-color: #795548;">전체 목록</button></a></div>
+	<div class="row-empty"></div>
 		<table class="table table-sideopen left" style=border-collapse:inherit;>
 			<tbody>
-				<%
-				if(!isLiveSearch){
-					for (PensionDto pdto : list_ps) {%>
-					<tr>
+				<%for (PensionDto pdto : list) {%>
+				<tr>
+					<%
+					
+						viewDto = pdao.getListWithImg(pdto.getPension_no());
+							if (viewDto != null) {
+					%>
+					<td rowspan="3" style=width:30px;>
+					<img src="download.do?pen_image_no=<%=viewDto.getPen_img_no() %>" width="200" height="200"></td>
+					<%} else { %>
+					<td rowspan="3"><img src="https://placehold.it/200x200"></td>
+					<%}%>
+					<td height="10px" style=""><h2 class="left" style="height: 10px;"><%=pdto.getPension_name()%></h2></td>
+					<td rowspan="3">
+						<a href="room_list.jsp?pension_no=<%=pdto.getPension_no()%>"><button type ="button" class='form-btn2 form-inline'>객실보기</button></a>
+						<a href="reservation_step1.do?pension_no=<%=pdto.getPension_no()%>"><button class='form-btn3 form-inline'>예약하기</button></a>
+						<a href="<%= request.getContextPath() %>/review/review_list.jsp?review_pension_no=<%= pdto.getPension_no()%>"><button class='form-btn2 form-inline'>리뷰보기</button></a>
+						<a href='<%= request.getContextPath() %>/question/question_list.jsp?que_pension_no=<%= pdto.getPension_no()%>'><button type ="button" class='form-btn2 form-inline'>문의하기</button></a>
+						
+					</td>
+				</tr>
+				<tr>
+					<td class="left"><h5 class="left" style="color: gray;" ><%=pdto.getPension_basic_addr() %></h5></td>
+				</tr>
+				<!-- 옵션에 따른 아이콘  표시 -->
+				<tr>
+					<td colspan="3" height="50px" class="left">
 						<%
-							viewDto = pdao.getListWithImg(pdto.getPension_no());
-								if (viewDto != null) {
-						%>
-						<td rowspan="3" style=width:30px;>
-						<img src="download.do?pen_image_no=<%=viewDto.getPen_img_no() %>" width="200" height="200"></td>
-						<%} else { %>
-						<td rowspan="3"><img src="https://placehold.it/200x200"></td>
-						<%}%>
-						<td height="10px" style=""><h2 class="left" style="height: 10px;"><%=pdto.getPension_name()%></h2></td>
-						<td rowspan="3">
-							<a href="room_list.jsp?pension_no=<%=pdto.getPension_no()%>"><button type ="button" class='form-btn form-inline'>객실보기</button></a>
-							<a href="reservation_step1.do?pension_no=<%=pdto.getPension_no()%>"><button class='form-btn form-inline'>예약하기</button></a>
-							<a href="<%= request.getContextPath() %>/review/review_list.jsp?review_pension_no=<%= pdto.getPension_no()%>"><button class='form-btn form-inline'>리뷰보기</button></a>
-							<a href='<%= request.getContextPath() %>/question/question_list.jsp?que_pension_no=<%= pdto.getPension_no()%>'><button type ="button" class='form-btn form-inline'>문의하기</button></a>
-							
-						</td>
-					</tr>
-					<tr>
-						<td class="left"><h5 class="left" style="color: gray;" ><%=pdto.getPension_basic_addr() %></h5></td>
-					</tr>
-					<!-- 옵션에 따른 아이콘  표시 -->
-					<tr>
-						<td colspan="3" height="50px" class="left">
-							<%
-								List<PensionOptionDto> optionList = podao.getList(pdto.getPension_no());
-									for (PensionOptionDto podto : optionList) {
-										if (podto.getOption_name().equals("수영장")) {
-							%> <img alt="수영장"
-							src="<%=request.getContextPath()%>/image/swim.png"
-							style="height: 30px; width: 40px; display: inline-block;">&nbsp;&nbsp;
-							<%
-								} else if (podto.getOption_name().equals("공용 바베큐장")) {
-							%> <img
-							alt="공용 바베큐장" src="<%=request.getContextPath()%>/image/bbq.png"
-							style="height: 30px; width: 40px; display: inline-block;">&nbsp;&nbsp;
-							<%
-								} else if (podto.getOption_name().equals("노래방")) {
-							%> <img alt="노래방"
-							src="<%=request.getContextPath()%>/image/sing.png"
-							style="height: 30px; width: 40px; display: inline-block;">&nbsp;&nbsp;
-							<%
-								} else if (podto.getOption_name().equals("족구장")) {
-							%> <img alt="족구장"
-							src="<%=request.getContextPath()%>/image/foot.png"
-							style="height: 30px; width: 40px; display: inline">&nbsp;&nbsp;
-							<%
-								} else if (podto.getOption_name().equals("탁구장")) {
-							%> <img alt="탁구장"
-							src="<%=request.getContextPath()%>/image/tak.png"
-							style="height: 30px; width: 40px; display: inline">&nbsp;&nbsp;
-							<%
-								} else if (podto.getOption_name().equals("반려견")) {
-							%> <img alt="반려견"
-							src="<%=request.getContextPath()%>/image/dog.png"
-							style="height: 30px; width: 40px; display: inline">&nbsp;&nbsp;
-							<% } %> 
-							<% } %>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="3"><hr></td>
-					</tr>
-					<%}
-					}else{ 
-						for (LiveSearchDto pdto : list_is) {%>
-						<tr>
-							<%
-								viewDto = pdao.getListWithImg(pdto.getPension_no());
-									if (viewDto != null) {
-							%>
-							<td rowspan="3" style=width:30px;>
-							<img src="download.do?pen_image_no=<%=viewDto.getPen_img_no() %>" width="200" height="200"></td>
-							<%} else { %>
-							<td rowspan="3"><img src="https://placehold.it/200x200"></td>
-							<%}%>
-							<td height="10px" style=""><h2 class="left" style="height: 10px;"><%=pdto.getPension_name()%></h2></td>
-							<td rowspan="3">
-								<a href="room_list.jsp?pension_no=<%=pdto.getPension_no()%>"><button type ="button" class='form-btn form-inline'>객실보기</button></a>
-								<a href="reservation_step1.do?pension_no=<%=pdto.getPension_no()%>"><button class='form-btn form-inline'>예약하기</button></a>
-								<a href="<%= request.getContextPath() %>/review/review_list.jsp?review_pension_no=<%= pdto.getPension_no()%>"><button class='form-btn form-inline'>리뷰보기</button></a>
-								<a href='<%= request.getContextPath() %>/question/question_list.jsp?que_pension_no=<%= pdto.getPension_no()%>'><button type ="button" class='form-btn form-inline'>문의하기</button></a>
-								
-							</td>
-						</tr>
-						<tr>
-							<td class="left"><h5 class="left" style="color: gray;" ><%=pdto.getPension_basic_addr() %></h5></td>
-						</tr>
-						<!-- 옵션에 따른 아이콘  표시 -->
-						<tr>
-							<td colspan="3" height="50px" class="left">
-								<%
-									List<PensionOptionDto> optionList = podao.getList(pdto.getPension_no());
-										for (PensionOptionDto podto : optionList) {
-											if (podto.getOption_name().equals("수영장")) {
-								%> <img alt="수영장"
-								src="<%=request.getContextPath()%>/image/swim.png"
-								style="height: 30px; width: 40px; display: inline-block;">&nbsp;&nbsp;
-								<%
-									} else if (podto.getOption_name().equals("공용 바베큐장")) {
-								%> <img
-								alt="공용 바베큐장" src="<%=request.getContextPath()%>/image/bbq.png"
-								style="height: 30px; width: 40px; display: inline-block;">&nbsp;&nbsp;
-								<%
-									} else if (podto.getOption_name().equals("노래방")) {
-								%> <img alt="노래방"
-								src="<%=request.getContextPath()%>/image/sing.png"
-								style="height: 30px; width: 40px; display: inline-block;">&nbsp;&nbsp;
-								<%
-									} else if (podto.getOption_name().equals("족구장")) {
-								%> <img alt="족구장"
-								src="<%=request.getContextPath()%>/image/foot.png"
-								style="height: 30px; width: 40px; display: inline">&nbsp;&nbsp;
-								<%
-									} else if (podto.getOption_name().equals("탁구장")) {
-								%> <img alt="탁구장"
-								src="<%=request.getContextPath()%>/image/tak.png"
-								style="height: 30px; width: 40px; display: inline">&nbsp;&nbsp;
-								<%
-									} else if (podto.getOption_name().equals("반려견")) {
-								%> <img alt="반려견"
-								src="<%=request.getContextPath()%>/image/dog.png"
-								style="height: 30px; width: 40px; display: inline">&nbsp;&nbsp;
-								<% } %> 
-								<% } %>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="3"><hr></td>
-						</tr>
+							List<PensionOptionDto> optionList = podao.getList(pdto.getPension_no());
+								for (PensionOptionDto podto : optionList) {
+									if (podto.getOption_name().equals("수영장")) {
+						%> <img alt="수영장"
+						src="<%=request.getContextPath()%>/image/swim.png"
+						style="height: 30px; width: 40px; display: inline-block;">&nbsp;&nbsp;
+						<%
+							} else if (podto.getOption_name().equals("공용 바베큐장")) {
+						%> <img
+						alt="공용 바베큐장" src="<%=request.getContextPath()%>/image/bbq.png"
+						style="height: 30px; width: 40px; display: inline-block;">&nbsp;&nbsp;
+						<%
+							} else if (podto.getOption_name().equals("노래방")) {
+						%> <img alt="노래방"
+						src="<%=request.getContextPath()%>/image/sing.png"
+						style="height: 30px; width: 40px; display: inline-block;">&nbsp;&nbsp;
+						<%
+							} else if (podto.getOption_name().equals("족구장")) {
+						%> <img alt="족구장"
+						src="<%=request.getContextPath()%>/image/foot.png"
+						style="height: 30px; width: 40px; display: inline">&nbsp;&nbsp;
+						<%
+							} else if (podto.getOption_name().equals("탁구장")) {
+						%> <img alt="탁구장"
+						src="<%=request.getContextPath()%>/image/tak.png"
+						style="height: 30px; width: 40px; display: inline">&nbsp;&nbsp;
+						<%
+							} else if (podto.getOption_name().equals("반려견")) {
+						%> <img alt="반려견"
+						src="<%=request.getContextPath()%>/image/dog.png"
+						style="height: 30px; width: 40px; display: inline">&nbsp;&nbsp;
 						<% } %> 
-								<% } %>
+						<% } %>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3"><hr></td>
+				</tr>
+				<%}%>
 			</tbody>
 		</table>
 		
@@ -221,10 +185,10 @@
 		<div class="row-empty"></div>
 		<div class="row-empty"></div>
 	<%if(startBlock>1){ %>
-		<%if(!isSearch){ %>
+		<%if(!isLiveSearch){ %>
 			<a href = "pension_list.jsp?page=<%=startBlock-1%>">&lt;</a>
 		<%}else{ %>
-			<a href = "pension_list.jsp?page=<%=startBlock-1%>&location=<%=location%>">
+			<a href = "pension_list.jsp?page=<%=startBlock-1%>&location=<%=location%>&start_date=<%=res_in%>&finish_date=<%=res_out%>&person=<%=people%>">
 			&lt;</a>
 		<%} %>
 		
@@ -240,17 +204,17 @@
 				}
 		%>
 					
-		<%if(!isSearch){ %>
+		<%if(!isLiveSearch){ %>
 			<a href = "pension_list.jsp?page=<%=i%>"<%=prop%>><%=i%></a>
 		<%}else{ %>
-			<a href = "pension_list.jsp?page=<%=i %>&keyword=<%=location %>"<%=prop%>><%=i %></a>
+			<a href = "pension_list.jsp?page=<%=i %>&keyword=<%=location %>&start_date=<%=res_in%>&finish_date=<%=res_out%>&person=<%=people%>"<%=prop%>><%=i %></a>
 	<%} %>
 	<%} %>
 	<%if(pageCount>finishBlock){ %>
-		<%if(!isSearch){ %>
+		<%if(!isLiveSearch){ %>
 			<a href = "pension_list.jsp?page=<%=finishBlock+1%>">&gt;</a>
 		<%}else{ %>
-			<a href = "pension_list.jsp?page=<%=startBlock-1%>&location=<%=location%>">
+			<a href = "pension_list.jsp?page=<%=startBlock-1%>&location=<%=location%>&start_date=<%=res_in%>&finish_date=<%=res_out%>&person=<%=people%>">
 			&gt;</a>
 		<%} %>
 		<%} %>

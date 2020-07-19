@@ -126,7 +126,7 @@
 		</a>
 		<div class="" style="display: inline-block; float: right">
 			<input type="text" placeholder="펜션 검색" name = "keyword" style="width: 124px; height: 34px; padding: 1rem;">
-			<input class = "form-btn3 form-inline" type="button" value = "검색">
+			<a href = "pension_list.jsp?keyword=<%=keyword %>"><input class = "form-btn3 form-inline" type="button" value = "검색"></a>
 		</div>
 	</form>
 	</div>
