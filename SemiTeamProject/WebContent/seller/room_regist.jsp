@@ -17,6 +17,16 @@
         .ck:checked + label {
             color:silver;
         }
+        .tdstyle{
+		width: 38px;
+	}
+			.form-input,.form-btn2,.form-btn3{
+	    	width: 50%;
+	        padding: 0.5rem;
+	        outline: none;/*선택시 자동 부여되는 테두리 제거*/
+	        border: none;
+	    	border-radius: 5px;
+	    }
     </style>
     <script>    
         function changeCheckbox(){
@@ -231,7 +241,7 @@
             <div class="row-empty"></div>
             <div class="row-empty"></div>
             <div class="row">
-        		<input class="form-btn" type="submit" value="객실등록하기">
+        		<input class="tdstyle form-btn2" style="width:100%;"  type="submit" value="객실등록하기">
 			</div>
             
 		</form>

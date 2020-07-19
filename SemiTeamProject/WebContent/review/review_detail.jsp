@@ -15,7 +15,6 @@
    	MemberDto mdto = (MemberDto) session.getAttribute("userinfo");
    	ReviewDto revdto = new ReviewDto();
    	ReviewFileDto rfdto = new ReviewFileDto();
-
    	ReviewReplyDao rrdao = new ReviewReplyDao();
    	int review_pension_no = Integer.parseInt(request.getParameter("review_pension_no"));
    	int review_no = Integer.parseInt(request.getParameter("review_no"));
@@ -40,7 +39,6 @@
 	a {
 		text-decoration: none;
 	}
-
 </style>
 
 <article class="w-50">
@@ -58,16 +56,18 @@
 	
 	<div class="row">
 		<font size="5">
-			<% if (revdto.getReview_writer() != 0) {%>
-				<%= revdto.getReview_writer() %>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
-			<%} else {%>
+			<%
+			String review_id = revdao.getId(revdto.getReview_no());
+			if (review_id != null) {%>
+			<%= review_id %>
+		<%}  else {%>
 		<font color="gray">XXX</font>
 					<%} %>
 		</font>
 	</div>
 	
 	<div class="row">
-		<%= revdto.getReview_date() %> / 
+		<%= revdto.getReview_auto() %> / 
 		조회 <%= revdto.getReview_count() %>
 	</div>
 	

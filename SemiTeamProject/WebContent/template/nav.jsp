@@ -2,16 +2,16 @@
 <%@page import="semi.beans.dto.SellerDto"%>
 <%@page import="semi.beans.dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	
-	<%
-		String root = request.getContextPath();
-		MemberDto mdto = (MemberDto)session.getAttribute("userinfo");//다운캐스팅(down-casting)
-		SellerDto sdto = (SellerDto)session.getAttribute("sellerinfo");
-		AdminDto adto = (AdminDto)session.getAttribute("admininfo");
-		boolean isLogin = mdto != null || sdto!=null || adto !=null;
-	%>
-	
+   pageEncoding="UTF-8"%>
+   
+   <%
+      String root = request.getContextPath();
+      MemberDto mdto = (MemberDto)session.getAttribute("userinfo");//다운캐스팅(down-casting)
+      SellerDto sdto = (SellerDto)session.getAttribute("sellerinfo");
+      AdminDto adto = (AdminDto)session.getAttribute("admininfo");
+      boolean isLogin = mdto != null || sdto!=null || adto !=null;
+   %>
+   
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,37 +36,38 @@
             src: url("<%= root %>/font/Jalnan.ttf");
         }
         ul > li > a {
-        	font-family: Jalnan.ttf;
-        	!important;
+           font-family: Jalnan.ttf;
+           !important;
         }
         
         .modal-wrap{
-        	display: none;
+           display: none;
         }
 
         .modal-wrap.on{
-        	z-index: 8000;
-        	display: block;
+           z-index: 8000;
+           display: block;
         }
         .form-btn.login{
-        	height: 55px;
-			radius:30%;
+           height: 55px;
+         radius:30%;
             font-size: 16px;
             font-weight: 900;
-        	background-color: darkslategray;
+           background-color: darkslategray;
         }
         .form-btn.login:hover{
-        	background-color: #b2bec3;
-        	 
+           background-color: #b2bec3;
+            
         }
         .center{
-        	margin-top: 50px;
+           margin-top: 50px;
             margin-left: 30px;
             margin-right: 30px;
             padding: 0.3rem;
         }
-        .siteName {
-        	float: left;
+
+        .siteName{
+           float: left;
         }
         
         .highlightTextOut a:hover {
@@ -80,19 +81,20 @@
         
         
         function remove_modal() {
-			var modal = document.querySelector(".modal-wrap");
-			modal.classList.remove("on");
-		}
+         var modal = document.querySelector(".modal-wrap");
+         modal.classList.remove("on");
+      }
         function add_modal() {
-			var modal = document.querySelector(".modal-wrap");
-			modal.classList.add("on");
-		}
+         var modal = document.querySelector(".modal-wrap");
+         modal.classList.add("on");
+      }
     </script>
     
 </head>
 <body>
-	<main>
-	 <div class = "modal-wrap">
+
+   <main style="margin-top:">
+    <div class = "modal-wrap">
         <div class="modal">
              <div class="row center" style="height: 55px;">
             <a href="<%=request.getContextPath() %>/member/login.jsp">
@@ -159,17 +161,17 @@
                <li><a href="<%= root %>/member/member_logout.do">로그아웃</a></li>
                 <li><a href="<%= root %>/member/pension_list.jsp" >펜션 찾기</a></li>
                 <li><a href="<%= root %>/member/reservation_list.jsp?res_write=<%= mdto.getMember_no() %>">내 예약 보기</a></li> 
-			</ul>
-			<%} %>
-		<%} %>
-<!-- 		<ul class="menuu"> -->
-<!-- 				<li><a href="#">업소관리</a></li> -->
-<!-- 				<li><a href="#">입점신청</a></li> -->
-<!-- 				<li><a href="#">펜션 찾기</a></li> -->
-<!-- 				<li><a href="#">내 예약 보기</a></li> -->
-<!-- 			</ul> -->
-		</nav>
-		<section>
-		<div style="height: 150px;"></div>
+         </ul>
+         <%} %>
+      <%} %>
+<!--       <ul class="menuu"> -->
+<!--             <li><a href="#">업소관리</a></li> -->
+<!--             <li><a href="#">입점신청</a></li> -->
+<!--             <li><a href="#">펜션 찾기</a></li> -->
+<!--             <li><a href="#">내 예약 보기</a></li> -->
+<!--          </ul> -->
+      </nav>
+      <section>
+      <div style="height: 150px;"></div>
 
                   
