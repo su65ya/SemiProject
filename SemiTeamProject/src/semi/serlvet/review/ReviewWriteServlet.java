@@ -54,6 +54,7 @@ public class ReviewWriteServlet extends HttpServlet{
 			revdto.setReview_writer(mdto.getMember_no());
 			revdto.setReview_title(map.get("review_title").get(0).getString());
 			revdto.setReview_content(map.get("review_content").get(0).getString());
+			revdto.setReview_res_no(Integer.parseInt(map.get("res_no").get(0).getString()));
 			
 			// 처리
 			int review_no = revdao.getSequence(); // 리뷰 번호
@@ -71,6 +72,7 @@ public class ReviewWriteServlet extends HttpServlet{
 					rfdto.setReview_file_no(review_file_no);
 					rfdto.setReview_file_name(item.getName());
 					rfdto.setReview_origin(review_no);
+					
 					rfdto.setReview_file_size(item.getSize());
 					rfdto.setReview_file_type(item.getContentType());
 					rfdao.save(rfdto);

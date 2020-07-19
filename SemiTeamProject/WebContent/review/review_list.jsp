@@ -65,6 +65,8 @@
 	else {
 		list = revdao.getList(review_pension_no, start, finish);
 	}
+	
+	ReviewDao rdao = new ReviewDao();
 %>
 
 <jsp:include page="/template/nav.jsp"></jsp:include>
@@ -134,13 +136,13 @@
 			<% } %>
 		</tbody>
 	</table>
-	
+	<%if(rdao.getInfo(mdto.getMember_no(),review_pension_no) != null){ %>
 	<div class="row right">
 		<a href="write.jsp?review_pension_no=<%=review_pension_no%>">
 			<input class="tdstyle form-btn3 form-inline" type="button" value="글쓰기">
 		</a>
 	</div>
-	
+	<%}%>
 	<div class="row center pagination">
 	
 		<!-- 이전 -->

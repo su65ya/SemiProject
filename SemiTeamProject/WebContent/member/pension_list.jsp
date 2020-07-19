@@ -128,7 +128,7 @@
 					<%}%>
 					<td height="10px" style=""><h2 class="left" style="height: 10px;"><%=pdto.getPension_name()%></h2></td>
 					<td rowspan="3">
-						<a href="room_list.jsp?pension_no=<%=pdto.getPension_no()%>"><button type ="button" class='form-btn2 form-inline'>객실보기</button></a>
+						<a href="room_list2.jsp?pension_no=<%=pdto.getPension_no()%>"><button type ="button" class='form-btn2 form-inline'>객실보기</button></a>
 						<a href="reservation_step1.do?pension_no=<%=pdto.getPension_no()%>"><button class='form-btn3 form-inline'>예약하기</button></a>
 						<a href="<%= request.getContextPath() %>/review/review_list.jsp?review_pension_no=<%= pdto.getPension_no()%>"><button class='form-btn2 form-inline'>리뷰보기</button></a>
 						<a href='<%= request.getContextPath() %>/question/question_list.jsp?que_pension_no=<%= pdto.getPension_no()%>'><button type ="button" class='form-btn2 form-inline'>문의하기</button></a>

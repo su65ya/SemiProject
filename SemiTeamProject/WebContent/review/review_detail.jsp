@@ -42,8 +42,8 @@
 	.tdstyle{
 		width: 38px;
 	}
-.form-btn2,.form-btn3{
-	    	width: 50%;
+	.form-btn2,.form-btn3{
+	    	width: 20%;
 	        padding: 0.5rem;
 	        outline: none;/*선택시 자동 부여되는 테두리 제거*/
 	        border: none;

@@ -54,8 +54,11 @@
 			</tr>
 		</tbody>
 	</table>
-
-
+<div>
+		<a href="<%=request.getContextPath() %>/review/write.jsp?review_pension_no=<%=roomDto.getRoom_pension_no() %>&res_no=<%=rdto.getRes_no()%>">
+			<input class="form-btn2" type="button" value="글쓰기">
+		</a>
+</div>
 </article>
 
 
