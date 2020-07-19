@@ -24,6 +24,7 @@
 
 
 	 <style>
+	 
     	.swiper-container {
     		z-index: -1;
             width: 100%;
@@ -64,32 +65,20 @@
             margin-right: 30px;
             padding: 0.3rem;
         }
-        .siteName{
+        .siteName {
         	float: left;
         }
+        
+        .highlightTextOut a:hover {
+        	color:white;
+        }
+        
         
     </style>
     <script src="<%= root %>/js/swiper.min.js"></script>
     <script>
         
-        // 창의 로딩이 완료되었을 때 실행할 코드를 예약
-        window.onload = function() {
-            // swiper 관련 코드를 이곳에 작성
-            // var mySwiper = new Swiper(선택자(대상), 옵션);
-            var mySwiper = new Swiper ('.swiper-container', {
-                // Optional parameters
-                direction: 'horizontal',
-                loop: true,
-
-                // If we need pagination
-                pagination: {
-                    el: '.swiper-pagination',
-                },                
-     
-                grabCursor:true,
-
-            });
-        };
+        
         function remove_modal() {
 			var modal = document.querySelector(".modal-wrap");
 			modal.classList.remove("on");
@@ -102,7 +91,7 @@
     
 </head>
 <body>
-	<main style="margin-top:">
+	<main>
 	 <div class = "modal-wrap">
         <div class="modal">
              <div class="row center" style="height: 55px;">
@@ -126,17 +115,25 @@
 		<nav class="nav">
 		<%if(!isLogin){//비로그인 상태 %>
 					<ul class="menuu menuu-f menuu-fixed container brown highlightTextOut">
-				<li class="siteName"><a href="<%= root %>/index.jsp">야!여기서놀자</a></li>
+				<li class="siteName" style="padding-top: 8px;"><a href="<%= root %>/index.jsp">
+
+				<img alt="main"
+						src="<%=request.getContextPath()%>/image/main.png"
+						style="padding-top:0px; width: 200px; display: inline">
+
+				</a></li>
 				<li><a onclick="add_modal();">로그인</a></li>
 				<li><a href="<%= root %>/member/join.jsp">회원가입</a></li>
 				<li><a href="<%= root %>/seller/code_no.jsp">입점신청</a></li>
-				<li><a href="#">펜션 찾기</a></li>
+				<li><a href="<%= root %>/member/pension_list.jsp"">펜션 찾기</a></li>
 			</ul>
 		<%}else{%>
 
 			<%if(adto!=null){//관리자면 %>
 			<ul class="menuu menuu-f menuu-fixed container brown highlightTextOut">
-				<li class="siteName"><a href="<%= root %>/index.jsp">야!여기서놀자</a></li>
+				<li class="siteName"><a href="<%= root %>/index.jsp"><img alt="main"
+						src="<%=request.getContextPath()%>/image/main.png"
+						style="padding-top:0px; width: 200px; display: inline"></a></li>
 				<li><a href="<%= root %>/admin/info.jsp">내 정보</a></li>
 				<li><a href="<%= root %>/admin/admin_logout.do">로그아웃</a></li>
 				<li><a href="<%= root %>/admin/admin_seller_list.jsp">판매자 회원 관리</a></li>
@@ -146,14 +143,18 @@
 			</ul>
 			<%}else if(sdto !=null){//판매자면 %>
 			<ul class="menuu menuu-f menuu-fixed container brown highlightTextOut">
-				<li class="siteName"><a href="<%= root %>/index.jsp">야!여기서놀자</a></li>
+				<li class="siteName"><a href="<%= root %>/index.jsp"><img alt="main"
+						src="<%=request.getContextPath()%>/image/main.png"
+						style="padding-top:0px; width: 200px; display: inline"></a></li>
 				<li><a href="<%= root %>/seller/seller_info.jsp">내 정보</a></li>
 				<li><a href="<%= root %>/seller/seller_logout.do">로그아웃</a></li>
 				<li><a href="<%= root %>/seller/pension_list.jsp">펜션관리</a></li>
 			</ul>
 			<%}else if(mdto !=null){//사용자면 %>
 			<ul class="menuu menuu-f menuu-fixed container brown highlightTextOut">
-				<li class="siteName"><a href="<%= root %>/index.jsp">야!여기서놀자</a></li>
+				<li class="siteName"><a href="<%= root %>/index.jsp"><img alt="main"
+						src="<%=request.getContextPath()%>/image/main.png"
+						style="padding-top:0px; width: 200px; display: inline"></a></li>
                 <li><a href="<%= root %>/member/info.jsp">내 정보</a></li>
                <li><a href="<%= root %>/member/member_logout.do">로그아웃</a></li>
                 <li><a href="<%= root %>/member/pension_list.jsp" >펜션 찾기</a></li>

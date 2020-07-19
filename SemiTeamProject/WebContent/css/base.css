@@ -380,14 +380,33 @@
             border: 1px solid black;
         }
         .form-input:focus{
-            border-color: cadetblue;
+            border-color: #636e72;
         }
         .form-btn{
-        	background-color:#2196f3;
+        	background-color:#636e72;
         	border: none;
             color: white;
             cursor: pointer;
         }
+        ,.form-btn2,.form-btn3{
+	    	width: 50%;
+	        padding: 0.5rem;
+	        outline: none;/*선택시 자동 부여되는 테두리 제거*/
+	        border: none;
+	    	border-radius: 5px;
+	    }
+		.form-btn2{
+	        background-color:#636e72;
+	        width : 80px;
+	        color: white;
+	    	cursor: pointer;
+	    }
+	    .form-btn3{
+	        background-color:#ff7675;
+	        width : 80px;
+	        color: white;
+	        cursor: pointer;
+	    }
         /* 
         .form-btn:hover{
             background-color: cadetblue;
