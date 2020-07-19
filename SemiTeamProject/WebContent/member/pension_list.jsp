@@ -10,9 +10,8 @@
 <%@page import="semi.beans.dto.PensionDto"%>
 <%@page import="java.util.List"%>
 <%
-	
 	MemberDto mdto = (MemberDto)session.getAttribute("userinfo");
-		
+	int member_no = mdto.getMember_no();
 	
 // 	int member_no = 3;
 	PensionDao pdao = new PensionDao();
@@ -73,24 +72,15 @@
 	}
 
 %>
-<style>
-.tdstyle{
-		width: 38px;
-	}
-			.form-input,.form-btn2,.form-btn3{
-	    	width: 50%;
-	        padding: 0.5rem;
-	        outline: none;/*선택시 자동 부여되는 테두리 제거*/
-	        border: none;
-	    	border-radius: 5px;
-	    }
 
-
-</style>
 
 <jsp:include page="/template/nav.jsp"></jsp:include>
 
 <style>
+		.tdstyle{
+			width: 38px;
+		}
+
 		.form-input,.form-btn2,.form-btn3{
 	    	width: 50%;
 	        padding: 0.5rem;
@@ -112,7 +102,7 @@
 	    }
 </style>
 <article class="w-90">
-<div class="row">
+	<div class="row">
 	<jsp:include page="/template/Search.jsp"></jsp:include>
 	</div>
 	
