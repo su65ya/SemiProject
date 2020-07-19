@@ -43,7 +43,7 @@
   		<filter-name>membertestLoginFilter</filter-name>
   		<url-pattern>/*</url-pattern>
   	</filter-mapping>
-	 -->
+   	 -->
  
  	<!-- 관리자 계정 필터 -->
  	<!-- 
@@ -65,7 +65,7 @@
    	 </servlet>
     
     <!-- 예약자 로그인 필터 -->
-    <!-- 
+     
     <filter>
     	<filter-name>memberLoginFilter</filter-name>
     	<filter-class> semi.filter.MemberLoginFilter</filter-class>
@@ -107,10 +107,10 @@
     	<url-pattern>/review/review_reply_del.do</url-pattern>
     	<url-pattern>/review/review_reply_writer.do</url-pattern>
     </filter-mapping>
-	 -->
+	 
 
 	<!-- 판매자 로그인 필터 -->
-	<!-- 
+	
     <filter>
     	<filter-name>sellerLoginFilter</filter-name>
     	<filter-class> semi.filter.SellerLoginFilter</filter-class>
@@ -143,10 +143,10 @@
     	<url-pattern>/seller/pension_edit.do</url-pattern>
     	<url-pattern>/seller/pension_delete.do</url-pattern>
     </filter-mapping>
-     -->
+
     
     <!-- 관리자 로그인 필터 -->
-    <!-- 
+    
     <filter>
     	<filter-name>adminLoginFilter</filter-name>
     	<filter-class>semi.filter.AdminLoginFilter</filter-class>
@@ -167,8 +167,8 @@
     	<url-pattern>/admin/memberDrop.do</url-pattern>
     	<url-pattern>/admin/admin_logout.do</url-pattern>
     	<url-pattern>/admin/admin_check.do</url-pattern>
-    </filter-mapping>
-     -->
+     </filter-mapping>
+
 
 </web-app>
 

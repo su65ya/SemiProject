@@ -76,7 +76,7 @@
     <script src="<%=request.getContextPath() %>/js/lightpick.js"></script>
 
     <script>
-        window.onload = function() {
+    window.addEventListener("load", function(){	
             var options = {
                 //선택1 날짜
                 field: document.querySelector(".picker-start"),
@@ -111,12 +111,12 @@
                 }
             };
             var picker = new Lightpick(options);
-        };
+        });
 
     </script>
 
 
-    <form class="search-form" action="<%=request.getContextPath() %>/member/pension_list.jsp" method="post">
+    <form class="search-form" action="<%=request.getContextPath() %>/member/pension_list.jsp" method="get">
         <div class="search">
            <h1 class="serch-h1">실시간빈방검색</h1>
            <div class="row-empty"></div>
@@ -147,7 +147,7 @@
             <div class="search-person">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS46t4HaVXE28g2KosQb0rGQIshseGS_fV_sA&usqp=CAU" alt="날짜" class="search-img">
                 <select name="person">
-                    <option value = "0">인원</option>
+                    <option value="0">인원</option>
                     <option value="1">1명</option>
                     <option value="2">2명</option>
                     <option value="3">3명</option>
@@ -161,6 +161,8 @@
                 </select>&nbsp;
                <input class = "search-submit" type="submit" value="검색">
             </div>
+               
+           
 
             <!-- 검색 버튼 -->
 

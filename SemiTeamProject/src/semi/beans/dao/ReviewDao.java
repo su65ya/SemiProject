@@ -50,14 +50,14 @@ public class ReviewDao {
 	public void write(ReviewDto revdto) throws Exception{
 		Connection con = getConnection();
 		
-		String sql = "INSERT INTO review VALUES(?,?, ?,1,?,?,sysdate,0)";
+		String sql = "INSERT INTO review VALUES(?,?, ?,?,?,?,sysdate,0)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, revdto.getReview_no());
 		ps.setInt(2, revdto.getReview_writer());
 		ps.setInt(3, revdto.getReview_pension_no());
-//		ps.setInt(3,revdto.getReview_res_no());
-		ps.setString(4, revdto.getReview_title());
-		ps.setString(5, revdto.getReview_content());
+		ps.setInt(4,revdto.getReview_res_no());
+		ps.setString(5, revdto.getReview_title());
+		ps.setString(6, revdto.getReview_content());
 		ps.execute();
 		
 		con.close();
@@ -155,6 +155,25 @@ public class ReviewDao {
 			return revdto;
 		}
 		
+		public String getId(int review_no) throws Exception {
+			Connection con = getConnection();
+			
+			String sql = "SELECT member_id from (SELECT * FROM member m INNER JOIN review r ON m.member_no = r.review_writer)WHERE review_no = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, review_no);
+			ResultSet rs = ps.executeQuery();
+			String member_id;
+			if(rs.next()) {
+				member_id = rs.getString(1);
+			}else {
+				member_id = null;
+			}
+			
+			
+			con.close();
+			return member_id;
+		}
+		
 		// 조회수 메소드
 		public void viewCount(int review_no, int review_writer) throws Exception {
 			Connection con = getConnection();
@@ -164,7 +183,6 @@ public class ReviewDao {
 			ps.setInt(1, review_no);
 			ps.setInt(2, review_writer);
 			ps.execute();
-			
 			
 			con.close();
 		}

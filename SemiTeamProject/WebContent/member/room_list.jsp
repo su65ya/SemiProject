@@ -145,6 +145,7 @@
 	PensionInfoDto pdto = pdao.get(pension_no);
 	String addr = pdto.getPension_basic_addr();
 	PensionImageDao pidao = new PensionImageDao();
+	
 	List<PensionImageDto> fileList = pidao.getList(pension_no);
 	
 	PenImgViewDto viewDto = new PenImgViewDto();

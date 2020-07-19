@@ -21,7 +21,7 @@
 		
 	<div class = "row">
 		<h4>
-			<a href="admin_login.jsp">로그인 화면</a>
+			<a href="admin_login.jsp"><button class="form-btn2">로그인 화면</button></a>
 		</h4>
 	</div>	
 	

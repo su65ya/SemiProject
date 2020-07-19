@@ -12,16 +12,27 @@
 <style>
 	th {
 	color:white;
-    background-color: #ff5990;
+    background-color: 	#AB8364;
     
   }
   tbody tr:nth-child(2n+1) {
-    background-color: #ffe6ee;
+    background-color: 	#D9C3B2;
   }
+	
   
   a {
   	text-decoration: none;
   }
+  .tdstyle{
+		width: 38px;
+	}
+			.form-input,.form-btn2,.form-btn3{
+	    	width: 50%;
+	        padding: 0.5rem;
+	        outline: none;/*선택시 자동 부여되는 테두리 제거*/
+	        border: none;
+	    	border-radius: 5px;
+	    }
 
 </style>
 <jsp:include page="/template/nav.jsp"></jsp:include>
@@ -86,7 +97,7 @@
   				<tr>
     				<td class="row right" colspan="7" >
 						<a href = "password_check.jsp?go=room_delete.do?room_no=<%=rdto.getRoom_no()%>">
-							<input class = "form-btn form-inline" type="button" value = "객실삭제">
+							<input class = "tdstyle form-btn3 form-inline" type="button" value = "객실삭제">
 						</a>
 					</td>
   				</tr>
@@ -98,10 +109,10 @@
 		<div class='row-empty'></div>
 		<div class='row right'>
 			<a href = "pension_list.jsp">
-				<input class = "form-btn form-inline" type="button" value = "펜션목록">
+				<input class = "tdstyle form-btn2 form-inline" type="button" value = "펜션목록">
 			</a>	
 			<a href = "room_regist.jsp?pension_no=<%= pension_no %>">
-				<input class = "form-btn form-inline" type="button" value = "객실등록">
+				<input class = "tdstyle form-btn2 form-inline" type="button" value = "객실등록">
 			</a>
 		</div>
 		

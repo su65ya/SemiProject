@@ -89,7 +89,7 @@
 <jsp:include page="/template/nav.jsp"></jsp:include>
 
 <link rel="stylesheet" href="../css/join.css" type="text/css">
-<script src="../js/join.js"></script>
+<script src="<%= request.getContextPath() %>/js/join.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 //우편번호 찾기 및 주소 입력 자바스크립트
@@ -162,7 +162,7 @@
 						</th>
 						<td class='left'>
 							<div>
-								<input class="intext " type="text" name="member_id" autocomplete="none" style='width: 250px;' onblur="idCheck();">
+								<input class="intext " type="text" name="member_id" id='idcheck' autocomplete="none" style='width: 250px;' onblur="idCheck();">
 								<span class='incorrect-message'>아이디는 영문 소문자, 숫자 포함 8~20자 이내로 입력하세요</span>
 								<span class='correct-message' style='color: #0984e3;'>사용가능한 아이디입니다</span>
 							</div>	
@@ -174,7 +174,7 @@
 						</th>
 						<td>
 							<div class='row left'>
-								<input class="intext " type="password" name="member_pw" autocomplete="none" style='width: 250px;' onblur="pwCheck()">
+								<input class="intext " type="password" name="member_pw" id="pwcheck" autocomplete="none" style='width: 250px;' onblur="pwCheck()">
 								<span class='incorrect-message'>비밀번호는 영문 대,소문자, 숫자, 특수 문자 포함 8~20자 이내로 입력하세요</span>
 							</div>
 						</td>
@@ -185,7 +185,7 @@
 						</th>
 						<td>
 							<div class="row left">
-								<input class="intext" type = "text" name = "member_name" autocomplete="none" style='width: 250px;' onblur='nameCheck();'>
+								<input class="intext" type = "text" name = "member_name" id='namecheck' autocomplete="none" style='width: 250px;' onblur='nameCheck();'>
 								<span class='incorrect-message'>이름을 입력해주세요</span>
 							</div>
 						</td>
@@ -196,7 +196,7 @@
 						</th>
 						<td>
 							<div class="row left">
-								<input class="intext" type = "date" name="member_birth" autocomplete="none" onblur="birthCheck();" style="width: auto">
+								<input class="intext" type = "date" name="member_birth" id='birthcheck' autocomplete="none" onblur="birthCheck();" style="width: auto">
 								<span class='incorrect-message'>생년월일을 입력해주세요</span>
 							</div>
 						</td>
@@ -207,7 +207,7 @@
 						</th>
 						<td>
 							<div class="row left">
-								<input class="intext" type = "text" name="member_mail" style='width: 250px;' onblur="mailCheck();">
+								<input class="intext" type = "text" name="member_mail" id='mailcheck' style='width: 250px;' onblur="mailCheck();">
 								<span class='incorrect-message'>이메일 입력해주세요</span>
 							</div>
 						</td>
@@ -246,7 +246,7 @@
 					    </th>
 					    <td>
 					        <div class="row left">
-				                <input class="intext" type="text" name="member_phone" placeholder="'-' 제외하고 입력" onblur="phoneCheck();" style='width: 250px;' maxlength="11">
+				                <input class="intext" type="text" name="member_phone" id='phonecheck' placeholder="'-' 제외하고 입력" onblur="phoneCheck();" style='width: 250px;' maxlength="11">
                                 <span class='incorrect-message'>핸드폰 번호를 입력해주요</span>
                             </div>
 					        
