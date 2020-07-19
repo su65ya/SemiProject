@@ -1,4 +1,4 @@
-<%@page import="semi.beans.dto.ReservationDto"%>
+<%@page import="semi.beans.dao.ReviewReplyDao"%>
 <%@page import="java.util.List"%>
 <%@page import="semi.beans.dto.AdminDto"%>
 <%@page import="semi.beans.dao.ReviewFileDao"%>
@@ -7,7 +7,6 @@
 <%@page import="semi.beans.dao.MemberDao"%>
 <%@page import="semi.beans.dto.MemberDto"%>
 <%@page import="semi.beans.dto.ReviewReplyDto"%>
-<%@page import="semi.beans.dao.ReviewReplyDao"%>
 <%@page import="semi.beans.dto.ReviewDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -16,30 +15,30 @@
    	MemberDto mdto = (MemberDto) session.getAttribute("userinfo");
    	ReviewDto revdto = new ReviewDto();
    	ReviewFileDto rfdto = new ReviewFileDto();
-
+   	ReviewReplyDao rrdao = new ReviewReplyDao();
    	int review_pension_no = Integer.parseInt(request.getParameter("review_pension_no"));
    	int review_no = Integer.parseInt(request.getParameter("review_no"));
    	ReviewDao revdao = new ReviewDao();
    	revdto = revdao.get(review_no);
    	ReviewFileDao rfdao = new ReviewFileDao();
-   	ReviewReplyDao rrdao = new ReviewReplyDao();
+   	
+   	
    	
 	boolean isAdmin = (adto != null);
 	
-	// - 내글 : 게시글(revdto)의 작성자와 로그인 된 사용자(user)의 아이디가 같아야 함
+	// - 내글 : 게시글(bdto)의 작성자와 로그인 된 사용자(user)의 아이디가 같아야 함
 	boolean isMine = mdto.getMember_no()==(revdto.getReview_writer());
 	List<ReviewReplyDto> replyList = rrdao.getList(review_no);
 	
 	List<ReviewFileDto> fileList = rfdao.getList(review_no);
-	ReservationDto rvdto = new ReservationDto();
+	
    %> 
 <jsp:include page="/template/nav.jsp"></jsp:include>
-<input type="hidden" name="review_res_no" value="<%=rvdto.getRes_no()%>">
+
 <style>
 	a {
 		text-decoration: none;
 	}
-
 </style>
 
 <article class="w-50">
@@ -97,31 +96,26 @@
 			<div class="row row-center">
 				<%for(ReviewReplyDto rrdto : replyList){ %>
 						<div class="row">
-						<%
-						String reply_id = rrdao.getReplyId(rrdto.getReply_no());
-						if(reply_id != null){ %> 
-						<%=reply_id%> 
-						<%=rrdto.getReply_writer() %>
+							<%=mdto.getMember_id()%>
 							<!-- 게시글 작성자인 경우 추가로 표시 -->
 									<%
 // 										boolean isWriter = 게시글작성자 존재 && 댓글작성자 존재 && 두 작성자 일치;
-										boolean isWriter = review_id != null;
-										isWriter = isWriter && reply_id != null;
-										isWriter = isWriter && review_id.equals(reply_id);
+										boolean isWriter = revdto.getReview_writer() != 0;
+										isWriter = isWriter && rrdto.getReply_writer() != 0;
+										isWriter = isWriter && revdto.getReview_writer()==(rrdto.getReply_writer());
 										if(isWriter){
 									%>
 										<font color="red">(작성자)</font>
 									<%} %>
-								
 						</div>
 						<div class="row"><%=rrdto.getReply_content()%></div>
-						<div class="row"><%=rrdto.getReply_auto()%></div>
+						<div class="row"><%=rrdto.getReply_date()%></div>
 							<!-- 
 								수정 삭제 버튼은 "내 댓글" 이거나 "관리자" 인 경우만 표시
 							 -->
 							<%
 // 								boolean isMyReply = 내 아이디가 작성자와 같은 경우;
-								boolean isMyReply = review_id.equals(reply_id);
+								boolean isMyReply = mdto.getMember_no()==(rrdto.getReply_writer());
 								if(isAdmin || isMyReply){
 							%>
 						<div class="row right">
@@ -135,7 +129,6 @@
 						<%} %>
 					<%} %>
 			</div>
-			<%} %>
 			
 			<!-- 댓글 작성 영역 -->
 	

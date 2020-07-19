@@ -1,4 +1,3 @@
-<%@page import="semi.beans.dto.ReviewReplyDto"%>
 <%@page import="semi.beans.dto.SellerDto"%>
 <%@page import="semi.beans.dto.MemberDto"%>
 <%@page import="semi.beans.dao.ReviewDao"%>
@@ -8,13 +7,12 @@
     pageEncoding="UTF-8"%>
 
 <%
-
 	// 펜션 별 펜션 리스트
-
 	MemberDto mdto = (MemberDto) session.getAttribute("userinfo");
 	SellerDto sdto = (SellerDto) session.getAttribute("sellerinfo");
 	
 	int review_pension_no = Integer.parseInt(request.getParameter("review_pension_no"));
+	
 	String type = request.getParameter("type");
 	String keyword = request.getParameter("keyword");
 	
@@ -45,7 +43,6 @@
 	int blockStart = (page_no - 1) / block_size * block_size + 1;
 	int blockFinish = blockStart +block_size - 1;
 	
-
 	ReviewDao revdao = new ReviewDao();
 	
 	int count;
@@ -68,9 +65,6 @@
 	else {
 		list = revdao.getList(review_pension_no, start, finish);
 	}
-
-
-	
 %>
 
 <jsp:include page="/template/nav.jsp"></jsp:include>
@@ -83,6 +77,16 @@
  	textarea {
 		resize: none;
 	}
+	.tdstyle{
+		width: 38px;
+	}
+	.form-btn2,.form-btn3{
+	    	width: 10%;
+	        padding: 0.5rem;
+	        outline: none;/*선택시 자동 부여되는 테두리 제거*/
+	        border: none;
+	    	border-radius: 5px;
+	    }
 	   
 </style>
 
@@ -116,10 +120,10 @@
 				</td>
 				
 				<td>
-					<% 
-					String review_id = revdao.getId(revdto.getReview_no());
-					if (review_id != null) {%>
-						<%= review_id %>
+					<%
+						String review_id = revdao.getId(revdto.getReview_no());
+						if (review_id != null) {%>
+							<%= review_id %>
 					<%} else {%>
 						<font color="gray">XXX</font>
 					<%} %>
@@ -133,7 +137,7 @@
 	
 	<div class="row right">
 		<a href="write.jsp?review_pension_no=<%=review_pension_no%>">
-			<input class="form-btn form-inline" type="button" value="글쓰기">
+			<input class="tdstyle form-btn3 form-inline" type="button" value="글쓰기">
 		</a>
 	</div>
 	
@@ -184,7 +188,7 @@
 				<input class="form-input form-inline" type="text" name="keyword">
 			<%} %>
 			
-			<input class="form-btn form-inline" type="submit" value="검색">
+			<input class="tdstyle form-btn2 form-inline" type="submit" value="검색">
 			
 		</form>
 	</div>	
