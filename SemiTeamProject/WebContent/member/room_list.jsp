@@ -217,7 +217,7 @@
     <div> 
     	<h4  class="left">"먼저 아래 달력에서 예약할 객실을 선택하고 예약하기를 눌러주세요."</h4>
     </div>
-    <div class="center">
+    <div class="center" style="margin-left: -30px;">
         <table class="table table-border center">
             <thead>
                 <tr>
