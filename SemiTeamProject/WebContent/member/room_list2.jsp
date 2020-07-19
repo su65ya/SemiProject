@@ -115,9 +115,6 @@
 			<a href = "pension_list.jsp">
 				<input class = "tdstyle form-btn2 form-inline" type="button" value = "펜션목록">
 			</a>	
-			<a href = "room_regist.jsp?pension_no=<%= pension_no %>">
-				<input class = "tdstyle form-btn2 form-inline" type="button" value = "객실등록">
-			</a>
 		</div>
 		
 	</div>
