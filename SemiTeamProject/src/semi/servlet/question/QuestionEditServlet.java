@@ -21,7 +21,6 @@ public class QuestionEditServlet extends HttpServlet{
 			// 입력
 			MemberDto mdto = (MemberDto) req.getSession().getAttribute("userinfo");
 			
-			int que_pension_no = Integer.parseInt(req.getParameter("que_pension_no"));
 			QuestionDto qdto = new QuestionDto();
 			
 			qdto.setQue_head(req.getParameter("que_head"));
@@ -34,13 +33,8 @@ public class QuestionEditServlet extends HttpServlet{
 			qdao.edit(qdto);
 			
 			// 출력
-			if (mdto != null) {
-				resp.sendRedirect("question_member_content.jsp?que_pension_no="+ que_pension_no +"&que_no=" + qdto.getQue_no());
-			}
-			else {
-				resp.sendRedirect("question_content.jsp?que_pension_no="+ que_pension_no +"&que_no=" + qdto.getQue_no());
-			}
-			
+			resp.sendRedirect("question_member_content.jsp?que_no=" + qdto.getQue_no());
+
 			
 			
 		} catch (Exception e) {

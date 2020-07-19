@@ -10,10 +10,8 @@
 <%@page import="semi.beans.dto.PensionDto"%>
 <%@page import="java.util.List"%>
 <%
-	
-	
 	MemberDto mdto = (MemberDto)session.getAttribute("userinfo");
-		
+	int member_no = mdto.getMember_no();
 	
 // 	int member_no = 3;
 	PensionDao pdao = new PensionDao();
@@ -72,11 +70,17 @@
 	}else{
 		list = pdao.getList(start,finish);
 	}
+
 %>
+
 
 <jsp:include page="/template/nav.jsp"></jsp:include>
 
 <style>
+		.tdstyle{
+			width: 38px;
+		}
+
 		.form-input,.form-btn2,.form-btn3{
 	    	width: 50%;
 	        padding: 0.5rem;
@@ -98,7 +102,7 @@
 	    }
 </style>
 <article class="w-90">
-<div class="row">
+	<div class="row">
 	<jsp:include page="/template/Search.jsp"></jsp:include>
 	</div>
 	
@@ -220,5 +224,6 @@
 		<%} %>
 	</div>
 		</div>
+
 </article>
 <jsp:include page="/template/footer.jsp"></jsp:include>
