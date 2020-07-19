@@ -16,6 +16,7 @@ import javax.sql.DataSource;
 
 
 import semi.beans.dto.SellerDto;
+import semi.beans.dto.SellerStatisticsDto;
 
 public class SellerDao {
 	
@@ -282,6 +283,27 @@ public class SellerDao {
 		con.close();
 		return seller_pw;
 		
+	}
+	
+	//펜션 별 매출 조회
+	public List<SellerStatisticsDto> getMonthlyPrice(int seller_no) throws Exception {
+		Connection con = getConnection();
+		String sql = "SELECT DISTINCT A.PENSION_NAME, TO_CHAR(A.RES_DATE, 'YYYY-MM') RES_DATE, COUNT(*) CNT, SUM(A.RES_PRICE) SUM_PRICE FROM (SELECT p.PENSION_NO, p.PENSION_NAME ,r.ROOM_NAME ,res.RES_NO , res.RES_WRITE , res.RES_ROOM_NO , Res.RES_NAME , res.RES_DATE , res.RES_IN , res.RES_OUT , res.RES_PAYTYPE , nvl(res.RES_PRICE, 0) RES_PRICE FROM PENSION p LEFT OUTER JOIN ROOM r ON p.PENSION_NO =r.ROOM_PENSION_NO LEFT OUTER JOIN RESERVATION res ON r.ROOM_NO =res.RES_ROOM_NO WHERE res.RES_NO IS NOT NULL AND p.PENSION_SELLER_NO = ?) A GROUP BY A.PENSION_NAME, TO_CHAR(RES_DATE, 'YYYY-MM')ORDER BY PENSION_NAME";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, seller_no);
+		ResultSet rs = ps.executeQuery();
+		List<SellerStatisticsDto> list = new ArrayList<SellerStatisticsDto>(); 
+		while(rs.next()) {
+			SellerStatisticsDto ssdto = new SellerStatisticsDto();
+			ssdto.setPension_name(rs.getString("pension_name"));
+			ssdto.setRes_date(rs.getString("res_date"));
+			ssdto.setCnt(rs.getInt("cnt"));
+			ssdto.setSum_price(rs.getInt("sum_price"));
+			
+			list.add(ssdto);
+		}
+		con.close();
+		return list;
 	}
 	
 

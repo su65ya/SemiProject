@@ -27,7 +27,10 @@
 	boolean isAdmin = (adto != null);
 	
 	// - 내글 : 게시글(revdto)의 작성자와 로그인 된 사용자(user)의 아이디가 같아야 함
-	boolean isMine = mdto.getMember_no()==(revdto.getReview_writer());
+	if(mdto != null){
+		boolean isMine = mdto.getMember_no()==revdto.getReview_writer();
+		
+	}
 	List<ReviewReplyDto> replyList = rrdao.getList(review_no);
 	
 	List<ReviewFileDto> fileList = rfdao.getList(review_no);
@@ -134,10 +137,10 @@
 								if(isAdmin || isMyReply){
 							%>
 						<div class="row right">
-						<a href="reply_edit.do?reply_no=<%=rrdto.getReply_no()%>&reply_origin=<%=review_no %>">
+						<a href="reply_edit.do?reply_no=<%=rrdto.getReply_no()%>&reply_origin=<%=review_no %>&review_pension_no=<%=review_pension_no%>">
 							<input class="tdstyle form-btn3 form-inline" type="button" value="수정">
 						</a>
-						<a href="reply_delete.do?reply_no=<%=rrdto.getReply_no()%>&reply_origin=<%=review_no%>">
+						<a href="reply_delete.do?reply_no=<%=rrdto.getReply_no()%>&reply_origin=<%=review_no%>&review_pension_no=<%=review_pension_no%>">
 							<input class="tdstyle form-btn3 form-inline" type="button" value="삭제">
 						</a>
 					</div>
@@ -161,8 +164,8 @@
 
 	<div class="row-empty"></div>
 	<div class="row right">
-		<%if(revdto.getReview_writer()!=0){ %>
-		<a href="review_delete.do?review_pension_no<%=review_pension_no%>&review_no=<%=review_no%>">
+		<%if(revdto.getReview_writer()!=0 && mdto != null){ %>
+		<a href="review_delete.do?review_pension_no=<%=review_pension_no%>&review_no=<%=review_no%>">
 			<input class="tdstyle form-btn2 form-inline" type="button" value="리뷰삭제">
 		</a>
 		<a href="review_edit.jsp?review_pension_no=<%=review_pension_no%>&review_no=<%=review_no%>">
@@ -170,7 +173,7 @@
 		</a>
 		<%} %>
 		<a href="review_list.jsp?review_pension_no=<%=review_pension_no%>">
-			<input class="tdstyle form-btn2 form-inline" type="button" value="펜션목록">
+			<input class="tdstyle form-btn2 form-inline" type="button" value="리뷰목록">
 		</a>
 	</div>
 	</article>

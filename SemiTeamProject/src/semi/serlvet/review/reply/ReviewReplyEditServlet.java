@@ -20,7 +20,7 @@ public class ReviewReplyEditServlet extends HttpServlet{
 			// 입력 - 리뷰 번호, 작성자, 댓글 내용
 						MemberDto mdto = (MemberDto) req.getSession().getAttribute("userinfo");			
 						ReviewReplyDto rrdto = new ReviewReplyDto();
-						
+						int review_no = Integer.parseInt(req.getParameter("reply_origin"));
 						int review_pension_no = Integer.parseInt(req.getParameter("review_pension_no"));
 						rrdto.setReply_origin(Integer.parseInt(req.getParameter("reply_origin")));
 						rrdto.setReply_writer(mdto.getMember_no());
@@ -32,7 +32,7 @@ public class ReviewReplyEditServlet extends HttpServlet{
 						
 						
 						// 출력
-						resp.sendRedirect("review_detail.jsp?review_pension_no=" + review_pension_no + "&review_no="+ rrdto.getReply_origin());
+						resp.sendRedirect("review_detail.jsp?review_pension_no=" + review_pension_no + "&review_no="+review_no);
 						
 			
 		}catch(Exception e) {

@@ -18,13 +18,14 @@ public class ReviewReplyDeleteServlet extends HttpServlet{
 try {
 //	rrdao.setReply_origin(Integer.parseInt(req.getParameter("reply_origin")));
 			int review_pension_no = Integer.parseInt(req.getParameter("review_pension_no"));
+			int review_no = Integer.parseInt(req.getParameter("reply_origin"));
 			int reply_no = Integer.parseInt(req.getParameter("reply_no"));
 			ReviewReplyDao rrdao = new ReviewReplyDao();
 			ReviewReplyDto rrdto = new ReviewReplyDto();
 			rrdao.delete(reply_no);
 			
 			
-			resp.sendRedirect("review_detail.jsp?review_pension_no=" + review_pension_no + "&review_no="+ rrdto.getReply_origin());
+			resp.sendRedirect("review_detail.jsp?review_pension_no=" + review_pension_no + "&review_no="+ review_no);
 			
 			
 		} catch (Exception e) {

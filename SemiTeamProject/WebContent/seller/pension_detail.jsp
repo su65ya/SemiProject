@@ -38,6 +38,14 @@
         ul>li{
         	list-style: none;
         }
+        
+        .form-btn2,.form-btn3{
+	    	width: 18%;
+	        padding: 0.5rem;
+	        outline: none;/*선택시 자동 부여되는 테두리 제거*/
+	        border: none;
+	    	border-radius: 5px;
+	    }
     </style>
 
 
@@ -51,7 +59,7 @@
  			<table>
  				<tbody>
  				<tr>
- 					<th style="width: 180px;" class="left">펜션번호 </th>
+ 					<th style="width: 180px">펜션번호 </th>
  					<td class="left"><%=pidto.getPension_no() %></td>
  				</tr>
  				<tr>
@@ -102,11 +110,11 @@
  		</div>
  		<div class="row-empty"></div>
  		<div class="row center a">
- 			<a href = "<%=request.getContextPath() %>/seller/password_check.jsp?go=<%=request.getContextPath() %>/seller/pension_edit.jsp?pension_no=<%=pension_no%>">수정하기</a>&nbsp;&nbsp;
- 			<a href = "room_regist.jsp?pension_no=<%= pension_no %>">객실 등록</a>&nbsp;&nbsp;
- 			<a href = "<%=request.getContextPath() %>/seller/password_check.jsp?go=pension_delete.do?pension_no=<%=pension_no%>">펜션 삭제</a>&nbsp;&nbsp;
- 			<a href = "pension_list.jsp">목록보기</a>&nbsp;&nbsp;
- 			<a href = "<%= request.getContextPath() %>/question/question_list.jsp?que_pension_no=<%= pension_no %>">문의내역</a>
+ 			<a href = "<%=request.getContextPath() %>/seller/password_check.jsp?go=<%=request.getContextPath() %>/seller/pension_edit.jsp?pension_no=<%=pension_no%>"><button class="form-btn2">수정하기</button></a>&nbsp;&nbsp;
+ 			<a href = "room_regist.jsp?pension_no=<%= pension_no %>"><button class="form-btn2">객실 등록</button></a>&nbsp;&nbsp;
+ 			<a href = "pension_list.jsp"><button class="form-btn2">목록보기</button></a>&nbsp;&nbsp;
+ 			<a href = "<%= request.getContextPath() %>/question/question_list.jsp?que_pension_no=<%= pension_no %>"><button class="form-btn2">문의내역</button></a>
+ 			<a href = "<%=request.getContextPath() %>/seller/password_check.jsp?go=pension_delete.do?pension_no=<%=pension_no%>"><button class="form-btn3">펜션 삭제</button></a>&nbsp;&nbsp;
  		</div>
  	</article>
 

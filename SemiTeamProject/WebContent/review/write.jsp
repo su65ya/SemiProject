@@ -71,12 +71,12 @@ function preview(){
 		
 		<div class="row">
 			<label><span>*</span>리뷰 제목</label>
-			<input class="form-input" type="text" name="review_title">
+			<input class="form-input" type="text" name="review_title" required>
 		</div>
 		
 		<div class="row">
 			<label><span>*</span>리뷰 내용</label><br>
-			<textarea name="review_content" rows="10px" cols="80px"></textarea>
+			<textarea name="review_content" rows="10px" cols="80px" required></textarea>
 		</div>
 		<div class="row-empty"></div>
 		<hr>

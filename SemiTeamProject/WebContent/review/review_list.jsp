@@ -136,13 +136,18 @@
 			<% } %>
 		</tbody>
 	</table>
-	<%if(rdao.getInfo(mdto.getMember_no(),review_pension_no) != null){ %>
 	<div class="row right">
+		<a href="<%=request.getContextPath() %>/member/pension_list.jsp">
+			<input class="tdstyle form-btn3 form-inline" type="button" value="이전" style="float: left">
+		</a>
+	<%
+	if(mdto != null){
+	if(rdao.getInfo(mdto.getMember_no(),review_pension_no) != null){ %>
 		<a href="write.jsp?review_pension_no=<%=review_pension_no%>">
 			<input class="tdstyle form-btn3 form-inline" type="button" value="글쓰기">
 		</a>
 	</div>
-	<%}%>
+	<%}}%>
 	<div class="row center pagination">
 	
 		<!-- 이전 -->

@@ -151,6 +151,7 @@
 				<li><a href="<%= root %>/seller/seller_info.jsp">내 정보</a></li>
 				<li><a href="<%= root %>/seller/seller_logout.do">로그아웃</a></li>
 				<li><a href="<%= root %>/seller/pension_list.jsp">펜션관리</a></li>
+				<li><a href="<%= root %>/seller/seller_statistics.jsp">통계보기</a></li>
 			</ul>
 			<%}else if(mdto !=null){//사용자면 %>
 			<ul class="menuu menuu-f menuu-fixed container brown highlightTextOut">
