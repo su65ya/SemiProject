@@ -305,7 +305,6 @@ public class SellerDao {
 		con.close();
 		return list;
 	}
-	
 
 }
 

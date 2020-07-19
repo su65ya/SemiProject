@@ -7,9 +7,8 @@
     pageEncoding="UTF-8"%>
 <%
 SellerDao sdao = new SellerDao();
-// SellerDto sdto = (SellerDto)session.getAttribute("sellerinfo");
-// List<SellerStatisticsDto> list = sdao.getMonthlyPrice(sdto.getSeller_no());
-List<SellerStatisticsDto> list = sdao.getMonthlyPrice(2);
+SellerDto sdto = (SellerDto)session.getAttribute("sellerinfo");
+List<SellerStatisticsDto> list = sdao.getMonthlyPrice(sdto.getSeller_no());
 %>
 <jsp:include page="/template/nav.jsp"></jsp:include>
 <style>

@@ -1,3 +1,4 @@
+<%@page import="semi.beans.dto.RoomImgViewDto"%>
 <%@page import="semi.beans.dao.ReservationDao"%>
 <%@page import="semi.beans.dto.MemberDto"%>
 <%@page import="semi.util.DateChecker"%>
@@ -39,6 +40,13 @@
             width:400px;
             height:200px;
         }
+        .form-btn2,.form-btn3{
+	    	width: 10%;
+	        padding: 0.5rem;
+	        outline: none;/*선택시 자동 부여되는 테두리 제거*/
+	        border: none;
+	    	border-radius: 5px;
+	    }
         
     </style>
     
@@ -156,14 +164,15 @@
 	SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd");
 	SimpleDateFormat yearWithformat = new SimpleDateFormat("yyyy/MM/dd");
 	ReservationDao rvdao = new ReservationDao();
+	RoomImgViewDto rivdto = new RoomImgViewDto();
 %>
 	<input type="hidden" value="<%=addr%>" id="goAddr">
     <div class="swiper-container center">
         <div class="swiper-wrapper">
                 <%for(PensionImageDto pmdto : fileList){ %>
-            <div class="swiper-slide">
- 						<img src="download.do?pen_image_no=<%=pmdto.getPen_image_no()%>" width="1100" height="500">
-            </div>
+		            <div class="swiper-slide">
+		 						<img src="download.do?pen_image_no=<%=pmdto.getPen_image_no()%>" width="1100" height="500">
+		            </div>
  				<%} %>
             <div class="swiper-slide">
                 <img src ="https://placeimg.com/1100/500/people">
@@ -236,7 +245,12 @@
                 <%for(RoomDto rdto : list){%>
                 <%cal = Calendar.getInstance(); %>
 		                <tr>
-		                    <td style="width: 90px; padding: 0;"><img src="https://placehold.it/100x120"></td>
+		                    <%rivdto = rdao.getImgView(rdto.getRoom_no()); 
+					if(rivdto != null){%>
+  					<td style="background-color:white; padding: 0rem;"><img src="roomdownload.do?room_image_no=<%=rivdto.getRoom_image_no() %>" style="width:100px; height:120px; margin: 0;"></td>
+  					<%}else{ %>
+					<td style="background-color:white"><img src="https://placehold.it/250x250"></td>
+					<%} %>
 		                    <%for(int j = 0;j<14;j++){ %>
 		                    <% 
 		                    
@@ -258,7 +272,6 @@
 		                  		<%} %>
 		                    </td>
 			               <%} %>
-		                    
 		              </tr>
                 <%}%>
             </tbody>
@@ -267,7 +280,7 @@
         <div class="row-empty"></div>
         <div class="row-empty"></div>
         <div class="row">
-        	<input type = "submit" value = "선택완료">
+        	<input type = "submit" class="form-btn3" value = "선택완료">
         </div>
     </div>
     </article>

@@ -1,3 +1,5 @@
+<%@page import="semi.beans.dto.RoomDto"%>
+<%@page import="semi.beans.dao.RoomDao"%>
 <%@page import="semi.util.DateChecker"%>
 <%@page import="semi.beans.dto.ReservationDto"%>
 <%@page import="java.util.List"%>
@@ -11,7 +13,7 @@
     	
     	ReservationDao rvdao = new ReservationDao();
     	List<ReservationDto> list = rvdao.getList(res_write);
-    	
+    	RoomDao romdao = new RoomDao(); 
     %>
     
     
@@ -60,7 +62,8 @@
 					<td><%= rvdto.getRes_date_day() %></td>
 					<td class="left">
 						<a href="reservation_detail.jsp?res_no=<%= rvdto.getRes_no() %>">
-							<%= rvdto.getRes_room_no() %>
+							<%RoomDto romdto = romdao.get(rvdto.getRes_room_no());%>
+							<%=romdto.getRoom_name() %>
 						</a>
 					</td>
 					<td><%= rvdto.getRes_name() %></td>
