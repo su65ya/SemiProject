@@ -1,3 +1,4 @@
+<%@page import="semi.beans.dto.ReviewReplyDto"%>
 <%@page import="semi.beans.dto.SellerDto"%>
 <%@page import="semi.beans.dto.MemberDto"%>
 <%@page import="semi.beans.dao.ReviewDao"%>
@@ -14,8 +15,6 @@
 	SellerDto sdto = (SellerDto) session.getAttribute("sellerinfo");
 	
 	int review_pension_no = Integer.parseInt(request.getParameter("review_pension_no"));
-	
-
 	String type = request.getParameter("type");
 	String keyword = request.getParameter("keyword");
 	
@@ -71,6 +70,7 @@
 	}
 
 
+	
 %>
 
 <jsp:include page="/template/nav.jsp"></jsp:include>
@@ -116,8 +116,10 @@
 				</td>
 				
 				<td>
-					<% if (revdto.getReview_writer() != 0) {%>
-						<%= mdto.getMember_id() %>
+					<% 
+					String review_id = revdao.getId(revdto.getReview_no());
+					if (review_id != null) {%>
+						<%= review_id %>
 					<%} else {%>
 						<font color="gray">XXX</font>
 					<%} %>
