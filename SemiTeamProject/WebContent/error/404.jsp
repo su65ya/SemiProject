@@ -6,7 +6,7 @@
   
   
   <div align="center">
-	<h2>해당 기능을 이용할 권한이 없습니다</h2>
+	<h2>페이지를 찾을 수 없습니다</h2>
 	<img src="<%= request.getContextPath()%>/image/404.jpg">
 	
 </div>

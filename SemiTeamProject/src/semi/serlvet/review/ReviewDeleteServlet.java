@@ -23,7 +23,7 @@ public class ReviewDeleteServlet extends HttpServlet{
 			revdao.delete(review_no);
 			
 			
-			resp.sendRedirect("review_list.jsp?reivew_pension_no="+ review_pension_no);
+			resp.sendRedirect("review_list.jsp?review_pension_no="+review_pension_no);
 			
 			
 		} catch (Exception e) {

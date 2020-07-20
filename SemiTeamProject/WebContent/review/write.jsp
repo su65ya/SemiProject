@@ -1,9 +1,19 @@
+<%@page import="semi.beans.dao.ReviewDao"%>
+<%@page import="semi.beans.dto.ReviewInfoGetDto"%>
+<%@page import="semi.beans.dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
 <%
+	
 	int review_pension_no=Integer.parseInt(request.getParameter("review_pension_no"));
+	MemberDto mdto = (MemberDto)session.getAttribute("userinfo");
+	ReviewDao rdao = new ReviewDao();
+	ReviewInfoGetDto getDto = rdao.getInfo(mdto.getMember_no(), review_pension_no);
+	int res_no = getDto.getRes_no();
+
 %>
+
 <script>
 function preview(){
             var fileTag = document.querySelector("input[name=review_file]");
@@ -51,6 +61,7 @@ function preview(){
 
 <form action="review_write.do" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="review_pension_no" value ="<%=request.getParameter("review_pension_no")%>">
+	<input type="hidden" name="res_no" value ="<%=res_no%>">
 	<article class="w-40">
 		<div class="row-empty"></div>
 
@@ -60,12 +71,12 @@ function preview(){
 		
 		<div class="row">
 			<label><span>*</span>리뷰 제목</label>
-			<input class="form-input" type="text" name="review_title">
+			<input class="form-input" type="text" name="review_title" required>
 		</div>
 		
 		<div class="row">
 			<label><span>*</span>리뷰 내용</label><br>
-			<textarea name="review_content" rows="10px" cols="80px"></textarea>
+			<textarea name="review_content" rows="10px" cols="80px" required></textarea>
 		</div>
 		<div class="row-empty"></div>
 		<hr>

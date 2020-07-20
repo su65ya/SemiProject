@@ -170,6 +170,9 @@
 		<a href="question_write.jsp?que_pension_no=<%= que_pension_no %>">
 			<input class="form-btn2" type="button" value="글쓰기">
 		</a>
+		<a href="<%=request.getContextPath() %>/member/pension_list.jsp">
+			<input class="form-btn2" type="button" value="이전" style="float: left;">
+		</a>
 	</div>
 	
 	

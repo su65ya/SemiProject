@@ -66,7 +66,7 @@
 			<tbody>
 			<%for(RoomDto rdto : list){ %>
 				<tr>
-					<%rivdto = rdao.getImgView(rdto.getRoom_pension_no()); 
+					<%rivdto = rdao.getImgView(rdto.getRoom_no()); 
 					if(rivdto != null){%>
   					<td rowspan="8"  style="background-color:white"><img src="roomdownload.do?room_image_no=<%=rivdto.getRoom_image_no() %>" width="250" height="250"></td>
    					<%}else{ %>

@@ -59,7 +59,7 @@
 </script>
 	<div class="row">
 		<article class="w-40">
-		<form action="seller_join.do" method="post" onsubmit="return sellerJoin();">
+		<form action="seller_join.do" method="post">
 		
 		
 			<div class="row">
@@ -180,7 +180,7 @@
 			<div class = "row-empty"></div>
 			
 			<div class="row center">
-				<input class= "form-btn3" style='font-size: 20px; width: 200px;' type="submit" value="가입하기">
+				<input class= "form-btn3" style="font-size: 20px; width: 200px;" type="submit" value="가입하기">
 			</div>
 			
     	</form>
