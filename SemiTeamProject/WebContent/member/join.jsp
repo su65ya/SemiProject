@@ -139,8 +139,6 @@
             }
         }).open();
     }
-    
-    
 
 </script>
 	<div class="row">
