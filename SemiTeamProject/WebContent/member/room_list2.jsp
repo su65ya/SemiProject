@@ -39,8 +39,6 @@
 <jsp:include page="/template/nav.jsp"></jsp:include>
 <%
 	
-	MemberDto mdto = (MemberDto)session.getAttribute("userinfo");
-	int member_no = mdto.getMember_no();
 	PensionDao pdao = new PensionDao();
 	RoomDao rdao = new RoomDao();
 	int pension_no = Integer.parseInt(request.getParameter("pension_no"));
@@ -100,7 +98,7 @@
   				</tr>
   				<tr>
     				<td class="row right" colspan="7" >
-						<a href = "reservation_step1.do?pension_no=<%=pension_no%>&member_no=<%=member_no%>">
+						<a href = "reservation_step1.do?pension_no=<%=pension_no%>">
 							<input class = "tdstyle form-btn3 form-inline" type="button" value = "예약하기">
 						</a>
 					</td>
@@ -115,9 +113,6 @@
 			<a href = "pension_list.jsp">
 				<input class = "tdstyle form-btn2 form-inline" type="button" value = "펜션목록">
 			</a>	
-			<a href = "room_regist.jsp?pension_no=<%= pension_no %>">
-				<input class = "tdstyle form-btn2 form-inline" type="button" value = "객실등록">
-			</a>
 		</div>
 		
 	</div>

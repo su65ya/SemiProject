@@ -104,7 +104,7 @@
     	<url-pattern>/review/review_delete.do</url-pattern>
     	<url-pattern>/review/review_edit.do</url-pattern>
     	<url-pattern>/review/review_write.do</url-pattern>
-    	<url-pattern>/review/review_reply_del.do</url-pattern>
+    	<url-pattern>/review/reply_delete.do</url-pattern>
     	<url-pattern>/review/review_reply_writer.do</url-pattern>
     </filter-mapping>
 	 
@@ -117,31 +117,33 @@
     </filter>
     <filter-mapping>
     	<filter-name>sellerLoginFilter</filter-name>
+    	<url-pattern>/seller/seller_delete.jsp</url-pattern>
+    	<url-pattern>/seller/seller_info.jsp</url-pattern>
+   		<url-pattern>/seller/seller_change_password.do</url-pattern>
+   		<url-pattern>/seller/seller_logout.do</url-pattern>
     	<url-pattern>/seller/change_info.jsp</url-pattern>
     	<url-pattern>/seller/change_password.jsp</url-pattern>
     	<url-pattern>/seller/change_pw_result.jsp</url-pattern>
+   		<url-pattern>/seller/change_info.do</url-pattern>
     	<url-pattern>/seller/password_check.jsp</url-pattern>
+   		<url-pattern>/seller/password_check.do</url-pattern>
+   		<url-pattern>/seller/exit.do</url-pattern>
+    	<url-pattern>/seller/pension_list.jsp</url-pattern>
     	<url-pattern>/seller/pension_regists.jsp</url-pattern>
     	<url-pattern>/seller/pension_detail.jsp</url-pattern>
     	<url-pattern>/seller/pension_edit.jsp</url-pattern>
-    	<url-pattern>/seller/room_regist.jsp</url-pattern>
-    	<url-pattern>/seller/room_result.jsp/</url-pattern>
-    	<url-pattern>/seller/seller_delete.jsp</url-pattern>
-    	<url-pattern>/seller/seller_info.jsp</url-pattern>
-   		<url-pattern>/seller/change_info.do</url-pattern>
-   		<url-pattern>/seller/seller_change_password.do</url-pattern>
-   		<url-pattern>/seller/password_check.do</url-pattern>
-   		<url-pattern>/seller/seller_logout.do</url-pattern>
-   		<url-pattern>/seller/exit.do</url-pattern>
-   		<url-pattern>/seller/room_regist.do</url-pattern>
-   		<url-pattern>/seller/room_delete.do</url-pattern>
-   		<url-pattern>/seller/room_delete.do</url-pattern>
-    	<url-pattern>/question/question_content.jsp</url-pattern>
-   		<url-pattern>/question/question_reply.jsp</url-pattern>    	
-    	<url-pattern>/question/question_reply.do</url-pattern>
     	<url-pattern>/seller/pension_regist.do</url-pattern>
     	<url-pattern>/seller/pension_edit.do</url-pattern>
     	<url-pattern>/seller/pension_delete.do</url-pattern>
+    	<url-pattern>/seller/room_list.jsp</url-pattern>
+    	<url-pattern>/seller/room_regist.jsp</url-pattern>
+    	<url-pattern>/seller/room_result.jsp/</url-pattern>
+   		<url-pattern>/seller/room_regist.do</url-pattern>
+   		<url-pattern>/seller/room_delete.do</url-pattern>
+   		<url-pattern>/seller/seller_statistics.jsp</url-pattern>
+    	<url-pattern>/question/question_content.jsp</url-pattern>
+   		<url-pattern>/question/question_reply.jsp</url-pattern>    	
+    	<url-pattern>/question/question_reply.do</url-pattern>
     </filter-mapping>
 
     
@@ -168,7 +170,21 @@
     	<url-pattern>/admin/admin_logout.do</url-pattern>
     	<url-pattern>/admin/admin_check.do</url-pattern>
      </filter-mapping>
+     
+     
+     
+     <!-- 에러 페이지 -->
+     <error-page>
+     	<error-code>404</error-code>
+     	<location>/error/404.jsp</location>
+     </error-page>
 
+     
+    <error-page>
+    	<error-code>500</error-code>
+    	<location>/error/500.jsp</location>
+    </error-page> 
+	
 
 </web-app>
 
