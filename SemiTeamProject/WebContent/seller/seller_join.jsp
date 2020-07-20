@@ -5,7 +5,7 @@
 <jsp:include page="/template/nav.jsp"></jsp:include>
 
 <link rel="stylesheet" href="../css/join.css" type="text/css">  
-<script src="../js/join.js"></script>
+<script src="../js/seller_join.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 //우편번호 찾기 및 주소 입력 자바스크립트
@@ -87,7 +87,7 @@
 						<td>
 							<div class='row left'>
 								<input class="intext " type="password" name="seller_pw" id="pwcheck" autocomplete="none" style='width: 250px;' onblur="pwCheck()">
-								<span class='incorrect-message'>비밀번호는 영문 대,소문자, 숫자, 특수 문자 포함 8~20자 이내로 입력하세요</span>
+								<span class='incorrect-message'>비밀번호는 영문 대,소문자, 숫자 포함 8~20자 이내로 입력하세요</span>
 							</div>
 						</td>
 					</tr>

@@ -1,8 +1,16 @@
+<%@page import="semi.beans.dto.AdminDto"%>
+<%@page import="semi.beans.dto.SellerDto"%>
 <%@page import="semi.beans.dto.PensionImageDto"%>
 <%@page import="java.util.List"%>
 <%@page import="semi.beans.dao.PensionImageDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%
+    SellerDto sdto = (SellerDto) session.getAttribute("sellerinfo");
+    AdminDto adto = (AdminDto) session.getAttribute("admininfo");
+    %>
+    
 
 <jsp:include page="/template/nav.jsp"></jsp:include>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/swiper.min.css" type="text/css">
@@ -85,20 +93,38 @@
                     <div class="swiper-wrapper">
                         <!-- 배치되는 이미지 또는 화면 -->
                         <div class="swiper-slide">
+                        <% if (sdto != null) { %>                        
+                        	<a href="<%=request.getContextPath() %>/seller/pension_list.jsp">
+                        <%} else if(adto != null){ %>
+                        	<a href="#">
+                        <%} else {%>
                             <a href="<%=request.getContextPath() %>/member/pension_list.jsp">
+                        <%} %>
                                <img alt="main"
 						src="<%=request.getContextPath()%>/image/main11.jpg">
                             </a>
                         </div>
                         
                         <div class="swiper-slide">
+                        <% if (sdto != null) { %>                        
+                        	<a href="<%=request.getContextPath() %>/seller/pension_list.jsp">
+                        <%} else if(adto != null){ %>
+                        	<a href="#">
+                        <%} else {%>
                             <a href="<%=request.getContextPath() %>/member/pension_list.jsp">
+                        <%} %>
                                  <img alt="main"
 						src="<%=request.getContextPath()%>/image/main_image1.jpg">
                             </a>
                         </div>
                         <div class="swiper-slide">
+                        <% if (sdto != null) { %>                        
+                        	<a href="<%=request.getContextPath() %>/seller/pension_list.jsp">
+                        <%} else if(adto != null){ %>
+                        	<a href="#">
+                        <%} else {%>
                             <a href="<%=request.getContextPath() %>/member/pension_list.jsp">
+                        <%} %>
                                  <img alt="main"
 						src="<%=request.getContextPath()%>/image/down.jpg">
      
