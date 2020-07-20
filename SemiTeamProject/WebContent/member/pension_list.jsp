@@ -1,5 +1,4 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="semi.beans.dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="semi.beans.dto.PensionOptionDto"%>
@@ -10,10 +9,6 @@
 <%@page import="semi.beans.dto.PensionDto"%>
 <%@page import="java.util.List"%>
 <%
-	MemberDto mdto = (MemberDto)session.getAttribute("userinfo");
-	int member_no = mdto.getMember_no();
-	
-// 	int member_no = 3;
 	PensionDao pdao = new PensionDao();
 	PenImgViewDto viewDto = new PenImgViewDto();
 	PensionOptionDao podao = new PensionOptionDao();

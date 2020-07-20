@@ -104,7 +104,7 @@
     	<url-pattern>/review/review_delete.do</url-pattern>
     	<url-pattern>/review/review_edit.do</url-pattern>
     	<url-pattern>/review/review_write.do</url-pattern>
-    	<url-pattern>/review/review_reply_del.do</url-pattern>
+    	<url-pattern>/review/reply_delete.do</url-pattern>
     	<url-pattern>/review/review_reply_writer.do</url-pattern>
     </filter-mapping>
 	 
@@ -140,6 +140,7 @@
     	<url-pattern>/seller/room_result.jsp/</url-pattern>
    		<url-pattern>/seller/room_regist.do</url-pattern>
    		<url-pattern>/seller/room_delete.do</url-pattern>
+   		<url-pattern>/seller/seller_statistics.jsp</url-pattern>
     	<url-pattern>/question/question_content.jsp</url-pattern>
    		<url-pattern>/question/question_reply.jsp</url-pattern>    	
     	<url-pattern>/question/question_reply.do</url-pattern>
@@ -169,7 +170,21 @@
     	<url-pattern>/admin/admin_logout.do</url-pattern>
     	<url-pattern>/admin/admin_check.do</url-pattern>
      </filter-mapping>
+     
+     
+     
+     <!-- 에러 페이지 -->
+     <error-page>
+     	<error-code>404</error-code>
+     	<location>/error/404.jsp</location>
+     </error-page>
 
+     
+    <error-page>
+    	<error-code>500</error-code>
+    	<location>/error/500.jsp</location>
+    </error-page> 
+	
 
 </web-app>
 
